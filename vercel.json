@@ -7,7 +7,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "package.json",
+      "src": "assets/**",
       "use": "@vercel/static"
     }
   ],
