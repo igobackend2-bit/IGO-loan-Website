@@ -3,1611 +3,632 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IGO Loans & Subsidy | Premium Government Loan Assistance in Tamil Nadu</title>
-  <meta name="description" content="IGO Loans & Subsidy empowers farmers, rural entrepreneurs, and MSMEs in Tamil Nadu with expert assistance for PM-KISAN, KCC, PMEGP, and Mudra loans. Trusted financial consultancy since 2017.">
-  <meta name="keywords" content="loans, subsidy, farmers tamil nadu, agriculture loans, msme loans india, pm-kisan registration, kisan credit card application, govt schemes tamil nadu, igo group">
-  <link rel="canonical" href="https://igogroup.in" />
+  <title>IGO Loans & Subsidy | Next-Gen Agri-Fintech India</title>
   
-  <!-- Open Graph -->
-  <meta property="og:title" content="IGO Loans & Subsidy | Empowering Farmers & Businesses">
-  <meta property="og:description" content="Access government-backed loans and subsidies with IGO's expert guidance. We handle the paperwork, you focus on growth.">
-  <meta property="og:image" content="/Users/igogroups/.gemini/antigravity/brain/2862c65c-0e2a-45bd-ae71-b9904f8f9fb9/igo_loan_logo_1777640794477.png">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://igogroup.in">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="IGO Loans & Subsidy | Financial Assistance for Farmers">
-  <meta name="twitter:description" content="Get expert help with government loans and subsidies in Tamil Nadu.">
-  <meta name="twitter:image" content="/Users/igogroups/.gemini/antigravity/brain/2862c65c-0e2a-45bd-ae71-b9904f8f9fb9/igo_loan_logo_1777640794477.png">
-  
-  <!-- Fonts -->
+  <!-- Modern Typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
 
-  <!-- Supabase -->
+  <!-- Icons & Frameworks -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-    /* ==============================
-       RESET & BASE
-    ============================== */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --primary: #059669;
+      --primary-dark: #064e3b;
+      --gold: #d97706;
+      --gold-light: #fbbf24;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(0,0,0,0.06);
+      --glass: rgba(255, 255, 255, 0.8);
+      --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
+      --shadow-hard: 0 20px 50px -12px rgba(0,0,0,0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #020617;
+      --bg-alt: #0b1120;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.06);
+      --glass: rgba(15, 23, 42, 0.8);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
-      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-      color: #1a1a2e;
-      background: #fff;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-    }
-    img { max-width: 100%; display: block; }
-    a { text-decoration: none; color: inherit; }
-
-    /* ==============================
-       COLOR PALETTE
-    ============================== */
-    :root {
-      --green-dark:   #064e3b; 
-      --green-mid:    #059669; 
-      --green-light:  #34d399; 
-      --gold:         #d97706; 
-      --gold-light:   #fbbf24; 
-      --gold-pale:    #fffbeb; 
-      --off-white:    #f9fafb;
-      --text-dark:    #111827;
-      --text-muted:   #4b5563;
-      --border:       #e5e7eb;
-      --shadow-sm:    0 4px 6px -1px rgba(0, 0, 0, 0.05);
-      --shadow-md:    0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      --shadow-lg:    0 20px 25px -5px rgba(0, 0, 0, 0.1);
-      --glass:        rgba(255, 255, 255, 0.75);
-      --glass-border: rgba(255, 255, 255, 0.4);
-      --mesh-gradient: radial-gradient(at 0% 0%, rgba(5, 150, 105, 0.15) 0px, transparent 50%),
-                       radial-gradient(at 100% 0%, rgba(217, 119, 6, 0.1) 0px, transparent 50%);
-    }
-
-    body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      color: var(--text-dark);
-      background: #fff;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      transition: all 0.4s ease;
       overflow-x: hidden;
     }
-
-    h1, h2, h3, h4, .logo-text strong {
-      font-family: 'Outfit', sans-serif;
+    
+    /* Noise Texture Overlay */
+    body::before {
+      content: "";
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.03; pointer-events: none; z-index: 9999;
     }
 
-    /* ==============================
-       UTILITIES
-    ============================== */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.3rem);
-      font-weight: 800;
-      color: var(--green-dark);
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    .section-subtitle {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 600px;
-      margin: 0 auto 48px;
-    }
-    .gold-bar {
-      width: 60px; height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--gold-light));
-      border-radius: 2px;
-      margin: 12px auto 20px;
-    }
-    .btn-primary {
-      display: inline-block;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: var(--text-dark);
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 14px 36px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 18px rgba(201, 162, 39, 0.4);
-      letter-spacing: 0.3px;
-    }
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(201, 162, 39, 0.55);
-    }
-    .btn-outline {
-      display: inline-block;
-      border: 2px solid var(--gold);
-      color: var(--gold-light);
-      font-weight: 700;
-      font-size: 1rem;
-      padding: 12px 32px;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-outline:hover {
-      background: var(--gold);
-      color: var(--text-dark);
-    }
-
-    /* ==============================
-       TOPBAR
-    ============================== */
-    .topbar {
-      background: var(--green-dark);
-      color: #d4f5e2;
-      font-size: 0.82rem;
-      padding: 7px 0;
-    }
-    .topbar .container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .topbar a { color: var(--gold-light); }
-    .topbar span { margin: 0 10px; opacity: 0.5; }
-
-    /* ==============================
-       NAVBAR
-    ============================== */
-    /* ==============================
-       NAVBAR
-    ============================== */
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+    
+    /* Next-Level Navbar */
     .navbar {
-      background: var(--glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--glass-border);
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      transition: all 0.3s ease;
+      height: 100px; position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--border); display: flex; align-items: center;
+      transition: 0.4s;
     }
-    .navbar.scrolled {
-      background: rgba(255, 255, 255, 0.9);
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    }
-    .navbar .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-    }
-    .logo-wrap { display: flex; align-items: center; gap: 12px; }
+    .navbar.scrolled { height: 80px; box-shadow: var(--shadow-soft); }
+    .navbar .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    
+    /* Elite SVG Logo */
+    .logo-wrap { display: flex; align-items: center; gap: 18px; text-decoration: none; }
     .logo-icon {
-      width: 44px; height: 44px;
-      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem; font-weight: 900; color: var(--gold-light);
-      box-shadow: 0 4px 12px rgba(6, 78, 59, 0.2);
+      width: 55px; height: 55px; position: relative;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
     }
-    .logo-text { line-height: 1.1; }
-    .logo-text strong { font-size: 1.1rem; font-weight: 800; color: var(--green-dark); display: block; }
-    .logo-text span { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.2px; text-transform: uppercase; }
-    
-    .nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
-    .nav-links a {
-      font-size: 0.9rem; font-weight: 600;
-      color: var(--text-dark);
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: '';
-      position: absolute; bottom: -4px; left: 0; width: 100%;
-      height: 2px; background: var(--green-mid);
-      transform: scaleX(0); transition: transform 0.3s ease;
-      transform-origin: right;
-    }
-    .nav-links a:hover { color: var(--green-mid); }
-    .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
-    .nav-cta { 
-      font-size: 0.85rem !important; 
-      padding: 10px 24px !important; 
-      border-radius: 12px !important;
-    }
-    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
-    .hamburger span { width: 24px; height: 2px; background: var(--green-dark); border-radius: 2px; transition: 0.3s; }
-    #nav-toggle { display: none; }
+    .logo-text h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--text); line-height: 1; letter-spacing: -1px; }
+    .logo-text span { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; }
 
-    /* ==============================
-       HERO
-    ============================== */
+    /* Button Masterpiece */
+    .btn {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 18px 40px; border-radius: 20px; font-weight: 800;
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer; text-decoration: none; border: none;
+      font-size: 1rem;
+    }
+    .btn-primary { 
+      background: linear-gradient(135deg, var(--primary), #10b981); 
+      color: #fff; 
+      box-shadow: 0 15px 30px -10px rgba(5, 150, 105, 0.5); 
+    }
+    .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 25px 40px -10px rgba(5, 150, 105, 0.6); }
+    
+    /* Hero Masterpiece */
     .hero {
-      background: var(--green-dark);
-      background-image: var(--mesh-gradient), url('/Users/igogroups/.gemini/antigravity/brain/2862c65c-0e2a-45bd-ae71-b9904f8f9fb9/igo_loan_hero_bg_1777640813833.png');
-      background-size: cover;
-      background-position: center;
-      color: #fff;
-      padding: 120px 0;
-      position: relative;
-      overflow: hidden;
+      padding: 220px 0 120px; position: relative; min-height: 100vh;
+      background: radial-gradient(circle at 10% 20%, rgba(5, 150, 105, 0.05) 0%, transparent 40%),
+                  radial-gradient(circle at 90% 80%, rgba(217, 119, 6, 0.05) 0%, transparent 40%);
     }
-    .hero::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: rgba(6, 78, 59, 0.4);
-      z-index: 1;
-    }
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 0l30 30-30 30-30-30z' fill='%23ffffff' fill-opacity='0.02'/%3E%3C/svg%3E");
-      opacity: 0.5;
-    }
-    /* Mesh Gradients */
-    .hero-blob {
-      position: absolute;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(52, 211, 153, 0.15) 0%, transparent 70%);
-      filter: blur(60px);
-      border-radius: 50%;
-      z-index: 0;
-    }
-    .blob-1 { top: -200px; right: -100px; }
-    .blob-2 { bottom: -200px; left: -100px; background: radial-gradient(circle, rgba(217, 119, 6, 0.1) 0%, transparent 70%); }
-
-    .hero-inner {
-      position: relative; z-index: 1;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      align-items: center;
-      gap: 80px;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--green-light);
-      padding: 8px 18px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      margin-bottom: 24px;
-      backdrop-filter: blur(4px);
-    }
-    .hero-badge .dot { width: 8px; height: 8px; background: var(--green-light); border-radius: 50%; box-shadow: 0 0 12px var(--green-light); animation: pulse 2s infinite; }
-    @keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
-    
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.05;
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
-    }
-    .hero h1 .gold { 
-      background: linear-gradient(135deg, var(--gold-light), #f59e0b);
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 80px; align-items: center; }
+    .hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3.5rem, 6vw, 6rem); line-height: 0.95; margin-bottom: 30px; letter-spacing: -0.05em; font-weight: 900; }
+    .hero h1 span { 
+      background: linear-gradient(to right, var(--primary), #10b981);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero p {
-      font-size: 1.15rem;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 40px;
-      max-width: 540px;
-      line-height: 1.6;
+    .hero p { font-size: 1.4rem; color: var(--text-muted); margin-bottom: 50px; max-width: 650px; font-weight: 500; line-height: 1.4; }
+    
+    .hero-visual-wrap { position: relative; z-index: 1; }
+    .hero-img { 
+      width: 100%; height: 700px; object-fit: cover; border-radius: 60px;
+      box-shadow: var(--shadow-hard); border: 12px solid var(--glass);
+      transition: 0.5s ease-out;
     }
-    .hero-btns { display: flex; gap: 20px; flex-wrap: wrap; }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      color: #fff;
-      border-radius: 14px;
-      padding: 16px 36px;
-      box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
+    .hero-visual-wrap:hover .hero-img { transform: scale(1.02) rotate(-1deg); }
+    
+    .floating-card {
+      position: absolute; background: var(--glass); backdrop-filter: blur(20px);
+      padding: 24px; border-radius: 24px; border: 1px solid var(--border);
+      box-shadow: var(--shadow-hard); display: flex; align-items: center; gap: 15px;
+      animation: float 6s ease-in-out infinite;
     }
-    .btn-outline {
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 14px;
-      backdrop-filter: blur(4px);
-    }
-    .btn-outline:hover {
-      background: #fff;
-      color: var(--green-dark);
-      border-color: #fff;
-    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
 
-    .hero-stats {
-      display: flex; gap: 48px;
-      margin-top: 60px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    /* Next-Level Sections */
+    .section { padding: 140px 0; position: relative; }
+    .section-title { font-family: 'Outfit', sans-serif; font-size: 4rem; font-weight: 900; margin-bottom: 20px; letter-spacing: -0.04em; }
+    
+    /* Modern Grid Cards */
+    .grid-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 40px; }
+    .fancy-card {
+      background: var(--bg); border: 1px solid var(--border); border-radius: 40px;
+      padding: 60px; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      position: relative; overflow: hidden;
     }
-    .stat { text-align: left; }
-    .stat .num { font-family: 'Outfit'; font-size: 2.2rem; font-weight: 800; color: #fff; display: block; margin-bottom: 4px; }
-    .stat .lbl { font-size: 0.8rem; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .fancy-card:hover { transform: translateY(-15px); border-color: var(--primary); box-shadow: var(--shadow-hard); }
+    .fancy-card::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
+      background: linear-gradient(to right, var(--primary), var(--gold));
+      opacity: 0; transition: 0.3s;
     }
-    .hero-card {
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 20px;
-      padding: 32px;
-      backdrop-filter: blur(10px);
-      width: 100%;
-      max-width: 380px;
-    }
-    .hero-card-title {
-      color: var(--gold-light);
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-    }
-    .scheme-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .scheme-item {
-      display: flex; align-items: center; gap: 12px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 10px;
-      padding: 12px 16px;
-    }
-    .scheme-icon {
-      width: 38px; height: 38px; border-radius: 8px;
-      background: linear-gradient(135deg, var(--gold), var(--gold-light));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; flex-shrink: 0;
-    }
-    .scheme-info strong { font-size: 0.88rem; color: #fff; display: block; }
-    .scheme-info span { font-size: 0.75rem; color: rgba(255,255,255,0.55); }
+    .fancy-card:hover::before { opacity: 1; }
+    .fancy-card i { font-size: 3.5rem; color: var(--primary); margin-bottom: 30px; display: block; transition: 0.3s; }
+    .fancy-card:hover i { transform: scale(1.2) rotate(10deg); }
 
-    /* ==============================
-       MARQUEE / TRUST BAR
-    ============================== */
-    .trust-bar {
-      background: var(--gold-pale);
-      border-top: 2px solid var(--gold);
-      border-bottom: 2px solid var(--gold);
-      padding: 14px 0;
-      overflow: hidden;
-    }
-    .marquee-track {
-      display: flex;
-      gap: 0;
-      white-space: nowrap;
-      animation: marquee 28s linear infinite;
-    }
-    @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-    .marquee-item {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 0 36px;
-      font-size: 0.88rem; font-weight: 600;
-      color: var(--green-dark);
-    }
-    .marquee-item .dot { color: var(--gold); font-size: 1.2rem; }
+    /* Marquee Track */
+    .marquee-container { background: var(--primary-dark); padding: 25px 0; overflow: hidden; }
+    .marquee-content { display: flex; gap: 80px; animation: marquee 40s linear infinite; white-space: nowrap; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .marquee-item { font-weight: 900; font-size: 1.3rem; color: var(--gold-light); text-transform: uppercase; letter-spacing: 3px; display: flex; align-items: center; gap: 15px; }
 
-    /* ==============================
-       SERVICES
-    ============================== */
-    .services { padding: 80px 0; background: var(--off-white); }
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
-    }
-    .service-card {
-      background: var(--glass);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-radius: 24px;
-      padding: 40px 32px;
-      border: 1px solid var(--glass-border);
-      box-shadow: var(--shadow-md);
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .service-card:hover { 
-      transform: translateY(-8px); 
-      box-shadow: var(--shadow-lg);
-      border-color: var(--green-light);
-      background: rgba(255, 255, 255, 0.9);
+    /* Glassmorphism Refinement */
+    .glass-box { 
+      background: var(--glass); backdrop-filter: blur(40px); border: 1px solid var(--border);
+      border-radius: 50px; padding: 60px; box-shadow: var(--shadow-hard);
+      transition: 0.3s;
     }
     
-    .svc-icon {
-      width: 56px; height: 56px; border-radius: 16px;
-      background: var(--gold-pale);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 24px;
-      transition: transform 0.3s ease;
+    /* Form Elite Styling */
+    .form-group { margin-bottom: 28px; }
+    .form-group label { display: block; font-weight: 800; margin-bottom: 12px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 22px; border-radius: 20px; border: 1.5px solid var(--border);
+      background: var(--bg); color: var(--text); font-family: inherit; font-size: 1.05rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .service-card:hover .svc-icon { transform: scale(1.1) rotate(5deg); }
-    
-    .service-card h3 { font-size: 1.25rem; font-weight: 700; color: var(--green-dark); margin-bottom: 12px; }
-    .service-card p { font-size: 0.95rem; color: var(--text-muted); line-height: 1.6; flex-grow: 1; }
-    .svc-tag {
-      display: inline-flex;
-      margin-top: 24px;
-      background: var(--green-light);
-      color: var(--green-dark);
-      font-size: 0.75rem; font-weight: 700;
-      padding: 6px 14px; border-radius: 100px;
-      width: fit-content;
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { 
+      border-color: var(--primary); outline: none; 
+      background: var(--bg);
+      box-shadow: 0 0 0 5px var(--primary-glow); 
+      transform: translateY(-2px);
     }
-    .service-card.gold-accent .svc-icon { background: var(--gold-pale); }
-    .service-card.gold-accent .svc-tag { background: var(--gold-light); color: var(--gold); }
+    .form-group input::placeholder { color: var(--text-muted); opacity: 0.5; }
 
-    /* ==============================
-       GOVT SCHEMES BANNER
-    ============================== */
-    .schemes-banner {
-      background: linear-gradient(135deg, var(--green-dark) 0%, #145c35 100%);
-      padding: 60px 0;
-      color: #fff;
-    }
-    .schemes-banner .section-title { color: #fff; }
-    .schemes-banner .section-subtitle { color: rgba(255,255,255,0.75); }
-    .schemes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-    }
-    .scheme-chip {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      padding: 20px 16px;
-      text-align: center;
-      transition: background 0.25s, transform 0.25s;
-      cursor: default;
-    }
-    .scheme-chip:hover {
-      background: rgba(201,162,39,0.25);
-      border-color: var(--gold);
-      transform: translateY(-4px);
-    }
-    .scheme-chip .emoji { font-size: 2rem; margin-bottom: 10px; }
-    .scheme-chip strong { font-size: 0.88rem; font-weight: 700; display: block; color: var(--gold-light); }
-    .scheme-chip span { font-size: 0.75rem; color: rgba(255,255,255,0.65); margin-top: 4px; display: block; }
+    /* Footer Elite */
+    .footer { background: var(--bg-alt); padding: 120px 0 60px; border-top: 1px solid var(--border); }
+    .footer-links a { color: var(--text-muted); text-decoration: none; font-weight: 600; transition: 0.2s; }
+    .footer-links a:hover { color: var(--primary); padding-left: 5px; }
 
-    /* ==============================
-       WHY CHOOSE US
-    ============================== */
-    .why-us { padding: 80px 0; background: #fff; }
-    .why-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-    .why-list { list-style: none; display: flex; flex-direction: column; gap: 20px; }
-    .why-item { display: flex; gap: 16px; align-items: flex-start; }
-    .why-icon {
-      width: 50px; height: 50px; border-radius: 12px; flex-shrink: 0;
-      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.3rem;
-    }
-    .why-text strong { font-size: 1rem; font-weight: 700; color: var(--green-dark); display: block; margin-bottom: 4px; }
-    .why-text p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; }
-    .trust-box {
-      background: linear-gradient(135deg, var(--off-white), #e8f5ee);
-      border: 2px solid var(--border);
-      border-radius: 22px;
-      padding: 40px 36px;
-      text-align: center;
-    }
-    .trust-logo-big {
-      width: 80px; height: 80px; border-radius: 18px;
-      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2.2rem; font-weight: 900; color: var(--gold-light);
-      margin: 0 auto 20px;
-      box-shadow: 0 8px 24px rgba(10,92,54,0.3);
-    }
-    .trust-box h3 { font-size: 1.4rem; font-weight: 800; color: var(--green-dark); margin-bottom: 10px; }
-    .trust-box p { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; }
-    .trust-numbers {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px;
-    }
-    .tn-item {
-      background: #fff;
-      border-radius: 12px;
-      padding: 16px;
-      border: 1px solid var(--border);
-    }
-    .tn-item .n { font-size: 1.5rem; font-weight: 900; color: var(--green-dark); }
-    .tn-item .l { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
-    .gold-num { color: var(--gold) !important; }
-    .partner-logos {
-      display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 24px;
-    }
-    .partner-tag {
-      background: var(--gold-pale);
-      border: 1px solid #e2c35a;
-      color: #7a5900;
-      font-size: 0.78rem; font-weight: 700;
-      padding: 6px 14px; border-radius: 50px;
-    }
-
-    /* ==============================
-       REGISTRATION FORM
-    ============================== */
-    .register { padding: 80px 0; background: var(--off-white); }
-    .form-wrapper {
-      max-width: 780px; margin: 0 auto;
-      background: #fff;
-      border-radius: 24px;
-      box-shadow: 0 8px 40px rgba(10,92,54,0.12);
-      overflow: hidden;
-    }
-    .form-header {
-      background: linear-gradient(135deg, var(--green-dark), #155f3a);
-      padding: 36px 40px;
-      text-align: center;
-    }
-    .form-header h2 { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
-    .form-header p { color: rgba(255,255,255,0.78); font-size: 0.92rem; }
-    .form-body { padding: 40px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .form-group { margin-bottom: 22px; }
-    .form-group label {
-      display: block;
-      font-size: 0.85rem; font-weight: 700;
-      color: var(--green-dark);
-      margin-bottom: 7px;
-      letter-spacing: 0.2px;
-    }
-    .form-group label .req { color: #c0392b; }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 14px 18px;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      font-size: 0.95rem;
-      color: var(--text-dark);
-      background: var(--off-white);
-      transition: all 0.3s ease;
-      outline: none;
-      font-family: inherit;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      background: #fff;
-      border-color: var(--green-mid);
-      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
-    }
-    .form-group textarea { resize: vertical; min-height: 90px; }
-    .form-group select { cursor: pointer; }
-    .form-submit-wrap { text-align: center; margin-top: 8px; }
-    .btn-submit {
-      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-      color: #fff;
-      font-size: 1.05rem;
-      font-weight: 700;
-      padding: 16px 52px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 6px 20px rgba(10,92,54,0.35);
-      letter-spacing: 0.3px;
-      width: 100%;
-      max-width: 320px;
-    }
-    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(10,92,54,0.45); }
-    .form-note {
-      text-align: center;
-      margin-top: 14px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .form-success {
-      display: none;
-      background: #e8f7ef;
-      border: 1.5px solid var(--green-light);
-      border-radius: 12px;
-      padding: 24px;
-      text-align: center;
-      margin-top: 24px;
-    }
-    .form-success .check { font-size: 2.5rem; margin-bottom: 12px; }
-    .form-success h3 { color: var(--green-dark); font-size: 1.2rem; margin-bottom: 8px; }
-    .form-success p { color: var(--text-muted); font-size: 0.9rem; }
-
-    /* ==============================
-       PROCESS / HOW IT WORKS
-    ============================== */
-    .process { padding: 100px 0; background: #fff; }
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 40px;
-      position: relative;
-    }
-    .step {
-      text-align: center;
-      padding: 32px 24px;
-      position: relative;
-      background: var(--off-white);
-      border-radius: 24px;
-      transition: transform 0.3s ease;
-    }
-    .step:hover { transform: translateY(-5px); }
-    .step-num {
-      width: 50px; height: 50px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-      color: #fff;
-      font-size: 1.2rem; font-weight: 800;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      box-shadow: 0 8px 16px rgba(6, 78, 59, 0.15);
-    }
-    .step h4 { font-size: 1.1rem; font-weight: 700; color: var(--green-dark); margin-bottom: 12px; }
-    .step p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
-
-    /* ==============================
-       FAQ
-    ============================== */
-    .faq { padding: 100px 0; background: #fff; }
-    .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; }
-    .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-    }
-    .faq-question {
-      padding: 24px;
-      display: flex; justify-content: space-between; align-items: center;
-      cursor: pointer; font-weight: 700; color: var(--green-dark);
-      background: var(--off-white);
-    }
-    .faq-answer {
-      padding: 0 24px;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      background: #fff;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-    }
-    .faq-item.active { border-color: var(--green-mid); box-shadow: var(--shadow-md); }
-    .faq-item.active .faq-answer { padding: 12px 24px 24px; max-height: 200px; }
-    .faq-toggle { font-size: 1.2rem; transition: transform 0.3s; }
-    .faq-item.active .faq-toggle { transform: rotate(45deg); }
-    .contact { padding: 100px 0; background: var(--off-white); }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 60px;
-      align-items: stretch;
-    }
-    .contact-card {
-      background: #fff;
-      border-radius: 32px;
-      padding: 48px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-    }
-    .contact-info h3 { font-size: 1.75rem; font-weight: 800; color: var(--green-dark); margin-bottom: 24px; }
-    .contact-item {
-      display: flex; gap: 20px; align-items: center;
-      margin-bottom: 24px;
-      padding: 16px;
-      border-radius: 16px;
-      background: var(--off-white);
-      transition: background 0.3s ease;
-    }
-    .contact-item:hover { background: #fff; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-    .contact-item-icon {
-      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
-      background: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    }
-    .contact-item-text strong { font-size: 0.85rem; font-weight: 700; color: var(--green-dark); display: block; }
-    .contact-item-text span { font-size: 0.88rem; color: var(--text-muted); }
-    .contact-item-text a { color: var(--green-mid); font-weight: 600; }
-    .contact-map {
-      border-radius: 18px; overflow: hidden;
-      box-shadow: 0 4px 20px var(--shadow);
-      background: #e8f0ea;
-      height: 320px;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column;
-      gap: 16px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      border: 2px solid var(--border);
-    }
-    .map-placeholder-icon { font-size: 3rem; }
-    .social-links { display: flex; gap: 12px; margin-top: 28px; }
-    .social-btn {
-      width: 42px; height: 42px; border-radius: 10px;
-      background: var(--green-dark);
-      color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1rem;
-      transition: transform 0.2s, background 0.2s;
-    }
-    .social-btn:hover { transform: translateY(-3px); background: var(--gold); color: var(--text-dark); }
-
-    /* ==============================
-       FOOTER
-    ============================== */
-    .footer {
-      background: var(--text-dark);
-      color: rgba(255,255,255,0.75);
-      padding: 50px 0 0;
-    }
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1.5fr;
-      gap: 40px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-    .footer-brand .logo-wrap { margin-bottom: 16px; }
-    .footer-brand .logo-text strong { color: #fff; }
-    .footer-brand .logo-text span { color: rgba(255,255,255,0.5); }
-    .footer-brand p { font-size: 0.85rem; line-height: 1.7; max-width: 280px; }
-    .footer-col h4 {
-      font-size: 0.9rem; font-weight: 700; color: var(--gold-light);
-      text-transform: uppercase; letter-spacing: 0.8px;
-      margin-bottom: 16px;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.65); transition: color 0.2s; }
-    .footer-links a:hover { color: var(--gold-light); }
-    .footer-contact-item {
-      display: flex; gap: 10px; align-items: center; margin-bottom: 12px;
-    }
-    .footer-contact-item .fc-icon { font-size: 0.95rem; color: var(--gold); flex-shrink: 0; }
-    .footer-contact-item span { font-size: 0.83rem; }
-    .footer-bottom {
-      padding: 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .footer-bottom p { font-size: 0.82rem; color: rgba(255,255,255,0.45); }
-    .footer-bottom .igo-badge {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.8rem; color: var(--gold-light);
-      background: rgba(201,162,39,0.12);
-      padding: 6px 14px; border-radius: 50px;
-      border: 1px solid rgba(201,162,39,0.25);
-    }
-
-    /* ==============================
-       MOBILE NAV
-    ============================== */
-    @media (max-width: 900px) {
-      .hamburger { display: flex; }
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        position: absolute; top: 100%; left: 0; right: 0;
-        background: #fff;
-        padding: 20px;
-        box-shadow: 0 8px 20px var(--shadow);
-        gap: 16px;
+    /* Mobile Perfection Engine */
+    @media (max-width: 1100px) {
+      .container { padding: 0 20px; }
+      .navbar { height: 75px !important; }
+      .navbar .btn-primary { display: none !important; } 
+      .nav-links { display: none !important; } 
+      .nav-links.active { 
+        display: flex !important; 
+        flex-direction: column; 
+        position: fixed; 
+        top: 75px; 
+        left: 0; 
+        width: 100%; 
+        background: var(--bg); 
+        padding: 30px; 
+        gap: 20px; 
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow-hard);
       }
-      #nav-toggle:checked ~ .nav-links { display: flex; }
-      .navbar .container { flex-wrap: wrap; position: relative; }
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      .why-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .process-steps::before { display: none; }
-    }
-    @media (max-width: 600px) {
-      .hero { padding: 60px 0; }
-      .topbar .container { justify-content: center; }
-      .footer-top { grid-template-columns: 1fr; }
-      .trust-numbers { grid-template-columns: 1fr 1fr; }
-      .hero-stats { flex-wrap: wrap; }
-      .form-body { padding: 24px 20px; }
-      .form-header { padding: 28px 20px; }
+      .mobile-toggle { display: flex !important; }
+      .logo-text h1 { font-size: 1.1rem; }
+      .logo-text span { font-size: 0.6rem; }
+      .logo-icon { width: 40px; height: 40px; }
+      
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 30px; }
+      .hero { padding: 130px 0 50px; }
+      .hero h1 { font-size: 2.8rem; letter-spacing: -2px; }
+      .hero p { font-size: 1.1rem; margin-bottom: 30px; }
+      .hero-content { display: flex; flex-direction: column; align-items: center; }
+      .hero-img { height: 350px; border-radius: 30px; }
+      .floating-card { display: none !important; }
+      
+      .section { padding: 60px 0; }
+      .section-title { font-size: 2.2rem; }
+      .glass-box { padding: 35px 20px; border-radius: 24px; }
+      #registrationForm { grid-template-columns: 1fr !important; gap: 15px !important; }
+      
+      div[style*="margin-top: 100px;"] { 
+        margin-top: 50px !important; 
+        gap: 40px !important; 
+        flex-direction: column !important; 
+        align-items: center !important;
+      }
+      div[style*="margin-top: 100px;"] h3 { font-size: 2.8rem !important; }
     }
 
-    /* ==============================
-       SCROLL ANIMATION
-    ============================== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 2.4rem; }
+      .btn { padding: 16px 28px; width: 100%; justify-content: center; font-size: 0.95rem; }
+      .hero div[style*="display: flex; gap: 24px;"] { flex-direction: column; width: 100%; gap: 12px; }
+      .hero div[style*="margin-top: 100px;"] { flex-direction: column; gap: 30px; margin-top: 60px; }
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* Mobile Menu Elements */
+    .mobile-toggle {
+      display: none; width: 50px; height: 50px; border-radius: 12px;
+      background: var(--bg-alt); align-items: center; justify-content: center;
+      cursor: pointer; border: 1px solid var(--border); font-size: 1.2rem;
+    }
+
+    /* Theme Toggle Restore */
+    #theme-toggle {
+      width: 50px; height: 50px; border-radius: 50%; background: var(--bg-alt);
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
+      border: 1px solid var(--border); transition: 0.3s;
+    }
+    #theme-toggle:hover { transform: rotate(45deg); border-color: var(--primary); }
   </style>
 </head>
 <body>
 
-<!-- ========== TOPBAR ========== -->
-<div class="topbar">
-  <div class="container">
-    <div>📞 Toll Free: <a href="tel:+918870123456">+91 88701 23456</a>&nbsp;&nbsp;|&nbsp;&nbsp;✉️ <a href="mailto:loans@igogroup.in">loans@igogroup.in</a></div>
-    <div>🕐 Mon – Sat: 9:00 AM – 6:00 PM &nbsp;|&nbsp; Tamil Nadu, India</div>
-  </div>
-</div>
-
-<!-- ========== NAVBAR ========== -->
+<!-- Navbar -->
 <nav class="navbar">
   <div class="container">
-    <div class="logo-wrap">
-      <img src="/Users/igogroups/.gemini/antigravity/brain/2862c65c-0e2a-45bd-ae71-b9904f8f9fb9/igo_loan_logo_1777640794477.png" alt="IGO Loans Logo" style="height: 50px; border-radius: 8px;">
-      <div class="logo-text">
-        <strong>IGO Loans &amp; Subsidy</strong>
-        <span>A Unit of IGO Group of Companies</span>
+    <a href="#" class="logo-wrap">
+      <div class="logo-icon">
+        <!-- Next-Level SVG Logo -->
+        <svg width="35" height="35" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M50 10L90 30V70L50 90L10 70V30L50 10Z" stroke="white" stroke-width="8" stroke-linejoin="round"/>
+          <path d="M50 30V70" stroke="white" stroke-width="8" stroke-linecap="round"/>
+          <path d="M30 50L50 30L70 50" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="50" cy="50" r="10" fill="var(--gold-light)"/>
+        </svg>
       </div>
-    </div>
-    <input type="checkbox" id="nav-toggle"/>
-    <label for="nav-toggle" class="hamburger">
-      <span></span><span></span><span></span>
-    </label>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#schemes">Schemes</a></li>
-      <li><a href="#why-us">Why IGO</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="#register" class="btn-primary nav-cta">Apply Now</a></li>
+      <div class="logo-text">
+        <h1>IGO LOANS & SUBSIDY</h1>
+        <span>National Agri-Fintech Excellence</span>
+      </div>
+    </a>
+    
+    <ul class="nav-links" style="display: flex; gap: 40px; list-style: none;">
+      <li><a href="#services">Solutions</a></li>
+      <li><a href="#calculator">Estimator</a></li>
+      <li><a href="#register">Quick Apply</a></li>
     </ul>
+
+    <div style="display: flex; gap: 15px; align-items: center;">
+      <div id="theme-toggle"><i class="fas fa-moon"></i></div>
+      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
+      <a href="#register" class="btn btn-primary" style="padding: 14px 30px; font-size: 0.9rem;">Start Now</a>
+    </div>
   </div>
 </nav>
 
-<!-- ========== HERO ========== -->
-<section class="hero">
-  <div class="hero-blob blob-1"></div>
-  <div class="hero-blob blob-2"></div>
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-badge">
-          <div class="dot"></div>
-          Government-Backed Financial Assistance
-        </div>
-        <h1>
-          Empowering Farmers &amp;<br/>
-          Businesses with<br/>
-          <span class="gold">Loans &amp; Subsidies</span>
-        </h1>
-        <p>
-          IGO Loans &amp; Subsidy connects farmers, rural entrepreneurs, and MSMEs across
-          Tamil Nadu with the right government loan schemes and subsidy programs.
-          We handle the paperwork — you focus on growth.
-        </p>
-        <div class="hero-btns">
-          <a href="#register" class="btn-primary">Apply for a Loan / Subsidy</a>
-          <a href="#services" class="btn-outline">Explore Services</a>
-        </div>
-        <div class="hero-stats">
-          <div class="stat">
-            <span class="num">5,000+</span>
-            <span class="lbl">Clients Served</span>
-          </div>
-          <div class="stat">
-            <span class="num">₹25 Cr+</span>
-            <span class="lbl">Loans Facilitated</span>
-          </div>
-          <div class="stat">
-            <span class="num">15+</span>
-            <span class="lbl">Govt. Schemes</span>
-          </div>
-          <div class="stat">
-            <span class="num">100%</span>
-            <span class="lbl">Transparent Process</span>
-          </div>
-        </div>
-      </div>
-      <div class="hero-visual">
-        <div class="hero-card">
-          <div class="hero-card-title">🏛️ Top Government Schemes</div>
-          <ul class="scheme-list">
-            <li class="scheme-item">
-              <div class="scheme-icon">🌾</div>
-              <div class="scheme-info">
-                <strong>PM-KISAN Yojana</strong>
-                <span>₹6,000/year for farmers</span>
-              </div>
-            </li>
-            <li class="scheme-item">
-              <div class="scheme-icon">💳</div>
-              <div class="scheme-info">
-                <strong>Kisan Credit Card</strong>
-                <span>Up to ₹3 Lakh @ 4%</span>
-              </div>
-            </li>
-            <li class="scheme-item">
-              <div class="scheme-icon">🏭</div>
-              <div class="scheme-info">
-                <strong>MSME Loans</strong>
-                <span>Collateral-free up to ₹10 Lakh</span>
-              </div>
-            </li>
-            <li class="scheme-item">
-              <div class="scheme-icon">🌱</div>
-              <div class="scheme-info">
-                <strong>Agri Subsidy</strong>
-                <span>Irrigation, Seeds &amp; Equipment</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== TRUST MARQUEE ========== -->
-<div class="trust-bar">
-  <div class="marquee-track">
-    <span class="marquee-item"><span class="dot">★</span> Registered &amp; Trusted Financial Consultancy</span>
-    <span class="marquee-item"><span class="dot">★</span> Supported by IGO Group of Companies</span>
-    <span class="marquee-item"><span class="dot">★</span> NABARD-linked Agricultural Loans</span>
-    <span class="marquee-item"><span class="dot">★</span> PM-KISAN | KCC | PMEGP | PMMY | MNREGS</span>
-    <span class="marquee-item"><span class="dot">★</span> Tamil Nadu Government Schemes</span>
-    <span class="marquee-item"><span class="dot">★</span> 100% Transparent &amp; Hassle-Free Process</span>
-    <span class="marquee-item"><span class="dot">★</span> Registered &amp; Trusted Financial Consultancy</span>
-    <span class="marquee-item"><span class="dot">★</span> Supported by IGO Group of Companies</span>
-    <span class="marquee-item"><span class="dot">★</span> NABARD-linked Agricultural Loans</span>
-    <span class="marquee-item"><span class="dot">★</span> PM-KISAN | KCC | PMEGP | PMMY | MNREGS</span>
-    <span class="marquee-item"><span class="dot">★</span> Tamil Nadu Government Schemes</span>
-    <span class="marquee-item"><span class="dot">★</span> 100% Transparent &amp; Hassle-Free Process</span>
-  </div>
-</div>
-
-<!-- ========== SERVICES ========== -->
-<section class="services" id="services">
-  <div class="container">
-    <h2 class="section-title fade-up">Our Loan &amp; Subsidy Services</h2>
-    <div class="gold-bar fade-up"></div>
-    <p class="section-subtitle fade-up">Comprehensive financial assistance tailored for Tamil Nadu's farmers, rural communities, and small businesses.</p>
-    <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="svc-icon">🌾</div>
-        <h3>Agricultural Loans</h3>
-        <p>Short-term and long-term crop loans for paddy, sugarcane, pulses, and horticulture. We assist with bank linkage, documentation, and disbursement follow-up.</p>
-        <span class="svc-tag">Up to ₹50 Lakh</span>
-      </div>
-      <div class="service-card fade-up">
-        <div class="svc-icon">💳</div>
-        <h3>Kisan Credit Card (KCC)</h3>
-        <p>Get quick access to revolving credit for seeds, fertilizers, and other farming needs with subsidized interest rates under the government KCC scheme.</p>
-        <span class="svc-tag">Interest @ 4% p.a.</span>
-      </div>
-      <div class="service-card fade-up">
-        <div class="svc-icon">🏭</div>
-        <h3>MSME / Business Loans</h3>
-        <p>Collateral-free loans for micro and small enterprises under PMMY (Mudra), CGTMSE, and PMEGP schemes. Ideal for artisans, traders, and start-ups.</p>
-        <span class="svc-tag">Upto ₹10 Lakh</span>
-      </div>
-      <div class="service-card gold-accent fade-up">
-        <div class="svc-icon">🏛️</div>
-        <h3>Government Subsidy Schemes</h3>
-        <p>We identify and apply for eligible state and central government subsidies for solar pumps, drip irrigation, farm mechanization, and rural housing.</p>
-        <span class="svc-tag">State &amp; Central</span>
-      </div>
-      <div class="service-card gold-accent fade-up">
-        <div class="svc-icon">🌿</div>
-        <h3>PM-KISAN Registration &amp; Correction</h3>
-        <p>Assistance with PM-KISAN enrollment, eKYC, name corrections, bank linkage, and instalment follow-up for eligible farmer families.</p>
-        <span class="svc-tag">₹6,000/year benefit</span>
-      </div>
-      <div class="service-card fade-up">
-        <div class="svc-icon">🐄</div>
-        <h3>Animal Husbandry &amp; Dairy Loans</h3>
-        <p>NABARD-backed loans for cattle, poultry, fisheries, and dairy farming. Includes Pashu Kisan Credit Card and AIF (Agriculture Infrastructure Fund) support.</p>
-        <span class="svc-tag">NABARD Linked</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== GOVERNMENT SCHEMES ========== -->
-<section class="schemes-banner" id="schemes">
-  <div class="container">
-    <h2 class="section-title fade-up">Government Schemes We Handle</h2>
-    <div class="gold-bar fade-up"></div>
-    <p class="section-subtitle fade-up">We are well-versed with 15+ active schemes from the Central &amp; Tamil Nadu State Government.</p>
-    <div class="schemes-grid">
-      <div class="scheme-chip fade-up">
-        <div class="emoji">🌾</div>
-        <strong>PM-KISAN</strong>
-        <span>Pradhan Mantri Kisan Samman Nidhi</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">💳</div>
-        <strong>Kisan Credit Card</strong>
-        <span>Agricultural revolving credit</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">🏭</div>
-        <strong>PMEGP</strong>
-        <span>Employment Generation Programme</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">💰</div>
-        <strong>PM Mudra Yojana</strong>
-        <span>Shishu, Kishore, Tarun loans</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">☀️</div>
-        <strong>PM Kusum</strong>
-        <span>Solar pump subsidies</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">🏡</div>
-        <strong>PMAY-G</strong>
-        <span>Rural Housing Scheme</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">💧</div>
-        <strong>PMKSY</strong>
-        <span>Irrigation &amp; Water Conservation</span>
-      </div>
-      <div class="scheme-chip fade-up">
-        <div class="emoji">🌱</div>
-        <strong>TN Agri Subsidy</strong>
-        <span>State farm input subsidies</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== WHY CHOOSE US ========== -->
-<section class="why-us" id="why-us">
-  <div class="container">
-    <div class="why-grid">
-      <div>
-        <h2 class="section-title" style="text-align:left;">Why Farmers &amp; Businesses<br/>Choose <span style="color:var(--gold)">IGO</span></h2>
-        <div class="gold-bar" style="margin-left:0;"></div>
-        <p class="section-subtitle" style="text-align:left;margin:0 0 32px;">Backed by the full strength of IGO Group, we deliver end-to-end financial assistance — from eligibility check to fund disbursement.</p>
-        <ul class="why-list">
-          <li class="why-item fade-up">
-            <div class="why-icon">🤝</div>
-            <div class="why-text">
-              <strong>End-to-End Application Support</strong>
-              <p>We handle documentation, online portal submissions, bank coordination, and follow-ups on your behalf — zero hassle for you.</p>
-            </div>
-          </li>
-          <li class="why-item fade-up">
-            <div class="why-icon">✅</div>
-            <div class="why-text">
-              <strong>Expert Eligibility Assessment</strong>
-              <p>Our trained advisors evaluate your eligibility across 15+ schemes and guide you to the best-fit loan or subsidy option.</p>
-            </div>
-          </li>
-          <li class="why-item fade-up">
-            <div class="why-icon">🔒</div>
-            <div class="why-text">
-              <strong>100% Transparent &amp; No Hidden Charges</strong>
-              <p>We operate on a clear-fee model with no hidden charges. All government benefits go directly to the beneficiary.</p>
-            </div>
-          </li>
-          <li class="why-item fade-up">
-            <div class="why-icon">🌐</div>
-            <div class="why-text">
-              <strong>Wide District Coverage Across Tamil Nadu</strong>
-              <p>With field teams and offices across Tamil Nadu districts, we serve rural and semi-urban clients with ease and speed.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="trust-box fade-up">
-        <div class="trust-logo-big">IGO</div>
-        <h3>IGO Group of Companies</h3>
-        <p>A trusted conglomerate with operations in agriculture, finance, consultancy, and rural services. IGO Loans &amp; Subsidy is our dedicated vertical for farmer and MSME financial empowerment.</p>
-        <div class="trust-numbers">
-          <div class="tn-item">
-            <div class="n">8+</div>
-            <div class="l">Years of Operation</div>
-          </div>
-          <div class="tn-item">
-            <div class="n gold-num">25+</div>
-            <div class="l">Districts Covered</div>
-          </div>
-          <div class="tn-item">
-            <div class="n">5,000+</div>
-            <div class="l">Happy Clients</div>
-          </div>
-          <div class="tn-item">
-            <div class="n gold-num">₹25Cr+</div>
-            <div class="l">Facilitated</div>
-          </div>
-        </div>
-        <div class="partner-logos">
-          <span class="partner-tag">NABARD</span>
-          <span class="partner-tag">SBI AgriLoan</span>
-          <span class="partner-tag">TN Gov't Schemes</span>
-          <span class="partner-tag">PMEGP</span>
-          <span class="partner-tag">PM Mudra</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== PROCESS ========== -->
-<section class="process" id="process">
-  <div class="container">
-    <h2 class="section-title fade-up">How It Works</h2>
-    <div class="gold-bar fade-up"></div>
-    <p class="section-subtitle fade-up">A simple 4-step process to get your loan or subsidy approved and disbursed.</p>
-    <div class="process-steps">
-      <div class="step fade-up">
-        <div class="step-num">1</div>
-        <h4>Register Online</h4>
-        <p>Fill in the registration form below with your details and the loan/subsidy type you need.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">2</div>
-        <h4>Free Consultation</h4>
-        <p>Our expert advisor contacts you, assesses eligibility and advises the best scheme for your profile.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">3</div>
-        <h4>Document Assistance</h4>
-        <p>We collect, verify and submit your documents to the bank or government portal on your behalf.</p>
-      </div>
-      <div class="step fade-up">
-        <div class="step-num">4</div>
-        <h4>Disbursement</h4>
-        <p>Loan amount or subsidy benefit is directly credited to your linked bank account. Done!</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== REGISTRATION FORM ========== -->
-<section class="register" id="register">
-  <div class="container">
-    <h2 class="section-title fade-up">Client Registration Form</h2>
-    <div class="gold-bar fade-up"></div>
-    <p class="section-subtitle fade-up">Fill in your details below and our team will reach out within 24 hours with a FREE consultation.</p>
-    <div class="form-wrapper fade-up">
-      <div class="form-header">
-        <h2>📋 Apply for Loan / Subsidy</h2>
-        <p>All fields marked with <strong style="color:#ffd77a">*</strong> are required. Your data is 100% confidential.</p>
-      </div>
-      <div class="form-body">
-        <form id="registrationForm" novalidate>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fullName">Full Name <span class="req">*</span></label>
-              <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required/>
-            </div>
-            <div class="form-group">
-              <label for="mobile">Mobile Number <span class="req">*</span></label>
-              <input type="tel" id="mobile" name="mobile" placeholder="+91 XXXXX XXXXX" pattern="[6-9]\d{9}" maxlength="10" required/>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">Email Address <span style="color:var(--text-muted);font-weight:400;">(Optional)</span></label>
-              <input type="email" id="email" name="email" placeholder="example@email.com"/>
-            </div>
-            <div class="form-group">
-              <label for="district">District / City <span class="req">*</span></label>
-              <input type="text" id="district" name="district" placeholder="e.g. Coimbatore, Madurai" required/>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="state">State <span class="req">*</span></label>
-              <select id="state" name="state" required>
-                <option value="Tamil Nadu" selected>Tamil Nadu</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Gujarat">Gujarat</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Haryana">Haryana</option>
-                <option value="West Bengal">West Bengal</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="loanType">Type of Loan / Subsidy Needed <span class="req">*</span></label>
-              <select id="loanType" name="loanType" required>
-                <option value="" disabled selected>-- Select Type --</option>
-                <option value="Agricultural Loan">Agricultural Loan</option>
-                <option value="Kisan Credit Card (KCC)">Kisan Credit Card (KCC)</option>
-                <option value="PM-KISAN Registration">PM-KISAN Registration / eKYC</option>
-                <option value="MSME / Business Loan">MSME / Business Loan</option>
-                <option value="PM Mudra Loan">PM Mudra Loan (Shishu / Kishore / Tarun)</option>
-                <option value="PMEGP Scheme">PMEGP Scheme</option>
-                <option value="Animal Husbandry Loan">Animal Husbandry / Dairy Loan</option>
-                <option value="Solar Pump Subsidy">Solar Pump / PM Kusum Subsidy</option>
-                <option value="Irrigation Subsidy">Drip Irrigation / PMKSY Subsidy</option>
-                <option value="Government Subsidy">Other Government Subsidy</option>
-                <option value="Other">Other / Not Sure</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="details">Land / Business Details <span class="req">*</span></label>
-            <textarea id="details" name="details" placeholder="e.g. I own 3 acres of farmland in Thanjavur growing paddy. / I run a small textile shop and need working capital loan." required></textarea>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="income">Annual Income (Approximate) <span class="req">*</span></label>
-              <select id="income" name="income" required>
-                <option value="" disabled selected>-- Select Income Range --</option>
-                <option value="Below ₹1 Lakh">Below ₹1 Lakh</option>
-                <option value="₹1 – ₹2 Lakh">₹1 Lakh – ₹2 Lakh</option>
-                <option value="₹2 – ₹5 Lakh">₹2 Lakh – ₹5 Lakh</option>
-                <option value="₹5 – ₹10 Lakh">₹5 Lakh – ₹10 Lakh</option>
-                <option value="₹10 – ₹25 Lakh">₹10 Lakh – ₹25 Lakh</option>
-                <option value="Above ₹25 Lakh">Above ₹25 Lakh</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="referral">How did you hear about us?</label>
-              <select id="referral" name="referral">
-                <option value="" disabled selected>-- Select --</option>
-                <option value="Facebook/Instagram">Facebook / Instagram</option>
-                <option value="WhatsApp">WhatsApp</option>
-                <option value="Friend/Family">Friend / Family Referral</option>
-                <option value="IGO Field Agent">IGO Field Agent</option>
-                <option value="Google Search">Google Search</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group" style="margin-bottom:8px;">
-            <label style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-weight:400;color:var(--text-muted);font-size:0.85rem;">
-              <input type="checkbox" id="consent" name="consent" required style="width:auto;margin-top:3px;accent-color:var(--green-mid);"/>
-              I consent to IGO Loans &amp; Subsidy contacting me via phone/WhatsApp regarding my application. I confirm the details provided are accurate. <span class="req">*</span>
-            </label>
-          </div>
-          <div class="form-submit-wrap">
-            <button type="submit" class="btn-submit">🚀 Submit My Application</button>
-          </div>
-          <p class="form-note">🔒 Your information is secure and will not be shared with third parties.</p>
-        </form>
-        <div class="form-success" id="formSuccess">
-          <div class="check">✅</div>
-          <h3>Application Submitted Successfully!</h3>
-          <p>Thank you! Our team will contact you within <strong>24 hours</strong> with a FREE eligibility consultation.<br/>
-          For urgent queries, call us at <strong>+91 88701 23456</strong>.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== FAQ SECTION ========== -->
-<section class="faq" id="faq">
-  <div class="container">
-    <h2 class="section-title fade-up">Frequently Asked Questions</h2>
-    <div class="gold-bar fade-up"></div>
-    <div class="faq-grid">
-      <div class="faq-item fade-up">
-        <div class="faq-question">
-          What documents are required for a farmer loan?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          Typically, you need your Aadhaar card, PAN card, land ownership documents (Patta/Chitta), bank passbook, and passport-size photographs. Specific requirements may vary by scheme.
-        </div>
-      </div>
-      <div class="faq-item fade-up">
-        <div class="faq-question">
-          How long does the approval process take?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          With IGO's assistance, the initial eligibility check takes 24 hours. Bank approval and disbursement usually take 7-15 working days depending on the scheme and documentation status.
-        </div>
-      </div>
-      <div class="faq-item fade-up">
-        <div class="faq-question">
-          Are there any upfront fees for consultation?
-          <span class="faq-toggle">+</span>
-        </div>
-        <div class="faq-answer">
-          No, our initial consultation and eligibility assessment are 100% free. We only charge a nominal service fee upon successful application processing.
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="contact" id="contact">
-  <div class="container">
-    <h2 class="section-title fade-up">Get In Touch</h2>
-    <div class="gold-bar fade-up"></div>
-    <p class="section-subtitle fade-up">Reach out to our team for any queries about loans, subsidies, or your application status.</p>
-    <div class="contact-grid">
-      <div class="contact-card fade-up">
-        <div class="contact-info">
-          <h3>IGO Loans &amp; Subsidy</h3>
-          <p>We are here to help farmers, rural entrepreneurs, and small businesses access the financial support they deserve. Visit us, call us, or register online.</p>
-          <div class="contact-item">
-            <div class="contact-item-icon">📞</div>
-            <div class="contact-item-text">
-              <strong>Phone / WhatsApp</strong>
-              <span><a href="tel:+918870123456">+91 88701 23456</a></span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">✉️</div>
-            <div class="contact-item-text">
-              <strong>Email</strong>
-              <span><a href="mailto:loans@igogroup.in">loans@igogroup.in</a></span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">📍</div>
-            <div class="contact-item-text">
-              <strong>Head Office</strong>
-              <span>IGO Group of Companies, Tamil Nadu, India</span>
-            </div>
-          </div>
-          <div class="contact-item">
-            <div class="contact-item-icon">🕐</div>
-            <div class="contact-item-text">
-              <strong>Office Hours</strong>
-              <span>Monday – Saturday: 9:00 AM to 6:00 PM</span>
-            </div>
-          </div>
-          <div class="social-links">
-            <a href="#" class="social-btn" title="Facebook">f</a>
-            <a href="#" class="social-btn" title="WhatsApp">W</a>
-            <a href="#" class="social-btn" title="Instagram">📷</a>
-            <a href="#" class="social-btn" title="YouTube">▶</a>
-          </div>
-        </div>
-      </div>
-      <div class="contact-map fade-up">
-        <div class="map-placeholder-icon">📍</div>
-        <strong style="color:var(--green-dark);font-size:1rem;">IGO Group of Companies</strong>
-        <span>Tamil Nadu, India</span>
-        <a href="https://maps.google.com" target="_blank" rel="noopener" class="btn-primary" style="font-size:0.85rem;padding:10px 24px;margin-top:8px;">Open in Google Maps →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="logo-wrap">
-          <div class="logo-icon">IGO</div>
-          <div class="logo-text">
-            <strong>IGO Loans &amp; Subsidy</strong>
-            <span>A Unit of IGO Group of Companies</span>
-          </div>
-        </div>
-        <p>Connecting Tamil Nadu's farmers and businesses with government loans and subsidies. Trusted, transparent, and community-driven financial services since 2017.</p>
-      </div>
-      <div class="footer-col">
-        <h4>Services</h4>
-        <ul class="footer-links">
-          <li><a href="#services">Agricultural Loans</a></li>
-          <li><a href="#services">Kisan Credit Card</a></li>
-          <li><a href="#services">MSME Loans</a></li>
-          <li><a href="#services">Government Subsidies</a></li>
-          <li><a href="#services">PM-KISAN Help</a></li>
-          <li><a href="#services">Animal Husbandry Loans</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul class="footer-links">
-          <li><a href="#schemes">Govt. Schemes</a></li>
-          <li><a href="#why-us">Why Choose IGO</a></li>
-          <li><a href="#process">How It Works</a></li>
-          <li><a href="#register">Apply Now</a></li>
-          <li><a href="#contact">Contact Us</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h4>Contact</h4>
-        <div class="footer-contact-item">
-          <span class="fc-icon">📞</span>
-          <span>+91 88701 23456</span>
-        </div>
-        <div class="footer-contact-item">
-          <span class="fc-icon">✉️</span>
-          <span>loans@igogroup.in</span>
-        </div>
-        <div class="footer-contact-item">
-          <span class="fc-icon">📍</span>
-          <span>Tamil Nadu, India</span>
-        </div>
-        <div class="footer-contact-item">
-          <span class="fc-icon">🕐</span>
-          <div class="footer-contact-item">
-            <span class="fc-icon">🕐</span>
-            <span>Mon–Sat: 9 AM – 6 PM</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2026 IGO Loans &amp; Subsidy | A Unit of IGO Group of Companies. All rights reserved.</p>
-        <div class="igo-badge">🏆 IGO Group of Companies — Trusted Since 2017</div>
-      </div>
-    </div>
-  </footer>
-
-<!-- ========== JAVASCRIPT ========== -->
 <script>
-  // Navbar scroll effect
-  const navbar = document.querySelector('.navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 20) {
-      navbar.classList.add('scrolled');
-    } else {
-      navbar.classList.remove('scrolled');
-    }
+  // Mobile Menu Logic
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = menuBtn.querySelector('i');
+    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
   });
 
-  // Scroll animation observer
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // Staggered grid animations
-  document.querySelectorAll('.services-grid .service-card, .schemes-grid .scheme-chip, .process-steps .step').forEach((el, i) => {
-    el.style.transitionDelay = (i * 0.08) + 's';
-  });
-
-  // Supabase Configuration
-  const SUPABASE_URL = 'https://slfxozmbwogpisxeltty.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_WCHsH2Z1w2hBwHpXDiTKLA_67-fEVP2';
-  const sbClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-  // Form submission
-  const form = document.getElementById('registrationForm');
-  const successMsg = document.getElementById('formSuccess');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Basic validation
-    const required = form.querySelectorAll('[required]');
-    let valid = true;
-
-    required.forEach(field => {
-      field.style.borderColor = '';
-      if (field.type === 'checkbox') {
-        if (!field.checked) { valid = false; field.closest('.form-group').querySelector('label').style.color = '#c0392b'; }
-        else { field.closest('.form-group').querySelector('label').style.color = ''; }
-      } else {
-        if (!field.value.trim()) {
-          valid = false;
-          field.style.borderColor = '#c0392b';
-          field.style.boxShadow = '0 0 0 3px rgba(192,57,43,0.12)';
-        } else {
-          field.style.borderColor = '';
-          field.style.boxShadow = '';
-        }
-      }
-    });
-
-    // Mobile validation
-    const mobile = document.getElementById('mobile');
-    if (mobile.value && !/^[6-9]\d{9}$/.test(mobile.value)) {
-      valid = false;
-      mobile.style.borderColor = '#c0392b';
-      alert('Please enter a valid 10-digit Indian mobile number.');
-      return;
-    }
-
-    if (!valid) {
-      alert('Please fill in all required fields correctly.');
-      return;
-    }
-
-    // Simulate submission (Now with Supabase!)
-    const btn = form.querySelector('.btn-submit');
-    const originalBtnText = btn.textContent;
-    btn.textContent = '⏳ Submitting...';
-    btn.disabled = true;
-
-    async function submitToSupabase() {
-      try {
-        const formData = new FormData(form);
-        const data = {
-          full_name: formData.get('fullName'),
-          mobile: formData.get('mobile'),
-          email: formData.get('email'),
-          district: formData.get('district'),
-          state: formData.get('state'),
-          loan_type: formData.get('loanType'),
-          details: formData.get('details'),
-          income: formData.get('income'),
-          referral: formData.get('referral'),
-          consent: formData.get('consent') === 'on'
-        };
-
-        const { error } = await sbClient
-          .from('loan_applications')
-          .insert([data]);
-
-        if (error) throw error;
-
-        form.style.display = 'none';
-        successMsg.style.display = 'block';
-        successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      } catch (error) {
-        console.error('Error submitting application:', error);
-        alert('Oops! Something went wrong. Please try again or contact us directly.');
-        btn.textContent = originalBtnText;
-        btn.disabled = false;
-      }
-    }
-
-    submitToSupabase();
-  });
-
-  // Input validation reset on focus
-  document.querySelectorAll('.form-group input, .form-group select, .form-group textarea').forEach(field => {
-    field.addEventListener('focus', function() {
-      this.style.borderColor = '';
-      this.style.boxShadow = '';
-    });
-  });
-
-  // Mobile number: digits only
-  document.getElementById('mobile').addEventListener('input', function() {
-    this.value = this.value.replace(/\D/g, '').slice(0, 10);
-  });
-
-  // FAQ Toggles
-  document.querySelectorAll('.faq-question').forEach(q => {
-    q.addEventListener('click', () => {
-      const item = q.parentElement;
-      item.classList.toggle('active');
-      
-      // Close others
-      document.querySelectorAll('.faq-item').forEach(other => {
-        if (other !== item) other.classList.remove('active');
-      });
-    });
-  });
-
-  // Close nav on link click (mobile)
+  // Close menu when clicking a link
   document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
-      document.getElementById('nav-toggle').checked = false;
+      navLinks.classList.remove('active');
+      menuBtn.querySelector('i').className = 'fas fa-bars';
     });
   });
 </script>
 
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(5, 150, 105, 0.1); color: var(--primary); padding: 12px 24px; border-radius: 100px; font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(5, 150, 105, 0.2); margin-bottom: 40px;">
+          <i class="fas fa-shield-check"></i> OFFICIAL GOVT. REGISTERED CONSULTANCY
+        </div>
+        <h1>The Future of <span>Farmer</span> Finance.</h1>
+        <p>Empowering 1.4 Billion dreams. We simplify complex government subsidies and bank loans, bringing elite financial services to every village in India.</p>
+        
+        <div style="display: flex; gap: 24px;">
+          <a href="#register" class="btn btn-primary">Check Your Eligibility</a>
+          <a href="#services" class="btn" style="border: 2px solid var(--border); color: var(--text);">Explore Solutions</a>
+        </div>
+
+        <div style="margin-top: 100px; display: flex; gap: 80px;">
+          <div><h3 style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit';">₹50Cr+</h3><p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Sanctioned Reach</p></div>
+          <div><h3 style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit';">10k+</h3><p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Satisfied Clients</p></div>
+        </div>
+      </div>
+
+      <div class="hero-visual-wrap">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop" alt="Indian Farming" class="hero-img">
+        
+        <div class="floating-card" style="top: 10%; right: -50px;">
+          <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
+            <i class="fas fa-award"></i>
+          </div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.1rem;">ISO 9001 Certified</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Trusted Nationwide</div>
+          </div>
+        </div>
+
+        <div class="floating-card" style="bottom: 10%; left: -50px; animation-delay: 2s;">
+          <div style="width: 50px; height: 50px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
+            <i class="fas fa-bolt"></i>
+          </div>
+          <div>
+            <div style="font-weight: 800; font-size: 1.1rem;">Fast Track Approval</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted);">Paperless Process</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-container">
+  <div class="marquee-content">
+    <div class="marquee-item"><i class="fas fa-star"></i> Kisan Credit Card (KCC)</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> PMEGP Subsidies</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Mudra Business Loans</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Solar Pump Schemes</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> PM-KISAN Helpdesk</div>
+    <!-- Repeat -->
+    <div class="marquee-item"><i class="fas fa-star"></i> Kisan Credit Card (KCC)</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> PMEGP Subsidies</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Mudra Business Loans</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> Solar Pump Schemes</div>
+    <div class="marquee-item"><i class="fas fa-star"></i> PM-KISAN Helpdesk</div>
+  </div>
+</div>
+
+<!-- Solutions Section -->
+<section id="services" class="section" style="background: var(--bg-alt);">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 100px;">
+      <h2 class="section-title">National <span style="color: var(--primary);">Elite</span> Solutions</h2>
+      <p style="font-size: 1.3rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; font-weight: 600;">Tailored financial consulting for India's diverse agricultural and business landscape.</p>
+    </div>
+    <div class="grid-cards">
+      <div class="fancy-card">
+        <i class="fas fa-seedling"></i>
+        <h3>Agri-Growth Loans</h3>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Secure low-interest funding for land, crops, and modern machinery through national banking networks.</p>
+      </div>
+      <div class="fancy-card">
+        <i class="fas fa-rocket"></i>
+        <h3>MSME & Startup</h3>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">Launch or scale your rural enterprise with collateral-free government-backed business loans.</p>
+      </div>
+      <div class="fancy-card">
+        <i class="fas fa-piggy-bank"></i>
+        <h3>Subsidy Maximizer</h3>
+        <p style="color: var(--text-muted); font-size: 1.1rem;">We specialize in identifying and processing the highest possible subsidies (up to 35%) for your projects.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Estimator Section -->
+<section id="calculator" class="section">
+  <div class="container">
+    <div class="glass-box">
+      <div class="hero-grid">
+        <div>
+          <h2 style="font-size: 3rem; margin-bottom: 40px; font-family: 'Outfit';">Smart <span style="color: var(--primary);">Estimator</span></h2>
+          <div style="margin-bottom: 40px;">
+            <label style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 15px;">Loan Amount <span>₹<span id="amt-val">5,00,000</span></span></label>
+            <input type="range" id="loan-amt" min="50000" max="10000000" step="50000" value="500000" style="width: 100%; accent-color: var(--primary);">
+          </div>
+          <div style="margin-bottom: 40px;">
+            <label style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 15px;">Interest Rate <span><span id="rate-val">9.5</span>%</span></label>
+            <input type="range" id="loan-rate" min="4" max="18" step="0.1" value="9.5" style="width: 100%; accent-color: var(--primary);">
+          </div>
+          <div style="margin-bottom: 40px;">
+            <label style="display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 15px;">Tenure <span><span id="dur-val">5</span> Years</span></label>
+            <input type="range" id="loan-dur" min="1" max="25" step="1" value="5" style="width: 100%; accent-color: var(--primary);">
+          </div>
+        </div>
+        <div style="background: var(--primary-dark); color: #fff; padding: 60px; border-radius: 40px; text-align: center; border: 1px solid rgba(255,255,255,0.1);">
+          <p style="font-weight: 900; opacity: 0.6; text-transform: uppercase; letter-spacing: 3px; font-size: 0.9rem;">Estimated Monthly EMI</p>
+          <div style="font-size: 5rem; font-weight: 900; color: var(--gold-light); margin: 20px 0; font-family: 'Outfit';">₹<span id="emi-val">10,500</span></div>
+          <a href="#register" class="btn btn-primary" style="background: var(--gold); color: #000; width: 100%; justify-content: center; margin-top: 30px;">Apply for this Plan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Registration Masterpiece -->
+<section id="register" class="section" style="background: var(--bg-alt);">
+  <div class="container">
+    <div class="glass-box" style="max-width: 1000px; margin: 0 auto; padding: 60px;">
+      <div style="text-align: center; margin-bottom: 60px;">
+        <h2 class="section-title">National <span style="color: var(--primary);">Application</span></h2>
+        <p style="font-size: 1.2rem; color: var(--text-muted); font-weight: 600;">Secure your future with India's most trusted digital loan consultancy.</p>
+      </div>
+      
+      <form id="registrationForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+        <div class="form-group">
+          <label>Full Name</label>
+          <input type="text" name="fullName" placeholder="As per Aadhaar" required>
+        </div>
+        <div class="form-group">
+          <label>Mobile Number</label>
+          <input type="tel" name="mobile" placeholder="10-digit #" required pattern="[0-9]{10}">
+        </div>
+        <div class="form-group">
+          <label>Select Your State</label>
+          <select name="state" required>
+            <option value="" disabled selected>-- Choose State --</option>
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Bihar">Bihar</option>
+            <option value="Gujarat">Gujarat</option>
+            <option value="Karnataka">Karnataka</option>
+            <option value="Maharashtra">Maharashtra</option>
+            <option value="Punjab">Punjab</option>
+            <option value="Tamil Nadu">Tamil Nadu</option>
+            <option value="Uttar Pradesh">Uttar Pradesh</option>
+            <option value="Other">Other States/UTs</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>District</label>
+          <input type="text" name="district" placeholder="Your City/Town" required>
+        </div>
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Interested Scheme</label>
+          <select name="loanType" required>
+            <option value="Agri Loan">Agricultural Loan / KCC</option>
+            <option value="MSME">Business / MSME Funding</option>
+            <option value="Subsidy">Govt. Infrastructure Subsidy</option>
+          </select>
+        </div>
+        <div class="form-group" style="grid-column: span 2;">
+          <label>Brief Requirement</label>
+          <textarea name="details" placeholder="Tell us about your project or funding need..." required style="width: 100%; padding: 20px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-alt); color: var(--text); font-family: inherit; font-size: 1rem; height: 120px;"></textarea>
+        </div>
+        <div style="grid-column: span 2;">
+          <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center; padding: 22px; font-size: 1.1rem;">🚀 Submit Official Application</button>
+        </div>
+      </form>
+
+      <div id="formSuccess" style="display: none; text-align: center; padding: 60px;">
+        <div style="width: 100px; height: 100px; background: var(--primary); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 30px;"><i class="fas fa-check"></i></div>
+        <h2>Application Received!</h2>
+        <p style="color: var(--text-muted); margin-top: 20px; font-size: 1.1rem;">Our regional officer will contact you within 24 hours.</p>
+        <button class="btn btn-primary" style="margin-top: 40px;" onclick="location.reload()">New Entry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer Elite -->
+<footer class="footer">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 80px; margin-bottom: 80px;">
+      <div>
+        <div class="logo-wrap" style="margin-bottom: 30px;">
+          <div class="logo-icon" style="width: 40px; height: 40px;">
+             <svg width="25" height="25" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M50 10L90 30V70L50 90L10 70V30L50 10Z" stroke="white" stroke-width="12" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h1 style="font-family: 'Space Grotesk'; font-size: 1.8rem; color: var(--primary);">IGO LOANS</h1>
+        </div>
+        <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 400px;">India's most trusted partner for agricultural and rural financial transformation. Empowering the heart of the nation.</p>
+      </div>
+      <div class="footer-links">
+        <h4 style="margin-bottom: 25px; font-family: 'Outfit'; font-size: 1.2rem;">Quick Links</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
+          <li><a href="#services">Solutions</a></li>
+          <li><a href="#calculator">Estimator</a></li>
+          <li><a href="#register">Register</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4 style="margin-bottom: 25px; font-family: 'Outfit'; font-size: 1.2rem;">Legal</h4>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="margin-bottom: 25px; font-family: 'Outfit'; font-size: 1.2rem;">Get in Touch</h4>
+        <p style="color: var(--text-muted); font-weight: 700; margin-bottom: 10px;"><i class="fas fa-envelope" style="color: var(--primary);"></i> info@igoloans.in</p>
+        <p style="color: var(--text-muted); font-weight: 700;"><i class="fas fa-map-marker-alt" style="color: var(--primary);"></i> National HQ, India</p>
+      </div>
+    </div>
+    <div style="text-align: center; border-top: 1px solid var(--border); padding-top: 50px; font-weight: 800; color: var(--text-muted); font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;">
+      © 2026 IGO LOANS & SUBSIDY. National Agri-Fintech Excellence.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme Engine
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  const themeIcon = themeToggle.querySelector('i');
+  
+  themeToggle.addEventListener('click', () => {
+    const next = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    body.setAttribute('data-theme', next);
+    themeIcon.className = next === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+  });
+
+  // Advanced Calculator
+  const amtIn = document.getElementById('loan-amt');
+  const rateIn = document.getElementById('loan-rate');
+  const durIn = document.getElementById('loan-dur');
+
+  function calculate() {
+    const P = parseFloat(amtIn.value);
+    const r = (parseFloat(rateIn.value) / 100) / 12;
+    const n = parseFloat(durIn.value) * 12;
+    const emi = (P * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    
+    document.getElementById('amt-val').innerText = P.toLocaleString('en-IN');
+    document.getElementById('rate-val').innerText = rateIn.value;
+    document.getElementById('dur-val').innerText = durIn.value;
+    document.getElementById('emi-val').innerText = Math.round(emi).toLocaleString('en-IN');
+  }
+  [amtIn, rateIn, durIn].forEach(i => i.addEventListener('input', calculate));
+  calculate();
+
+  // Scroll Animations
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.navbar');
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Simple Reveal (Observer already setup in logic)
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fancy-card, .glass-box, .hero-content').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(40px)';
+    el.style.transition = '1s cubic-bezier(0.2, 0.8, 0.2, 1)';
+    observer.observe(el);
+  });
+
+  // Supabase Submission Logic
+  const SUPABASE_URL = 'https://slfxozmbwogpisxeltty.supabase.co';
+  const SUPABASE_KEY = 'sb_publishable_WCHsH2Z1w2hBwHpXDiTKLA_67-fEVP2';
+  const sbClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+  const form = document.getElementById('registrationForm');
+  const successBox = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.innerText = '📡 Connecting to National Database...';
+
+    try {
+      const fd = new FormData(form);
+      const data = {
+        full_name: fd.get('fullName'),
+        mobile: fd.get('mobile'),
+        state: fd.get('state'),
+        district: fd.get('district'),
+        loan_type: fd.get('loanType'),
+        details: fd.get('details'),
+        consent: true
+      };
+
+      const { error } = await sbClient.from('loan_applications').insert([data]);
+      if (error) throw error;
+      
+      form.style.display = 'none';
+      successBox.style.display = 'block';
+    } catch (err) {
+      console.error(err);
+      alert('Network Error. Please try again or contact support.');
+      btn.disabled = false;
+      btn.innerText = '🚀 Submit Official Application';
+    }
+  });
+</script>
 </body>
 </html>
