@@ -1,0 +1,13 @@
+{
+  "name": "igo-loan-website",
+  "version": "1.0.0",
+  "description": "IGO Loans & Subsidy Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
