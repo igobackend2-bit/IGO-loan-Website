@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPR Auto-Portal | IGO Loans & Subsidy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #022c22;
+            --gold: #c5a059;
+            --gold-light: #e2c35a;
+            --gold-pale: #fdf3d0;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+        .logo h1 { font-family: 'Outfit'; font-size: 1.4rem; font-weight: 800; }
+
+        .portal-header {
+            background: var(--primary-dark);
+            color: #fff;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .portal-header h1 { font-family: 'Outfit'; font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; }
+        .portal-header p { font-size: 1.2rem; opacity: 0.8; max-width: 700px; margin: 0 auto; }
+
+        .form-container {
+            max-width: 800px;
+            margin: -60px auto 100px;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            z-index: 1;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            background: #fff;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            z-index: 2;
+            transition: 0.3s;
+        }
+
+        .step.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+        }
+
+        .step.completed {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #fff;
+        }
+
+        .form-group { margin-bottom: 30px; }
+        .form-group label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        
+        input, select, textarea {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: 0.3s;
+            background: #fcfcfc;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: #fff;
+            box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.05);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 36px;
+            border-radius: 100px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-family: 'Outfit';
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            box-shadow: 0 10px 30px -5px rgba(5, 150, 105, 0.3);
+        }
+
+        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 20px 40px -10px rgba(5, 150, 105, 0.4); }
+
+        .hidden { display: none; }
+
+        .scheme-card {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .scheme-card:hover { border-color: var(--primary); background: rgba(5, 150, 105, 0.02); }
+        .scheme-card.selected { border-color: var(--primary); background: rgba(5, 150, 105, 0.05); }
+
+        .success-animation { text-align: center; padding: 40px; }
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            margin: 0 auto 30px;
+        }
+
+        @media (max-width: 768px) {
+            .portal-header h1 { font-size: 2.5rem; }
+            .form-container { padding: 30px; margin-top: -30px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <img src="assets/logo.png" alt="IGO Logo" style="height: 40px;">
+            <h1>IGO LOANS</h1>
+        </a>
+        <div style="font-weight: 800; font-size: 0.8rem; color: var(--primary); background: rgba(5, 150, 105, 0.1); padding: 8px 16px; border-radius: 100px;">
+            <i class="fas fa-lock"></i> SECURE DPR PORTAL
+        </div>
+    </div>
+</nav>
+
+<header class="portal-header">
+    <div class="container">
+        <h1>DPR Auto-Generator</h1>
+        <p>AI-powered Detailed Project Report generation for NHB, PMEGP, and Agri-Infrastructure Subsidies.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="form-container">
+        <div class="step-indicator">
+            <div class="step active" id="s1">1</div>
+            <div class="step" id="s2">2</div>
+            <div class="step" id="s3">3</div>
+            <div class="step" id="s4">4</div>
+        </div>
+
+        <form id="dprForm">
+            <!-- Step 1: Basic Info -->
+            <div id="step1">
+                <h2 style="margin-bottom: 30px; font-family: 'Outfit';">Basic Project Information</h2>
+                <div class="form-group">
+                    <label>Farmer / Entrepreneur Name</label>
+                    <input type="text" id="pName" placeholder="As per Aadhaar" required>
+                </div>
+                <div class="form-group">
+                    <label>Aadhaar Number</label>
+                    <input type="text" id="pAadhar" placeholder="12-digit Aadhaar" required pattern="[0-9]{12}">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>State</label>
+                        <select id="pState" required>
+                            <option value="">-- Select State --</option>
+                            <option>Tamil Nadu</option>
+                            <option>Maharashtra</option>
+                            <option>Uttar Pradesh</option>
+                            <option>Karnataka</option>
+                            <option>Andhra Pradesh</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>District</label>
+                        <input type="text" id="pDistrict" placeholder="Enter District" required>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue to Project Details <i class="fas fa-arrow-right"></i></button>
+            </div>
+
+            <!-- Step 2: Project Details -->
+            <div id="step2" class="hidden">
+                <h2 style="margin-bottom: 30px; font-family: 'Outfit';">Technical Specifications</h2>
+                <div class="form-group">
+                    <label>Primary Project Category</label>
+                    <select id="pCategory" required>
+                        <option value="">-- Choose Category --</option>
+                        <option value="Horticulture">Horticulture (Fruits/Veg)</option>
+                        <option value="Livestock">Livestock (Goat/Poultry/Dairy)</option>
+                        <option value="Solar">Solar Irrigation (KUSUM)</option>
+                        <option value="Infrastructure">Cold Storage / Warehouse</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Project Land Area (Acres)</label>
+                    <input type="number" id="pArea" placeholder="e.g. 5" required>
+                </div>
+                <div class="form-group">
+                    <label>Estimated Project Cost (₹)</label>
+                    <input type="number" id="pCost" placeholder="e.g. 2500000" required>
+                </div>
+                <div style="display: flex; gap: 20px;">
+                    <button type="button" class="btn" style="border: 1px solid var(--border);" onclick="prevStep(1)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(3)">Check Eligibility <i class="fas fa-magic"></i></button>
+                </div>
+            </div>
+
+            <!-- Step 3: Eligibility & Scheme Selection -->
+            <div id="step3" class="hidden">
+                <h2 style="margin-bottom: 10px; font-family: 'Outfit';">AI Scheme Matcher</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Based on your inputs, we found the following eligible subsidies.</p>
+                
+                <div id="schemesList">
+                    <!-- Dynamic Schemes -->
+                </div>
+
+                <div style="display: flex; gap: 20px; margin-top: 30px;">
+                    <button type="button" class="btn" style="border: 1px solid var(--border);" onclick="prevStep(2)">Back</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(4)">Generate Final DPR <i class="fas fa-file-pdf"></i></button>
+                </div>
+            </div>
+
+            <!-- Step 4: Generation & Submission -->
+            <div id="step4" class="hidden">
+                <div class="success-animation">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h2 style="font-family: 'Outfit'; margin-bottom: 10px;">DPR Generated Successfully!</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 40px;">Your 48-page Detailed Project Report is ready for review.</p>
+                    
+                    <div style="background: var(--bg); padding: 30px; border-radius: 20px; text-align: left; margin-bottom: 40px; border: 1px dashed var(--primary);">
+                        <h4 style="margin-bottom: 15px;"><i class="fas fa-file-invoice" style="color: var(--primary);"></i> DPR_Report_IGO_2026.pdf</h4>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Size: 4.2 MB | Pages: 48</span>
+                            <a href="#" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.9rem;">Download PDF</a>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" style="width: 100%; justify-content: center; background: var(--primary-dark);" onclick="finalSubmit()">
+                        <i class="fas fa-paper-plane"></i> Submit to NHB Official Portal
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    let currentStep = 1;
+
+    function nextStep(step) {
+        if (step === 3) {
+            calculateEligibility();
+        }
+        
+        document.getElementById(`step${currentStep}`).classList.add('hidden');
+        document.getElementById(`step${step}`).classList.remove('hidden');
+        
+        document.getElementById(`s${step}`).classList.add('active');
+        document.getElementById(`s${currentStep}`).classList.add('completed');
+        
+        currentStep = step;
+        window.scrollTo(0, 0);
+    }
+
+    function prevStep(step) {
+        document.getElementById(`step${currentStep}`).classList.add('hidden');
+        document.getElementById(`step${step}`).classList.remove('hidden');
+        
+        document.getElementById(`s${currentStep}`).classList.remove('active');
+        document.getElementById(`s${step}`).classList.remove('completed');
+        document.getElementById(`s${step}`).classList.add('active');
+        
+        currentStep = step;
+    }
+
+    function calculateEligibility() {
+        const cost = parseFloat(document.getElementById('pCost').value);
+        const category = document.getElementById('pCategory').value;
+        const list = document.getElementById('schemesList');
+        list.innerHTML = '';
+
+        // National Scheme Database
+        const schemeDB = {
+            'Horticulture': [
+                { name: 'NHB Horticulture Development', percent: 40, amt: cost * 0.4, tag: 'HIGH APPROVAL', desc: '40% Subsidy for fruits, vegetables, and protected cultivation.' },
+                { name: 'NHB Value Addition Scheme', percent: 35, amt: cost * 0.35, tag: 'PROCESSING', desc: '35% Subsidy for minimal processing and preservation units.' },
+                { name: 'Organic Farming Cluster', percent: 50, amt: cost * 0.5, tag: 'SPECIALIZED', desc: '50% Subsidy for biopesticide and organic input units.' }
+            ],
+            'Livestock': [
+                { name: 'Dairy Entrepreneurship (DEDS)', percent: 25, amt: cost * 0.25, tag: 'NABARD', desc: '25% Back-ended subsidy for dairy and milk processing.' },
+                { name: 'National Livestock Mission', percent: 50, amt: cost * 0.5, tag: 'GOAT/POULTRY', desc: '50% Subsidy for livestock breeding and feed projects.' }
+            ],
+            'Solar': [
+                { name: 'PM-KUSUM (Component B)', percent: 90, amt: cost * 0.9, tag: 'MAX SUBSIDY', desc: '90% Subsidy for standalone solar powered irrigation pumps.' }
+            ],
+            'Infrastructure': [
+                { name: 'Agri Infrastructure Fund (AIF)', percent: 3, amt: '3% Subvention', tag: 'LONG TENOR', desc: 'Interest subvention on loans up to ₹2 Cr for 7 years.' },
+                { name: 'Integrated Cold Chain', percent: 35, amt: cost * 0.35, tag: 'LOGISTICS', desc: '35% Subsidy for cold storage and refrigerated transport.' }
+            ]
+        };
+
+        const selectedSchemes = schemeDB[category] || [];
+
+        if (selectedSchemes.length === 0) {
+            list.innerHTML = '<p style="text-align:center; padding: 20px; color: var(--text-muted);">Calculating custom schemes based on your profile...</p>';
+        }
+
+        selectedSchemes.forEach((s, i) => {
+            list.innerHTML += `
+                <div class="scheme-card ${i === 0 ? 'selected' : ''}" onclick="selectScheme(this)">
+                    <div style="flex: 1;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="font-weight: 800; font-size: 1.1rem;">${s.name}</div>
+                            <span style="font-size: 0.65rem; font-weight: 900; background: var(--gold-pale); color: var(--gold); padding: 2px 8px; border-radius: 4px;">${s.tag}</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 5px;">${s.desc}</div>
+                        <div style="font-size: 0.85rem; color: var(--primary); font-weight: 800; margin-top: 8px;">Potential Savings: ₹${typeof s.amt === 'number' ? s.amt.toLocaleString('en-IN') : s.amt}</div>
+                    </div>
+                    <div style="text-align: right; margin-left: 20px;">
+                        <div style="font-weight: 900; color: var(--primary); font-size: 1.5rem;">${s.percent}%</div>
+                        <div style="font-size: 0.7rem; font-weight: 700; opacity: 0.6;">SUBSIDY</div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function selectScheme(el) {
+        document.querySelectorAll('.scheme-card').forEach(c => c.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    function finalSubmit() {
+        const btn = event.currentTarget;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting to NHB State Portal...';
+        btn.disabled = true;
+        
+        setTimeout(() => {
+            alert('SUCCESS: Your DPR has been successfully submitted to the NHB Deputy Director. Reference ID: IGO-NHB-2026-X892. An IGO specialist will contact you for site inspection within 48 hours.');
+            window.location.href = 'index.html';
+        }, 2000);
+    }
+</script>
+
+<div class="container" style="margin-bottom: 100px;">
+    <div style="display: flex; justify-content: center; gap: 60px; opacity: 0.5; grayscale: 100%; filter: grayscale(1);">
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 800;">
+            <i class="fas fa-certificate" style="font-size: 1.5rem;"></i> ISO 9001:2015
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 800;">
+            <i class="fas fa-building-columns" style="font-size: 1.5rem;"></i> NHB PARTNERED
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; font-weight: 800;">
+            <i class="fas fa-shield-halved" style="font-size: 1.5rem;"></i> GOVT. REGISTERED
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

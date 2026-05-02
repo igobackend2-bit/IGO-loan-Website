@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | IGO Loans & Subsidy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #022c22;
+            --gold: #c5a059;
+            --bg: #f1f5f9;
+            --sidebar: #0f172a;
+            --text: #1e293b;
+            --border: #e2e8f0;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: var(--sidebar);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            flex-shrink: 0;
+        }
+
+        .logo { font-family: 'Outfit'; font-size: 1.5rem; font-weight: 900; margin-bottom: 50px; display: flex; align-items: center; gap: 12px; }
+        .logo i { color: var(--primary); }
+
+        .nav-menu { list-style: none; flex-grow: 1; }
+        .nav-item { 
+            padding: 15px 20px; 
+            border-radius: 12px; 
+            margin-bottom: 8px; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            transition: 0.3s;
+            color: rgba(255,255,255,0.6);
+            font-weight: 600;
+        }
+        .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: #fff; }
+        .nav-item.active { border-left: 4px solid var(--primary); }
+
+        /* Main Content */
+        .main-content { flex-grow: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .top-bar { 
+            background: #fff; 
+            padding: 20px 40px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dashboard-header { padding: 40px; }
+        .header-title { font-family: 'Outfit'; font-size: 2rem; font-weight: 800; margin-bottom: 10px; }
+
+        /* Stats Grid */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 0 40px 40px; }
+        .stat-card { background: #fff; padding: 25px; border-radius: 20px; border: 1px solid var(--border); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .stat-label { font-size: 0.8rem; color: #64748b; font-weight: 700; text-transform: uppercase; margin-bottom: 10px; display: block; }
+        .stat-value { font-size: 1.8rem; font-weight: 800; font-family: 'Outfit'; color: var(--primary-dark); }
+
+        /* Table Section */
+        .table-container { background: #fff; margin: 0 40px 40px; border-radius: 24px; border: 1px solid var(--border); overflow: hidden; }
+        .table-header { padding: 25px 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { padding: 15px 30px; font-size: 0.8rem; color: #64748b; font-weight: 800; border-bottom: 1px solid var(--border); background: #f8fafc; }
+        td { padding: 20px 30px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+        .status-badge { padding: 6px 12px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-completed { background: #dcfce7; color: #166534; }
+
+        .action-btn { padding: 8px 16px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; transition: 0.2s; font-size: 0.8rem; }
+        .btn-view { background: var(--bg); color: var(--text); }
+        .btn-send { background: var(--primary); color: #fff; }
+
+        .badge { padding: 6px 14px; border-radius: 100px; font-size: 0.75rem; font-weight: 800; display: inline-block; }
+        .btn { padding: 10px 20px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; transition: 0.3s; }
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-primary:hover { background: #047857; transform: translateY(-1px); }
+
+        /* Modal */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 2000; align-items: center; justify-content: center; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 24px; width: 600px; max-width: 90%; }
+
+        /* Login Gate */
+        #loginGate {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #0f172a, #022c22);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(40px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 50px;
+            border-radius: 30px;
+            width: 450px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            color: #fff;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            margin-bottom: 20px;
+            color: #fff;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .login-btn:hover { background: #10b981; transform: translateY(-2px); }
+
+    </style>
+</head>
+<body style="visibility: hidden;">
+
+<!-- Login Gate Overlay -->
+<div id="loginGate">
+    <div class="login-card">
+        <div class="logo" style="justify-content: center; margin-bottom: 30px;">
+            <i class="fas fa-shield-halved" style="font-size: 2.5rem; color: var(--primary);"></i>
+            <span style="font-size: 2rem;">IGO ADMIN</span>
+        </div>
+        <h3 style="margin-bottom: 10px; font-weight: 800;">Command Center Login</h3>
+        <p style="opacity: 0.6; font-size: 0.9rem; margin-bottom: 30px;">Enter your credentials to access the national lead system.</p>
+        
+        <input type="text" id="adminUser" class="login-input" placeholder="User ID">
+        <input type="password" id="adminPass" class="login-input" placeholder="Password">
+        
+        <button onclick="handleLogin()" class="login-btn">Secure Login <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></button>
+        <p id="loginError" style="color: #ef4444; font-size: 0.8rem; margin-top: 15px; font-weight: 700; display: none;">Invalid credentials. Access denied.</p>
+    </div>
+</div>
+
+<aside class="sidebar">
+    <div class="logo">
+        <i class="fas fa-shield-halved"></i>
+        <span>IGO ADMIN</span>
+    </div>
+    <ul class="nav-menu">
+        <li class="nav-item active" onclick="switchView('dashboard')"><i class="fas fa-chart-line"></i> Dashboard</li>
+        <li class="nav-item" onclick="switchView('enquiries')"><i class="fas fa-users"></i> Enquiries</li>
+        <li class="nav-item" onclick="switchView('applications')"><i class="fas fa-file-invoice"></i> Applications</li>
+        <li class="nav-item" onclick="switchView('documents')"><i class="fas fa-folder-open"></i> Documents</li>
+        <li class="nav-item" onclick="switchView('settings')"><i class="fas fa-cog"></i> Settings</li>
+    </ul>
+    <div style="padding: 20px; background: rgba(255,255,255,0.05); border-radius: 12px; font-size: 0.8rem;">
+        <div style="opacity: 0.6; margin-bottom: 5px;">LOGGED IN AS</div>
+        <div style="font-weight: 800;">ADMIN_HQ_CHENNAI</div>
+    </div>
+</aside>
+
+<main class="main-content">
+    <header class="top-bar">
+        <div style="position: relative; width: 300px;">
+            <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+            <input type="text" placeholder="Search leads, ref numbers..." style="width: 100%; padding: 10px 10px 10px 40px; border-radius: 100px; border: 1px solid var(--border); outline: none;">
+        </div>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <i class="far fa-bell" style="font-size: 1.2rem; cursor: pointer;"></i>
+            <div style="width: 40px; height: 40px; background: var(--gold); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff;">A</div>
+        </div>
+    </header>
+
+    <div class="dashboard-header">
+        <h2 class="header-title">National Command Center</h2>
+        <p style="color: #64748b; font-weight: 600;">Managing 26 Specialized Brands & National Agri-Leads</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <p style="opacity: 0.7; margin-bottom: 10px;">Total Leads</p>
+            <h2 id="stat-total-leads">0</h2>
+            <p style="color: var(--primary); font-size: 0.8rem; margin-top: 10px;"><i class="fas fa-arrow-up"></i> Live Tracking</p>
+        </div>
+        <div class="stat-card">
+            <p style="opacity: 0.7; margin-bottom: 10px;">Pending Forms</p>
+            <h2 id="stat-pending-forms">0</h2>
+            <p style="color: #fbbf24; font-size: 0.8rem; margin-top: 10px;"><i class="fas fa-clock"></i> Follow-up needed</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Subsidy Facilitated</span>
+            <div class="stat-value">₹8.4 Cr</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Estimated total</div>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Active Brands</span>
+            <div class="stat-value">26</div>
+            <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700; margin-top: 5px;">Full Coverage</div>
+        </div>
+    </div>
+
+    <div class="table-container" id="mainTableContainer">
+        <div class="table-header">
+            <h3 id="viewTitle" style="font-family: 'Outfit'; font-weight: 800;">Recent National Enquiries</h3>
+            <button class="action-btn btn-send" id="viewActionBtn" style="padding: 10px 20px;">Export CSV</button>
+        </div>
+        <table id="leadsTable">
+            <thead id="tableHead">
+                <tr>
+                    <th>NAME</th>
+                    <th>BRAND / CROP</th>
+                    <th>PHONE</th>
+                    <th>LOCATION</th>
+                    <th>STATUS</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="leadsTableBody">
+                <tr>
+                    <td colspan="6" style="text-align: center; padding: 50px; color: #64748b;">Connecting to secure backend...</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Settings View (Hidden by default) -->
+    <div id="settingsView" style="display: none; padding: 40px;">
+        <h2 style="margin-bottom: 30px;">System Settings</h2>
+        <div style="background: #fff; padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 700; margin-bottom: 10px;">Admin Notification Email</label>
+                <input type="text" value="admin@igoloans.in" class="login-input" style="background: var(--bg); color: var(--text);">
+            </div>
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 700; margin-bottom: 10px;">Enquiry Threshold (Monthly)</label>
+                <input type="number" value="1000" class="login-input" style="background: var(--bg); color: var(--text);">
+            </div>
+            <button class="btn btn-primary">Save Configuration</button>
+        </div>
+    </div>
+</main>
+
+<script>
+    // Security Logic
+    function checkAuth() {
+        if (sessionStorage.getItem('igo_admin_auth') === 'true') {
+            document.getElementById('loginGate').style.display = 'none';
+            document.body.style.visibility = 'visible';
+            fetchLeads();
+        } else {
+            document.body.style.visibility = 'visible';
+        }
+    }
+
+    function handleLogin() {
+        const u = document.getElementById('adminUser').value;
+        const p = document.getElementById('adminPass').value;
+        const err = document.getElementById('loginError');
+
+        if (u === 'igo_admin' && p === 'igo@admin2026') {
+            sessionStorage.setItem('igo_admin_auth', 'true');
+            document.getElementById('loginGate').style.fadeOut = '0.5s';
+            setTimeout(() => {
+                document.getElementById('loginGate').style.display = 'none';
+            }, 500);
+            fetchLeads();
+        } else {
+            err.style.display = 'block';
+            setTimeout(() => { err.style.display = 'none'; }, 3000);
+        }
+    }
+
+    let currentView = 'dashboard';
+
+    function switchView(view) {
+        currentView = view;
+        
+        // Update Nav
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+            if (item.innerText.toLowerCase().includes(view)) item.classList.add('active');
+        });
+
+        // Toggle visibility
+        const mainTable = document.getElementById('mainTableContainer');
+        const settingsView = document.getElementById('settingsView');
+        const statsGrid = document.querySelector('.stats-grid');
+        const dashboardHeader = document.querySelector('.dashboard-header');
+
+        if (view === 'settings') {
+            mainTable.style.display = 'none';
+            statsGrid.style.display = 'none';
+            dashboardHeader.style.display = 'none';
+            settingsView.style.display = 'block';
+            return;
+        } else if (view === 'dashboard') {
+            mainTable.style.display = 'block';
+            statsGrid.style.display = 'grid';
+            dashboardHeader.style.display = 'block';
+            settingsView.style.display = 'none';
+            updateDashboard();
+        } else {
+            mainTable.style.display = 'block';
+            statsGrid.style.display = 'none';
+            dashboardHeader.style.display = 'block';
+            settingsView.style.display = 'none';
+            loadViewData(view);
+        }
+    }
+
+    async function updateDashboard() {
+        try {
+            const res = await fetch('/api/stats');
+            const stats = await res.json();
+            document.getElementById('stat-total-leads').innerText = stats.totalLeads;
+            document.getElementById('stat-pending-forms').innerText = stats.pendingForms;
+            
+            // Show recent enquiries in dashboard
+            loadViewData('enquiries', true);
+        } catch (e) { console.error(e); }
+    }
+
+    async function loadViewData(view, isDashboard = false) {
+        const title = document.getElementById('viewTitle');
+        const tableHead = document.getElementById('tableHead');
+        const tableBody = document.getElementById('leadsTableBody');
+        
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 50px;">Loading data...</td></tr>';
+
+        if (view === 'enquiries') {
+            title.innerText = isDashboard ? 'Recent National Enquiries' : 'All Enquiries';
+            tableHead.innerHTML = `<tr><th>NAME</th><th>CROP</th><th>PHONE</th><th>LOCATION</th><th>STATUS</th><th>ACTIONS</th></tr>`;
+            const res = await fetch('/api/leads');
+            const data = await res.json();
+            renderTable(data, 'enquiries');
+        } else if (view === 'applications') {
+            title.innerText = 'Loan Applications';
+            tableHead.innerHTML = `<tr><th>REF#</th><th>APPLICANT</th><th>SCHEME</th><th>BUDGET</th><th>STATUS</th><th>ACTIONS</th></tr>`;
+            const res = await fetch('/api/applications');
+            const data = await res.json();
+            renderTable(data, 'applications');
+        } else if (view === 'documents') {
+            title.innerText = 'Submitted Documents';
+            tableHead.innerHTML = `<tr><th>FILE NAME</th><th>TYPE</th><th>APPLICANT</th><th>REF#</th><th>DATE</th><th>ACTIONS</th></tr>`;
+            const res = await fetch('/api/documents');
+            const data = await res.json();
+            renderTable(data, 'documents');
+        }
+    }
+
+    function renderTable(data, type) {
+        const tableBody = document.getElementById('leadsTableBody');
+        tableBody.innerHTML = '';
+
+        if (!data || data.length === 0) {
+            tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 50px; opacity: 0.5;">No ${type} found.</td></tr>`;
+            return;
+        }
+
+        data.forEach(item => {
+            const row = document.createElement('tr');
+            if (type === 'enquiries') {
+                row.innerHTML = `
+                    <td style="font-weight: 700;">${item.name}</td>
+                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--primary);">${item.crop_type || 'General'}</span></td>
+                    <td>${item.phone}</td>
+                    <td>${item.location || 'Not Specified'}</td>
+                    <td><span class="badge" style="background: ${getStatusColor(item.status)}">${item.status.toUpperCase()}</span></td>
+                    <td><button class="btn btn-primary" onclick="viewLead('${item.id}')" style="padding: 5px 15px; font-size: 0.8rem;">Manage</button></td>
+                `;
+            } else if (type === 'applications') {
+                row.innerHTML = `
+                    <td style="font-weight: 700;">${item.reference_number || 'PENDING'}</td>
+                    <td>${item.name}<br><small style="opacity: 0.6;">${item.phone}</small></td>
+                    <td>${item.scheme_selected || 'N/A'}</td>
+                    <td>₹${(item.budget / 100000).toFixed(1)}L</td>
+                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--primary);">${item.status.toUpperCase()}</span></td>
+                    <td><button class="btn btn-primary" onclick="viewApp('${item.id}')" style="padding: 5px 15px; font-size: 0.8rem;">Review</button></td>
+                `;
+            } else if (type === 'documents') {
+                row.innerHTML = `
+                    <td style="font-weight: 700;">${item.file_name}</td>
+                    <td>${item.document_type}</td>
+                    <td>${item.forms?.name || 'N/A'}</td>
+                    <td>${item.forms?.reference_number || 'N/A'}</td>
+                    <td>${new Date(item.upload_date).toLocaleDateString()}</td>
+                    <td><button class="btn btn-primary" onclick="window.open('${item.file_url}')" style="padding: 5px 15px; font-size: 0.8rem;">Download</button></td>
+                `;
+            }
+            tableBody.appendChild(row);
+        });
+    }
+
+    // Original fetchLeads function replaced by loadViewData
+    async function fetchLeads() { updateDashboard(); }
+
+    async function sendLink(leadId, method) {
+        try {
+            const response = await fetch('/api/send-link', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ leadId, method })
+            });
+            const result = await response.json();
+            if (result.success) {
+                alert(`Form link sent successfully! Ref: ${result.reference_number}`);
+                fetchLeads(); // Refresh table
+            }
+        } catch (err) {
+            alert('Error sending link.');
+        }
+    }
+
+    function getStatusColor(status) {
+        switch(status?.toLowerCase()) {
+            case 'pending': return 'rgba(239, 68, 68, 0.1); color: #ef4444;';
+            case 'sent_link': return 'rgba(245, 158, 11, 0.1); color: #f59e0b;';
+            case 'completed': return 'rgba(16, 185, 129, 0.1); color: #10b981;';
+            default: return 'rgba(107, 114, 128, 0.1); color: #6b7280;';
+        }
+    }
+
+    function viewLead(id) {
+        window.location.href = `/api/leads/${id}`; // Simplified for now
+    }
+
+    function viewApp(id) {
+        alert(`Application Review coming soon for ID: ${id}`);
+    }
+
+    // Initial Check
+    checkAuth();
+</script>
+
+</body>
+</html>

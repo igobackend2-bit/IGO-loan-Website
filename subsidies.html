@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subsidy Maximizer | IGO Loans & Subsidy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #022c22;
+            --gold: #c5a059;
+            --gold-light: #e2c35a;
+            --gold-pale: #fdf3d0;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid var(--border);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+        .logo h1 { font-family: 'Outfit'; font-size: 1.4rem; font-weight: 800; }
+
+        .header-section {
+            background: var(--primary-dark);
+            color: #fff;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-section h1 { font-family: 'Outfit'; font-size: 4rem; font-weight: 900; margin-bottom: 20px; }
+        .header-section p { font-size: 1.3rem; opacity: 0.8; max-width: 800px; margin: 0 auto; }
+
+        .filter-bar {
+            background: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            margin: -40px auto 60px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .filter-btn {
+            padding: 12px 24px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: #fff;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn.active {
+            background: var(--primary);
+            color: #fff;
+            border-color: var(--primary);
+        }
+
+        .subsidy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .scheme-card {
+            background: #fff;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid var(--border);
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scheme-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px -15px rgba(5, 150, 105, 0.15);
+        }
+
+        .scheme-badge {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: var(--gold);
+            color: #000;
+            font-weight: 900;
+            font-size: 0.7rem;
+            padding: 8px 40px;
+            transform: rotate(45deg);
+            text-transform: uppercase;
+        }
+
+        .ministry {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .scheme-title {
+            font-family: 'Outfit';
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .benefit-box {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .benefit-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+        .benefit-value { font-size: 1.4rem; font-weight: 900; color: var(--primary); }
+
+        .scheme-desc {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+            border: none;
+            font-family: 'Outfit';
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        .btn-primary { background: var(--primary); color: #fff; }
+        .btn-outline { border: 2px solid var(--primary); color: var(--primary); }
+
+        .stacking-section {
+            background: #fff;
+            padding: 100px 0;
+            border-radius: 60px 60px 0 0;
+            box-shadow: 0 -30px 60px -15px rgba(0,0,0,0.05);
+        }
+
+        .section-tag {
+            background: var(--gold-pale);
+            color: var(--gold);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-weight: 900;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .roadmap-card {
+            background: var(--bg);
+            border-radius: 30px;
+            padding: 50px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .header-section h1 { font-size: 2.8rem; }
+            .roadmap-card { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container nav-content">
+        <a href="index.html" class="logo">
+            <img src="assets/farm-loans-logo.jpg" alt="IGO Logo" style="height: 45px; border-radius: 8px;">
+            <h1>IGO SUBSIDY HUB</h1>
+        </a>
+        <div style="display: flex; gap: 20px;">
+            <a href="portal.html" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Check Eligibility</a>
+        </div>
+    </div>
+</nav>
+
+<header class="header-section">
+    <div class="container">
+        <span class="section-tag" style="background: rgba(255,255,255,0.1); color: var(--gold-light);">NATIONAL FUNDING HUB 2026</span>
+        <h1>Subsidy Maximizer</h1>
+        <p>Expertly curated directory of India's most high-impact agricultural grants, subsidies, and low-interest loans.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterSchemes('all')">All Schemes</button>
+        <button class="filter-btn" onclick="filterSchemes('horticulture')">Horticulture</button>
+        <button class="filter-btn" onclick="filterSchemes('livestock')">Livestock</button>
+        <button class="filter-btn" onclick="filterSchemes('infrastructure')">Infrastructure</button>
+        <button class="filter-btn" onclick="filterSchemes('solar')">Solar</button>
+    </div>
+
+    <div class="subsidy-grid" id="schemeGrid">
+        <!-- Schemes will be injected here -->
+    </div>
+</div>
+
+<section class="stacking-section">
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 60px;">
+            <span class="section-tag">PRO STRATEGY</span>
+            <h2 style="font-family: 'Outfit'; font-size: 2.5rem; font-weight: 800;">The Stacking Advantage</h2>
+            <p style="color: var(--text-muted); max-width: 700px; margin: 0 auto;">Learn how IGO helps you combine multiple schemes to cover up to 75% of your project cost.</p>
+        </div>
+
+        <div class="roadmap-card">
+            <div style="flex: 1;">
+                <h3 style="font-family: 'Outfit'; font-size: 1.8rem; margin-bottom: 20px;">Optimal Polyhouse Stack</h3>
+                <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fas fa-check-circle" style="color: var(--primary); font-size: 1.4rem; margin-top: 4px;"></i>
+                        <div>
+                            <strong style="display: block;">NHB Base Subsidy (50%)</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Up to ₹56 Lakhs for 1-acre polyhouse projects.</span>
+                        </div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fas fa-plus-circle" style="color: var(--gold); font-size: 1.4rem; margin-top: 4px;"></i>
+                        <div>
+                            <strong style="display: block;">AIF Interest Subvention (3%)</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Reduces bank loan interest rate for 7 years.</span>
+                        </div>
+                    </li>
+                    <li style="display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fas fa-plus-circle" style="color: var(--gold); font-size: 1.4rem; margin-top: 4px;"></i>
+                        <div>
+                            <strong style="display: block;">PM-KUSUM Solar Subsidy (60%)</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Cover your irrigation power costs for free.</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div style="background: var(--primary-dark); color: #fff; padding: 40px; border-radius: 20px; text-align: center; min-width: 300px;">
+                <div style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 10px;">TOTAL POTENTIAL COVERAGE</div>
+                <div style="font-size: 4rem; font-weight: 900; color: var(--gold-light); font-family: 'Outfit';">75%</div>
+                <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">Farmer pays only 25% capital</div>
+                <a href="portal.html" class="btn btn-primary" style="margin-top: 30px; width: 100%; justify-content: center; background: var(--gold); color: #000;">Build Your Stack</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    const schemes = [
+        {
+            title: "NHB Protected Cultivation",
+            ministry: "National Horticulture Board",
+            category: "horticulture",
+            benefit: "50%",
+            max: "₹1.12 Crore",
+            desc: "The flagship scheme for Polyhouses, Hydroponics, and Shade Net projects. Includes 50% subsidy on both construction and planting material.",
+            tag: "HIGH PRIORITY",
+            url: "https://nhb.gov.in"
+        },
+        {
+            title: "Agriculture Infrastructure Fund",
+            ministry: "Ministry of Agriculture",
+            category: "infrastructure",
+            benefit: "3%",
+            max: "₹2.0 Crore",
+            desc: "Long-term debt financing facility for investment in viable projects for post-harvest management infrastructure and community farming assets.",
+            tag: "INTEREST SUBVENTION",
+            url: "https://agriinfra.dac.gov.in"
+        },
+        {
+            title: "National Livestock Mission",
+            ministry: "Dept of Animal Husbandry",
+            category: "livestock",
+            benefit: "50%",
+            max: "₹30 Lakhs",
+            desc: "Dedicated support for Goat, Sheep, and Poultry farming. Covers capital expenditure for shed construction and breeding animals.",
+            tag: "BEST FOR LIVESTOCK",
+            url: "https://nlm.udyami.gov.in"
+        },
+        {
+            title: "PM-KUSUM Solar Scheme",
+            ministry: "New & Renewable Energy",
+            category: "solar",
+            benefit: "90%",
+            max: "₹12 Lakhs",
+            desc: "Transform your farm with 90% subsidy on solar irrigation pumps. Reduces operational electricity costs to zero.",
+            tag: "MAX SAVINGS",
+            url: "https://pmkusum.mnre.gov.in"
+        },
+        {
+            title: "PMMSY Aquaculture Grant",
+            ministry: "Dept of Fisheries",
+            category: "infrastructure",
+            benefit: "60%",
+            max: "₹25 Lakhs",
+            desc: "Comprehensive support for Fish Farming, Pond construction, and Recirculatory Aquaculture Systems (RAS).",
+            tag: "AQUACULTURE",
+            url: "https://dof.gov.in/pmmsy"
+        },
+        {
+            title: "MIDH Horticulture Development",
+            ministry: "State Horticulture Dept",
+            category: "horticulture",
+            benefit: "40%",
+            max: "₹15 Lakhs",
+            desc: "State-level mission for integrated development of horticulture including nurseries and small-scale cold storages.",
+            tag: "TN SPECIALIZED",
+            url: "https://tnhorticulture.tn.gov.in"
+        }
+    ];
+
+    function renderSchemes(data) {
+        const grid = document.getElementById('schemeGrid');
+        grid.innerHTML = data.map(s => `
+            <div class="scheme-card" data-category="${s.category}">
+                <div class="scheme-badge">${s.tag}</div>
+                <span class="ministry">${s.ministry}</span>
+                <h3 class="scheme-title">${s.title}</h3>
+                <div class="benefit-box">
+                    <div>
+                        <div class="benefit-label">Subsidy %</div>
+                        <div class="benefit-value">${s.benefit}</div>
+                    </div>
+                    <div style="text-align: right;">
+                        <div class="benefit-label">Max Amount</div>
+                        <div class="benefit-value">${s.max}</div>
+                    </div>
+                </div>
+                <p class="scheme-desc">${s.desc}</p>
+                <div style="display: flex; gap: 10px;">
+                    <a href="${s.url}" target="_blank" class="btn btn-outline" style="flex: 1; padding: 12px;">Official Portal</a>
+                    <a href="portal.html" class="btn btn-primary" style="flex: 1.5; padding: 12px;">Apply with IGO</a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterSchemes(cat) {
+        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+        event.target.classList.add('active');
+
+        if (cat === 'all') {
+            renderSchemes(schemes);
+        } else {
+            const filtered = schemes.filter(s => s.category === cat);
+            renderSchemes(filtered);
+        }
+    }
+
+    // Initial render
+    renderSchemes(schemes);
+</script>
+
+</body>
+</html>
