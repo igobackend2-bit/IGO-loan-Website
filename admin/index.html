@@ -206,7 +206,7 @@
                 <h4 style="color: var(--primary-dark); font-weight: 800; margin-bottom: 5px;"><i class="fas fa-bolt"></i> Zero-Backend Mode Active</h4>
                 <p style="font-size: 0.9rem; color: #64748b; font-weight: 600;">The platform is currently optimized for direct Netlify lead capture.</p>
             </div>
-            <a href="https://app.netlify.com/sites/preeminent-monstera-f9b4e4/forms" target="_blank" class="btn btn-primary" style="background: var(--primary-dark); border-radius: 12px; padding: 15px 30px; font-weight: 800; font-size: 0.9rem;">
+            <a href="https://app.netlify.com/sites/igofarmloan/forms" target="_blank" class="btn btn-primary" style="background: var(--primary-dark); border-radius: 12px; padding: 15px 30px; font-weight: 800; font-size: 0.9rem;">
                 <i class="fas fa-external-link-alt"></i> OPEN LIVE NETLIFY DASHBOARD
             </a>
         </div>
@@ -224,9 +224,9 @@
             <p style="color: #fbbf24; font-size: 0.8rem; margin-top: 10px;"><i class="fas fa-clock"></i> Follow-up needed</p>
         </div>
         <div class="stat-card">
-            <span class="stat-label">Subsidy Facilitated</span>
-            <div class="stat-value">₹8.4 Cr</div>
-            <div style="font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-top: 5px;">Estimated total</div>
+            <span class="stat-label">Active Schemes</span>
+            <div class="stat-value">LIVE</div>
+            <div style="font-size: 0.75rem; color: var(--primary); font-weight: 700; margin-top: 5px;">Cloud Database Active</div>
         </div>
         <div class="stat-card">
             <span class="stat-label">Active Brands</span>
@@ -275,6 +275,33 @@
         </div>
     </div>
 </main>
+
+<!-- Lead Details Modal -->
+<div id="leadModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 20px;">
+    <div style="background: #fff; width: 100%; max-width: 650px; border-radius: 30px; overflow: hidden; box-shadow: 0 40px 100px rgba(0,0,0,0.3); animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+        <div style="background: var(--primary-dark); padding: 30px; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+                <h3 id="modalName" style="font-family: 'Outfit'; font-size: 1.8rem; font-weight: 800;">Lead Name</h3>
+                <p id="modalForm" style="opacity: 0.8; font-weight: 600; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px;"></p>
+            </div>
+            <button onclick="closeModal()" style="background: rgba(255,255,255,0.1); border: none; color: #fff; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.2rem;"><i class="fas fa-times"></i></button>
+        </div>
+        <div id="modalBody" style="padding: 40px; max-height: 70vh; overflow-y: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+            <!-- Content injected here -->
+        </div>
+        <div style="padding: 25px 40px; border-top: 1px solid var(--border); background: var(--bg-alt); display: flex; gap: 15px;">
+            <button id="modalCall" class="btn btn-primary" style="flex: 1; justify-content: center;"><i class="fas fa-phone"></i> Call Client</button>
+            <button id="modalEmail" class="btn" style="flex: 1; justify-content: center; border: 1px solid var(--border);"><i class="fas fa-envelope"></i> Email Info</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    @keyframes slideUp { from { transform: translateY(40px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .detail-item { margin-bottom: 15px; }
+    .detail-label { font-size: 0.7rem; font-weight: 800; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+    .detail-value { font-weight: 700; color: var(--text); font-size: 1.1rem; }
+</style>
 
 <script>
     // Security Logic
@@ -417,7 +444,7 @@
             return;
         }
 
-        data.forEach(item => {
+        data.forEach((item, index) => {
             const d = item.data;
             const date = new Date(item.created_at).toLocaleDateString();
             const row = document.createElement('tr');
@@ -428,10 +455,47 @@
                 <td>${d.mobile || d.phone || 'N/A'}</td>
                 <td>${d.district || 'N/A'}, ${d.state || ''}</td>
                 <td><span class="badge" style="background: rgba(5, 150, 105, 0.1); color: var(--primary);">${date}</span></td>
-                <td><button class="btn btn-primary" onclick="alert('Lead Details:\\n' + JSON.stringify(${JSON.stringify(d)}, null, 2))" style="padding: 5px 15px; font-size: 0.8rem;">View</button></td>
+                <td><button class="btn btn-primary" onclick="viewLead(${index})" style="padding: 8px 20px; font-size: 0.8rem; border-radius: 10px;">Review <i class="fas fa-search" style="margin-left: 5px;"></i></button></td>
             `;
             tableBody.appendChild(row);
         });
+    }
+
+    function viewLead(index) {
+        const item = currentView === 'dashboard' ? allLeads.slice(0, 10)[index] : allLeads.filter(l => {
+            if (currentView === 'enquiries') return l.form_name === 'consulting-request' || l.form_name === 'franchise-interest';
+            if (currentView === 'applications') return l.form_name === 'dpr-portal';
+            return true;
+        })[index];
+
+        if (!item) return;
+
+        const d = item.data;
+        document.getElementById('modalName').innerText = d.fullName || d.name || 'Client Details';
+        document.getElementById('modalForm').innerText = item.form_name.replace('-', ' ');
+        
+        const body = document.getElementById('modalBody');
+        body.innerHTML = '';
+        
+        Object.keys(d).forEach(key => {
+            if (key === 'bot-field') return;
+            const div = document.createElement('div');
+            div.className = 'detail-item';
+            div.innerHTML = `
+                <p class="detail-label">${key.replace(/([A-Z])/g, ' $1').toUpperCase()}</p>
+                <p class="detail-value">${d[key]}</p>
+            `;
+            body.appendChild(div);
+        });
+
+        document.getElementById('modalCall').onclick = () => window.location.href = `tel:${d.mobile || d.phone}`;
+        document.getElementById('modalEmail').onclick = () => window.location.href = `mailto:${d.email || ''}`;
+
+        document.getElementById('leadModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+        document.getElementById('leadModal').style.display = 'none';
     }
 
     checkAuth();
