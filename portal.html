@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPR Auto-Portal | IGO Loans & Subsidy</title>
+    <title>DPR Service Portal | IGO Loans & Subsidy</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -199,15 +199,15 @@
             <h1>IGO LOANS</h1>
         </a>
         <div style="font-weight: 800; font-size: 0.8rem; color: var(--primary); background: rgba(5, 150, 105, 0.1); padding: 8px 16px; border-radius: 100px;">
-            <i class="fas fa-lock"></i> SECURE DPR PORTAL
+            <i class="fas fa-lock"></i> DPR REQUEST PORTAL
         </div>
     </div>
 </nav>
 
 <header class="portal-header">
     <div class="container">
-        <h1>DPR Auto-Generator</h1>
-        <p>AI-powered Detailed Project Report generation for NHB, PMEGP, and Agri-Infrastructure Subsidies.</p>
+        <h1>DPR Service Portal</h1>
+        <p>Request a professional Detailed Project Report for NHB, PMEGP, and Agri-Infrastructure Subsidies.</p>
     </div>
 </header>
 
@@ -220,22 +220,33 @@
             <div class="step" id="s4">4</div>
         </div>
 
-        <form id="dprForm">
+        <form id="dprForm" name="dpr-portal" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
             <!-- Step 1: Basic Info -->
             <div id="step1">
                 <h2 style="margin-bottom: 30px; font-family: 'Outfit';">Basic Project Information</h2>
                 <div class="form-group">
                     <label>Farmer / Entrepreneur Name</label>
-                    <input type="text" id="pName" placeholder="As per Aadhaar" required>
+                    <input type="text" id="pName" name="fullName" placeholder="As per Aadhaar" required>
                 </div>
                 <div class="form-group">
                     <label>Aadhaar Number</label>
-                    <input type="text" id="pAadhar" placeholder="12-digit Aadhaar" required pattern="[0-9]{12}">
+                    <input type="text" id="pAadhar" name="aadhar" placeholder="12-digit Aadhaar" required pattern="[0-9]{12}">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="form-group">
+                        <label>Mobile Number</label>
+                        <input type="tel" name="phone" placeholder="Enter mobile number" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" name="email" placeholder="Enter email address" required>
+                    </div>
                 </div>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                     <div class="form-group">
                         <label>State</label>
-                        <select id="pState" required>
+                        <select id="pState" name="state" required>
                             <option value="">-- Select State --</option>
                             <option>Tamil Nadu</option>
                             <option>Maharashtra</option>
@@ -246,7 +257,7 @@
                     </div>
                     <div class="form-group">
                         <label>District</label>
-                        <input type="text" id="pDistrict" placeholder="Enter District" required>
+                        <input type="text" id="pDistrict" name="district" placeholder="Enter District" required>
                     </div>
                 </div>
                 <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue to Project Details <i class="fas fa-arrow-right"></i></button>
@@ -257,7 +268,7 @@
                 <h2 style="margin-bottom: 30px; font-family: 'Outfit';">Technical Specifications</h2>
                 <div class="form-group">
                     <label>Primary Project Category</label>
-                    <select id="pCategory" required>
+                    <select id="pCategory" name="category" required>
                         <option value="">-- Choose Category --</option>
                         <option value="Horticulture">Horticulture (Fruits/Veg)</option>
                         <option value="Livestock">Livestock (Goat/Poultry/Dairy)</option>
@@ -267,11 +278,11 @@
                 </div>
                 <div class="form-group">
                     <label>Project Land Area (Acres)</label>
-                    <input type="number" id="pArea" placeholder="e.g. 5" required>
+                    <input type="number" id="pArea" name="landArea" placeholder="e.g. 5" required>
                 </div>
                 <div class="form-group">
                     <label>Estimated Project Cost (₹)</label>
-                    <input type="number" id="pCost" placeholder="e.g. 2500000" required>
+                    <input type="number" id="pCost" name="projectCost" placeholder="e.g. 2500000" required>
                 </div>
                 <div style="display: flex; gap: 20px;">
                     <button type="button" class="btn" style="border: 1px solid var(--border);" onclick="prevStep(1)">Back</button>
@@ -281,7 +292,7 @@
 
             <!-- Step 3: Eligibility & Scheme Selection -->
             <div id="step3" class="hidden">
-                <h2 style="margin-bottom: 10px; font-family: 'Outfit';">AI Scheme Matcher</h2>
+                <h2 style="margin-bottom: 10px; font-family: 'Outfit';">Scheme Matcher</h2>
                 <p style="color: var(--text-muted); margin-bottom: 30px;">Based on your inputs, we found the following eligible subsidies.</p>
                 
                 <div id="schemesList">
@@ -300,19 +311,16 @@
                     <div class="success-icon">
                         <i class="fas fa-check"></i>
                     </div>
-                    <h2 style="font-family: 'Outfit'; margin-bottom: 10px;">DPR Generated Successfully!</h2>
-                    <p style="color: var(--text-muted); margin-bottom: 40px;">Your 48-page Detailed Project Report is ready for review.</p>
+                    <h2 style="font-family: 'Outfit'; margin-bottom: 10px;">DPR Request Received!</h2>
+                    <p style="color: var(--text-muted); margin-bottom: 40px;">Our specialized team will now begin preparing your professional project report.</p>
                     
                     <div style="background: var(--bg); padding: 30px; border-radius: 20px; text-align: left; margin-bottom: 40px; border: 1px dashed var(--primary);">
-                        <h4 style="margin-bottom: 15px;"><i class="fas fa-file-invoice" style="color: var(--primary);"></i> DPR_Report_IGO_2026.pdf</h4>
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 0.85rem; color: var(--text-muted);">Size: 4.2 MB | Pages: 48</span>
-                            <a href="#" class="btn btn-primary" style="padding: 12px 24px; font-size: 0.9rem;">Download PDF</a>
-                        </div>
+                        <h4 style="margin-bottom: 15px;"><i class="fas fa-clock" style="color: var(--primary);"></i> Preparation in Progress</h4>
+                        <p style="font-size: 0.9rem; color: var(--text-muted);">Your custom DPR will be prepared as per NABARD/NHB guidelines and sent to your email.</p>
                     </div>
 
                     <button type="button" class="btn btn-primary" style="width: 100%; justify-content: center; background: var(--primary-dark);" onclick="finalSubmit()">
-                        <i class="fas fa-paper-plane"></i> Submit to NHB Official Portal
+                        <i class="fas fa-paper-plane"></i> Submit Request to Experts
                     </button>
                 </div>
             </div>
@@ -406,15 +414,40 @@
         el.classList.add('selected');
     }
 
-    function finalSubmit() {
+    async function finalSubmit() {
         const btn = event.currentTarget;
+        const originalText = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting to NHB State Portal...';
         btn.disabled = true;
         
-        setTimeout(() => {
-            alert('SUCCESS: Your DPR has been successfully submitted to the NHB Deputy Director. Reference ID: IGO-NHB-2026-X892. An IGO specialist will contact you for site inspection within 48 hours.');
-            window.location.href = 'index.html';
-        }, 2000);
+        try {
+            const form = document.getElementById('dprForm');
+            const formData = new FormData(form);
+            
+            // Add any dynamic data if needed
+            const selectedScheme = document.querySelector('.scheme-card.selected');
+            if (selectedScheme) {
+                formData.append('selected_scheme', selectedScheme.querySelector('div[style*="font-weight: 800"]').innerText);
+            }
+
+            const response = await fetch('/', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams(formData).toString()
+            });
+
+            if (response.ok) {
+                alert('SUCCESS: Your DPR request has been successfully submitted. An IGO specialist will contact you on your mobile number to discuss the technical preparation within 24-48 hours.');
+                window.location.href = 'index.html';
+            } else {
+                throw new Error('Network response was not ok');
+            }
+        } catch (err) {
+            console.error('Submission error:', err);
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            alert('Submission failed. Please check your connection and try again.');
+        }
     }
 </script>
 

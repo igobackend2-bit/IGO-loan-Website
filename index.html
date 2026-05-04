@@ -18,7 +18,7 @@
 
   <!-- Icons & Frameworks -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <!-- Netlify Forms — no external scripts needed -->
 
   <style>
     :root {
@@ -705,9 +705,6 @@
     </div>
 
     <!-- Farming Projects -->
-    <!-- Farming Projects -->
-    <!-- Farming Projects -->
-    <!-- Farming Projects -->
     <div id="portfolios" style="margin-bottom: 150px; padding: 120px 0; background: #fff; border-radius: 80px; box-shadow: 0 40px 100px rgba(0,0,0,0.02);">
       <div class="container">
         
@@ -990,7 +987,7 @@
         <div style="margin-top: 60px; text-align: center; padding: 40px; background: linear-gradient(135deg, var(--primary-dark), #064e3b); border-radius: 30px; color: #fff;">
           <h4 style="font-family: 'Outfit'; font-size: 1.5rem; margin-bottom: 15px;"><i class="fas fa-users-gear" style="color: var(--gold); margin-right: 15px;"></i> Expand the Ecosystem</h4>
           <p style="opacity: 0.8; margin-bottom: 30px;">Earn <strong>5% Referral Commission</strong> on every successful franchise partner you bring into the IGO family.</p>
-          <a href="#franchise-form-container" class="btn btn-primary" style="background: var(--gold); color: #000; border: none; font-weight: 800;">Request Franchise Prospectus</a>
+          <button type="button" onclick="document.getElementById('franchise-form-container').scrollIntoView({behavior: 'smooth'})" class="btn btn-primary" style="background: var(--gold); color: #000; border: none; font-weight: 800; padding: 20px; border-radius: 15px;">Request Franchise Prospectus</button>
         </div>
 
         <!-- SEPARATE FRANCHISE LEAD FORM -->
@@ -1002,7 +999,8 @@
              <p style="color: var(--text-muted); font-weight: 600;">Secure your region and receive the FICO Model Institutional Prospectus.</p>
           </div>
           
-          <form id="franchise-lead-form" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+          <form id="franchise-lead-form" name="franchise-interest" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+            <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
             <div class="form-group" style="grid-column: span 1;">
               <label for="f-name" style="font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; display: block; color: var(--primary-dark);">FULL NAME</label>
               <input type="text" id="f-name" name="name" required placeholder="Enter your full name" style="width: 100%; padding: 18px 25px; border-radius: 15px; border: 2px solid var(--border); font-weight: 600; outline: none; transition: 0.3s; background: var(--bg-alt);">
@@ -1023,11 +1021,17 @@
                 <option value="Institutional (21L+)">Institutional (₹21L+)</option>
               </select>
             </div>
-            <div style="grid-column: span 2; text-align: center; margin-top: 20px;">
-              <button type="submit" class="btn btn-primary" style="padding: 24px 80px; font-size: 1.1rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(5, 150, 105, 0.3); width: 100%; justify-content: center;">Send Partnership Request <i class="fas fa-file-pdf" style="margin-left: 10px;"></i></button>
-              <p id="f-success" style="display: none; color: var(--primary); font-weight: 800; margin-top: 20px;"><i class="fas fa-circle-check"></i> Success! Our regional officer will contact you with the Prospectus.</p>
-            </div>
+            <button type="submit" class="btn btn-primary" style="background: var(--gold); color: #000; border: none; font-weight: 800; padding: 20px; border-radius: 15px; margin-top: 10px; grid-column: span 2;">SEND PARTNERSHIP REQUEST <i class="fas fa-paper-plane" style="margin-left: 10px;"></i></button>
           </form>
+
+          <div id="franchiseSuccess" style="display: none; text-align: center; padding: 60px 20px;">
+            <div style="width: 100px; height: 100px; background: var(--gold-pale); color: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 3rem; margin: 0 auto 30px; box-shadow: 0 20px 40px rgba(197, 160, 89, 0.2);">
+              <i class="fas fa-handshake"></i>
+            </div>
+            <h3 style="font-family: 'Outfit'; font-size: 2.5rem; margin-bottom: 20px;">Partnership Received!</h3>
+            <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 500px; margin: 0 auto 30px; line-height: 1.6;">Our expansion team will review your interest and send the <strong>Institutional Prospectus</strong> to your email shortly.</p>
+            <button onclick="location.reload()" class="btn" style="border: 1px solid var(--border); padding: 15px 30px; font-weight: 800;">Submit Another Response</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1117,7 +1121,8 @@
         <p style="font-size: 1.2rem; color: var(--text-muted); font-weight: 600;">Secure your financial future with India's most trusted agri-fintech partners.</p>
       </div>
       
-      <form id="registrationForm" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+      <form id="registrationForm" name="consulting-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+        <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
         <div class="form-group">
           <label for="fullName">Full Name</label>
           <input type="text" id="fullName" name="fullName" placeholder="As per Aadhaar" required>
@@ -1288,25 +1293,49 @@
     });
   }, 500);
 
-  // Supabase Integration (DISCONNECTED)
-  /*
-  const SUPABASE_URL = 'https://zijseuxdahlqdbzfzcay.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_NxkY-cTzp9fSIavtHc6uag_gEhHNxvt';
-  const sbClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  */
+  // Netlify Forms — AJAX Submission (no page reload)
+  function handleNetlifyForm(formEl, successElId) {
+    if (!formEl) return;
+    formEl.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = formEl.querySelector('button[type="submit"]');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+      btn.disabled = true;
 
-  // Forms are currently in maintenance/static mode
-  const fForm = document.getElementById('franchise-lead-form');
-  const form = document.getElementById('registrationForm');
+      try {
+        const formData = new FormData(formEl);
+        const response = await fetch('/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(formData).toString()
+        });
 
-  [fForm, form].forEach(f => {
-    if (f) {
-      f.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Form submission is currently disabled for maintenance. Please contact info@igoloans.in for immediate assistance.');
-      });
-    }
-  });
+        if (response.ok) {
+          if (successElId) {
+            formEl.style.display = 'none';
+            document.getElementById(successElId).style.display = 'block';
+          } else {
+            formEl.reset();
+            btn.innerHTML = '<i class="fas fa-circle-check"></i> Submitted Successfully!';
+            btn.style.background = 'var(--primary)';
+            setTimeout(() => { btn.innerHTML = originalText; btn.disabled = false; btn.style.background = ''; }, 3000);
+          }
+        } else {
+          throw new Error('Network response was not ok');
+        }
+      } catch (err) {
+        console.error('Form submission error:', err);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        alert('Submission failed. Please try again or contact info@igoloans.in');
+      }
+    });
+  }
+
+  // Initialize all forms
+  handleNetlifyForm(document.getElementById('registrationForm'), 'formSuccess');
+  handleNetlifyForm(document.getElementById('franchise-lead-form'), 'franchiseSuccess');
 </script>
 </body>
 </html>

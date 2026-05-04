@@ -163,6 +163,9 @@
         
         <button onclick="handleLogin()" class="login-btn">Secure Login <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></button>
         <p id="loginError" style="color: #ef4444; font-size: 0.8rem; margin-top: 15px; font-weight: 700; display: none;">Invalid credentials. Access denied.</p>
+        <div style="margin-top: 20px; font-size: 0.75rem; color: #64748b; font-weight: 600; text-align: center;">
+            <i class="fas fa-info-circle"></i> Login: igo_admin / igo@admin2026
+        </div>
     </div>
 </div>
 
@@ -198,7 +201,15 @@
 
     <div class="dashboard-header">
         <h2 class="header-title">National Command Center</h2>
-        <p style="color: #64748b; font-weight: 600;">Managing 26 Specialized Brands & National Agri-Leads</p>
+        <div style="margin-top: 20px; padding: 25px; background: rgba(5, 150, 105, 0.05); border-radius: 20px; border: 1px solid rgba(5, 150, 105, 0.2); display: flex; align-items: center; justify-content: space-between; gap: 30px;">
+            <div>
+                <h4 style="color: var(--primary-dark); font-weight: 800; margin-bottom: 5px;"><i class="fas fa-bolt"></i> Zero-Backend Mode Active</h4>
+                <p style="font-size: 0.9rem; color: #64748b; font-weight: 600;">The platform is currently optimized for direct Netlify lead capture.</p>
+            </div>
+            <a href="https://app.netlify.com/sites/preeminent-monstera-f9b4e4/forms" target="_blank" class="btn btn-primary" style="background: var(--primary-dark); border-radius: 12px; padding: 15px 30px; font-weight: 800; font-size: 0.9rem;">
+                <i class="fas fa-external-link-alt"></i> OPEN LIVE NETLIFY DASHBOARD
+            </a>
+        </div>
     </div>
 
     <div class="stats-grid">
@@ -271,7 +282,7 @@
         if (sessionStorage.getItem('igo_admin_auth') === 'true') {
             document.getElementById('loginGate').style.display = 'none';
             document.body.style.visibility = 'visible';
-            fetchLeads();
+            updateDashboard();
         } else {
             document.body.style.visibility = 'visible';
         }
@@ -284,11 +295,8 @@
 
         if (u === 'igo_admin' && p === 'igo@admin2026') {
             sessionStorage.setItem('igo_admin_auth', 'true');
-            document.getElementById('loginGate').style.fadeOut = '0.5s';
-            setTimeout(() => {
-                document.getElementById('loginGate').style.display = 'none';
-            }, 500);
-            fetchLeads();
+            document.getElementById('loginGate').style.display = 'none';
+            updateDashboard();
         } else {
             err.style.display = 'block';
             setTimeout(() => { err.style.display = 'none'; }, 3000);
@@ -296,17 +304,78 @@
     }
 
     let currentView = 'dashboard';
+    let allLeads = [];
+
+    async function updateDashboard() {
+        const tableBody = document.getElementById('leadsTableBody');
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 50px;"><i class="fas fa-spinner fa-spin"></i> Syncing with Netlify Cloud...</td></tr>';
+
+        try {
+            const res = await fetch('/.netlify/functions/get-leads');
+            if (res.status === 404) {
+                renderError("System Synchronization Error: The Lead Proxy function is still deploying. Please wait 60 seconds and refresh.");
+                return;
+            }
+            const data = await res.json();
+
+            if (data.setup_needed) {
+                renderSetupRequired();
+                return;
+            }
+
+            if (data.error) {
+                renderError("API Error: " + data.error);
+                return;
+            }
+
+            allLeads = data;
+            
+            // Update Stats
+            document.getElementById('stat-total-leads').innerText = allLeads.length;
+            document.getElementById('stat-pending-forms').innerText = allLeads.filter(l => l.form_name === 'dpr-portal').length;
+
+            renderTable(allLeads.slice(0, 10)); // Show latest 10
+        } catch (err) {
+            console.error('Fetch error:', err);
+            renderError("Network Error: Could not connect to the Netlify Sync service.");
+        }
+    }
+
+    function renderError(msg) {
+        const tableBody = document.getElementById('leadsTableBody');
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 60px;">
+                    <div style="font-size: 3rem; color: #ef4444; margin-bottom: 20px;"><i class="fas fa-exclamation-triangle"></i></div>
+                    <h3 style="font-family: 'Outfit'; margin-bottom: 15px;">Connection Problem</h3>
+                    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px;">${msg}</p>
+                    <button onclick="updateDashboard()" class="btn btn-primary" style="padding: 12px 30px; border-radius: 12px;">Retry Sync</button>
+                </td>
+            </tr>
+        `;
+    }
+
+    function renderSetupRequired() {
+        const tableBody = document.getElementById('leadsTableBody');
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 60px;">
+                    <div style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"><i class="fas fa-key"></i></div>
+                    <h3 style="font-family: 'Outfit'; margin-bottom: 15px;">API Connection Required</h3>
+                    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px;">To see your leads here, you must add your <strong>NETLIFY_TOKEN</strong> to the Netlify Environment Variables.</p>
+                    <a href="https://app.netlify.com/sites/igofarmloan/settings/env" target="_blank" class="btn btn-primary" style="padding: 12px 30px; border-radius: 12px;">Add Token Now</a>
+                </td>
+            </tr>
+        `;
+    }
 
     function switchView(view) {
         currentView = view;
-        
-        // Update Nav
         document.querySelectorAll('.nav-item').forEach(item => {
             item.classList.remove('active');
             if (item.innerText.toLowerCase().includes(view)) item.classList.add('active');
         });
 
-        // Toggle visibility
         const mainTable = document.getElementById('mainTableContainer');
         const settingsView = document.getElementById('settingsView');
         const statsGrid = document.querySelector('.stats-grid');
@@ -317,143 +386,54 @@
             statsGrid.style.display = 'none';
             dashboardHeader.style.display = 'none';
             settingsView.style.display = 'block';
-            return;
-        } else if (view === 'dashboard') {
-            mainTable.style.display = 'block';
-            statsGrid.style.display = 'grid';
-            dashboardHeader.style.display = 'block';
-            settingsView.style.display = 'none';
-            updateDashboard();
         } else {
             mainTable.style.display = 'block';
-            statsGrid.style.display = 'none';
+            statsGrid.style.display = (view === 'dashboard' ? 'grid' : 'none');
             dashboardHeader.style.display = 'block';
             settingsView.style.display = 'none';
-            loadViewData(view);
-        }
-    }
-
-    async function updateDashboard() {
-        try {
-            const res = await fetch('/api/stats');
-            const stats = await res.json();
-            document.getElementById('stat-total-leads').innerText = stats.totalLeads;
-            document.getElementById('stat-pending-forms').innerText = stats.pendingForms;
             
-            // Show recent enquiries in dashboard
-            loadViewData('enquiries', true);
-        } catch (e) { console.error(e); }
-    }
-
-    async function loadViewData(view, isDashboard = false) {
-        const title = document.getElementById('viewTitle');
-        const tableHead = document.getElementById('tableHead');
-        const tableBody = document.getElementById('leadsTableBody');
-        
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 50px;">Loading data...</td></tr>';
-
-        if (view === 'enquiries') {
-            title.innerText = isDashboard ? 'Recent National Enquiries' : 'All Enquiries';
-            tableHead.innerHTML = `<tr><th>NAME</th><th>CROP</th><th>PHONE</th><th>LOCATION</th><th>STATUS</th><th>ACTIONS</th></tr>`;
-            const res = await fetch('/api/leads');
-            const data = await res.json();
-            renderTable(data, 'enquiries');
-        } else if (view === 'applications') {
-            title.innerText = 'Loan Applications';
-            tableHead.innerHTML = `<tr><th>REF#</th><th>APPLICANT</th><th>SCHEME</th><th>BUDGET</th><th>STATUS</th><th>ACTIONS</th></tr>`;
-            const res = await fetch('/api/applications');
-            const data = await res.json();
-            renderTable(data, 'applications');
-        } else if (view === 'documents') {
-            title.innerText = 'Submitted Documents';
-            tableHead.innerHTML = `<tr><th>FILE NAME</th><th>TYPE</th><th>APPLICANT</th><th>REF#</th><th>DATE</th><th>ACTIONS</th></tr>`;
-            const res = await fetch('/api/documents');
-            const data = await res.json();
-            renderTable(data, 'documents');
+            const title = document.getElementById('viewTitle');
+            if (view === 'dashboard') {
+                title.innerText = 'Recent National Enquiries';
+                renderTable(allLeads.slice(0, 10));
+            } else if (view === 'enquiries') {
+                title.innerText = 'Consulting & Franchise Enquiries';
+                renderTable(allLeads.filter(l => l.form_name === 'consulting-request' || l.form_name === 'franchise-interest'));
+            } else if (view === 'applications') {
+                title.innerText = 'Loan & DPR Applications';
+                renderTable(allLeads.filter(l => l.form_name === 'dpr-portal'));
+            } else {
+                renderTable([]);
+            }
         }
     }
 
-    function renderTable(data, type) {
+    function renderTable(data) {
         const tableBody = document.getElementById('leadsTableBody');
         tableBody.innerHTML = '';
 
         if (!data || data.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="6" style="text-align:center; padding: 50px; opacity: 0.5;">No ${type} found.</td></tr>`;
+            tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 50px; opacity: 0.5;">No records found.</td></tr>';
             return;
         }
 
         data.forEach(item => {
+            const d = item.data;
+            const date = new Date(item.created_at).toLocaleDateString();
             const row = document.createElement('tr');
-            if (type === 'enquiries') {
-                row.innerHTML = `
-                    <td style="font-weight: 700;">${item.name}</td>
-                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--primary);">${item.crop_type || 'General'}</span></td>
-                    <td>${item.phone}</td>
-                    <td>${item.location || 'Not Specified'}</td>
-                    <td><span class="badge" style="background: ${getStatusColor(item.status)}">${item.status.toUpperCase()}</span></td>
-                    <td><button class="btn btn-primary" onclick="viewLead('${item.id}')" style="padding: 5px 15px; font-size: 0.8rem;">Manage</button></td>
-                `;
-            } else if (type === 'applications') {
-                row.innerHTML = `
-                    <td style="font-weight: 700;">${item.reference_number || 'PENDING'}</td>
-                    <td>${item.name}<br><small style="opacity: 0.6;">${item.phone}</small></td>
-                    <td>${item.scheme_selected || 'N/A'}</td>
-                    <td>₹${(item.budget / 100000).toFixed(1)}L</td>
-                    <td><span class="badge" style="background: rgba(16, 185, 129, 0.1); color: var(--primary);">${item.status.toUpperCase()}</span></td>
-                    <td><button class="btn btn-primary" onclick="viewApp('${item.id}')" style="padding: 5px 15px; font-size: 0.8rem;">Review</button></td>
-                `;
-            } else if (type === 'documents') {
-                row.innerHTML = `
-                    <td style="font-weight: 700;">${item.file_name}</td>
-                    <td>${item.document_type}</td>
-                    <td>${item.forms?.name || 'N/A'}</td>
-                    <td>${item.forms?.reference_number || 'N/A'}</td>
-                    <td>${new Date(item.upload_date).toLocaleDateString()}</td>
-                    <td><button class="btn btn-primary" onclick="window.open('${item.file_url}')" style="padding: 5px 15px; font-size: 0.8rem;">Download</button></td>
-                `;
-            }
+            
+            row.innerHTML = `
+                <td style="font-weight: 700;">${d.fullName || d.name || 'Anonymous'}</td>
+                <td><span class="badge" style="background: rgba(5, 150, 105, 0.1); color: var(--primary);">${item.form_name.replace('-', ' ').toUpperCase()}</span></td>
+                <td>${d.mobile || d.phone || 'N/A'}</td>
+                <td>${d.district || 'N/A'}, ${d.state || ''}</td>
+                <td><span class="badge" style="background: rgba(5, 150, 105, 0.1); color: var(--primary);">${date}</span></td>
+                <td><button class="btn btn-primary" onclick="alert('Lead Details:\\n' + JSON.stringify(${JSON.stringify(d)}, null, 2))" style="padding: 5px 15px; font-size: 0.8rem;">View</button></td>
+            `;
             tableBody.appendChild(row);
         });
     }
 
-    // Original fetchLeads function replaced by loadViewData
-    async function fetchLeads() { updateDashboard(); }
-
-    async function sendLink(leadId, method) {
-        try {
-            const response = await fetch('/api/send-link', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ leadId, method })
-            });
-            const result = await response.json();
-            if (result.success) {
-                alert(`Form link sent successfully! Ref: ${result.reference_number}`);
-                fetchLeads(); // Refresh table
-            }
-        } catch (err) {
-            alert('Error sending link.');
-        }
-    }
-
-    function getStatusColor(status) {
-        switch(status?.toLowerCase()) {
-            case 'pending': return 'rgba(239, 68, 68, 0.1); color: #ef4444;';
-            case 'sent_link': return 'rgba(245, 158, 11, 0.1); color: #f59e0b;';
-            case 'completed': return 'rgba(16, 185, 129, 0.1); color: #10b981;';
-            default: return 'rgba(107, 114, 128, 0.1); color: #6b7280;';
-        }
-    }
-
-    function viewLead(id) {
-        window.location.href = `/api/leads/${id}`; // Simplified for now
-    }
-
-    function viewApp(id) {
-        alert(`Application Review coming soon for ID: ${id}`);
-    }
-
-    // Initial Check
     checkAuth();
 </script>
 
