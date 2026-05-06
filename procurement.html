@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Land Procurement | IGO Agri Estate</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/navbar.css">
+
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #022c22;
+      --gold: #c5a059;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(0,0,0,0.06);
+      --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
+      --shadow-hard: 0 20px 50px -12px rgba(0,0,0,0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding-top: 90px;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+    /* Hero Section */
+    .hero {
+      padding: 100px 0;
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/agri_estate_hero.png');
+      background-size: cover;
+      background-position: center;
+      min-height: 60vh;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      border-radius: 0 0 60px 60px;
+    }
+
+    .hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; margin-bottom: 20px; }
+    .hero p { font-size: 1.5rem; max-width: 800px; margin: 0 auto; opacity: 0.9; font-weight: 500; }
+
+    /* Service Grid */
+    .section { padding: 120px 0; }
+    .section-title { font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 900; text-align: center; margin-bottom: 60px; }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .service-card {
+      background: var(--bg-alt);
+      padding: 50px;
+      border-radius: 40px;
+      border: 1px solid var(--border);
+      transition: 0.4s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      background: #fff;
+      box-shadow: var(--shadow-hard);
+      border-color: var(--primary);
+    }
+
+    .service-card i { font-size: 3rem; color: var(--primary); margin-bottom: 30px; display: block; }
+    .service-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 20px; }
+    .service-card p { color: var(--text-muted); font-size: 1.1rem; }
+
+    /* Info Section */
+    .info-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 100px 0;
+    }
+
+    .info-content h2 { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 30px; }
+    .info-content p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }
+
+    .check-list { list-style: none; }
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+    }
+    .check-list i { color: var(--primary); font-size: 1.3rem; }
+
+    .info-image img {
+      width: 100%;
+      border-radius: 40px;
+      box-shadow: var(--shadow-hard);
+    }
+
+    /* CTA Section */
+    .cta-box {
+      background: var(--primary-dark);
+      color: #fff;
+      padding: 80px;
+      border-radius: 60px;
+      text-align: center;
+      margin-top: 60px;
+    }
+    .cta-box h2 { font-family: 'Outfit', sans-serif; font-size: 3rem; margin-bottom: 20px; }
+    .cta-box p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 45px;
+      border-radius: 20px;
+      font-weight: 800;
+      transition: 0.3s;
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .btn-gold { background: var(--gold); color: #000; }
+    .btn-gold:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(197, 160, 89, 0.3); }
+
+    @media (max-width: 900px) {
+      .info-split { grid-template-columns: 1fr; text-align: center; }
+      .check-list li { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="main-nav">
+  <div class="navbar-container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-img-box">
+        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
+      </div>
+      <div class="logo-text">
+        <span class="brand">IGO LOANS</span>
+        <span class="tagline">The Sovereign Ecosystem</span>
+      </div>
+    </a>
+    
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="procurement.html">Procurement</a></li>
+      <li><a href="agri-projects.html">Agri Projects</a></li>
+      <li><a href="farm-loan-form.html">Loans</a></li>
+      <li><a href="subsidies.html">Subsidy</a></li>
+      <li><a href="dpr-guide.html">DPR Guide</a></li>
+      
+    </ul>
+
+    <div class="nav-cta-group">
+      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
+      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
+      
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <h1>IGO Agri Estate</h1>
+    <p>Premium Land Procurement & Legal Validation Services for India's Next Generation of Agripreneurs.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">End-to-End Procurement</h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <i class="fas fa-map-marked-alt"></i>
+        <h3>Land Scouting</h3>
+        <p>Expert identification of high-yield, road-accessible agricultural land across national corridors.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-scale-balanced"></i>
+        <h3>Legal Due Diligence</h3>
+        <p>100% verified documentation, title clearance, and hassle-free registration support.</p>
+      </div>
+      <div class="service-card">
+        <i class="fas fa-vial"></i>
+        <h3>Soil & Water Validation</h3>
+        <p>Scientific testing to ensure land suitability for your specific high-value crops or livestock.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background: var(--bg-alt);">
+  <div class="container">
+    <div class="info-split">
+      <div class="info-image">
+        <img src="assets/agri_estate_hero.png" alt="Land Procurement">
+      </div>
+      <div class="info-content">
+        <h2>Why IGO Agri Estate?</h2>
+        <p>We don't just find land; we find a future-proof foundation for your agricultural business.</p>
+        <ul class="check-list">
+          <li><i class="fas fa-circle-check"></i> Government Approved Land Zones</li>
+          <li><i class="fas fa-circle-check"></i> 100% Title Clarity Guarantee</li>
+          <li><i class="fas fa-circle-check"></i> Proximity to Logistics & Power</li>
+          <li><i class="fas fa-circle-check"></i> Integrated Boundary Management</li>
+        </ul>
+        <a href="portal.html" class="btn btn-gold">Request Land Portfolio <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Found Your Land?</h2>
+      <p>Once your land is secured via IGO Agri Estate, our AgriTech team takes over to build and manage your high-yield farm.</p>
+      <a href="agri-projects.html" class="btn btn-gold">Explore Agri Projects <i class="fas fa-tractor"></i></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Navbar Scroll Effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile Menu Logic
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = menuBtn.querySelector('i');
+    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+  });
+  // Theme Engine
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  const themeIcon = themeToggle.querySelector('i');
+  
+  themeToggle.addEventListener('click', () => {
+    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', next);
+    themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    localStorage.setItem('igo-theme', next);
+  });
+
+  // Load Saved Theme
+  const savedTheme = localStorage.getItem('igo-theme') || 'light';
+  body.setAttribute('data-theme', savedTheme);
+  themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+</script>
+
+</body>
+</html>

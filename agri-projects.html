@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IGO AgriTech Projects | Portfolio of Excellence</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/navbar.css">
+
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #064e3b;
+      --primary-glow: rgba(5, 150, 105, 0.15);
+      --gold: #c5a059;
+      --bg: #ffffff;
+      --bg-alt: #f8fafc;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --border: rgba(0,0,0,0.06);
+      --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
+      --shadow-hard: 0 20px 50px -12px rgba(0,0,0,0.1);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.06);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
+
+    /* Hero Section */
+    .hero-alt {
+      padding: 160px 0 100px;
+      background: radial-gradient(circle at top right, var(--primary-glow), transparent),
+                  radial-gradient(circle at bottom left, rgba(197, 160, 89, 0.05), transparent);
+      text-align: center;
+    }
+
+    .hero-alt .badge {
+      display: inline-block;
+      background: var(--primary-glow);
+      color: var(--primary);
+      padding: 8px 24px;
+      border-radius: 100px;
+      font-weight: 900;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 25px;
+      border: 1px solid rgba(5, 150, 105, 0.1);
+    }
+
+    .hero-alt h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 30px;
+      letter-spacing: -2px;
+    }
+
+    .hero-alt p {
+      font-size: 1.3rem;
+      max-width: 900px;
+      margin: 0 auto 50px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* Quick Stats */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      margin-top: 60px;
+    }
+
+    .stat-card {
+      background: var(--bg);
+      padding: 30px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-soft);
+      transition: 0.3s;
+    }
+
+    .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+    .stat-card h2 { font-family: 'Outfit'; font-size: 2.5rem; color: var(--primary); margin-bottom: 5px; }
+    .stat-card p { font-size: 0.8rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--text-muted); }
+
+    /* Project Grid */
+    .section { padding: 100px 0; }
+    .section-header { text-align: center; margin-bottom: 80px; }
+    .section-header h2 { font-family: 'Outfit'; font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; }
+
+    .discipline-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 25px;
+    }
+
+    @media (max-width: 1200px) {
+      .discipline-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .discipline-grid { grid-template-columns: 1fr; }
+    }
+
+    .discipline-card {
+      background: var(--bg);
+      border-radius: 50px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .discipline-card:hover { transform: translateY(-15px); box-shadow: var(--shadow-hard); border-color: var(--primary); }
+
+    .discipline-img {
+      height: 240px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .discipline-img::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
+    }
+
+    .discipline-content { padding: 40px; }
+    .discipline-content .count { color: var(--primary); font-weight: 900; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+    .discipline-content h3 { font-family: 'Outfit'; font-size: 1.8rem; margin-bottom: 15px; }
+    .discipline-content p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.05rem; }
+
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: var(--bg-alt);
+      border-radius: 100px;
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+      transition: 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .discipline-card:hover .btn-explore { background: var(--primary); color: #fff; }
+
+    /* Detailed Lists */
+    .detail-section { padding: 80px 0; background: var(--bg-alt); }
+    .project-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 50px;
+    }
+
+    .list-group h4 {
+      font-family: 'Outfit';
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--primary);
+      display: inline-block;
+    }
+
+    .project-items { list-style: none; }
+    .project-items li {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      transition: 0.2s;
+    }
+    .project-items li i { color: var(--primary); font-size: 0.8rem; }
+    .project-items li:hover { color: var(--primary); padding-left: 5px; }
+
+    /* CTA Section */
+    .cta-banner {
+      background: var(--primary-dark);
+      border-radius: 60px;
+      padding: 100px;
+      text-align: center;
+      color: #fff;
+      margin-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-banner h2 { font-family: 'Outfit'; font-size: 4rem; margin-bottom: 30px; }
+    .cta-banner p { font-size: 1.3rem; opacity: 0.8; max-width: 700px; margin: 0 auto 50px; }
+
+    .btn-gold-lg {
+      display: inline-flex;
+      align-items: center;
+      gap: 15px;
+      background: var(--gold);
+      color: #000;
+      padding: 25px 60px;
+      border-radius: 20px;
+      font-weight: 900;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 20px 40px rgba(197, 160, 89, 0.3);
+    }
+
+    .btn-gold-lg:hover { transform: translateY(-5px); background: #fff; }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      .cta-banner { padding: 60px 30px; }
+      .hero-alt h1 { font-size: 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="main-nav">
+  <div class="navbar-container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-img-box">
+        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
+      </div>
+      <div class="logo-text">
+        <span class="brand">IGO LOANS</span>
+        <span class="tagline">The Sovereign Ecosystem</span>
+      </div>
+    </a>
+    
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="procurement.html">Procurement</a></li>
+      <li><a href="agri-projects.html">Agri Projects</a></li>
+      <li><a href="farm-loan-form.html">Loans</a></li>
+      <li><a href="subsidies.html">Subsidy</a></li>
+      <li><a href="dpr-guide.html">DPR Guide</a></li>
+    </ul>
+
+    <div class="nav-cta-group">
+      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
+      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-alt">
+  <div class="container">
+    <span class="badge">IGO Projects</span>
+    <h1>Portfolio of <br><span style="color: var(--primary);">Excellence.</span></h1>
+    <p>15,000+ institutional implementations executed across India — from precision polyhouses to integrated aquaculture ecosystems.</p>
+    
+    <div class="stats-strip">
+      <div class="stat-card">
+        <h2>15,000+</h2>
+        <p>Projects Completed</p>
+      </div>
+      <div class="stat-card">
+        <h2>4</h2>
+        <p>Core Disciplines</p>
+      </div>
+      <div class="stat-card">
+        <h2>Pan-India</h2>
+        <p>Delivery Reach</p>
+      </div>
+      <div class="stat-card">
+        <h2>15+</h2>
+        <p>Years Excellence</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="disciplines">
+  <div class="container">
+    <div class="section-header">
+      <h2>Core Disciplines</h2>
+      <p style="font-size: 1.2rem; color: var(--text-muted);">Select a category to explore our turnkey solutions.</p>
+    </div>
+
+    <div class="discipline-grid">
+      <!-- Agri -->
+      <div class="discipline-card">
+        <div class="discipline-img" style="background-image: url('agri_farming_projects_1778075356405.png');"></div>
+        <div class="discipline-content">
+          <span class="count">10 Project Types</span>
+          <h3>Agri Farming</h3>
+          <p>Polyhouses, hydroponics, vertical farms, and high-value plantations.</p>
+          <a href="#agri-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Aqua -->
+      <div class="discipline-card">
+        <div class="discipline-img" style="background-image: url('aquaculture_projects_1778075389826.png');"></div>
+        <div class="discipline-content">
+          <span class="count">5 Project Types</span>
+          <h3>Aquaculture</h3>
+          <p>Fish, biofloc, shrimp & crab farming plus turnkey solutions.</p>
+          <a href="#aqua-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Livestock -->
+      <div class="discipline-card">
+        <div class="discipline-img" style="background-image: url('livestock_projects_1778075415565.png');"></div>
+        <div class="discipline-content">
+          <span class="count">5 Project Types</span>
+          <h3>Livestock</h3>
+          <p>Goat, sheep, dairy, and poultry systems with shed design.</p>
+          <a href="#livestock-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Engineering -->
+      <div class="discipline-card">
+        <div class="discipline-img" style="background-image: url('farm_engineering_projects_1778075454719.png');"></div>
+        <div class="discipline-content">
+          <span class="count">4 Project Types</span>
+          <h3>Farm Engineering</h3>
+          <p>Cold storage, solar agriculture, and precision development.</p>
+          <a href="#eng-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Detailed Project Breakdown -->
+<section class="detail-section" id="agri-list">
+  <div class="container">
+    <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
+      <i class="fas fa-seedling" style="font-size: 3rem; color: var(--primary);"></i>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Agri Farming Projects</h2>
+    </div>
+    
+    <div class="project-list-grid">
+      <div class="list-group">
+        <h4>Protected Farming</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Naturally Ventilated Polyhouse</li>
+          <li><i class="fas fa-check"></i> Climate Controlled Polyhouse</li>
+          <li><i class="fas fa-check"></i> Polycarbonate Greenhouse</li>
+          <li><i class="fas fa-check"></i> Shade Net House</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Hydroponics & Vertical</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> NFT Hydroponic System</li>
+          <li><i class="fas fa-check"></i> Deep Water Culture</li>
+          <li><i class="fas fa-check"></i> Vertical Towers</li>
+          <li><i class="fas fa-check"></i> Indoor Vertical Farms</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>High-Value Plantations</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Dragon Fruit & Blueberry</li>
+          <li><i class="fas fa-check"></i> Guava, Mango, Papaya</li>
+          <li><i class="fas fa-check"></i> Medicinal Crops (Aloe, Moringa)</li>
+          <li><i class="fas fa-check"></i> Floriculture (Rose, Jasmine)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="detail-section" id="aqua-list" style="background: var(--bg);">
+  <div class="container">
+    <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
+      <i class="fas fa-fish" style="font-size: 3rem; color: #3b82f6;"></i>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Aquaculture Projects</h2>
+    </div>
+    <div class="project-list-grid">
+      <div class="list-group">
+        <h4>Fish & Shrimp</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Intensive Fish Farming</li>
+          <li><i class="fas fa-check"></i> Biofloc Systems</li>
+          <li><i class="fas fa-check"></i> Vannamei Shrimp Farming</li>
+          <li><i class="fas fa-check"></i> Crab & Prawn Projects</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Integrated Systems</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Aquaponics Turnkey Setup</li>
+          <li><i class="fas fa-check"></i> Fish + Crop Integration</li>
+          <li><i class="fas fa-check"></i> Bio-secure Infrastructure</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="detail-section" id="livestock-list">
+  <div class="container">
+    <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
+      <i class="fas fa-cow" style="font-size: 3rem; color: #f59e0b;"></i>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Livestock Projects</h2>
+    </div>
+    <div class="project-list-grid">
+      <div class="list-group">
+        <h4>Herds & Flocks</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Commercial Goat & Sheep</li>
+          <li><i class="fas fa-check"></i> Automated Dairy Systems</li>
+          <li><i class="fas fa-check"></i> Layer & Broiler Poultry</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Infrastructure</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Professional Shed Design</li>
+          <li><i class="fas fa-check"></i> Genetic Management Units</li>
+          <li><i class="fas fa-check"></i> Livestock + Fish Integration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="detail-section" id="eng-list" style="background: var(--bg);">
+  <div class="container">
+    <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
+      <i class="fas fa-gears" style="font-size: 3rem; color: #64748b;"></i>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Farm Engineering</h2>
+    </div>
+    <div class="project-list-grid">
+      <div class="list-group">
+        <h4>Infrastructure</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Cold Storage & Pack Houses</li>
+          <li><i class="fas fa-check"></i> Precision Land Surveying</li>
+          <li><i class="fas fa-check"></i> Rainwater Harvesting</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Solar & Tech</h4>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Solar Pump (PM-KUSUM)</li>
+          <li><i class="fas fa-check"></i> Solar Fencing & Lighting</li>
+          <li><i class="fas fa-check"></i> Smart Irrigation Systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Gallery of Sustenance</h2>
+      <p>Ready to start your turnkey agricultural project? We handle everything from site survey to government subsidy facilitation.</p>
+      <a href="portal.html" class="btn-gold-lg">Start Your Project <i class="fas fa-tractor"></i></a>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Navbar Scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    nav.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Theme Engine
+  const themeToggle = document.getElementById('theme-toggle');
+  const body = document.body;
+  const themeIcon = themeToggle.querySelector('i');
+  
+  themeToggle.addEventListener('click', () => {
+    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    body.setAttribute('data-theme', next);
+    themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    localStorage.setItem('igo-theme', next);
+  });
+
+  const savedTheme = localStorage.getItem('igo-theme') || 'light';
+  body.setAttribute('data-theme', savedTheme);
+  themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+  // Mobile Menu
+  document.getElementById('menu-btn').addEventListener('click', () => {
+    document.querySelector('.nav-links').classList.toggle('active');
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGO Subsidy Eligibility & Stacking Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/navbar.css">
+    <style>
+        :root {
+            --primary: #059669;
+            --primary-dark: #064e3b;
+            --primary-glow: rgba(5, 150, 105, 0.1);
+            --gold: #c5a059;
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: rgba(0,0,0,0.06);
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: rgba(255,255,255,0.06);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            padding-top: 120px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 40px;
+            box-shadow: 0 40px 100px -20px rgba(2, 44, 34, 0.15);
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        [data-theme="dark"] .container { background: #1e293b; }
+
+        .header {
+            background: var(--primary-dark);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 { font-family: 'Outfit'; font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
+        .header p { font-size: 1.1rem; opacity: 0.8; }
+
+        .progress-bar { height: 6px; background: rgba(255,255,255,0.1); }
+        .progress-fill { height: 100%; background: var(--gold); transition: width 0.5s ease; }
+
+        .form-content { padding: 60px 40px; }
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s ease forwards; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .section-title { font-family: 'Outfit'; font-size: 1.8rem; font-weight: 900; margin-bottom: 30px; color: var(--primary); }
+
+        .form-group { margin-bottom: 30px; }
+        label { display: block; font-size: 0.9rem; font-weight: 800; margin-bottom: 12px; color: var(--text); }
+        
+        input, select {
+            width: 100%;
+            padding: 16px 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); }
+
+        .radio-group { display: grid; grid-template-columns: 1fr; gap: 12px; }
+        .radio-item {
+            padding: 18px 24px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: 0.3s;
+        }
+        .radio-item:hover { border-color: var(--primary); background: var(--primary-glow); }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            padding: 18px 40px;
+            border-radius: 16px;
+            border: none;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(5, 150, 105, 0.2); }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-muted);
+            padding: 18px 40px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .button-group { display: flex; gap: 20px; margin-top: 40px; }
+        .button-group button { flex: 1; }
+
+        .summary-box {
+            background: var(--bg-alt);
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid var(--border);
+            margin-top: 30px;
+        }
+
+        .scheme-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 16px;
+            border-left: 5px solid var(--primary);
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+        }
+        [data-theme="dark"] .scheme-card { background: #0f172a; }
+    </style>
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #ee5a6f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .section-indicator {
+            text-align: center;
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .report-section {
+            display: none;
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+
+        .report-section.active {
+            display: block;
+        }
+
+        .success-icon {
+            text-align: center;
+            font-size: 50px;
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .alert-error {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #c62828;
+        }
+
+        .alert-success {
+            background: #e8f5e9;
+            color: #1b5e20;
+            border-left: 4px solid #4caf50;
+        }
+
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .form-content {
+                padding: 20px 15px;
+            }
+
+            .summary-row {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar" id="main-nav">
+  <div class="navbar-container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-img-box">
+        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
+      </div>
+      <div class="logo-text">
+        <span class="brand">IGO LOANS</span>
+        <span class="tagline">The Sovereign Ecosystem</span>
+      </div>
+    </a>
+    
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="procurement.html">Procurement</a></li>
+      <li><a href="agri-projects.html">Agri Projects</a></li>
+      <li><a href="farm-loan-form.html">Loans</a></li>
+      <li><a href="subsidies.html">Subsidy</a></li>
+      <li><a href="dpr-guide.html">DPR Guide</a></li>
+      
+    </ul>
+
+    <div class="nav-cta-group">
+      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
+      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
+      
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Navbar Scroll Effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile Menu Logic
+  const menuBtn = document.getElementById('menu-btn');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    const icon = menuBtn.querySelector('i');
+    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+  });
+
+  // Close menu when clicking a link
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+      menuBtn.querySelector('i').className = 'fas fa-bars';
+    });
+  });
+</script>
+    <div class="container">
+        <div class="header">
+            <h1>💰 IGO Subsidy Maximizer</h1>
+            <p>Identify & stack government subsidies for your farm project</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+
+        <div class="form-content">
+            <div id="alertBox"></div>
+
+            <!-- SECTION 1: Project Definition -->
+            <div class="section active" id="section1">
+                <div class="section-indicator">Step 1 of 3</div>
+                <h2 class="section-title">Your Project</h2>
+
+                <div class="form-group">
+                    <label for="projectName">Project Name *</label>
+                    <input type="text" id="projectName" placeholder="e.g., 1-acre polyhouse for vegetables" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="projectState">State *</label>
+                    <select id="projectState" onchange="updateDistrictOptions()" required>
+                        <option value="">-- Select State --</option>
+                        <option value="TN">Tamil Nadu</option>
+                        <option value="AP">Andhra Pradesh</option>
+                        <option value="KA">Karnataka</option>
+                        <option value="MH">Maharashtra</option>
+                        <option value="PB">Punjab</option>
+                        <option value="UP">Uttar Pradesh</option>
+                        <option value="OT">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="projectDistrict">District *</label>
+                    <input type="text" id="projectDistrict" placeholder="e.g., Coimbatore" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Project Category *</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="category" value="horticulture" onchange="updateSubsidyEligibility()" required>
+                            <span><strong>Horticulture</strong> - Polyhouse, nursery, vegetables, flowers</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="category" value="livestock" onchange="updateSubsidyEligibility()" required>
+                            <span><strong>Livestock</strong> - Dairy, goat, poultry, aquaculture</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="category" value="infrastructure" onchange="updateSubsidyEligibility()" required>
+                            <span><strong>Infrastructure</strong> - Cold storage, warehouse, processing</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="category" value="solar" onchange="updateSubsidyEligibility()" required>
+                            <span><strong>Solar/Renewable</strong> - Solar pumps, power systems</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="category" value="msme" onchange="updateSubsidyEligibility()" required>
+                            <span><strong>MSME/Manufacturing</strong> - Food processing, agri-tech</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="projectCost">Total Project Cost (₹) *</label>
+                    <input type="number" id="projectCost" placeholder="e.g., 2500000" min="50000" step="10000" onchange="updateCalculations()" required>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-primary" onclick="validateSection1()">Next →</button>
+                </div>
+            </div>
+
+            <!-- SECTION 2: Eligibility Checklist -->
+            <div class="section" id="section2">
+                <div class="section-indicator">Step 2 of 3</div>
+                <h2 class="section-title">Eligibility Check</h2>
+
+                <div class="form-group">
+                    <label>Land Ownership *</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="landOwnership" value="owned" onchange="updateSubsidyEligibility()" required>
+                            <span>Own Land</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="landOwnership" value="leased" onchange="updateSubsidyEligibility()" required>
+                            <span>Leased / Tenanted (valid lease deed required)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="landOwnership" value="cooperative" onchange="updateSubsidyEligibility()" required>
+                            <span>Cooperative / Joint</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="landArea">Land Area (in acres) *</label>
+                    <input type="number" id="landArea" placeholder="e.g., 1.5" min="0.1" step="0.1" onchange="updateSubsidyEligibility()" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Farmer Category *</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="farmerCategory" value="marginal" onchange="updateSubsidyEligibility()" required>
+                            <span>Marginal (< 1 hectare) - Higher subsidy eligible</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="farmerCategory" value="small" onchange="updateSubsidyEligibility()" required>
+                            <span>Small (1-2 hectares)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="farmerCategory" value="large" onchange="updateSubsidyEligibility()" required>
+                            <span>Large (> 2 hectares)</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="farmerCategory" value="entrepreneur" onchange="updateSubsidyEligibility()" required>
+                            <span>Non-farmer entrepreneur / Corporate</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Caste/Priority Status (optional, improves eligibility)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="priority" value="sc" onchange="updateSubsidyEligibility()">
+                            <span>Scheduled Caste (SC)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="priority" value="st" onchange="updateSubsidyEligibility()">
+                            <span>Scheduled Tribe (ST)</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="priority" value="woman" onchange="updateSubsidyEligibility()">
+                            <span>Woman Farmer / Entrepreneur</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Previous Subsidy Beneficiary? *</label>
+                    <div class="radio-group">
+                        <label class="radio-item">
+                            <input type="radio" name="prevSubsidy" value="no" onchange="updateSubsidyEligibility()" required>
+                            <span>No, first-time beneficiary</span>
+                        </label>
+                        <label class="radio-item">
+                            <input type="radio" name="prevSubsidy" value="yes" onchange="updateSubsidyEligibility()" required>
+                            <span>Yes, benefited previously (may limit some schemes)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="button-group" style="margin-top: 40px;">
+                    <button class="btn-secondary" onclick="goToSection(1)">← Back</button>
+                    <button class="btn-primary" onclick="goToSection(4)">Get Consultation & Report →</button>
+                </div>
+            </div>
+
+            <!-- SECTION 4: Lead Capture -->
+            <div class="section" id="section4">
+                <div class="section-indicator">Final Step</div>
+                <h2 class="section-title">Claim Your Benefits 🎁</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">Request a detailed project report and a call from our subsidy experts.</p>
+
+                <!-- Netlify Form Integration -->
+                <form name="subsidy-leads" method="POST" data-netlify="true" id="subsidyLeadForm">
+                    <input type="hidden" name="form-name" value="subsidy-leads">
+                    <input type="hidden" name="calc_total_cost" id="hidden_total_cost">
+                    <input type="hidden" name="calc_total_subsidy" id="hidden_total_subsidy">
+                    <input type="hidden" name="calc_net_cost" id="hidden_net_cost">
+                    
+                    <div class="form-group">
+                        <label for="leadName">Full Name *</label>
+                        <input type="text" name="name" id="leadName" placeholder="e.g., Ramesh Kumar" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="leadPhone">Mobile Number *</label>
+                        <input type="tel" name="phone" id="leadPhone" placeholder="10-digit mobile number" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="leadEmail">Email Address *</label>
+                        <input type="email" name="email" id="leadEmail" placeholder="your.email@example.com" required>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="button" class="btn-secondary" onclick="goToSection(3)">← View Result</button>
+                        <button type="submit" class="btn-primary" id="submitBtn">Submit & Get Expert Call →</button>
+                    </div>
+                </form>
+
+                <div id="formSuccess" style="display: none; text-align: center; padding: 40px;">
+                    <i class="fas fa-circle-check" style="font-size: 4rem; color: var(--primary); margin-bottom: 20px;"></i>
+                    <h3 style="font-family: 'Outfit'; font-size: 2rem; margin-bottom: 10px;">Request Sent!</h3>
+                    <p style="color: var(--text-muted);">Our experts will review your subsidy stack and contact you within 24 hours.</p>
+                    <a href="index.html" class="btn-primary" style="display: inline-block; margin-top: 30px; text-decoration: none;">Return Home</a>
+                </div>
+            </div>
+
+            <!-- SECTION 3: Subsidy Stacking & Report -->
+            <div class="section" id="section3">
+                <div class="section-indicator">Step 3 of 3</div>
+                <h2 class="section-title">Your Subsidy Stack 🎯</h2>
+
+                <div class="info-box">
+                    ✅ Based on your project details, here are the schemes you're eligible for. We'll stack them to maximize your subsidy!
+                </div>
+
+                <div id="subsidySchemes"></div>
+
+                <div class="calculator-summary">
+                    <div class="summary-title">💡 Your Real Cost Breakdown</div>
+                    
+                    <div class="summary-row">
+                        <span>Total Project Cost:</span>
+                        <span id="costTotal">₹ 0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Government Subsidy Stack:</span>
+                        <span id="subsidyTotal" style="color: #4caf50; font-weight: 600;">₹ 0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Bank Loan (if needed):</span>
+                        <span id="loanAmount">₹ 0</span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Your Out-of-Pocket:</span>
+                        <span id="yourCost">₹ 0</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span style="font-size: 13px;">Subsidy Coverage: <strong id="coveragePercent">0%</strong></span>
+                    </div>
+
+                    <div id="pieChartContainer"></div>
+
+                    <div class="info-box" style="margin-top: 15px; background: #e8f5e9; border-left-color: #4caf50; color: #1b5e20;">
+                        <strong>Processing Timeline:</strong> Government subsidy approval typically takes 2-4 months after loan approval.
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button class="btn-secondary" onclick="goToSection(2)">← Back</button>
+                    <button class="btn-primary" onclick="downloadReport()">📄 Download Report</button>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                        Ready to apply for the loan amount? (After subsidy, this is what you'll need to finance)
+                    </p>
+                    <button class="btn-primary" onclick="applyForLoan()" style="width: 100%;">
+                        💵 Apply for Farm Loan Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 1;
+        const totalSections = 3;
+        let subsidyData = {};
+
+        // Subsidy scheme definitions
+        const schemes = {
+            NHB: {
+                name: 'NHB (Horticulture)',
+                percentage: 40,
+                maxAmount: 5600000,
+                categories: ['horticulture'],
+                farmerTypes: ['marginal', 'small', 'large'],
+                description: 'Up to 40% for polyhouse, nursery, fruit plants'
+            },
+            AIF: {
+                name: 'AIF (Agricultural Infrastructure)',
+                percentage: 3,
+                maxAmount: 100000000,
+                categories: ['infrastructure', 'horticulture'],
+                farmerTypes: ['marginal', 'small', 'large', 'entrepreneur'],
+                description: 'Interest subvention for 7 years on loans'
+            },
+            PMEGP: {
+                name: 'PMEGP (Business/Manufacturing)',
+                percentage: 35,
+                maxAmount: 2500000,
+                categories: ['msme'],
+                farmerTypes: ['entrepreneur'],
+                description: 'Up to 35% for new manufacturing units'
+            },
+            KUSUM: {
+                name: 'PM-KUSUM (Solar Pumps)',
+                percentage: 90,
+                maxAmount: 500000,
+                categories: ['solar', 'horticulture', 'livestock'],
+                farmerTypes: ['marginal', 'small', 'large'],
+                description: '90% subsidy for solar-powered irrigation pumps'
+            },
+            NABARD: {
+                name: 'NABARD (Livestock)',
+                percentage: 50,
+                maxAmount: 10000000,
+                categories: ['livestock'],
+                farmerTypes: ['marginal', 'small', 'large'],
+                description: 'Up to 50% subsidy for dairy, aquaculture projects'
+            }
+        };
+
+        function updateProgress() {
+            const progress = (currentSection / totalSections) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function goToSection(n) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('section' + n).classList.add('active');
+    
+    const progress = (n / 4) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (n === 4) {
+      // Populate hidden fields for lead capture
+      document.getElementById('hidden_total_cost').value = document.getElementById('costTotal').innerText;
+      document.getElementById('hidden_total_subsidy').value = document.getElementById('subsidyTotal').innerText;
+      document.getElementById('hidden_net_cost').value = document.getElementById('yourCost').innerText;
+    }
+  }
+
+  // Handle Form Submission
+  const leadForm = document.getElementById('subsidyLeadForm');
+  leadForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    btn.disabled = true;
+
+    try {
+      const formData = new FormData(leadForm);
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formData).toString()
+      });
+
+      if (response.ok) {
+        leadForm.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Submission failed');
+      }
+    } catch (err) {
+      alert('Error submitting form. Please try again.');
+      btn.innerHTML = 'Submit & Get Expert Call →';
+      btn.disabled = false;
+    }
+  });
+
+        function showAlert(message, type = 'error') {
+            const alertBox = document.getElementById('alertBox');
+            alertBox.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                alertBox.innerHTML = '';
+            }, 5000);
+        }
+
+        function validateSection1() {
+            const projectName = document.getElementById('projectName').value.trim();
+            const state = document.getElementById('projectState').value;
+            const district = document.getElementById('projectDistrict').value.trim();
+            const category = document.querySelector('input[name="category"]:checked');
+            const projectCost = document.getElementById('projectCost').value;
+
+            if (!projectName || !state || !district || !category || !projectCost) {
+                showAlert('Please fill all required fields');
+                return;
+            }
+
+            subsidyData.projectName = projectName;
+            subsidyData.state = state;
+            subsidyData.district = district;
+            subsidyData.category = category.value;
+            subsidyData.projectCost = parseInt(projectCost);
+
+            goToSection(2);
+        }
+
+        function validateSection2() {
+            const landOwnership = document.querySelector('input[name="landOwnership"]:checked');
+            const landArea = document.getElementById('landArea').value;
+            const farmerCategory = document.querySelector('input[name="farmerCategory"]:checked');
+            const prevSubsidy = document.querySelector('input[name="prevSubsidy"]:checked');
+
+            if (!landOwnership || !landArea || !farmerCategory || !prevSubsidy) {
+                showAlert('Please fill all required fields');
+                return;
+            }
+
+            subsidyData.landOwnership = landOwnership.value;
+            subsidyData.landArea = parseFloat(landArea);
+            subsidyData.farmerCategory = farmerCategory.value;
+            subsidyData.prevSubsidy = prevSubsidy.value;
+
+            // Get priority status
+            const priority = Array.from(document.querySelectorAll('input[name="priority"]:checked')).map(cb => cb.value);
+            subsidyData.priority = priority;
+
+            // Submit to backend API
+            const nextButton = document.querySelector('#section2 .btn-primary');
+            const originalText = nextButton.textContent;
+            nextButton.textContent = 'Calculating...';
+            nextButton.disabled = true;
+
+            fetch('/api/subsidy-eligibility-report', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(subsidyData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Update subsidy data with server response
+                    subsidyData.totalSubsidy = data.totalSubsidy;
+                    subsidyData.yourCost = data.yourCost;
+                    subsidyData.loanNeeded = data.loanNeeded;
+                    subsidyData.subsidyCoverage = data.subsidyCoverage;
+                    subsidyData.eligibleSchemes = data.subsidyStack;
+                    subsidyData.reportId = data.reportId;
+                    
+                    updateSubsidyEligibility();
+                    goToSection(3);
+                } else {
+                    showAlert('Calculation failed: ' + (data.message || 'Unknown error'));
+                }
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                // Fallback to client-side calculation if API fails
+                updateSubsidyEligibility();
+                goToSection(3);
+            })
+            .finally(() => {
+                nextButton.textContent = originalText;
+                nextButton.disabled = false;
+            });
+        }
+
+        function updateSubsidyEligibility() {
+            const category = document.querySelector('input[name="category"]:checked')?.value;
+            const farmerCategory = document.querySelector('input[name="farmerCategory"]:checked')?.value;
+            
+            if (!category || !farmerCategory) return;
+
+            const container = document.getElementById('subsidySchemes');
+            let eligibleSchemes = [];
+            let html = '';
+
+            for (let [key, scheme] of Object.entries(schemes)) {
+                const isEligible = scheme.categories.includes(category) && 
+                                   scheme.farmerTypes.includes(farmerCategory);
+
+                const subsidyCard = `
+                    <div class="subsidy-card ${isEligible ? 'eligible' : 'ineligible'}">
+                        <div class="subsidy-name">${scheme.name}</div>
+                        <div class="subsidy-details">
+                            ${scheme.description}<br/>
+                            Max: ₹${(scheme.maxAmount / 100000).toFixed(1)}L
+                        </div>
+                        <span class="subsidy-badge badge-${isEligible ? 'eligible' : 'ineligible'}">
+                            ${isEligible ? '✓ ELIGIBLE' : '✗ NOT ELIGIBLE'}
+                        </span>
+                    </div>
+                `;
+                html += subsidyCard;
+
+                if (isEligible) {
+                    eligibleSchemes.push(key);
+                }
+            }
+
+            if (currentSection === 3) {
+                container.innerHTML = html;
+                calculateSubsidyStack(eligibleSchemes);
+            } else if (currentSection === 2) {
+                if (container) {
+                    container.innerHTML = html;
+                }
+            }
+        }
+
+        function calculateSubsidyStack(eligibleSchemes) {
+            const projectCost = subsidyData.projectCost;
+            let totalSubsidy = 0;
+            let usedSchemes = [];
+
+            // Stack subsidies intelligently
+            const stackingPriority = ['KUSUM', 'NHB', 'NABARD', 'AIF', 'PMEGP'];
+
+            for (let scheme of stackingPriority) {
+                if (eligibleSchemes.includes(scheme)) {
+                    const schemeObj = schemes[scheme];
+                    let subsidy = (projectCost * schemeObj.percentage) / 100;
+                    subsidy = Math.min(subsidy, schemeObj.maxAmount);
+
+                    if (totalSubsidy + subsidy <= projectCost) {
+                        totalSubsidy += subsidy;
+                        usedSchemes.push({name: schemeObj.name, amount: subsidy});
+                    }
+                }
+            }
+
+            const remainingCost = projectCost - totalSubsidy;
+            const coveragePercent = Math.round((totalSubsidy / projectCost) * 100);
+
+            // Update display
+            document.getElementById('costTotal').textContent = '₹ ' + formatCurrency(projectCost);
+            document.getElementById('subsidyTotal').textContent = '₹ ' + formatCurrency(totalSubsidy);
+            document.getElementById('loanAmount').textContent = '₹ ' + formatCurrency(remainingCost * 0.5);
+            document.getElementById('yourCost').textContent = '₹ ' + formatCurrency(remainingCost * 0.5);
+            document.getElementById('coveragePercent').textContent = coveragePercent + '%';
+
+            subsidyData.totalSubsidy = totalSubsidy;
+            subsidyData.yourCost = remainingCost * 0.5;
+            subsidyData.loanNeeded = remainingCost * 0.5;
+
+            // Draw pie chart
+            drawPieChart(projectCost, totalSubsidy, remainingCost);
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-IN').format(Math.round(num));
+        }
+
+        function drawPieChart(total, subsidy, remaining) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 300;
+            canvas.height = 200;
+            const ctx = canvas.getContext('2d');
+
+            const subsidyPercent = (subsidy / total) * 100;
+            const remainPercent = (remaining / total) * 100;
+
+            const colors = ['#4caf50', '#ff9800'];
+            const data = [subsidyPercent, remainPercent];
+            const labels = [
+                `Subsidy: ${Math.round(subsidyPercent)}%`,
+                `You Pay: ${Math.round(remainPercent)}%`
+            ];
+
+            let currentAngle = 0;
+            const centerX = 150;
+            const centerY = 100;
+            const radius = 80;
+
+            ctx.fillStyle = '#fff';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < data.length; i++) {
+                const sliceAngle = (data[i] / 100) * 2 * Math.PI;
+                
+                ctx.fillStyle = colors[i];
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                ctx.lineTo(centerX, centerY);
+                ctx.fill();
+
+                currentAngle += sliceAngle;
+            }
+
+            const container = document.getElementById('pieChartContainer');
+            container.innerHTML = '';
+            container.appendChild(canvas);
+
+            // Add legend
+            const legend = `
+                <div style="text-align: center; margin-top: 10px; font-size: 12px;">
+                    <div style="color: #4caf50; font-weight: 600;">Government subsidy covers ₹${formatCurrency(subsidy)}</div>
+                    <div style="color: #ff9800; font-weight: 600;">You contribute ₹${formatCurrency(remaining * 0.5)} (with bank loan support)</div>
+                </div>
+            `;
+            container.innerHTML += legend;
+        }
+
+        function downloadReport() {
+            const report = `
+IGO SUBSIDY ELIGIBILITY REPORT
+Generated: ${new Date().toLocaleDateString()}
+
+PROJECT DETAILS
+===============
+Project Name: ${subsidyData.projectName}
+Location: ${subsidyData.district}, ${subsidyData.state}
+Category: ${subsidyData.category}
+Project Cost: ₹${formatCurrency(subsidyData.projectCost)}
+
+APPLICANT DETAILS
+=================
+Farmer Category: ${subsidyData.farmerCategory}
+Land Size: ${subsidyData.landArea} acres
+Land Ownership: ${subsidyData.landOwnership}
+
+SUBSIDY CALCULATION
+===================
+Total Government Subsidy: ₹${formatCurrency(subsidyData.totalSubsidy)}
+Coverage: ${Math.round((subsidyData.totalSubsidy / subsidyData.projectCost) * 100)}%
+Your Investment: ₹${formatCurrency(subsidyData.yourCost)}
+Recommended Loan: ₹${formatCurrency(subsidyData.loanNeeded)}
+
+NEXT STEPS
+==========
+1. Apply for IGO Farm Loan for the remaining amount
+2. Submit subsidy application with all required documents
+3. Government processing: 2-4 months typically
+4. Partnership with IGO Agritech Farms (optional)
+
+This is a preliminary estimate. Final subsidy depends on government agency approval.
+            `;
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'IGO_Subsidy_Report.txt';
+            a.click();
+
+            showAlert('Subsidy report downloaded!', 'success');
+        }
+
+        function applyForLoan() {
+            // Store subsidy data in sessionStorage for pre-filling loan form
+            const loanAmount = subsidyData.loanNeeded || (subsidyData.yourCost || 0);
+            sessionStorage.setItem('subsidyLoanAmount', loanAmount);
+            sessionStorage.setItem('subsidyProjectCost', subsidyData.projectCost);
+            sessionStorage.setItem('fromSubsidyCalculator', 'true');
+            
+            // Redirect to farm loan form
+            window.location.href = 'farm-loan-form.html';
+        }
+
+        function updateCalculations() {
+            if (currentSection === 1 && subsidyData.projectCost) {
+                updateSubsidyEligibility();
+            }
+        }
+
+        updateProgress();
+    </script>
+</body>
+</html>

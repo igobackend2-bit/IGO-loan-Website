@@ -203,11 +203,11 @@
         <h2 class="header-title">National Command Center</h2>
         <div style="margin-top: 20px; padding: 25px; background: rgba(5, 150, 105, 0.05); border-radius: 20px; border: 1px solid rgba(5, 150, 105, 0.2); display: flex; align-items: center; justify-content: space-between; gap: 30px;">
             <div>
-                <h4 style="color: var(--primary-dark); font-weight: 800; margin-bottom: 5px;"><i class="fas fa-bolt"></i> Zero-Backend Mode Active</h4>
-                <p style="font-size: 0.9rem; color: #64748b; font-weight: 600;">The platform is currently optimized for direct Netlify lead capture.</p>
+                <h4 style="color: var(--primary-dark); font-weight: 800; margin-bottom: 5px;"><i class="fas fa-database"></i> Supabase Backend Connected</h4>
+                <p style="font-size: 0.9rem; color: #64748b; font-weight: 600;">Farm loan applications and subsidy reports are stored in Supabase database.</p>
             </div>
-            <a href="https://app.netlify.com/sites/igofarmloan/forms" target="_blank" class="btn btn-primary" style="background: var(--primary-dark); border-radius: 12px; padding: 15px 30px; font-weight: 800; font-size: 0.9rem;">
-                <i class="fas fa-external-link-alt"></i> OPEN LIVE NETLIFY DASHBOARD
+            <a href="https://snveztjjlurdwxqgmpsx.supabase.co" target="_blank" class="btn btn-primary" style="background: var(--primary-dark); border-radius: 12px; padding: 15px 30px; font-weight: 800; font-size: 0.9rem;">
+                <i class="fas fa-external-link-alt"></i> OPEN SUPABASE DASHBOARD
             </a>
         </div>
     </div>
@@ -335,36 +335,57 @@
 
     async function updateDashboard() {
         const tableBody = document.getElementById('leadsTableBody');
-        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 50px;"><i class="fas fa-spinner fa-spin"></i> Syncing with Netlify Cloud...</td></tr>';
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 50px;"><i class="fas fa-spinner fa-spin"></i> Syncing with Supabase Cloud...</td></tr>';
 
         try {
-            const res = await fetch('/.netlify/functions/get-leads');
-            if (res.status === 404) {
-                renderError("System Synchronization Error: The Lead Proxy function is still deploying. Please wait 60 seconds and refresh.");
-                return;
-            }
-            const data = await res.json();
+            // Fetch from Supabase backend API
+            const [leadsRes, statsRes] = await Promise.all([
+                fetch('/api/leads'),
+                fetch('/api/stats')
+            ]);
 
-            if (data.setup_needed) {
-                renderSetupRequired();
-                return;
-            }
-
-            if (data.error) {
-                renderError("API Error: " + data.error);
+            if (!leadsRes.ok) {
+                const errorData = await leadsRes.json().catch(() => ({}));
+                renderError("API Error: " + (errorData.error || 'Failed to fetch leads'));
                 return;
             }
 
-            allLeads = data;
+            const leadsData = await leadsRes.json();
+            const statsData = await statsRes.json();
+
+            if (!leadsData.success) {
+                renderError("API Error: " + (leadsData.error || 'Unknown error'));
+                return;
+            }
+
+            // Transform farm loan applications to match expected format
+            allLeads = leadsData.leads.map(lead => ({
+                id: lead.id,
+                number: lead.reference_number,
+                name: lead.full_name,
+                email: lead.email || '-',
+                phone: lead.phone,
+                form_name: lead.loan_type,
+                data: {
+                    state: lead.state,
+                    district: lead.district,
+                    loan_amount: '₹' + (lead.loan_amount / 100000).toFixed(1) + 'L',
+                    lead_score: lead.lead_score,
+                    status: lead.status,
+                    managed_interest: lead.managed_interest,
+                    created_at: lead.created_at
+                },
+                created_at: lead.created_at
+            }));
             
             // Update Stats
-            document.getElementById('stat-total-leads').innerText = allLeads.length;
-            document.getElementById('stat-pending-forms').innerText = allLeads.filter(l => l.form_name === 'dpr-portal').length;
+            document.getElementById('stat-total-leads').innerText = statsData.totalLeads || allLeads.length;
+            document.getElementById('stat-pending-forms').innerText = allLeads.filter(l => l.data.status === 'submitted').length;
 
             renderTable(allLeads.slice(0, 10)); // Show latest 10
         } catch (err) {
             console.error('Fetch error:', err);
-            renderError("Network Error: Could not connect to the Netlify Sync service.");
+            renderError("Network Error: Could not connect to the Supabase backend. Ensure the server is running on port 5001.");
         }
     }
 
@@ -387,10 +408,12 @@
         tableBody.innerHTML = `
             <tr>
                 <td colspan="6" style="text-align: center; padding: 60px;">
-                    <div style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"><i class="fas fa-key"></i></div>
-                    <h3 style="font-family: 'Outfit'; margin-bottom: 15px;">API Connection Required</h3>
-                    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px;">To see your leads here, you must add your <strong>NETLIFY_TOKEN</strong> to the Netlify Environment Variables.</p>
-                    <a href="https://app.netlify.com/sites/igofarmloan/settings/env" target="_blank" class="btn btn-primary" style="padding: 12px 30px; border-radius: 12px;">Add Token Now</a>
+                    <div style="font-size: 3rem; color: #fbbf24; margin-bottom: 20px;"><i class="fas fa-server"></i></div>
+                    <h3 style="font-family: 'Outfit'; margin-bottom: 15px;">Backend Server Required</h3>
+                    <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 30px;">To see your leads here, ensure the Node.js server is running on <strong>http://localhost:5001</strong></p>
+                    <code style="background: #f1f5f9; padding: 10px 20px; border-radius: 8px; display: inline-block; margin-bottom: 20px;">npm start</code>
+                    <br>
+                    <button onclick="updateDashboard()" class="btn btn-primary" style="padding: 12px 30px; border-radius: 12px;">Retry Connection</button>
                 </td>
             </tr>
         `;

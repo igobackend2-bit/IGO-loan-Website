@@ -18,7 +18,7 @@
 
   <!-- Icons & Frameworks -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Netlify Forms — no external scripts needed -->
+  <link rel="stylesheet" href="assets/navbar.css">
 
   <style>
     :root {
@@ -69,33 +69,7 @@
 
     .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
     
-    /* Next-Level Navbar */
-    .navbar {
-      height: 100px; position: fixed; top: 0; width: 100%; z-index: 1000;
-      background: var(--glass); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-      border-bottom: 1px solid var(--border); display: flex; align-items: center;
-      transition: 0.4s;
-    }
-    .navbar.scrolled { height: 80px; box-shadow: var(--shadow-soft); }
-    .navbar .container { display: flex; justify-content: space-between; align-items: center; width: 100%; }
-    
-    /* Elite SVG Logo */
-    .logo-wrap { display: flex; align-items: center; gap: 18px; text-decoration: none; }
-    .logo-icon {
-      width: 55px; height: 55px; position: relative;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      border-radius: 16px; display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 10px 20px -5px rgba(5, 150, 105, 0.4);
-    }
-    .logo-text h1 { font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; color: var(--text); line-height: 1; letter-spacing: -1px; }
-    .logo-text span { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px; }
-
-    /* Navigation Links */
-    .nav-links { display: flex; gap: 40px; list-style: none; transition: 0.3s; }
-    .nav-links a { text-decoration: none; font-weight: 700; color: var(--text); font-size: 0.95rem; transition: 0.3s; white-space: nowrap; }
-    .nav-links a:hover { color: var(--primary); }
-
-    /* Button Masterpiece */
+    /* General Buttons */
     .btn {
       display: inline-flex; align-items: center; gap: 12px;
       padding: 18px 40px; border-radius: 20px; font-weight: 800;
@@ -109,7 +83,7 @@
       box-shadow: 0 15px 30px -10px rgba(5, 150, 105, 0.5); 
     }
     .btn-primary:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 25px 40px -10px rgba(5, 150, 105, 0.6); }
-    
+
     /* Hero Masterpiece */
     .hero {
       padding: 220px 0 120px; position: relative; min-height: 100vh;
@@ -226,22 +200,6 @@
     /* Mobile Perfection Engine */
     @media (max-width: 1100px) {
       .container { padding: 0 20px; }
-      .navbar { height: 75px !important; }
-      .navbar .btn-primary { display: none !important; } 
-      .nav-links { display: none !important; } 
-      .nav-links.active { 
-        display: flex !important; 
-        flex-direction: column; 
-        position: fixed; 
-        top: 75px; 
-        left: 0; 
-        width: 100%; 
-        background: var(--bg); 
-        padding: 30px; 
-        gap: 20px; 
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow-hard);
-      }
       .mobile-toggle { display: flex !important; }
       .logo-text h1 { font-size: 1.1rem; }
       .logo-text span { font-size: 0.6rem; }
@@ -275,16 +233,10 @@
       .btn:active { transform: scale(0.96); opacity: 0.8; }
       .hero div[style*="display: flex; gap: 24px;"] { flex-direction: column; width: 100%; gap: 12px; }
       .hero div[style*="margin-top: 100px;"] { flex-direction: column; gap: 30px; margin-top: 60px; }
-      .navbar .container { justify-content: space-between; }
       .logo-text { display: none; } /* Hide text on very small screens to keep icons clean */
     }
 
-    /* Mobile Menu Elements */
-    .mobile-toggle {
-      display: none; width: 50px; height: 50px; border-radius: 12px;
-      background: var(--bg-alt); align-items: center; justify-content: center;
-      cursor: pointer; border: 1px solid var(--border); font-size: 1.2rem;
-    }
+
 
     /* Theme Toggle Restore */
     #theme-toggle {
@@ -361,36 +313,45 @@
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- Navbar -->
-<nav class="navbar">
-  <div class="container">
-    <a href="#" class="logo-wrap">
-      <div style="background: #fff; padding: 5px; border-radius: 16px; box-shadow: 0 10px 30px rgba(5, 150, 105, 0.2); display: flex; align-items: center; justify-content: center;">
-        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo" style="height: 60px; border-radius: 12px; filter: contrast(1.1) brightness(1.05);">
+<nav class="navbar" id="main-nav">
+  <div class="navbar-container">
+    <a href="index.html" class="logo-wrap">
+      <div class="logo-img-box">
+        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
       </div>
       <div class="logo-text">
-        <span style="font-family: 'Space Grotesk'; font-size: 1.6rem; color: var(--text); display: block; font-weight: 700;">IGO LOANS & SUBSIDY</span>
-        <span style="color: var(--primary); font-weight: 800; letter-spacing: 1px;">THE SOVEREIGN ECOSYSTEM</span>
+        <span class="brand">IGO LOANS</span>
+        <span class="tagline">The Sovereign Ecosystem</span>
       </div>
     </a>
     
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="#farm-loans">Solutions</a>
-      <a href="subsidies.html">Subsidies</a>
-      <a href="dpr-guide.html">DPR Guide</a>
-      <a href="#ecosystem">Ecosystem</a>
-      <a href="#franchise">Franchise</a>
-    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="procurement.html">Procurement</a></li>
+      <li><a href="agri-projects.html">Agri Projects</a></li>
+      <li><a href="farm-loan-form.html">Loans</a></li>
+      <li><a href="subsidies.html">Subsidy</a></li>
+      <li><a href="dpr-guide.html">DPR Guide</a></li>
+    </ul>
 
-    <div style="display: flex; gap: 15px; align-items: center;">
-      <div id="theme-toggle"><i class="fas fa-moon"></i></div>
+    <div class="nav-cta-group">
+      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
       <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
-      <a href="portal.html" class="btn btn-primary" style="padding: 14px 30px; font-size: 0.9rem;">Start Now</a>
     </div>
   </div>
 </nav>
 
 <script>
+  // Navbar Scroll Effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('main-nav');
+    if (window.scrollY > 50) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
   // Mobile Menu Logic
   const menuBtn = document.getElementById('menu-btn');
   const navLinks = document.querySelector('.nav-links');
@@ -410,53 +371,136 @@
   });
 </script>
 
-<main id="main-content">
+<main id="main-content" style="padding-top: 100px;">
 
 <!-- Hero Section -->
-<section class="hero">
+<section class="hero" style="padding: 120px 0 100px; min-height: 80vh; display: flex; align-items: center;">
   <div class="container">
-    <div class="hero-grid">
+    <div class="hero-grid" style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center;">
       <div class="hero-content">
         <div style="display: inline-flex; align-items: center; gap: 12px; background: rgba(5, 150, 105, 0.1); color: var(--primary); padding: 12px 24px; border-radius: 100px; font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(5, 150, 105, 0.2); margin-bottom: 40px;">
           <i class="fas fa-certificate"></i> ISO 9001:2015 CERTIFIED CONSULTANCY
         </div>
-        <h1 style="font-family: 'Outfit', sans-serif;">The <span style="color: var(--gold);">Gold Standard</span> of Farm Finance.</h1>
-        <p>Empowering rural India with seamless access to high-value government subsidies and low-interest bank loans. We turn your agricultural vision into reality.</p>
+        <h1 style="font-family: 'Outfit', sans-serif; font-size: 4.8rem; line-height: 1.05; margin-bottom: 30px; font-weight: 900; letter-spacing: -2px;">The <span style="color: var(--primary);">Gold Standard</span> of Farm Finance.</h1>
+        <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 45px; max-width: 600px; line-height: 1.6;">Empowering rural India with seamless access to high-value government subsidies and low-interest bank loans. We turn your agricultural vision into reality.</p>
         
         <div style="display: flex; gap: 24px;">
-          <a href="portal.html" class="btn btn-primary">Apply Now</a>
-          <a href="subsidies.html" class="btn" style="border: 2px solid var(--border); color: var(--text);">Explore Subsidies</a>
+          <a href="farm-loan-form.html" class="btn btn-primary" style="background: var(--primary-dark); padding: 24px 50px; font-size: 1.15rem; border-radius: 24px; font-weight: 800; box-shadow: 0 20px 40px rgba(6, 78, 59, 0.2);">Get Farm Loan <i class="fas fa-sack-dollar" style="margin-left: 10px;"></i></a>
+          <a href="subsidy-calculator.html" class="btn btn-gold" style="padding: 24px 50px; font-size: 1.15rem; border-radius: 24px; font-weight: 800;">Check Subsidy <i class="fas fa-calculator" style="margin-left: 10px;"></i></a>
         </div>
 
-        <div style="margin-top: 100px; display: flex; gap: 80px; flex-wrap: wrap;">
-          <div><div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">₹75Cr+</div><p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Facilitated</p></div>
-          <div><div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">15k+</div><p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Empowered</p></div>
-          <div><div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">700+</div><p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Districts</p></div>
+        <div style="margin-top: 70px; display: flex; gap: 60px;">
+          <div>
+            <div style="font-family: 'Outfit'; font-size: 3.2rem; font-weight: 900; color: var(--primary); letter-spacing: -1px;">₹500Cr+</div>
+            <div style="font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px;">Disbursed</div>
+          </div>
+          <div>
+            <div style="font-family: 'Outfit'; font-size: 3.2rem; font-weight: 900; color: var(--primary); letter-spacing: -1px;">12,000+</div>
+            <div style="font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); letter-spacing: 2px;">Farmers Happy</div>
+          </div>
         </div>
       </div>
-
-      <div class="hero-visual-wrap">
-        <img src="assets/hero.png" alt="IGO Farm Finance" class="hero-img">
+      
+      <div class="hero-image" style="position: relative;">
+        <div style="position: relative; border-radius: 60px; overflow: hidden; box-shadow: 0 50px 100px -20px rgba(0,0,0,0.25);">
+          <img src="igo_hero_agriculture_finance_1778075664911.png" alt="IGO Farm Loans Hero" style="width: 100%; display: block; transition: transform 0.5s ease;">
+        </div>
         
-        <div class="floating-card" style="top: 10%; right: -50px;">
-          <div style="width: 50px; height: 50px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
-            <i class="fas fa-crown"></i>
+        <!-- Floating Badges -->
+        <div class="floating-badge" style="position: absolute; top: 10%; right: -30px; background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 18px; z-index: 2; border: 1px solid var(--border);">
+           <div style="width: 48px; height: 48px; background: var(--gold); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem;"><i class="fas fa-shield-halved"></i></div>
+           <div><div style="font-weight: 900; font-size: 1rem; color: var(--text);">Govt Approved</div><div style="font-size: 0.8rem; color: var(--text-muted);">100% Secure</div></div>
+        </div>
+        <div class="floating-badge" style="position: absolute; bottom: 10%; left: -30px; background: #fff; padding: 25px; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.12); display: flex; align-items: center; gap: 18px; z-index: 2; border: 1px solid var(--border);">
+           <div style="width: 48px; height: 48px; background: var(--primary); border-radius: 16px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.2rem;"><i class="fas fa-bolt"></i></div>
+           <div><div style="font-weight: 900; font-size: 1rem; color: var(--text);">Fast Approval</div><div style="font-size: 0.8rem; color: var(--text-muted);">48-Hour TAT</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IGO Ecosystem Lifecycle -->
+<section id="lifecycle" class="section" style="padding-top: 0; margin-top: -80px; position: relative; z-index: 10;">
+  <div class="container">
+    <div class="glass-box" style="padding: 80px 60px; border-radius: 60px; background: #fff; box-shadow: 0 50px 100px -20px rgba(2, 44, 34, 0.15); border: 1px solid var(--border);">
+      <div style="text-align: center; margin-bottom: 80px;">
+        <div style="display: inline-block; background: var(--primary-glow); color: var(--primary); padding: 8px 20px; border-radius: 100px; font-weight: 900; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 25px; border: 1px solid rgba(5, 150, 105, 0.1);">THE SOVEREIGN ECOSYSTEM</div>
+        <h2 style="font-family: 'Outfit'; font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1;">Your 360° Agri-Business <span style="color: var(--primary);">Journey</span></h2>
+        <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 800px; margin: 0 auto; line-height: 1.7;">From the first plot of land to global market exports, IGO is your single-window partner for institutional agricultural success.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 30px; position: relative;">
+        <!-- Connecting Line (Desktop) -->
+        <div style="position: absolute; top: 70px; left: 10%; right: 10%; height: 2px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.1; z-index: 0;" class="desktop-only-line"></div>
+
+        <!-- Step 1 -->
+        <div class="lifecycle-card" style="text-align: center; position: relative; z-index: 1; transition: 0.4s;">
+          <div style="width: 140px; height: 140px; background: var(--bg-alt); border-radius: 40px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--primary); margin: 0 auto 30px; border: 1px solid var(--border); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; transition: 0.4s;">
+             <i class="fas fa-map-location-dot" style="position: relative; z-index: 2;"></i>
+             <div style="position: absolute; bottom: -10px; right: -10px; font-size: 5rem; font-weight: 900; opacity: 0.03; color: var(--text);">1</div>
           </div>
-          <div>
-            <div style="font-weight: 800; font-size: 1.1rem;">Premium Service</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">National Reach</div>
-          </div>
+          <h4 style="font-family: 'Outfit'; font-size: 1.6rem; margin-bottom: 12px; font-weight: 800;">1. Land</h4>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Procurement & Legal via <br><strong>IGO Agri Estate</strong></p>
+          <a href="procurement.html" class="lifecycle-link" style="font-weight: 900; color: var(--primary); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px;">Learn More <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i></a>
         </div>
 
-        <div class="floating-card" style="bottom: 15%; left: -50px; animation-delay: 2s;">
-          <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff;">
-            <i class="fas fa-check-double"></i>
+        <!-- Step 2 -->
+        <div class="lifecycle-card" style="text-align: center; position: relative; z-index: 1; transition: 0.4s;">
+          <div style="width: 140px; height: 140px; background: var(--bg-alt); border-radius: 40px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--primary); margin: 0 auto 30px; border: 1px solid var(--border); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; transition: 0.4s;">
+             <i class="fas fa-file-invoice" style="position: relative; z-index: 2;"></i>
+             <div style="position: absolute; bottom: -10px; right: -10px; font-size: 5rem; font-weight: 900; opacity: 0.03; color: var(--text);">2</div>
           </div>
-          <div>
-            <div style="font-weight: 800; font-size: 1.1rem;">High Approval Rate</div>
-            <div style="font-size: 0.85rem; color: var(--text-muted);">Expert Guidance</div>
-          </div>
+          <h4 style="font-family: 'Outfit'; font-size: 1.6rem; margin-bottom: 12px; font-weight: 800;">2. Planning</h4>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Master DPR & <br>Govt. Liasoning</p>
+          <a href="dpr-guide.html" class="lifecycle-link" style="font-weight: 900; color: var(--primary); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px;">View Roadmap <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i></a>
         </div>
+
+        <!-- Step 3 -->
+        <div class="lifecycle-card active-step" style="text-align: center; position: relative; z-index: 1; transition: 0.4s;">
+          <div style="width: 140px; height: 140px; background: var(--primary-dark); border-radius: 40px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--gold); margin: 0 auto 30px; box-shadow: 0 20px 40px rgba(2, 44, 34, 0.25); position: relative; overflow: hidden; transition: 0.4s; border: 2px solid var(--gold);">
+             <i class="fas fa-sack-dollar" style="position: relative; z-index: 2;"></i>
+             <div style="position: absolute; bottom: -10px; right: -10px; font-size: 5rem; font-weight: 900; opacity: 0.1; color: #fff;">3</div>
+          </div>
+          <h4 style="font-family: 'Outfit'; font-size: 1.6rem; margin-bottom: 12px; font-weight: 800;">3. Funding</h4>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Loans & Subsidies via <br><strong>IGO Loans</strong></p>
+          <a href="farm-loan-form.html" class="lifecycle-link" style="font-weight: 900; color: var(--primary); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px;">Get Started <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i></a>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="lifecycle-card" style="text-align: center; position: relative; z-index: 1; transition: 0.4s;">
+          <div style="width: 140px; height: 140px; background: var(--bg-alt); border-radius: 40px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; color: var(--primary); margin: 0 auto 30px; border: 1px solid var(--border); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; transition: 0.4s;">
+             <i class="fas fa-tractor" style="position: relative; z-index: 2;"></i>
+             <div style="position: absolute; bottom: -10px; right: -10px; font-size: 5rem; font-weight: 900; opacity: 0.03; color: var(--text);">4</div>
+          </div>
+          <h4 style="font-family: 'Outfit'; font-size: 1.6rem; margin-bottom: 12px; font-weight: 800;">4. Operation</h4>
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px;">Build & Manage via <br><strong>IGO AgriTech</strong></p>
+          <a href="agri-projects.html" class="lifecycle-link" style="font-weight: 900; color: var(--primary); text-decoration: none; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; justify-content: center; gap: 8px;">View Projects <i class="fas fa-arrow-right" style="font-size: 0.7rem;"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Impact Stats Section -->
+<section class="section" style="padding-bottom: 80px;">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; text-align: center;">
+      <div>
+        <div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">₹750Cr+</div>
+        <p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Value Facilitated</p>
+      </div>
+      <div>
+        <div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">15k+</div>
+        <p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Farmers Empowered</p>
+      </div>
+      <div>
+        <div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">700+</div>
+        <p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Districts Covered</p>
+      </div>
+      <div>
+        <div style="font-size: 3.5rem; font-weight: 900; font-family: 'Outfit'; color: var(--text);">1M+</div>
+        <p style="color:var(--text-muted); font-weight:800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Projected Agripreneurs</p>
       </div>
     </div>
   </div>
@@ -1204,7 +1248,7 @@
         <h4 style="margin-bottom: 25px; font-family: 'Outfit'; font-size: 1.2rem;">Our Solutions</h4>
         <ul style="list-style: none; display: flex; flex-direction: column; gap: 15px;">
           <li><a href="#farm-loans">Farm Loans</a></li>
-          <li><a href="#subsidies">Subsidies</a></li>
+          <li><a href="#subsidies">Subsidy</a></li>
           <li><a href="#ecosystem">Sovereign Ecosystem</a></li>
           <li><a href="#franchise">Franchise Opportunity</a></li>
           <li><a href="#calculator">Estimator</a></li>
@@ -1237,10 +1281,16 @@
   const themeIcon = themeToggle.querySelector('i');
   
   themeToggle.addEventListener('click', () => {
-    const next = body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
     body.setAttribute('data-theme', next);
-    themeIcon.className = next === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+    themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    localStorage.setItem('igo-theme', next);
   });
+
+  // Load Saved Theme
+  const savedTheme = localStorage.getItem('igo-theme') || 'light';
+  body.setAttribute('data-theme', savedTheme);
+  themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 
   // Advanced Calculator
   const amtIn = document.getElementById('loan-amt');
