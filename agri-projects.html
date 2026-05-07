@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>IGO AgriTech Projects | Portfolio of Excellence</title>
+  <title>Projects & Procurement | IGO Group Portfolio</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,79 +17,62 @@
       --primary-dark: #064e3b;
       --primary-glow: rgba(5, 150, 105, 0.15);
       --gold: #c5a059;
+      --gold-dark: #a38146;
       --bg: #ffffff;
       --bg-alt: #f8fafc;
       --text: #0f172a;
       --text-muted: #64748b;
-      --border: rgba(0,0,0,0.06);
-      --shadow-soft: 0 10px 40px -10px rgba(0,0,0,0.05);
-      --shadow-hard: 0 20px 50px -12px rgba(0,0,0,0.1);
+      --border: rgba(0,0,0,0.08);
     }
 
     [data-theme="dark"] {
-      --bg: #0f172a;
-      --bg-alt: #1e293b;
+      --bg: #020617;
+      --bg-alt: #0f172a;
       --text: #f1f5f9;
       --text-muted: #94a3b8;
-      --border: rgba(255,255,255,0.06);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: 'Inter', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      position: relative;
+    }
+    body::after {
+      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity: 0.03; pointer-events: none; z-index: 9999;
     }
 
-    .container { max-width: 1400px; margin: 0 auto; padding: 0 40px; }
-
-    /* Hero Section */
-    .hero-alt {
-      padding: 160px 0 100px;
-      background: radial-gradient(circle at top right, var(--primary-glow), transparent),
-                  radial-gradient(circle at bottom left, rgba(197, 160, 89, 0.05), transparent);
-      text-align: center;
+    /* Hero Masterpiece */
+    .hero-projects {
+      padding: 180px 0 100px; position: relative; min-height: 80vh;
+      background: url('agri_projects_hero_bg_dark_1778137368087.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
     }
-
-    .hero-alt .badge {
-      display: inline-block;
-      background: var(--primary-glow);
-      color: var(--primary);
-      padding: 8px 24px;
-      border-radius: 100px;
-      font-weight: 900;
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 25px;
-      border: 1px solid rgba(5, 150, 105, 0.1);
+    .hero-projects::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(2, 44, 34, 0.95) 20%, rgba(2, 44, 34, 0.4) 60%, transparent 100%);
+      z-index: 1;
     }
-
-    .hero-alt h1 {
-      font-family: 'Outfit', sans-serif;
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      font-weight: 900;
-      line-height: 1.05;
-      margin-bottom: 30px;
-      letter-spacing: -2px;
-    }
-
-    .hero-alt p {
-      font-size: 1.3rem;
+    .hero-container { position: relative; z-index: 2; width: 100%; }
+    .hero-glass-card {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(25px) saturate(1.8);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 80px;
+      border-radius: 60px;
       max-width: 900px;
-      margin: 0 auto 50px;
-      color: var(--text-muted);
-      font-weight: 500;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
     }
-
-    /* Quick Stats */
-    .stats-strip {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
-    }
+    .hero-projects h1 { font-family: 'Outfit'; font-size: clamp(3rem, 6vw, 6rem); line-height: 0.95; font-weight: 900; color: #fff; margin-bottom: 30px; letter-spacing: -2px; }
+    .hero-projects h1 span { color: var(--gold); }
+    .hero-projects p { font-size: 1.4rem; color: rgba(255, 255, 255, 0.8); max-width: 700px; line-height: 1.4; margin-bottom: 50px; }
 
     .stat-card {
       background: var(--bg);
@@ -124,27 +107,30 @@
 
     .discipline-card {
       background: var(--bg);
-      border-radius: 50px;
-      overflow: hidden;
+      border-radius: 40px;
       border: 1px solid var(--border);
-      transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: relative;
+      perspective: 1000px;
     }
-
-    .discipline-card:hover { transform: translateY(-15px); box-shadow: var(--shadow-hard); border-color: var(--primary); }
-
+    .discipline-card:hover {
+      transform: translateY(-15px) rotateX(1deg) rotateY(1deg);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+      border-color: var(--gold);
+    }
     .discipline-img {
-      height: 240px;
+      height: 280px;
       background-size: cover;
       background-position: center;
-      position: relative;
+      transition: 0.8s;
     }
-
-    .discipline-img::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6));
+    .discipline-card:hover .discipline-img { transform: scale(1.1); }
+    
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; width: 0%; height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      z-index: 9999;
     }
 
     .discipline-content { padding: 40px; }
@@ -187,15 +173,15 @@
 
     .project-items { list-style: none; }
     .project-items li {
-      padding: 12px 0;
+      padding: 15px 0;
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       gap: 12px;
-      font-weight: 600;
-      color: var(--text-muted);
-      transition: 0.2s;
+      font-weight: 700;
+      font-size: 0.95rem;
     }
+    .project-items li:last-child { border: none; }
     .project-items li i { color: var(--primary); font-size: 0.8rem; }
     .project-items li:hover { color: var(--primary); padding-left: 5px; }
 
@@ -239,6 +225,7 @@
   </style>
 </head>
 <body>
+<div id="scroll-progress" class="scroll-progress"></div>
 
 <nav class="navbar" id="main-nav">
   <div class="navbar-container">
@@ -254,10 +241,9 @@
     
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="procurement.html">Procurement</a></li>
-      <li><a href="agri-projects.html">Agri Projects</a></li>
+      <li><a href="agri-projects.html">Projects & Procurement</a></li>
       <li><a href="farm-loan-form.html">Loans</a></li>
-      <li><a href="subsidies.html">Subsidy</a></li>
+      <li><a href="subsidy-calculator.html" style="color: var(--gold); font-weight: 800;">Subsidy Maximizer</a></li>
       <li><a href="dpr-guide.html">DPR Guide</a></li>
     </ul>
 
@@ -268,89 +254,127 @@
   </div>
 </nav>
 
-<section class="hero-alt">
-  <div class="container">
-    <span class="badge">IGO Projects</span>
-    <h1>Portfolio of <br><span style="color: var(--primary);">Excellence.</span></h1>
-    <p>15,000+ institutional implementations executed across India — from precision polyhouses to integrated aquaculture ecosystems.</p>
-    
-    <div class="stats-strip">
-      <div class="stat-card">
-        <h2>15,000+</h2>
-        <p>Projects Completed</p>
-      </div>
-      <div class="stat-card">
-        <h2>4</h2>
-        <p>Core Disciplines</p>
-      </div>
-      <div class="stat-card">
-        <h2>Pan-India</h2>
-        <p>Delivery Reach</p>
-      </div>
-      <div class="stat-card">
-        <h2>15+</h2>
-        <p>Years Excellence</p>
+<!-- Hero Section -->
+<section class="hero-projects">
+  <div class="container hero-container">
+    <div class="hero-glass-card glass-elite-card reveal-on-scroll">
+      <div style="position: relative; z-index: 2;">
+        <div style="background: rgba(197, 160, 89, 0.15); color: var(--gold); padding: 10px 25px; border-radius: 100px; display: inline-block; font-weight: 900; font-size: 0.8rem; letter-spacing: 4px; margin-bottom: 35px; border: 1px solid rgba(197, 160, 89, 0.3);">INSTITUTIONAL VERTICALS</div>
+        <h1>Sovereign <span>Agri-Portfolio</span> 2026</h1>
+        <p>Execution of high-performance agricultural assets for a million agripreneurs. From precision engineering to global trade infrastructure.</p>
+        
+        <div style="display: flex; gap: 24px; flex-wrap: wrap;">
+          <a href="portal.html" class="btn btn-primary">Start Your Project <i class="fas fa-tractor"></i></a>
+          <a href="#disciplines" class="btn" style="background: rgba(255,255,255,0.1); color: #fff; border: 1px solid rgba(255,255,255,0.2);">Browse Disciplines <i class="fas fa-layer-group"></i></a>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section" id="disciplines">
+<!-- Core Disciplines Grid -->
+<section class="section" id="disciplines" style="background: var(--bg); padding: 120px 0;">
   <div class="container">
-    <div class="section-header">
-      <h2>Core Disciplines</h2>
-      <p style="font-size: 1.2rem; color: var(--text-muted);">Select a category to explore our turnkey solutions.</p>
+    <div style="text-align: center; margin-bottom: 100px;">
+      <h2 class="section-title">The <span style="color: var(--gold);">Four</span> Pillars</h2>
+      <p style="color: var(--text-muted); font-size: 1.25rem; max-width: 800px; margin: 0 auto; font-weight: 600;">A vertically integrated ecosystem covering every phase of high-performance agriculture.</p>
     </div>
 
     <div class="discipline-grid">
-      <!-- Agri -->
-      <div class="discipline-card">
-        <div class="discipline-img" style="background-image: url('agri_farming_projects_1778075356405.png');"></div>
+      <!-- Land -->
+      <div class="discipline-card hover-lift reveal-on-scroll">
+        <div class="discipline-img" style="background-image: url('agri_land_procurement_hero_1778132897958.png');"></div>
         <div class="discipline-content">
-          <span class="count">10 Project Types</span>
-          <h3>Agri Farming</h3>
-          <p>Polyhouses, hydroponics, vertical farms, and high-value plantations.</p>
-          <a href="#agri-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+          <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 01</div>
+          <h3>Land & Legal</h3>
+          <p>Scientific scouting and rigorous legal due diligence for institutional assets.</p>
+          <a href="#land-list" class="btn-explore">Explore Vertical <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Agri -->
+      <div class="discipline-card hover-lift reveal-on-scroll">
+        <div class="discipline-img" style="background-image: url('agri_farming_projects_hero_1778132919368.png');"></div>
+        <div class="discipline-content">
+          <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 02</div>
+          <h3>Turnkey Farms</h3>
+          <p>High-tech polyhouses, hydroponics, and precision high-value plantations.</p>
+          <a href="#agri-list" class="btn-explore">Explore Vertical <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Aqua -->
-      <div class="discipline-card">
-        <div class="discipline-img" style="background-image: url('aquaculture_projects_1778075389826.png');"></div>
+      <div class="discipline-card hover-lift reveal-on-scroll">
+        <div class="discipline-img" style="background-image: url('aquaculture_projects_hero_1778132953152.png');"></div>
         <div class="discipline-content">
-          <span class="count">5 Project Types</span>
+          <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 03</div>
           <h3>Aquaculture</h3>
-          <p>Fish, biofloc, shrimp & crab farming plus turnkey solutions.</p>
-          <a href="#aqua-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+          <p>Advanced biofloc systems and climate-controlled shrimp/fish farming.</p>
+          <a href="#aqua-list" class="btn-explore">Explore Vertical <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
 
       <!-- Livestock -->
-      <div class="discipline-card">
-        <div class="discipline-img" style="background-image: url('livestock_projects_1778075415565.png');"></div>
+      <div class="discipline-card hover-lift reveal-on-scroll">
+        <div class="discipline-img" style="background-image: url('livestock_tech_projects_hero_1778132978858.png');"></div>
         <div class="discipline-content">
-          <span class="count">5 Project Types</span>
-          <h3>Livestock</h3>
-          <p>Goat, sheep, dairy, and poultry systems with shed design.</p>
-          <a href="#livestock-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
-        </div>
-      </div>
-
-      <!-- Engineering -->
-      <div class="discipline-card">
-        <div class="discipline-img" style="background-image: url('farm_engineering_projects_1778075454719.png');"></div>
-        <div class="discipline-content">
-          <span class="count">4 Project Types</span>
-          <h3>Farm Engineering</h3>
-          <p>Cold storage, solar agriculture, and precision development.</p>
-          <a href="#eng-list" class="btn-explore">Explore <i class="fas fa-arrow-right"></i></a>
+          <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 04</div>
+          <h3>Livestock Tech</h3>
+          <p>Precision sheep, goat, and dairy modules with cold-chain integration.</p>
+          <a href="#livestock-list" class="btn-explore">Explore Vertical <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Detailed Project Breakdown -->
+<section class="detail-section" id="land-list" style="background: var(--bg);">
+  <div class="container">
+    <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
+      <i class="fas fa-map-location-dot" style="font-size: 3rem; color: var(--gold);"></i>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Land Procurement Services</h2>
+    </div>
+    <div class="project-list-grid">
+      <div class="list-group">
+        <h4>Cold Chain Eng.</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_engineering_cold_storage_detail_1778138396987.png" alt="Cold Chain" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Integrated Cold Room</li>
+          <li><i class="fas fa-check"></i> Blast Freezing Units</li>
+          <li><i class="fas fa-check"></i> IQF Tunnel Systems</li>
+          <li><i class="fas fa-check"></i> Ripening Chambers</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Technical Selection</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_surveying_detail_1778133194655.png" alt="Technical Surveying" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Strategic Land Scouting</li>
+          <li><i class="fas fa-check"></i> Soil & Water Profiling</li>
+          <li><i class="fas fa-check"></i> Topography Surveys</li>
+          <li><i class="fas fa-check"></i> Logistics Feasibility</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Foundation Prep</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_land_procurement_hero_1778132897958.png" alt="Foundation Prep" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Fencing & Gate Security</li>
+          <li><i class="fas fa-check"></i> Farm Road Development</li>
+          <li><i class="fas fa-check"></i> Borewell & Power Setup</li>
+          <li><i class="fas fa-check"></i> Site Office Construction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="detail-section" id="agri-list">
   <div class="container">
     <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
@@ -361,6 +385,9 @@
     <div class="project-list-grid">
       <div class="list-group">
         <h4>Protected Farming</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_farming_projects_hero_1778132919368.png" alt="Protected Farming" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Naturally Ventilated Polyhouse</li>
           <li><i class="fas fa-check"></i> Climate Controlled Polyhouse</li>
@@ -370,6 +397,9 @@
       </div>
       <div class="list-group">
         <h4>Hydroponics & Vertical</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_hydroponics_detail_1778133242593.png" alt="Hydroponic Detail" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> NFT Hydroponic System</li>
           <li><i class="fas fa-check"></i> Deep Water Culture</li>
@@ -379,6 +409,9 @@
       </div>
       <div class="list-group">
         <h4>High-Value Plantations</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="assets/exotic_portfolio.png" alt="Dragon Fruit Plantation" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Dragon Fruit & Blueberry</li>
           <li><i class="fas fa-check"></i> Guava, Mango, Papaya</li>
@@ -399,6 +432,9 @@
     <div class="project-list-grid">
       <div class="list-group">
         <h4>Fish & Shrimp</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="aquaculture_projects_hero_1778132953152.png" alt="Aquaculture Detail" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Intensive Fish Farming</li>
           <li><i class="fas fa-check"></i> Biofloc Systems</li>
@@ -408,10 +444,26 @@
       </div>
       <div class="list-group">
         <h4>Integrated Systems</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="assets/agriculture_portfolio.png" alt="Integrated Systems" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Aquaponics Turnkey Setup</li>
           <li><i class="fas fa-check"></i> Fish + Crop Integration</li>
           <li><i class="fas fa-check"></i> Bio-secure Infrastructure</li>
+          <li><i class="fas fa-check"></i> Zero-Waste Ecosystems</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Biofloc Systems</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="assets/agriculture_v2.png" alt="Biofloc Detail" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> High-Density Fish Tanks</li>
+          <li><i class="fas fa-check"></i> Microbial Colony Management</li>
+          <li><i class="fas fa-check"></i> Low Feed Conversion Ratio</li>
+          <li><i class="fas fa-check"></i> Urban Aquaculture Units</li>
         </ul>
       </div>
     </div>
@@ -426,19 +478,39 @@
     </div>
     <div class="project-list-grid">
       <div class="list-group">
-        <h4>Herds & Flocks</h4>
+        <h4>Livestock Breeding</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="livestock_tech_projects_hero_1778132978858.png" alt="Livestock Detail" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
-          <li><i class="fas fa-check"></i> Commercial Goat & Sheep</li>
-          <li><i class="fas fa-check"></i> Automated Dairy Systems</li>
-          <li><i class="fas fa-check"></i> Layer & Broiler Poultry</li>
+          <li><i class="fas fa-check"></i> Hi-Tech Dairy (Holstein/Jersey)</li>
+          <li><i class="fas fa-check"></i> Goat Farming (Boer/Beetal)</li>
+          <li><i class="fas fa-check"></i> Poultry (Layer/Broiler)</li>
+          <li><i class="fas fa-check"></i> Integrated Feed Units</li>
         </ul>
       </div>
       <div class="list-group">
         <h4>Infrastructure</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_modern_cattle_shed_detail_1778148443580.png" alt="Livestock Infrastructure" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Professional Shed Design</li>
           <li><i class="fas fa-check"></i> Genetic Management Units</li>
           <li><i class="fas fa-check"></i> Livestock + Fish Integration</li>
+          <li><i class="fas fa-check"></i> Waste-to-Energy Systems</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Health & Nutrition</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="assets/livestock_v2.png" alt="Livestock Health" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Veterinary Support Centers</li>
+          <li><i class="fas fa-check"></i> Automated Feed Mill Units</li>
+          <li><i class="fas fa-check"></i> Digital Health Monitoring</li>
+          <li><i class="fas fa-check"></i> Smart Tagging & Tracking</li>
         </ul>
       </div>
     </div>
@@ -448,45 +520,83 @@
 <section class="detail-section" id="eng-list" style="background: var(--bg);">
   <div class="container">
     <div style="margin-bottom: 60px; display: flex; align-items: center; gap: 20px;">
-      <i class="fas fa-gears" style="font-size: 3rem; color: #64748b;"></i>
-      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Farm Engineering</h2>
+      <i class="fas fa-industry" style="font-size: 3rem; color: var(--gold);"></i>
+      <h2 style="font-family: 'Outfit'; font-size: 2.5rem;">Infrastructure & Engineering</h2>
     </div>
     <div class="project-list-grid">
       <div class="list-group">
-        <h4>Infrastructure</h4>
+        <h4>Post-Harvest Tech</h4>
+        <div style="width: 100%; height: 220px; border-radius: 30px; overflow: hidden; margin-bottom: 25px; border: 1px solid var(--border);">
+          <img src="agri_engineering_cold_storage_detail_1778138396987.png" alt="Engineering Detail" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
-          <li><i class="fas fa-check"></i> Cold Storage & Pack Houses</li>
-          <li><i class="fas fa-check"></i> Precision Land Surveying</li>
-          <li><i class="fas fa-check"></i> Rainwater Harvesting</li>
+          <li><i class="fas fa-check"></i> Multi-Chamber Cold Storage</li>
+          <li><i class="fas fa-check"></i> Controlled Atmosphere (CA) Rooms</li>
+          <li><i class="fas fa-check"></i> Grading & Sorting Automation</li>
+          <li><i class="fas fa-check"></i> IQF (Individual Quick Freezing)</li>
         </ul>
       </div>
       <div class="list-group">
-        <h4>Solar & Tech</h4>
+        <h4>Energy & Water</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="agri_projects_hero_bg_dark_1778137368087.png" alt="Energy Detail" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
         <ul class="project-items">
-          <li><i class="fas fa-check"></i> Solar Pump (PM-KUSUM)</li>
-          <li><i class="fas fa-check"></i> Solar Fencing & Lighting</li>
-          <li><i class="fas fa-check"></i> Smart Irrigation Systems</li>
+          <li><i class="fas fa-check"></i> Solar Rooftop Integration</li>
+          <li><i class="fas fa-check"></i> Micro-Irrigation Command Center</li>
+          <li><i class="fas fa-check"></i> Water Treatment Plants</li>
+          <li><i class="fas fa-check"></i> Biogas Power Generation</li>
+        </ul>
+      </div>
+      <div class="list-group">
+        <h4>Food Processing</h4>
+        <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
+          <img src="assets/agriculture_v3.png" alt="Food Processing" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <ul class="project-items">
+          <li><i class="fas fa-check"></i> Value-Addition Machineries</li>
+          <li><i class="fas fa-check"></i> Oil Extraction & Refining</li>
+          <li><i class="fas fa-check"></i> Automated Grading Lines</li>
+          <li><i class="fas fa-check"></i> Export-Ready Packaging</li>
         </ul>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section" style="padding-top: 0;">
   <div class="container">
-    <div class="cta-banner">
-      <h2>Gallery of Sustenance</h2>
-      <p>Ready to start your turnkey agricultural project? We handle everything from site survey to government subsidy facilitation.</p>
-      <a href="portal.html" class="btn-gold-lg">Start Your Project <i class="fas fa-tractor"></i></a>
+    <div style="background: linear-gradient(135deg, var(--primary-dark), #064e3b); border-radius: 60px; padding: 100px 60px; text-align: center; color: #fff; position: relative; overflow: hidden; box-shadow: 0 40px 80px -20px rgba(2, 44, 34, 0.4);">
+      <div style="position: absolute; top: -100px; right: -100px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(197, 160, 89, 0.15), transparent); border-radius: 50%;"></div>
+      <div style="position: relative; z-index: 2;">
+        <span style="color: var(--gold); font-weight: 900; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 4px; display: block; margin-bottom: 30px;">READY FOR TRANSFORMATION?</span>
+        <h2 style="font-family: 'Outfit'; font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; margin-bottom: 30px; line-height: 1.1;">Join the <span style="color: var(--gold);">Sovereign</span> Ecosystem</h2>
+        <p style="font-size: 1.3rem; opacity: 0.8; max-width: 800px; margin: 0 auto 50px; font-weight: 500;">Scale your agricultural vision with India's most advanced turnkey solutions. From planning to profits, we are with you every step of the way.</p>
+        <div style="display: flex; gap: 25px; justify-content: center; flex-wrap: wrap;">
+          <a href="portal.html" style="background: var(--gold); color: #000; text-decoration: none; padding: 22px 45px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; transition: 0.4s; display: flex; align-items: center; gap: 15px;">
+            Start Your Project <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="farm-loan-form.html" style="background: rgba(255,255,255,0.1); color: #fff; text-decoration: none; padding: 22px 45px; border-radius: 20px; font-weight: 900; font-size: 1.1rem; transition: 0.4s; border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; gap: 15px;">
+            Check Loan Eligibility <i class="fas fa-sack-dollar"></i>
+          </a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <script>
-  // Navbar Scroll
+  // Scroll Progress
   window.addEventListener('scroll', () => {
-    const nav = document.getElementById('main-nav');
-    nav.classList.toggle('scrolled', window.scrollY > 50);
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    const progressBar = document.getElementById("scroll-progress");
+    if (progressBar) progressBar.style.width = scrolled + "%";
+
+    const nav = document.querySelector('.navbar');
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
   });
 
   // Theme Engine

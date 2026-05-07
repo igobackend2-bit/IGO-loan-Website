@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="assets/navbar.css">
+  <link rel="stylesheet" href="assets/style.css">
 
   <style>
     :root {
@@ -38,24 +39,45 @@
 
     /* Hero Section */
     .hero {
-      padding: 100px 0;
-      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('assets/agri_estate_hero.png');
+      padding: 120px 0;
+      background: linear-gradient(135deg, rgba(2,44,34,0.85) 0%, rgba(5,150,105,0.8) 100%),
+                  url('assets/agri_estate_hero.png');
       background-size: cover;
       background-position: center;
-      min-height: 60vh;
+      min-height: 70vh;
       display: flex;
       align-items: center;
       color: #fff;
       text-align: center;
       border-radius: 0 0 60px 60px;
+      position: relative;
     }
 
-    .hero h1 { font-family: 'Outfit', sans-serif; font-size: clamp(3rem, 5vw, 5rem); font-weight: 900; margin-bottom: 20px; }
-    .hero p { font-size: 1.5rem; max-width: 800px; margin: 0 auto; opacity: 0.9; font-weight: 500; }
+    .hero h1 { 
+      font-family: 'Outfit', sans-serif; 
+      font-size: clamp(3rem, 6vw, 5.5rem); 
+      font-weight: 900; 
+      margin-bottom: 24px; 
+      letter-spacing: -2px;
+    }
+    .hero p { 
+      font-size: 1.3rem; 
+      max-width: 850px; 
+      margin: 0 auto; 
+      opacity: 0.95; 
+      font-weight: 500;
+    }
 
     /* Service Grid */
     .section { padding: 120px 0; }
-    .section-title { font-family: 'Outfit', sans-serif; font-size: 3.5rem; font-weight: 900; text-align: center; margin-bottom: 60px; }
+    .section-title { 
+      font-family: 'Outfit', sans-serif; 
+      font-size: 3.5rem; 
+      font-weight: 900; 
+      text-align: center; 
+      margin-bottom: 60px; 
+      letter-spacing: -1px;
+    }
 
     .service-grid {
       display: grid;
@@ -68,8 +90,23 @@
       padding: 50px;
       border-radius: 40px;
       border: 1px solid var(--border);
-      transition: 0.4s;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
     }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--gold));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .service-card:hover::before { transform: scaleX(1); }
 
     .service-card:hover {
       transform: translateY(-10px);
@@ -78,9 +115,26 @@
       border-color: var(--primary);
     }
 
-    .service-card i { font-size: 3rem; color: var(--primary); margin-bottom: 30px; display: block; }
-    .service-card h3 { font-family: 'Outfit', sans-serif; font-size: 1.8rem; margin-bottom: 20px; }
-    .service-card p { color: var(--text-muted); font-size: 1.1rem; }
+    .service-card i { 
+      font-size: 3rem; 
+      color: var(--primary); 
+      margin-bottom: 30px; 
+      display: block;
+      transition: transform 0.4s;
+    }
+    .service-card:hover i { transform: scale(1.15) rotate(5deg); }
+    
+    .service-card h3 { 
+      font-family: 'Outfit', sans-serif; 
+      font-size: 1.8rem; 
+      margin-bottom: 20px; 
+      letter-spacing: -0.5px;
+    }
+    .service-card p { 
+      color: var(--text-muted); 
+      font-size: 1.1rem; 
+      line-height: 1.7;
+    }
 
     /* Info Section */
     .info-split {
@@ -91,8 +145,19 @@
       padding: 100px 0;
     }
 
-    .info-content h2 { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 900; margin-bottom: 30px; }
-    .info-content p { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; }
+    .info-content h2 { 
+      font-family: 'Outfit', sans-serif; 
+      font-size: 3rem; 
+      font-weight: 900; 
+      margin-bottom: 30px; 
+      letter-spacing: -1px;
+    }
+    .info-content p { 
+      font-size: 1.2rem; 
+      color: var(--text-muted); 
+      margin-bottom: 40px; 
+      line-height: 1.7;
+    }
 
     .check-list { list-style: none; }
     .check-list li {
@@ -103,12 +168,180 @@
       font-size: 1.1rem;
       margin-bottom: 20px;
     }
-    .check-list i { color: var(--primary); font-size: 1.3rem; }
+    .check-list i { 
+      color: var(--primary); 
+      font-size: 1.3rem;
+      background: rgba(5,150,105,0.1);
+      padding: 8px;
+      border-radius: 50%;
+    }
 
     .info-image img {
       width: 100%;
       border-radius: 40px;
       box-shadow: var(--shadow-hard);
+      object-fit: cover;
+    }
+
+    /* Procurement Form Section */
+    .procurement-form-section {
+      background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%);
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .form-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 40px;
+      padding: 60px;
+      box-shadow: var(--shadow-hard);
+      border: 1px solid var(--border);
+    }
+
+    .form-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .form-header h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      margin-bottom: 16px;
+      color: var(--primary-dark);
+    }
+
+    .form-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .igo-form { max-width: 100%; }
+    .form-row { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 30px; 
+      margin-bottom: 24px;
+    }
+    .form-group { margin-bottom: 24px; }
+    .form-group label { 
+      display: block; 
+      font-weight: 700; 
+      font-size: 0.95rem; 
+      margin-bottom: 10px; 
+      color: var(--text);
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; 
+      padding: 16px 18px; 
+      border: 1.5px solid var(--border);
+      border-radius: 12px; 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      font-size: 1rem;
+      background: var(--bg); 
+      color: var(--text); 
+      transition: all 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none; 
+      border-color: var(--primary); 
+      box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+    }
+    .form-group textarea { 
+      resize: vertical; 
+      min-height: 100px;
+    }
+
+    .checkbox-group { 
+      display: flex; 
+      flex-wrap: wrap; 
+      gap: 12px; 
+      margin-top: 8px; 
+    }
+    .checkbox-group label { 
+      display: flex; 
+      align-items: center; 
+      gap: 8px; 
+      font-weight: 600; 
+      font-size: 0.95rem; 
+      cursor: pointer; 
+      padding: 10px 16px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      transition: all 0.2s;
+    }
+    .checkbox-group label:hover { 
+      border-color: var(--primary); 
+      background: rgba(5,150,105,0.05);
+    }
+    .checkbox-group input[type="checkbox"] { 
+      accent-color: var(--primary); 
+      width: 16px; 
+      height: 16px; 
+    }
+
+    .btn-submit {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 20px 50px;
+      border-radius: 20px;
+      font-weight: 800;
+      font-size: 1.1rem;
+      text-decoration: none;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+      width: 100%;
+      justify-content: center;
+    }
+    .btn-submit:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(5,150,105,0.3);
+    }
+
+    .form-sidebar {
+      background: var(--primary-dark);
+      border-radius: 30px;
+      padding: 40px;
+      color: #fff;
+      height: fit-content;
+      position: sticky;
+      top: 120px;
+    }
+
+    .form-sidebar h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      color: var(--gold);
+    }
+
+    .form-sidebar .check-list li {
+      color: rgba(255,255,255,0.8);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .form-sidebar p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .form-sidebar a {
+      color: var(--gold);
+      font-weight: 700;
     }
 
     /* CTA Section */
@@ -120,8 +353,19 @@
       text-align: center;
       margin-top: 60px;
     }
-    .cta-box h2 { font-family: 'Outfit', sans-serif; font-size: 3rem; margin-bottom: 20px; }
-    .cta-box p { font-size: 1.2rem; opacity: 0.8; margin-bottom: 40px; max-width: 700px; margin-left: auto; margin-right: auto; }
+    .cta-box h2 { 
+      font-family: 'Outfit', sans-serif; 
+      font-size: 3rem; 
+      margin-bottom: 20px; 
+    }
+    .cta-box p { 
+      font-size: 1.2rem; 
+      opacity: 0.8; 
+      margin-bottom: 40px; 
+      max-width: 700px; 
+      margin-left: auto; 
+      margin-right: auto; 
+    }
 
     .btn {
       display: inline-flex;
@@ -134,12 +378,27 @@
       text-decoration: none;
       font-size: 1.1rem;
     }
-    .btn-gold { background: var(--gold); color: #000; }
-    .btn-gold:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(197, 160, 89, 0.3); }
+    .btn-gold { 
+      background: var(--gold); 
+      color: #000; 
+    }
+    .btn-gold:hover { 
+      transform: translateY(-5px); 
+      box-shadow: 0 20px 40px rgba(197, 160, 89, 0.3);
+    }
 
     @media (max-width: 900px) {
-      .info-split { grid-template-columns: 1fr; text-align: center; }
-      .check-list li { justify-content: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .info-split { grid-template-columns: 1fr; }
+      .form-container { padding: 40px 24px; }
+      .form-sidebar { position: static; margin-top: 40px; }
+      .section-title { font-size: 2.5rem; }
+    }
+
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      .hero { border-radius: 0 0 30px 30px; }
+      .service-card { padding: 35px; }
     }
   </style>
 </head>
@@ -150,7 +409,7 @@
   <div class="navbar-container">
     <a href="index.html" class="logo-wrap">
       <div class="logo-img-box">
-        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
+        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo" loading="lazy">
       </div>
       <div class="logo-text">
         <span class="brand">IGO LOANS</span>
@@ -160,22 +419,25 @@
     
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="procurement.html">Procurement</a></li>
+      <li><a href="procurement.html" class="active">Procurement</a></li>
       <li><a href="agri-projects.html">Agri Projects</a></li>
       <li><a href="farm-loan-form.html">Loans</a></li>
       <li><a href="subsidies.html">Subsidy</a></li>
       <li><a href="dpr-guide.html">DPR Guide</a></li>
-      
     </ul>
 
     <div class="nav-cta-group">
-      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
-      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
-      
+      <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Toggle dark mode" tabindex="0">
+        <i class="fas fa-moon"></i>
+      </div>
+      <div class="mobile-toggle" id="menu-btn" aria-label="Toggle menu" role="button">
+        <i class="fas fa-bars"></i>
+      </div>
     </div>
   </div>
 </nav>
 
+<!-- Hero Section -->
 <section class="hero">
   <div class="container">
     <h1>IGO Agri Estate</h1>
@@ -183,6 +445,7 @@
   </div>
 </section>
 
+<!-- Services Section -->
 <section class="section">
   <div class="container">
     <h2 class="section-title">End-to-End Procurement</h2>
@@ -206,11 +469,12 @@
   </div>
 </section>
 
+<!-- Why IGO Agri Estate Section -->
 <section class="section" style="background: var(--bg-alt);">
   <div class="container">
     <div class="info-split">
       <div class="info-image">
-        <img src="assets/agri_estate_hero.png" alt="Land Procurement">
+        <img src="assets/agri_land_procurement_hero.png" alt="Land Procurement" loading="lazy">
       </div>
       <div class="info-content">
         <h2>Why IGO Agri Estate?</h2>
@@ -221,21 +485,165 @@
           <li><i class="fas fa-circle-check"></i> Proximity to Logistics & Power</li>
           <li><i class="fas fa-circle-check"></i> Integrated Boundary Management</li>
         </ul>
-        <a href="portal.html" class="btn btn-gold">Request Land Portfolio <i class="fas fa-arrow-right"></i></a>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<!-- Procurement Request Form -->
+<section class="procurement-form-section">
   <div class="container">
-    <div class="cta-box">
-      <h2>Found Your Land?</h2>
-      <p>Once your land is secured via IGO Agri Estate, our AgriTech team takes over to build and manage your high-yield farm.</p>
-      <a href="agri-projects.html" class="btn btn-gold">Explore Agri Projects <i class="fas fa-tractor"></i></a>
+    <div class="form-container">
+      <div class="form-header">
+        <h2>Start Your Land Procurement</h2>
+        <p>Fill in your requirements and our team will source the perfect agricultural land for you.</p>
+      </div>
+
+      <form id="procurement-form" class="igo-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" name="customerName" required placeholder="Your full name">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="customerPhone" required placeholder="+91 XXXXX XXXXX">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="customerEmail" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="state">State *</label>
+            <select id="state" name="requiredState" required>
+              <option value="">Select State</option>
+              <option value="AP">Andhra Pradesh</option>
+              <option value="TN">Tamil Nadu</option>
+              <option value="KA">Karnataka</option>
+              <option value="MH">Maharashtra</option>
+              <option value="GJ">Gujarat</option>
+              <option value="MP">Madhya Pradesh</option>
+              <option value="RJ">Rajasthan</option>
+              <option value="UP">Uttar Pradesh</option>
+              <option value="PB">Punjab</option>
+              <option value="HR">Haryana</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="district">District</label>
+            <input type="text" id="district" name="requiredDistrict" placeholder="Preferred district">
+          </div>
+          <div class="form-group">
+            <label for="village">Village / Taluka</label>
+            <input type="text" id="village" name="requiredVillage" placeholder="Specific area if any">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="minArea">Minimum Area (Acres)</label>
+            <input type="number" id="minArea" name="minAreaAcres" min="0" step="0.1" placeholder="e.g., 5">
+          </div>
+          <div class="form-group">
+            <label for="maxArea">Maximum Area (Acres)</label>
+            <input type="number" id="maxArea" name="maxAreaAcres" min="0" step="0.1" placeholder="e.g., 50">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="maxBudget">Maximum Budget (₹)</label>
+            <input type="number" id="maxBudget" name="maxBudget" min="0" step="100000" placeholder="e.g., 10000000">
+          </div>
+          <div class="form-group">
+            <label for="intendedUse">Intended Use *</label>
+            <select id="intendedUse" name="intendedUse" required>
+              <option value="">Select Use</option>
+              <option value="cultivation">Cultivation</option>
+              <option value="farmhouse">Farmhouse</option>
+              <option value="plantation">Plantation</option>
+              <option value="livestock">Livestock</option>
+              <option value="mixed">Mixed Use</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Land Type Preference</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="landTypePreference" value="agricultural"> Agricultural</label>
+            <label><input type="checkbox" name="landTypePreference" value="farmhouse"> Farmhouse Plot</label>
+            <label><input type="checkbox" name="landTypePreference" value="plantation"> Plantation</label>
+            <label><input type="checkbox" name="landTypePreference" value="commercial"> Commercial</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Water Source Preference</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="waterSourcePreference" value="well"> Well</label>
+            <label><input type="checkbox" name="waterSourcePreference" value="canal"> Canal</label>
+            <label><input type="checkbox" name="waterSourcePreference" value="borewell"> Borewell</label>
+            <label><input type="checkbox" name="waterSourcePreference" value="river"> River</label>
+            <label><input type="checkbox" name="waterSourcePreference" value="pond"> Pond</label>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="timeline">Purchase Timeline</label>
+            <select id="timeline" name="purchaseTimeline">
+              <option value="">Select Timeline</option>
+              <option value="immediate">Immediate</option>
+              <option value="1-3_months">1-3 Months</option>
+              <option value="3-6_months">3-6 Months</option>
+              <option value="6-12_months">6-12 Months</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="priority">Priority Level</label>
+            <select id="priority" name="priority">
+              <option value="normal">Normal</option>
+              <option value="high">High</option>
+              <option value="urgent">Urgent</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="notes">Additional Requirements</label>
+          <textarea id="notes" name="notes" rows="3" placeholder="Any specific requirements or preferences..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Submit Procurement Request <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
     </div>
   </div>
 </section>
+
+<!-- CTA Section -->
+<section class="section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>Need Help Finding Land?</h2>
+      <p>Our procurement experts will personally scout and shortlist properties matching your exact requirements.</p>
+      <a href="tel:+91XXXXXXXXXX" class="btn btn-gold">Contact Procurement Team <i class="fas fa-phone-alt"></i></a>
+      <p style="margin-top: 20px; font-size: 0.9rem; opacity: 0.7;">
+        Already submitted a request? <a href="portal.html" style="color: var(--gold); font-weight: 700; text-decoration: underline;">Track your application</a>
+      </p>
+    </div>
+  </div>
+</section>
+
 
 <script>
   // Navbar Scroll Effect
@@ -252,27 +660,77 @@
   const menuBtn = document.getElementById('menu-btn');
   const navLinks = document.querySelector('.nav-links');
   
-  menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = menuBtn.querySelector('i');
-    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
-  });
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      const icon = menuBtn.querySelector('i');
+      if (icon) {
+        icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+      }
+      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
+
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        const icon = menuBtn.querySelector('i');
+        if (icon) icon.className = 'fas fa-bars';
+        document.body.style.overflow = '';
+      });
+    });
+  }
+
   // Theme Engine
   const themeToggle = document.getElementById('theme-toggle');
   const body = document.body;
-  const themeIcon = themeToggle.querySelector('i');
   
-  themeToggle.addEventListener('click', () => {
-    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    body.setAttribute('data-theme', next);
-    themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    localStorage.setItem('igo-theme', next);
-  });
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      body.setAttribute('data-theme', next);
+      localStorage.setItem('igo-theme', next);
+      const icon = themeToggle.querySelector('i');
+      if (icon) icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
 
-  // Load Saved Theme
-  const savedTheme = localStorage.getItem('igo-theme') || 'light';
-  body.setAttribute('data-theme', savedTheme);
-  themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    const savedTheme = localStorage.getItem('igo-theme') || 'light';
+    body.setAttribute('data-theme', savedTheme);
+    const icon = themeToggle.querySelector('i');
+    if (icon) icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  }
+
+  // Form Submission
+  document.getElementById('procurement-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Convert checkboxes to arrays
+    const checkboxes = ['landTypePreference', 'waterSourcePreference'];
+    checkboxes.forEach(name => {
+      const values = formData.getAll(name);
+      if (values.length) data[name] = values;
+    });
+
+    try {
+      const res = await fetch('/api/procurement-requests', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+
+      const result = await res.json();
+      if (result.success) {
+        alert('Procurement request submitted successfully! Reference: ' + result.requestId);
+        e.target.reset();
+      } else {
+        alert('Error: ' + result.error);
+      }
+    } catch (err) {
+      alert('Submission failed. Please try again.');
+      console.error(err);
+    }
+  });
 </script>
 
 </body>

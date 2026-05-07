@@ -1,352 +1,442 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master DPR Guide | IGO Loans & Subsidy</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/navbar.css">
-    <style>
-        :root {
-            --primary: #059669;
-            --primary-dark: #022c22;
-            --gold: #c5a059;
-            --gold-light: #e2c35a;
-            --gold-pale: #fdf3d0;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 10px 30px -5px rgba(0,0,0,0.05);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Master DPR Guide — A 5-phase roadmap to successfully securing government subsidies for your agri-project. IGO Loans.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <title>Master DPR Guide | IGO Loans & Subsidy</title>
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); 
-            color: var(--text);
-            line-height: 1.6;
-        }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/navbar.css">
 
+  <style>
+    .hero-solid { padding-top: calc(var(--nav-height) + 80px); }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
-        .logo h1 { font-family: 'Outfit'; font-size: 1.4rem; font-weight: 800; }
+    /* Phase Card */
+    .phase-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      transition: all var(--duration-base) var(--ease-out);
+    }
+    .phase-card:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-lg);
+      transform: translateX(8px);
+    }
+    .phase-num {
+      width: 52px; height: 52px; flex-shrink: 0;
+      border-radius: 50%;
+      background: var(--primary-light);
+      border: 2px solid rgba(5,150,105,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif; font-weight: 900; font-size: 1.1rem;
+      color: var(--primary);
+    }
+    .phase-card:hover .phase-num {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+    }
 
-        .header-section {
-            background: var(--primary-dark);
-            color: #fff;
-            padding: 100px 0;
-            text-align: center;
-        }
+    /* Checklist Cards */
+    .checklist-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px;
+      transition: all var(--duration-fast) var(--ease-out);
+    }
+    .checklist-card:hover { box-shadow: var(--shadow-md); }
+    .checklist-card h4 {
+      font-family: 'Outfit', sans-serif; font-weight: 800; font-size: 1rem;
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
+    }
 
-        .header-section h1 { font-family: 'Outfit'; font-size: 3.5rem; font-weight: 900; margin-bottom: 20px; }
-        .header-section p { font-size: 1.2rem; opacity: 0.8; max-width: 700px; margin: 0 auto; }
+    .check-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: all var(--duration-fast);
+      font-size: 0.9rem; font-weight: 500;
+      user-select: none;
+    }
+    .check-item:last-child { border-bottom: none; }
+    .check-item:hover { color: var(--primary); padding-left: 4px; }
+    .check-item i { color: var(--border); transition: 0.2s; font-size: 1rem; flex-shrink: 0; }
+    .check-item.done i { color: var(--primary); }
+    .check-item.done span { text-decoration: line-through; color: var(--text-muted); }
 
-        .roadmap-container {
-            max-width: 900px;
-            margin: -60px auto 100px;
-            background: #fff;
-            padding: 60px;
-            border-radius: 40px;
-            box-shadow: 0 40px 100px -20px rgba(0,0,0,0.1);
-            position: relative;
-            z-index: 10;
-        }
+    /* Progress counter */
+    .checklist-progress {
+      height: 4px; background: var(--border);
+      border-radius: var(--radius-full); margin-top: 20px; overflow: hidden;
+    }
+    .checklist-progress-fill {
+      height: 100%; background: var(--primary);
+      border-radius: var(--radius-full);
+      transition: width 0.4s var(--ease-spring);
+      width: 0%;
+    }
 
-        .roadmap-item {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 50px;
-            position: relative;
-        }
-
-        .roadmap-item:not(:last-child)::after {
-            content: '';
-            position: absolute;
-            left: 20px;
-            top: 50px;
-            width: 2px;
-            height: calc(100% - 10px);
-            background: var(--border);
-        }
-
-        .phase-number {
-            width: 40px;
-            height: 40px;
-            background: var(--primary);
-            color: #fff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            flex-shrink: 0;
-            z-index: 2;
-        }
-
-        .phase-content h3 { font-family: 'Outfit'; font-size: 1.6rem; margin-bottom: 10px; }
-        .phase-content p { color: var(--text-muted); margin-bottom: 20px; }
-
-        .checklist-section {
-            background: #fff;
-            padding: 80px 0;
-            margin-bottom: 80px;
-        }
-
-        .checklist-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .checklist-card {
-            background: var(--bg);
-            padding: 30px;
-            border-radius: 24px;
-            transition: 0.3s;
-        }
-
-        .checklist-card:hover { transform: translateY(-5px); background: #fdfdfd; box-shadow: var(--shadow); }
-
-        .checklist-card h4 { font-family: 'Outfit'; margin-bottom: 20px; color: var(--primary-dark); }
-
-        .check-item {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 12px;
-            font-size: 0.9rem;
-            cursor: pointer;
-        }
-
-        .check-item i { color: var(--border); transition: 0.3s; }
-        .check-item.active i { color: var(--primary); }
-        .check-item.active span { text-decoration: line-through; opacity: 0.5; }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            padding: 18px 36px;
-            border-radius: 100px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-            font-family: 'Outfit';
-            text-decoration: none;
-        }
-
-        .btn-primary { background: var(--primary); color: #fff; }
-
-        @media (max-width: 768px) {
-            .roadmap-container { padding: 30px; margin-top: -30px; }
-            .header-section h1 { font-size: 2.5rem; }
-        }
-    </style>
+    @media (max-width: 640px) {
+      .phase-card { flex-direction: column; gap: 18px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="navbar" id="main-nav">
-  <div class="navbar-container">
-    <a href="index.html" class="logo-wrap">
-      <div class="logo-img-box">
-        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
-      </div>
-      <div class="logo-text">
-        <span class="brand">IGO LOANS</span>
-        <span class="tagline">The Sovereign Ecosystem</span>
-      </div>
-    </a>
-    
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="procurement.html">Procurement</a></li>
-      <li><a href="agri-projects.html">Agri Projects</a></li>
-      <li><a href="farm-loan-form.html">Loans</a></li>
-      <li><a href="subsidies.html">Subsidy</a></li>
-      <li><a href="dpr-guide.html">DPR Guide</a></li>
-      
-    </ul>
+  <div class="scroll-progress"></div>
 
-    <div class="nav-cta-group">
-      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
-      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
-      
+  <!-- NAVBAR -->
+  <nav class="navbar" id="main-nav">
+    <div class="navbar-container">
+      <a href="index.html" class="logo-wrap">
+        <div class="logo-img-box">
+          <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" loading="lazy">
+        </div>
+        <div class="logo-text">
+          <span class="brand">IGO LOANS</span>
+          <span class="tagline">The Sovereign Ecosystem</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="agri-projects.html">Projects</a></li>
+        <li><a href="farm-loan-form.html">Farm Loans</a></li>
+        <li><a href="subsidies.html">Subsidies</a></li>
+        <li><a href="subsidy-calculator.html">Calculator</a></li>
+        <li><a href="dpr-guide.html" class="active">DPR Guide</a></li>
+      </ul>
+      <div class="nav-cta-group">
+        <a href="farm-loan-form.html" class="nav-btn nav-btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+        <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Toggle dark mode" tabindex="0"><i class="fas fa-moon"></i></div>
+        <div class="mobile-toggle" id="menu-btn" role="button"><i class="fas fa-bars"></i></div>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
 
-<script>
-  // Navbar Scroll Effect
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('main-nav');
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
+  <!-- HERO -->
+  <section class="hero-solid">
+    <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(5,150,105,0.2), transparent 60%); pointer-events:none; z-index:1;"></div>
+    <div class="container" style="position:relative; z-index:2; text-align:center;">
+      <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25); margin:0 auto 20px;">
+        <i class="fas fa-file-lines"></i> Subsidy Claim Roadmap
+      </div>
+      <h1 class="section-title xl reveal" style="color:#fff; margin-bottom:20px;">Master <span class="text-gradient-gold">DPR Guide</span></h1>
+      <p style="color:rgba(255,255,255,0.65); font-size:1.1rem; max-width:680px; margin:0 auto; line-height:1.7; font-weight:500;" class="reveal delay-1">
+        A technical guide to the 5-phase journey from project planning to successful government subsidy credit. Follow each phase to maximize your chances of approval.
+      </p>
+    </div>
+  </section>
+
+  <!-- PHASE ROADMAP -->
+  <section class="section" style="background:var(--bg-alt);">
+    <div class="container-md">
+
+      <div class="section-header" style="margin-bottom:48px;">
+        <div class="section-label"><i class="fas fa-map-signs"></i> The 5-Phase Journey</div>
+        <h2 class="section-title lg reveal">DPR to Subsidy <span class="text-gradient-green">Roadmap</span></h2>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:20px;">
+
+        <div class="phase-card reveal">
+          <div class="phase-num">1</div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+              <h3 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.2rem;">Planning & Feasibility</h3>
+              <span class="badge badge-green">Week 1–2</span>
+            </div>
+            <p style="color:var(--text-muted); line-height:1.7; font-size:0.95rem;">
+              Site selection, soil/water testing, and determining project scope for Polyhouse, Livestock, or Solar. Initial consultation with IGO experts to select the optimal funding combination.
+            </p>
+          </div>
+        </div>
+
+        <div class="phase-card reveal delay-1">
+          <div class="phase-num">2</div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+              <h3 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.2rem;">Technical Documentation</h3>
+              <span class="badge badge-green">Week 2–4</span>
+            </div>
+            <p style="color:var(--text-muted); line-height:1.7; font-size:0.95rem;">
+              Generation of the 45-page Detailed Project Report (DPR), architectural layouts, and cost estimates aligned with NHB/MIDH guidelines. This document is the backbone of your application.
+            </p>
+          </div>
+        </div>
+
+        <div class="phase-card reveal delay-2" style="border-color:rgba(197,160,89,0.4); background:rgba(197,160,89,0.04);">
+          <div class="phase-num" style="background:var(--gold-pale); border-color:var(--gold); color:var(--gold-dark);">3</div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+              <h3 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.2rem;">Bank & LOI Approval</h3>
+              <span class="badge badge-gold">Critical Step</span>
+              <span class="badge badge-green">Week 4–8</span>
+            </div>
+            <p style="color:var(--text-muted); line-height:1.7; font-size:0.95rem;">
+              Submission to bank for term loan and obtaining the critical "Letter of Intent" (LOI) from National Horticulture Board (NHB) <strong>before construction starts</strong>. This step is mandatory — construction before LOI forfeits the subsidy.
+            </p>
+          </div>
+        </div>
+
+        <div class="phase-card reveal delay-3">
+          <div class="phase-num">4</div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+              <h3 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.2rem;">Construction & Execution</h3>
+              <span class="badge badge-green">Month 2–6</span>
+            </div>
+            <p style="color:var(--text-muted); line-height:1.7; font-size:0.95rem;">
+              Implementation of the project as per approved specifications. Concurrent application for PM-KUSUM (Solar) and PMFBY (Crop Insurance). Progress photos must be maintained throughout.
+            </p>
+          </div>
+        </div>
+
+        <div class="phase-card reveal delay-4">
+          <div class="phase-num">5</div>
+          <div style="flex:1;">
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:12px; flex-wrap:wrap;">
+              <h3 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.2rem;">Joint Inspection & Credit</h3>
+              <span class="badge badge-green">Month 6–8</span>
+            </div>
+            <p style="color:var(--text-muted); line-height:1.7; font-size:0.95rem;">
+              Joint site inspection by NHB/MIDH/Bank officials. Submission of completion certificate and verification of compliance. Subsidy is directly credited to the bank loan account within 30–60 days.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center; margin-top:48px;" class="reveal">
+        <a href="portal.html" class="btn btn-primary btn-lg">Start Your Phase 1 Now <i class="fas fa-rocket"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DOCUMENT CHECKLIST -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-label"><i class="fas fa-list-check"></i> Document Tracker</div>
+        <h2 class="section-title lg reveal">Mandatory Document <span class="text-gradient-green">Checklist</span></h2>
+        <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Interactive readiness tracker — click to mark items complete. Progress is saved locally.</p>
+      </div>
+
+      <div id="totalProgress" style="max-width:600px; margin:0 auto 52px; text-align:center;">
+        <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.1rem; margin-bottom:12px; color:var(--text);">
+          Overall Readiness: <span id="readinessLabel" style="color:var(--primary);">0%</span>
+        </div>
+        <div style="height:8px; background:var(--border); border-radius:var(--radius-full); overflow:hidden;">
+          <div id="readinessFill" style="height:100%; background:linear-gradient(90deg,var(--primary),var(--gold)); border-radius:var(--radius-full); transition:width 0.5s var(--ease-spring); width:0%;"></div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:24px;">
+
+        <div class="checklist-card">
+          <h4 style="color:var(--primary);"><i class="fas fa-user-shield"></i> KYC Documents</h4>
+          <div class="check-item" data-key="kyc1" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Aadhaar Card (Original Scan)</span></div>
+          <div class="check-item" data-key="kyc2" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>PAN Card</span></div>
+          <div class="check-item" data-key="kyc3" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Passport Photos (3 Copies)</span></div>
+          <div class="check-item" data-key="kyc4" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Farmer Registration Certificate</span></div>
+          <div class="checklist-progress"><div class="checklist-progress-fill"></div></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4 style="color:var(--primary);"><i class="fas fa-map-location-dot"></i> Land Documents</h4>
+          <div class="check-item" data-key="land1" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Patta / Ownership Proof</span></div>
+          <div class="check-item" data-key="land2" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Chitta & Adangal</span></div>
+          <div class="check-item" data-key="land3" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>FMB Sketch Map</span></div>
+          <div class="check-item" data-key="land4" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Survey Number Certificate</span></div>
+          <div class="checklist-progress"><div class="checklist-progress-fill"></div></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4 style="color:var(--primary);"><i class="fas fa-building-columns"></i> Bank & Financials</h4>
+          <div class="check-item" data-key="bank1" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Bank Passbook (1st Page)</span></div>
+          <div class="check-item" data-key="bank2" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>6-Month Bank Statement</span></div>
+          <div class="check-item" data-key="bank3" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>CIBIL Score Report (750+)</span></div>
+          <div class="check-item" data-key="bank4" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Income Tax Returns (2 years)</span></div>
+          <div class="checklist-progress"><div class="checklist-progress-fill"></div></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4 style="color:var(--primary);"><i class="fas fa-file-invoice"></i> Technical Documents</h4>
+          <div class="check-item" data-key="tech1" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Detailed Project Report (DPR)</span></div>
+          <div class="check-item" data-key="tech2" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Soil Test Report (Latest)</span></div>
+          <div class="check-item" data-key="tech3" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Water Test Report</span></div>
+          <div class="check-item" data-key="tech4" onclick="toggleCheck(this)"><i class="far fa-square"></i><span>Architect Layout Plan</span></div>
+          <div class="checklist-progress"><div class="checklist-progress-fill"></div></div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AUTHORITY CONTACTS -->
+  <section class="section" style="background:var(--primary-dark); position:relative; overflow:hidden;">
+    <div style="position:absolute; bottom:-80px; right:-80px; font-family:'Outfit',sans-serif; font-size:20rem; font-weight:900; color:rgba(255,255,255,0.02); pointer-events:none; line-height:1;">IGO</div>
+    <div class="container" style="position:relative; z-index:1;">
+      <div class="section-header">
+        <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25);">
+          <i class="fas fa-phone"></i> Escalation Matrix
+        </div>
+        <h2 class="section-title lg reveal" style="color:#fff; text-align:center;">Direct Authority <span class="text-gradient-gold">Contacts</span></h2>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:24px;">
+
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius-lg); padding:32px;" class="reveal">
+          <div class="footer-heading">Central Authorities</div>
+          <div style="display:flex; flex-direction:column; gap:14px; margin-top:4px;">
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">NHB HQ:</strong> 0124-2342992</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">AIF Helpline:</strong> 1800-200-8700</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">PM-KUSUM:</strong> 1800-180-3333</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">NABARD:</strong> 022-26539895</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius-lg); padding:32px;" class="reveal delay-1">
+          <div class="footer-heading">Tamil Nadu State</div>
+          <div style="display:flex; flex-direction:column; gap:14px; margin-top:4px;">
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">TN Horticulture:</strong> 044-24310512</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">TN Agriculture:</strong> 044-24311351</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">TN NABARD:</strong> 044-25219150</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:#fff;">MIDH Office:</strong> 044-24333434</div>
+          </div>
+        </div>
+
+        <div style="background:rgba(197,160,89,0.08); border:1px solid rgba(197,160,89,0.2); border-radius:var(--radius-lg); padding:32px;" class="reveal delay-2">
+          <div class="footer-heading">IGO Priority Support</div>
+          <div style="display:flex; flex-direction:column; gap:14px; margin-top:4px;">
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:var(--gold);">Email:</strong> igoagritechfarms@gmail.com</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:var(--gold);">Phone:</strong> +91-7397789803</div>
+            <div style="font-size:0.875rem; color:rgba(255,255,255,0.65);"><strong style="color:var(--gold);">Office:</strong> Madipakkam, Chennai</div>
+            <div style="margin-top:16px;">
+              <a href="portal.html" class="btn btn-gold btn-sm w-full" style="justify-content:center;">Get Expert Help <i class="fas fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" class="footer-logo-img" loading="lazy">
+            <div class="footer-logo-text">
+              <span class="brand">IGO LOANS</span>
+              <span class="tagline">The Sovereign Ecosystem</span>
+            </div>
+          </div>
+          <p>India's institutional-grade agri-fintech consultancy. Building the future of agricultural finance.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Quick Links</div>
+          <div class="footer-links">
+            <a href="index.html"><i class="fas fa-chevron-right"></i> Home</a>
+            <a href="farm-loan-form.html"><i class="fas fa-chevron-right"></i> Apply for Loan</a>
+            <a href="subsidies.html"><i class="fas fa-chevron-right"></i> Subsidy Hub</a>
+            <a href="subsidy-calculator.html"><i class="fas fa-chevron-right"></i> Calculator</a>
+            <a href="portal.html"><i class="fas fa-chevron-right"></i> Service Portal</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">DPR Services</div>
+          <div class="footer-links">
+            <a href="#"><i class="fas fa-chevron-right"></i> Polyhouse DPR</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Aquaculture DPR</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Livestock DPR</a>
+            <a href="#"><i class="fas fa-chevron-right"></i> Solar Farm DPR</a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-heading">Contact</div>
+          <div class="footer-contact-item"><i class="fas fa-phone"></i> +91 73977 89803</div>
+          <div class="footer-contact-item"><i class="fas fa-envelope"></i> igoagritechfarms@gmail.com</div>
+          <div class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> Madipakkam, Chennai</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 IGO Loans & Subsidy. All rights reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="privacy-policy.html">Privacy</a>
+          <a href="terms-of-service.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="assets/app.js"></script>
+  <script>
+    const TOTAL_ITEMS = document.querySelectorAll('.check-item').length;
+
+    function getCompleted() {
+      return document.querySelectorAll('.check-item.done').length;
     }
-  });
 
-  // Mobile Menu Logic
-  const menuBtn = document.getElementById('menu-btn');
-  const navLinks = document.querySelector('.nav-links');
-  
-  menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = menuBtn.querySelector('i');
-    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
-  });
+    function updateOverall() {
+      const pct = Math.round(getCompleted() / TOTAL_ITEMS * 100);
+      document.getElementById('readinessLabel').textContent = pct + '%';
+      document.getElementById('readinessFill').style.width = pct + '%';
+    }
 
-  // Close menu when clicking a link
-  document.querySelectorAll('.nav-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      navLinks.classList.remove('active');
-      menuBtn.querySelector('i').className = 'fas fa-bars';
-    });
-  });
-</script>
+    function updateCardProgress(item) {
+      const card = item.closest('.checklist-card');
+      const items = card.querySelectorAll('.check-item');
+      const done = card.querySelectorAll('.check-item.done').length;
+      const fill = card.querySelector('.checklist-progress-fill');
+      if (fill) fill.style.width = (done / items.length * 100) + '%';
+    }
 
-<header class="header-section">
-    <div class="container">
-        <h1>Subsidy Claim Roadmap</h1>
-        <p>A technical guide to the 5-phase journey from project planning to successful government subsidy credit.</p>
-    </div>
-</header>
-
-<div class="container">
-    <div class="roadmap-container">
-        <div class="roadmap-item">
-            <div class="phase-number">1</div>
-            <div class="phase-content">
-                <h3>Planning & Feasibility</h3>
-                <p>Site selection, soil/water testing, and determining project scope for Polyhouse, Livestock, or Solar. Initial consultation with IGO experts.</p>
-            </div>
-        </div>
-        <div class="roadmap-item">
-            <div class="phase-number">2</div>
-            <div class="phase-content">
-                <h3>Technical Documentation</h3>
-                <p>Generation of the 45-page Detailed Project Report (DPR), architectural layouts, and cost estimates aligned with NHB/MIDH guidelines.</p>
-            </div>
-        </div>
-        <div class="roadmap-item">
-            <div class="phase-number">3</div>
-            <div class="phase-content">
-                <h3>Bank & LOI Approval</h3>
-                <p>Submission to bank for term loan and obtaining the critical "Letter of Intent" (LOI) from National Horticulture Board (NHB) before construction starts.</p>
-            </div>
-        </div>
-        <div class="roadmap-item">
-            <div class="phase-number">4</div>
-            <div class="phase-content">
-                <h3>Construction & Execution</h3>
-                <p>Implementation of the project as per approved specifications. Concurrent application for PM-KUSUM (Solar) and PMFBY (Insurance).</p>
-            </div>
-        </div>
-        <div class="roadmap-item">
-            <div class="phase-number">5</div>
-            <div class="phase-content">
-                <h3>Joint Inspection & Credit</h3>
-                <p>Joint site inspection by NHB/MIDH/Bank. Submission of completion certificate and direct subsidy credit to the bank loan account.</p>
-            </div>
-        </div>
-
-        <div style="text-align: center; margin-top: 20px;">
-            <a href="portal.html" class="btn btn-primary">Start Your Phase 1 Now <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </div>
-</div>
-
-<section class="checklist-section">
-    <div class="container">
-        <div style="text-align: center; margin-bottom: 60px;">
-            <h2 style="font-family: 'Outfit'; font-size: 2.5rem; font-weight: 800;">Mandatory Document Checklist</h2>
-            <p style="color: var(--text-muted);">Interactive readiness tracker for your subsidy application.</p>
-        </div>
-
-        <div class="checklist-grid">
-            <div class="checklist-card">
-                <h4><i class="fas fa-user-shield"></i> KYC Documents</h4>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Aadhaar Card (Original Scan)</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>PAN Card</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Passport Photos (3 Copies)</span></div>
-            </div>
-            <div class="checklist-card">
-                <h4><i class="fas fa-map-location-dot"></i> Land Documents</h4>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Patta / Ownership Proof</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Chitta & Adangal</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>FMB Sketch Map</span></div>
-            </div>
-            <div class="checklist-card">
-                <h4><i class="fas fa-building-columns"></i> Bank & Financials</h4>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Bank Passbook (1st Page)</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>6-Month Bank Statement</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>CIBIL Score Report</span></div>
-            </div>
-            <div class="checklist-card">
-                <h4><i class="fas fa-file-invoice"></i> Technical Docs</h4>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Detailed Project Report (DPR)</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Soil Test Report (Latest)</span></div>
-                <div class="check-item" onclick="toggleCheck(this)"><i class="far fa-square"></i> <span>Water Test Report</span></div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="container" style="margin-bottom: 100px;">
-    <div style="background: var(--primary-dark); color: #fff; padding: 60px; border-radius: 40px; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 2;">
-            <span class="section-tag" style="background: rgba(255,255,255,0.1); color: var(--gold-light);">ESCALATION MATRIX</span>
-            <h2 style="font-family: 'Outfit'; font-size: 2.5rem; font-weight: 800; margin-bottom: 30px;">Direct Authority Contacts</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
-                <div>
-                    <h4 style="color: var(--gold); margin-bottom: 15px;">Central Authorities</h4>
-                    <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px; opacity: 0.8;">
-                        <li><strong>NHB HQ:</strong> 0124-2342992</li>
-                        <li><strong>AIF Helpline:</strong> 1800-200-8700</li>
-                        <li><strong>PM-KUSUM:</strong> 1800-180-3333</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: var(--gold); margin-bottom: 15px;">Tamil Nadu State</h4>
-                    <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px; opacity: 0.8;">
-                        <li><strong>TN Horticulture:</strong> 044-24310512</li>
-                        <li><strong>TN Agriculture:</strong> 044-24311351</li>
-                        <li><strong>TN NABARD:</strong> 044-25219150</li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 style="color: var(--gold); margin-bottom: 15px;">IGO Priority Support</h4>
-                    <ul style="list-style: none; font-size: 0.9rem; display: flex; flex-direction: column; gap: 10px; opacity: 0.8;">
-                        <li><strong>Email:</strong> igoagritechfarms@gmail.com</li>
-                        <li><strong>Phone:</strong> +91-7397789803</li>
-                        <li><strong>Office:</strong> Madipakkam, Chennai</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div style="position: absolute; right: -50px; bottom: -50px; font-size: 15rem; color: rgba(255,255,255,0.03); font-weight: 900; pointer-events: none;">IGO</div>
-    </div>
-</section>
-
-<script>
     function toggleCheck(el) {
-        el.classList.toggle('active');
-        const icon = el.querySelector('i');
-        if (el.classList.contains('active')) {
-            icon.className = 'fas fa-check-square';
-        } else {
-            icon.className = 'far fa-square';
-        }
+      const key = el.dataset.key;
+      el.classList.toggle('done');
+      const icon = el.querySelector('i');
+      icon.className = el.classList.contains('done') ? 'fas fa-check-square' : 'far fa-square';
+      localStorage.setItem('dpr_' + key, el.classList.contains('done') ? '1' : '0');
+      updateCardProgress(el);
+      updateOverall();
     }
-</script>
+
+    // Restore saved state
+    document.querySelectorAll('.check-item').forEach(el => {
+      if (localStorage.getItem('dpr_' + el.dataset.key) === '1') {
+        el.classList.add('done');
+        el.querySelector('i').className = 'fas fa-check-square';
+      }
+    });
+
+    // Init progress
+    document.querySelectorAll('.checklist-card').forEach(card => {
+      const items = card.querySelectorAll('.check-item');
+      const done = card.querySelectorAll('.check-item.done').length;
+      const fill = card.querySelector('.checklist-progress-fill');
+      if (fill) fill.style.width = (done / items.length * 100) + '%';
+    });
+    updateOverall();
+  </script>
 
 </body>
 </html>

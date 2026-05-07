@@ -1,151 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Terms of Service — IGO Loans & Subsidy. Read our terms and conditions for using our consultancy services.">
+  <link rel="icon" type="image/png" href="assets/logo.png">
   <title>Terms of Service | IGO Loans & Subsidy</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Outfit:wght@700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/navbar.css">
   <style>
-    :root {
-      --primary: #059669;
-      --primary-dark: #022c22;
-      --gold: #c5a059;
-      --bg: #ffffff;
-      --text: #0f172a;
-      --text-muted: #64748b;
-      --border: rgba(0,0,0,0.1);
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.8;
-    }
-    .container { max-width: 900px; margin: 0 auto; padding: 0 40px; }
-    header {
-      background: var(--primary-dark);
-      color: #fff;
-      padding: 60px 0;
-      text-align: center;
-      margin-bottom: 60px;
-    }
-    h1 { font-family: 'Outfit'; font-size: 3rem; margin-bottom: 10px; }
-    h2 { font-family: 'Outfit'; font-size: 1.8rem; margin: 40px 0 20px; color: var(--primary); }
-    p { margin-bottom: 20px; color: #475569; }
-    ul { margin-bottom: 20px; padding-left: 20px; color: #475569; }
-    li { margin-bottom: 10px; }
-    footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 80px; }
+    .hero-solid { padding-top: calc(var(--nav-height) + 72px); padding-bottom: 72px; }
+    .legal-body { max-width: 840px; margin: 60px auto 100px; padding: 0 24px; }
+    .legal-section { margin-bottom: 48px; }
+    .legal-h2 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-light); display: flex; align-items: center; gap: 10px; }
+    .legal-p { color: var(--text-muted); line-height: 1.85; font-size: 0.975rem; margin-bottom: 16px; }
+    .legal-ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .legal-ul li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
+    .legal-ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 9px; }
   </style>
 </head>
 <body>
-<!-- Navbar -->
-<nav class="navbar" id="main-nav">
-  <div class="container">
-    <a href="index.html" class="logo-wrap">
-      <div class="logo-img-box">
-        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
+  <div class="scroll-progress"></div>
+  <nav class="navbar" id="main-nav">
+    <div class="navbar-container">
+      <a href="index.html" class="logo-wrap">
+        <div class="logo-img-box"><img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" loading="lazy"></div>
+        <div class="logo-text"><span class="brand">IGO LOANS</span><span class="tagline">The Sovereign Ecosystem</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="farm-loan-form.html">Farm Loans</a></li>
+        <li><a href="subsidies.html">Subsidies</a></li>
+        <li><a href="dpr-guide.html">DPR Guide</a></li>
+        <li><a href="portal.html">Portal</a></li>
+      </ul>
+      <div class="nav-cta-group">
+        <div id="theme-toggle" class="theme-toggle" role="button" tabindex="0"><i class="fas fa-moon"></i></div>
+        <div class="mobile-toggle" id="menu-btn" role="button"><i class="fas fa-bars"></i></div>
       </div>
-      <div class="logo-text">
-        <span class="brand">IGO LOANS</span>
-        <span class="tagline">The Sovereign Ecosystem</span>
+    </div>
+  </nav>
+  <section class="hero-solid">
+    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(5,150,105,0.15),transparent 60%);pointer-events:none;z-index:1;"></div>
+    <div class="container" style="position:relative;z-index:2;text-align:center;">
+      <div class="section-label" style="background:rgba(197,160,89,0.12);color:var(--gold);border-color:rgba(197,160,89,0.25);margin:0 auto 20px;"><i class="fas fa-file-contract"></i> Legal & Compliance</div>
+      <h1 class="section-title lg" style="color:#fff;margin-bottom:14px;">Terms of Service</h1>
+      <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;font-weight:600;">Effective Date: May 2026 · IGO Loans & Subsidy</p>
+    </div>
+  </section>
+  <main class="legal-body">
+    <div class="notice notice-gold" style="margin-bottom:40px;"><i class="fas fa-triangle-exclamation"></i><span>Welcome to <strong>IGO Loans & Subsidy</strong>. By accessing our website or using our consultancy services, you agree to comply with and be bound by the following terms and conditions.</span></div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-briefcase"></i> 1. Nature of Services</h2>
+      <p class="legal-p">IGO Loans & Subsidy provides financial consultancy, project report preparation, and government subsidy facilitation services. <strong>We are a consultancy firm and NOT a bank, NBFC, or direct lender.</strong> We do not provide loans directly; we assist you in securing funding from established financial institutions and government agencies.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-exclamation-triangle"></i> 2. No Guarantee of Approval</h2>
+      <p class="legal-p">While we provide expert guidance and ensure your application is technically robust, the final approval of any loan or subsidy rests solely with the respective bank, financial institution, or government department. IGO Loans & Subsidy does not guarantee the successful outcome of any application.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-user-shield"></i> 3. User Responsibilities</h2>
+      <ul class="legal-ul">
+        <li>All information and documents provided by you are true, accurate, and complete.</li>
+        <li>You will not misrepresent your financial standing or business operations.</li>
+        <li>You will provide timely cooperation during the application and project report preparation process.</li>
+      </ul>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-receipt"></i> 4. Consultancy Fees</h2>
+      <p class="legal-p">Our services are subject to professional consultancy fees. These fees are for our expertise, time, and efforts in project preparation and facilitation. Fee structures will be explicitly communicated and agreed upon before the commencement of services. Fees paid for completed work or project reports are non-refundable.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-copyright"></i> 5. Intellectual Property</h2>
+      <p class="legal-p">The content, project report templates, and proprietary methodologies used by IGO Loans & Subsidy are the intellectual property of IGO Group. You are granted a limited license to use the specific project reports prepared for you for their intended purpose only.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-scale-balanced"></i> 6. Limitation of Liability</h2>
+      <p class="legal-p">IGO Loans & Subsidy shall not be liable for any indirect, incidental, or consequential damages arising from the rejection of a loan application by a bank or a subsidy claim by a government department. Our liability is limited to the professional fees paid for the specific service in question.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-handshake"></i> 7. Indemnification</h2>
+      <p class="legal-p">You agree to indemnify and hold IGO Loans & Subsidy harmless from any claims, losses, or legal actions resulting from the submission of forged, fraudulent, or inaccurate documents provided by you.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-gavel"></i> 8. Governing Law</h2>
+      <p class="legal-p">These terms and conditions are governed by and construed in accordance with the laws of India. Any disputes arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts in New Delhi, India.</p>
+    </div>
+    <div class="legal-section">
+      <h2 class="legal-h2"><i class="fas fa-ban"></i> 9. Termination</h2>
+      <p class="legal-p">We reserve the right to terminate our services if we discover any breach of these terms, including the submission of fraudulent information or non-payment of agreed consultancy fees.</p>
+    </div>
+    <div style="background:var(--primary-dark);border-radius:var(--radius-xl);padding:40px;margin-top:48px;">
+      <h3 style="font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:800;color:var(--gold);margin-bottom:16px;"><i class="fas fa-envelope"></i> 10. Contact Us</h3>
+      <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.75;margin-bottom:20px;">If you have any questions regarding these Terms of Service, please contact us:</p>
+      <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;display:flex;flex-direction:column;gap:10px;">
+        <div><i class="fas fa-envelope" style="color:var(--gold);margin-right:10px;"></i><a href="mailto:legal@igoloans.in" style="color:var(--gold);">legal@igoloans.in</a></div>
+        <div><i class="fas fa-map-marker-alt" style="color:var(--gold);margin-right:10px;"></i>Plot #42, Agri-Fintech Hub, Delhi NCR, India</div>
       </div>
-    </a>
-    
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="procurement.html">Procurement</a></li>
-      <li><a href="agri-projects.html">Agri Projects</a></li>
-      <li><a href="farm-loan-form.html">Loans</a></li>
-      <li><a href="subsidies.html">Subsidy</a></li>
-      <li><a href="dpr-guide.html">DPR Guide</a></li>
-      
-    </ul>
-
-    <div class="nav-cta-group">
-      <div id="theme-toggle" class="theme-toggle" style="cursor: pointer; padding: 10px; font-size: 1.1rem;"><i class="fas fa-moon"></i></div>
-      <div class="mobile-toggle" id="menu-btn"><i class="fas fa-bars"></i></div>
-      
     </div>
-  </div>
-</nav>
-
-<script>
-  // Navbar Scroll Effect
-  window.addEventListener('scroll', () => {
-    const nav = document.getElementById('main-nav');
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  });
-
-  // Mobile Menu Logic
-  const menuBtn = document.getElementById('menu-btn');
-  const navLinks = document.querySelector('.nav-links');
-  
-  menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    const icon = menuBtn.querySelector('i');
-    icon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
-  });
-</script>
-  
-  <header>
-    <div class="container">
-      <h1>Terms of Service</h1>
-      <p style="color: rgba(255,255,255,0.7);">Effective Date: May 2026</p>
-    </div>
-  </header>
-
-  <main class="container">
-    <p>Welcome to <strong>IGO Loans & Subsidy</strong>. By accessing our website or using our consultancy services, you agree to comply with and be bound by the following terms and conditions of use.</p>
-
-    <h2>1. Nature of Services</h2>
-    <p>IGO Loans & Subsidy provides financial consultancy, project report preparation, and government subsidy facilitation services. <strong>We are a consultancy firm and NOT a bank, NBFC, or direct lender.</strong> We do not provide loans directly; we assist you in securing funding from established financial institutions and government agencies.</p>
-
-    <h2>2. No Guarantee of Approval</h2>
-    <p>While we provide expert guidance and ensure your application is technically robust, the final approval of any loan or subsidy rests solely with the respective bank, financial institution, or government department. IGO Loans & Subsidy does not guarantee the successful outcome of any application.</p>
-
-    <h2>3. User Responsibilities</h2>
-    <p>By using our services, you represent and warrant that:</p>
-    <ul>
-      <li>All information and documents provided by you are true, accurate, and complete.</li>
-      <li>You will not misrepresent your financial standing or business operations.</li>
-      <li>You will provide timely cooperation during the application and project report preparation process.</li>
-    </ul>
-
-    <h2>4. Consultancy Fees</h2>
-    <p>Our services are subject to professional consultancy fees. These fees are for our expertise, time, and efforts in project preparation and facilitation. Fee structures will be explicitly communicated and agreed upon before the commencement of services. Fees paid for completed work or project reports are non-refundable.</p>
-
-    <h2>5. Intellectual Property</h2>
-    <p>The content, project report templates, and proprietary methodologies used by IGO Loans & Subsidy are the intellectual property of IGO Group. You are granted a limited license to use the specific project reports prepared for you for their intended purpose only.</p>
-
-    <h2>6. Limitation of Liability</h2>
-    <p>IGO Loans & Subsidy shall not be liable for any indirect, incidental, or consequential damages arising from the rejection of a loan application by a bank or a subsidy claim by a government department. Our liability is limited to the professional fees paid for the specific service in question.</p>
-
-    <h2>7. Indemnification</h2>
-    <p>You agree to indemnify and hold IGO Loans & Subsidy harmless from any claims, losses, or legal actions resulting from the submission of forged, fraudulent, or inaccurate documents provided by you.</p>
-
-    <h2>8. Governing Law</h2>
-    <p>These terms and conditions are governed by and construed in accordance with the laws of India. Any disputes arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts in New Delhi, India.</p>
-
-    <h2>9. Termination</h2>
-    <p>We reserve the right to terminate our services if we discover any breach of these terms, including the submission of fraudulent information or non-payment of agreed consultancy fees.</p>
-
-    <h2>10. Contact Us</h2>
-    <p>If you have any questions regarding these Terms of Service, please contact us at legal@igoloans.in.</p>
   </main>
-
-  <footer>
+  <footer class="site-footer">
     <div class="container">
-      <p>&copy; 2026 IGO LOANS & SUBSIDY. All Rights Reserved.</p>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" class="footer-logo-img" loading="lazy">
+            <div class="footer-logo-text"><span class="brand">IGO LOANS</span><span class="tagline">The Sovereign Ecosystem</span></div>
+          </div>
+          <p>India's institutional-grade agri-fintech consultancy.</p>
+        </div>
+        <div><div class="footer-heading">Services</div><div class="footer-links"><a href="farm-loan-form.html"><i class="fas fa-chevron-right"></i> Farm Loans</a><a href="subsidies.html"><i class="fas fa-chevron-right"></i> Subsidies</a><a href="dpr-guide.html"><i class="fas fa-chevron-right"></i> DPR Guide</a></div></div>
+        <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="privacy-policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a><a href="terms-of-service.html"><i class="fas fa-chevron-right"></i> Terms of Service</a></div></div>
+        <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><i class="fas fa-envelope"></i> legal@igoloans.in</div></div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2026 IGO Loans & Subsidy. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div></div>
     </div>
   </footer>
+  <script src="assets/app.js"></script>
 </body>
 </html>
