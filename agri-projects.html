@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@700;800;900&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preload" as="image" href="agri_projects_hero_bg_dark_1778137368087.avif" type="image/avif">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/navbar.css">
 
   <style>
@@ -40,16 +43,16 @@
       line-height: 1.6;
       position: relative;
     }
-    body::after {
-      content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: url('https://grainy-gradients.vercel.app/noise.svg');
-      opacity: 0.03; pointer-events: none; z-index: 9999;
-    }
+    
 
     /* Hero Masterpiece */
     .hero-projects {
       padding: 180px 0 100px; position: relative; min-height: 80vh;
-      background: url('agri_projects_hero_bg_dark_1778137368087.png') no-repeat center center;
+      background-image: image-set(
+        url('agri_projects_hero_bg_dark_1778137368087.avif') type('image/avif'),
+        url('agri_projects_hero_bg_dark_1778137368087.png') type('image/png')
+      );
+      background-repeat: no-repeat; background-position: center; background-size: cover;
       background-size: cover;
       display: flex;
       align-items: center;
@@ -231,7 +234,7 @@
   <div class="navbar-container">
     <a href="index.html" class="logo-wrap">
       <div class="logo-img-box">
-        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo">
+        <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo" width="46" height="46" loading="eager">
       </div>
       <div class="logo-text">
         <span class="brand">IGO LOANS</span>
@@ -283,7 +286,7 @@
     <div class="discipline-grid">
       <!-- Land -->
       <div class="discipline-card hover-lift reveal-on-scroll">
-        <div class="discipline-img" style="background-image: url('agri_land_procurement_hero_1778132897958.png');"></div>
+        <div class="discipline-img" style="background-image: image-set(url('agri_land_procurement_hero_1778132897958.avif') type('image/avif'), url('agri_land_procurement_hero_1778132897958.png') type('image/png'));"></div>
         <div class="discipline-content">
           <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 01</div>
           <h3>Land & Legal</h3>
@@ -294,7 +297,7 @@
 
       <!-- Agri -->
       <div class="discipline-card hover-lift reveal-on-scroll">
-        <div class="discipline-img" style="background-image: url('agri_farming_projects_hero_1778132919368.png');"></div>
+        <div class="discipline-img" style="background-image: image-set(url('agri_farming_projects_hero_1778132919368.avif') type('image/avif'), url('agri_farming_projects_hero_1778132919368.png') type('image/png'));"></div>
         <div class="discipline-content">
           <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 02</div>
           <h3>Turnkey Farms</h3>
@@ -305,7 +308,7 @@
 
       <!-- Aqua -->
       <div class="discipline-card hover-lift reveal-on-scroll">
-        <div class="discipline-img" style="background-image: url('aquaculture_projects_hero_1778132953152.png');"></div>
+        <div class="discipline-img" style="background-image: image-set(url('aquaculture_projects_hero_1778132953152.avif') type('image/avif'), url('aquaculture_projects_hero_1778132953152.png') type('image/png'));"></div>
         <div class="discipline-content">
           <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 03</div>
           <h3>Aquaculture</h3>
@@ -316,7 +319,7 @@
 
       <!-- Livestock -->
       <div class="discipline-card hover-lift reveal-on-scroll">
-        <div class="discipline-img" style="background-image: url('livestock_tech_projects_hero_1778132978858.png');"></div>
+        <div class="discipline-img" style="background-image: image-set(url('livestock_tech_projects_hero_1778132978858.avif') type('image/avif'), url('livestock_tech_projects_hero_1778132978858.png') type('image/png'));"></div>
         <div class="discipline-content">
           <div style="color: var(--gold); font-weight: 900; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px;">PHASE 04</div>
           <h3>Livestock Tech</h3>
@@ -338,7 +341,7 @@
       <div class="list-group">
         <h4>Cold Chain Eng.</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_engineering_cold_storage_detail_1778138396987.png" alt="Cold Chain" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_engineering_cold_storage_detail_1778138396987.avif" type="image/avif"><img src="agri_engineering_cold_storage_detail_1778138396987.png" alt="Cold Chain" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Integrated Cold Room</li>
@@ -350,7 +353,7 @@
       <div class="list-group">
         <h4>Technical Selection</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_surveying_detail_1778133194655.png" alt="Technical Surveying" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_surveying_detail_1778133194655.avif" type="image/avif"><img src="agri_surveying_detail_1778133194655.png" alt="Technical Surveying" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Strategic Land Scouting</li>
@@ -362,7 +365,7 @@
       <div class="list-group">
         <h4>Foundation Prep</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_land_procurement_hero_1778132897958.png" alt="Foundation Prep" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_land_procurement_hero_1778132897958.avif" type="image/avif"><img src="agri_land_procurement_hero_1778132897958.png" alt="Foundation Prep" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Fencing & Gate Security</li>
@@ -386,7 +389,7 @@
       <div class="list-group">
         <h4>Protected Farming</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_farming_projects_hero_1778132919368.png" alt="Protected Farming" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_farming_projects_hero_1778132919368.avif" type="image/avif"><img src="agri_farming_projects_hero_1778132919368.png" alt="Protected Farming" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Naturally Ventilated Polyhouse</li>
@@ -398,7 +401,7 @@
       <div class="list-group">
         <h4>Hydroponics & Vertical</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_hydroponics_detail_1778133242593.png" alt="Hydroponic Detail" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_hydroponics_detail_1778133242593.avif" type="image/avif"><img src="agri_hydroponics_detail_1778133242593.png" alt="Hydroponic Detail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> NFT Hydroponic System</li>
@@ -410,7 +413,7 @@
       <div class="list-group">
         <h4>High-Value Plantations</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="assets/exotic_portfolio.png" alt="Dragon Fruit Plantation" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="assets/exotic_portfolio.avif" type="image/avif"><img src="assets/exotic_portfolio.png" alt="Dragon Fruit Plantation" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Dragon Fruit & Blueberry</li>
@@ -433,7 +436,7 @@
       <div class="list-group">
         <h4>Fish & Shrimp</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="aquaculture_projects_hero_1778132953152.png" alt="Aquaculture Detail" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="aquaculture_projects_hero_1778132953152.avif" type="image/avif"><img src="aquaculture_projects_hero_1778132953152.png" alt="Aquaculture Detail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Intensive Fish Farming</li>
@@ -445,7 +448,7 @@
       <div class="list-group">
         <h4>Integrated Systems</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="assets/agriculture_portfolio.png" alt="Integrated Systems" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="assets/agriculture_portfolio.avif" type="image/avif"><img src="assets/agriculture_portfolio.png" alt="Integrated Systems" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Aquaponics Turnkey Setup</li>
@@ -457,7 +460,7 @@
       <div class="list-group">
         <h4>Biofloc Systems</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="assets/agriculture_v2.png" alt="Biofloc Detail" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="assets/agriculture_v2.avif" type="image/avif"><img src="assets/agriculture_v2.png" alt="Biofloc Detail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> High-Density Fish Tanks</li>
@@ -480,7 +483,7 @@
       <div class="list-group">
         <h4>Livestock Breeding</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="livestock_tech_projects_hero_1778132978858.png" alt="Livestock Detail" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="livestock_tech_projects_hero_1778132978858.avif" type="image/avif"><img src="livestock_tech_projects_hero_1778132978858.png" alt="Livestock Detail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Hi-Tech Dairy (Holstein/Jersey)</li>
@@ -492,7 +495,7 @@
       <div class="list-group">
         <h4>Infrastructure</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_modern_cattle_shed_detail_1778148443580.png" alt="Livestock Infrastructure" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_modern_cattle_shed_detail_1778148443580.avif" type="image/avif"><img src="agri_modern_cattle_shed_detail_1778148443580.png" alt="Livestock Infrastructure" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Professional Shed Design</li>
@@ -504,7 +507,7 @@
       <div class="list-group">
         <h4>Health & Nutrition</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="assets/livestock_v2.png" alt="Livestock Health" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="assets/livestock_v2.avif" type="image/avif"><img src="assets/livestock_v2.png" alt="Livestock Health" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Veterinary Support Centers</li>
@@ -527,7 +530,7 @@
       <div class="list-group">
         <h4>Post-Harvest Tech</h4>
         <div style="width: 100%; height: 220px; border-radius: 30px; overflow: hidden; margin-bottom: 25px; border: 1px solid var(--border);">
-          <img src="agri_engineering_cold_storage_detail_1778138396987.png" alt="Engineering Detail" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_engineering_cold_storage_detail_1778138396987.avif" type="image/avif"><img src="agri_engineering_cold_storage_detail_1778138396987.png" alt="Engineering Detail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Multi-Chamber Cold Storage</li>
@@ -539,7 +542,7 @@
       <div class="list-group">
         <h4>Energy & Water</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="agri_projects_hero_bg_dark_1778137368087.png" alt="Energy Detail" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="agri_projects_hero_bg_dark_1778137368087.avif" type="image/avif"><img src="agri_projects_hero_bg_dark_1778137368087.png" alt="Energy Detail" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Solar Rooftop Integration</li>
@@ -551,7 +554,7 @@
       <div class="list-group">
         <h4>Food Processing</h4>
         <div style="width: 100%; height: 180px; border-radius: 20px; overflow: hidden; margin-bottom: 20px; border: 1px solid var(--border);">
-          <img src="assets/agriculture_v3.png" alt="Food Processing" style="width: 100%; height: 100%; object-fit: cover;">
+          <picture><source srcset="assets/agriculture_v3.avif" type="image/avif"><img src="assets/agriculture_v3.png" alt="Food Processing" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async"></picture>
         </div>
         <ul class="project-items">
           <li><i class="fas fa-check"></i> Value-Addition Machineries</li>
@@ -585,41 +588,7 @@
   </div>
 </section>
 
-<script>
-  // Scroll Progress
-  window.addEventListener('scroll', () => {
-    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
-    const progressBar = document.getElementById("scroll-progress");
-    if (progressBar) progressBar.style.width = scrolled + "%";
-
-    const nav = document.querySelector('.navbar');
-    if (window.scrollY > 60) nav.classList.add('scrolled');
-    else nav.classList.remove('scrolled');
-  });
-
-  // Theme Engine
-  const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
-  const themeIcon = themeToggle.querySelector('i');
-  
-  themeToggle.addEventListener('click', () => {
-    const next = body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    body.setAttribute('data-theme', next);
-    themeIcon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-    localStorage.setItem('igo-theme', next);
-  });
-
-  const savedTheme = localStorage.getItem('igo-theme') || 'light';
-  body.setAttribute('data-theme', savedTheme);
-  themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-
-  // Mobile Menu
-  document.getElementById('menu-btn').addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.toggle('active');
-  });
-</script>
+<script src="assets/app.js" defer></script>
 
 </body>
 </html>

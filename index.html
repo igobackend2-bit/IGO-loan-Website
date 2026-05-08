@@ -11,18 +11,336 @@
   <link rel="icon" type="image/png" href="assets/logo.png">
   <title>IGO Loans & Subsidy | Next-Gen Agri-Fintech India</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Performance: preconnect to external origins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+
+  <!-- Preload critical hero image (LCP) -->
+  <link rel="preload" as="image" href="igo_home_hero_bg_wide_1778136091121.avif" type="image/avif">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/navbar.css">
 
   <style>
     /* ── PAGE-SPECIFIC STYLES ─────────────────── */
 
-    /* Hero */
+    /* ══════════════════════════════════════════
+       HERO — PREMIUM REDESIGN WITH COINS & CROPS
+       ══════════════════════════════════════════ */
     .hero {
-      background: url('igo_home_hero_bg_wide_1778136091121.png') no-repeat center center / cover;
+      background-image:
+        image-set(
+          url('igo_home_hero_bg_wide_1778136091121.avif') type('image/avif'),
+          url('igo_home_hero_bg_wide_1778136091121.png') type('image/png')
+        );
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
       min-height: 100vh;
-      padding: 120px 0 80px;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+    }
+    @supports not (background-image: image-set(url('x') type('image/avif'))) {
+      .hero { background-image: url('igo_home_hero_bg_wide_1778136091121.png'); }
+    }
+
+    /* Dark layered overlay — left heavy, fades right */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to right,  rgba(2,44,34,0.94) 0%, rgba(2,44,34,0.70) 50%, rgba(2,44,34,0.30) 100%),
+        linear-gradient(to bottom, rgba(2,44,34,0.3)  0%, transparent 40%, rgba(2,44,34,0.5) 100%);
+      z-index: 1;
+    }
+
+    /* ── DECORATIVE LAYER ───────────────── */
+    .hero-deco {
+      position: absolute; inset: 0;
+      pointer-events: none; z-index: 2;
+      overflow: hidden;
+    }
+
+    /* Gold coins */
+    .h-coin {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%,
+        #ffe066 0%, #c5a059 40%, #8a6520 80%, #5a3e0a 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      color: #7a4d0a;
+      box-shadow:
+        0 6px 20px rgba(197,160,89,0.55),
+        inset 0 2px 4px rgba(255,255,255,0.45),
+        inset 0 -3px 6px rgba(0,0,0,0.25);
+      animation: coinFloat var(--dur, 7s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    .h-coin::after {
+      content: '₹';
+      font-size: var(--fs, 1.4rem);
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    }
+
+    /* Coin sizes & positions */
+    .h-coin-1  { --dur:7s;  --delay:0s;    --fs:2rem;   width:80px;  height:80px;  top:18%;  right:12%; opacity:0.92; }
+    .h-coin-2  { --dur:9s;  --delay:1.2s;  --fs:1.2rem; width:52px;  height:52px;  top:55%;  right:6%;  opacity:0.8;  }
+    .h-coin-3  { --dur:6s;  --delay:2.5s;  --fs:2.8rem; width:110px; height:110px; top:28%;  right:28%; opacity:0.7;  }
+    .h-coin-4  { --dur:8s;  --delay:0.8s;  --fs:1rem;   width:38px;  height:38px;  top:72%;  right:20%; opacity:0.65; }
+    .h-coin-5  { --dur:11s; --delay:3.1s;  --fs:1.6rem; width:64px;  height:64px;  top:8%;   right:40%; opacity:0.55; }
+
+    /* Rupee rain drops (small) */
+    .h-rupee {
+      position: absolute;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 18px rgba(197,160,89,0.7);
+      animation: rupeeRain var(--dur, 8s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      opacity: var(--op, 0.5);
+      font-size: var(--fs, 1.5rem);
+    }
+    .h-rupee-1 { --dur:8s;  --delay:0s;   --fs:1.8rem; --op:0.55; top:12%; right:55%; }
+    .h-rupee-2 { --dur:6s;  --delay:2s;   --fs:1.2rem; --op:0.40; top:65%; right:50%; }
+    .h-rupee-3 { --dur:10s; --delay:1s;   --fs:2.2rem; --op:0.35; top:40%; right:45%; }
+    .h-rupee-4 { --dur:7s;  --delay:3.5s; --fs:1rem;   --op:0.30; top:82%; right:35%; }
+
+    /* Crop emojis */
+    .h-emoji {
+      position: absolute;
+      font-size: var(--fs, 2rem);
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+      animation: emojiFloat var(--dur, 9s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+    }
+    .h-emoji-1  { --fs:2.6rem;  --dur:8s;  --delay:0s;   top:15%;  right:8%;  }
+    .h-emoji-2  { --fs:2rem;    --dur:10s; --delay:1.5s; top:62%;  right:15%; }
+    .h-emoji-3  { --fs:3rem;    --dur:7s;  --delay:2.8s; top:35%;  right:33%; }
+    .h-emoji-4  { --fs:1.8rem;  --dur:12s; --delay:0.5s; top:78%;  right:8%;  }
+    .h-emoji-5  { --fs:2.4rem;  --dur:9s;  --delay:3.5s; top:5%;   right:22%; }
+    .h-emoji-6  { --fs:1.6rem;  --dur:11s; --delay:2s;   top:50%;  right:42%; }
+    .h-emoji-7  { --fs:2.8rem;  --dur:8s;  --delay:4s;   top:88%;  right:30%; }
+    .h-emoji-8  { --fs:2rem;    --dur:13s; --delay:1s;   top:22%;  right:50%; }
+
+    /* ── FLOATING STAT MINI-CARDS ────────── */
+    .h-stat-card {
+      position: absolute;
+      background: rgba(255,255,255,0.10);
+      backdrop-filter: blur(20px) saturate(1.8);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 20px;
+      padding: 16px 22px;
+      display: flex; align-items: center; gap: 14px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.15);
+      animation: cardFloat var(--dur, 6s) ease-in-out infinite;
+      animation-delay: var(--delay, 0s);
+      z-index: 3;
+      min-width: 180px;
+    }
+    .h-stat-card .sc-icon {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .h-stat-card .sc-val {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900; font-size: 1.25rem;
+      color: #fff; line-height: 1;
+    }
+    .h-stat-card .sc-lbl {
+      font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1.2px;
+      color: rgba(255,255,255,0.6); margin-top: 4px;
+    }
+
+    .h-card-1 { --dur:6s;  --delay:0s;   top:18%; right:3%;  }
+    .h-card-2 { --dur:8s;  --delay:1.8s; top:45%; right:2%;  }
+    .h-card-3 { --dur:7s;  --delay:3.2s; top:70%; right:5%;  }
+
+    /* ── KEYFRAMES ──────────────────────── */
+    @keyframes coinFloat {
+      0%, 100% { transform: translateY(0px) rotate(-8deg) scale(1); }
+      33%       { transform: translateY(-22px) rotate(5deg) scale(1.05); }
+      66%       { transform: translateY(-10px) rotate(-3deg) scale(0.97); }
+    }
+    @keyframes rupeeRain {
+      0%, 100% { transform: translateY(0) rotate(0deg); opacity: var(--op,0.5); }
+      50%       { transform: translateY(-28px) rotate(15deg); opacity: calc(var(--op,0.5) * 1.6); }
+    }
+    @keyframes emojiFloat {
+      0%, 100% { transform: translateY(0) scale(1) rotate(-5deg); }
+      40%       { transform: translateY(-20px) scale(1.1) rotate(6deg); }
+      70%       { transform: translateY(-8px) scale(0.95) rotate(-2deg); }
+    }
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50%       { transform: translateY(-14px) translateX(-4px); }
+    }
+
+    /* ── HERO LAYOUT ────────────────────── */
+    .hero-inner {
+      position: relative; z-index: 4;
+      width: 100%; padding: 120px 0 80px;
+    }
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-left {}
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-left: 20px;
+    }
+
+    /* ── GLASS CARD (left) ──────────────── */
+    .hero-glass {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(32px) saturate(1.8);
+      -webkit-backdrop-filter: blur(32px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 48px;
+      padding: 72px 64px;
+      box-shadow: 0 50px 120px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.12);
+      position: relative; overflow: hidden;
+    }
+    .hero-glass::before {
+      content: '';
+      position: absolute; top: -60px; left: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(197,160,89,0.18), transparent 70%);
+      pointer-events: none;
+    }
+    .hero-glass::after {
+      content: '';
+      position: absolute; bottom: -40px; right: -40px;
+      width: 160px; height: 160px;
+      background: radial-gradient(circle, rgba(5,150,105,0.15), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── RIGHT SIDE CARDS ───────────────── */
+    /* Big loan showcase card */
+    .hero-loan-card {
+      background: linear-gradient(135deg,
+        rgba(197,160,89,0.18) 0%, rgba(5,150,105,0.12) 100%);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(197,160,89,0.35);
+      border-radius: 32px;
+      padding: 36px 32px;
+      position: relative; overflow: hidden;
+    }
+    .hero-loan-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold), #fff, var(--gold));
+      border-radius: 3px 3px 0 0;
+    }
+    .hlc-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 2.5px;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .hlc-amount {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900; font-size: 3rem; color: #fff; line-height: 1;
+      margin-bottom: 6px;
+      text-shadow: 0 0 30px rgba(197,160,89,0.4);
+    }
+    .hlc-sub {
+      font-size: 0.8rem; color: rgba(255,255,255,0.55);
+      font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+      margin-bottom: 24px;
+    }
+    .hlc-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    .hlc-pill {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px; padding: 12px 14px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hlc-pill-emoji { font-size: 1.3rem; }
+    .hlc-pill-val {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900; font-size: 1.1rem; color: var(--gold); display: block;
+    }
+    .hlc-pill-lbl {
+      font-size: 0.65rem; font-weight: 700;
+      color: rgba(255,255,255,0.45); text-transform: uppercase;
+      letter-spacing: 0.8px; display: block;
+    }
+
+    /* Subsidy card */
+    .hero-subsidy-card {
+      background: rgba(5,150,105,0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(5,150,105,0.30);
+      border-radius: 28px;
+      padding: 28px;
+      display: flex; align-items: center; gap: 20px;
+    }
+    .hsc-icon {
+      width: 64px; height: 64px; border-radius: 18px; flex-shrink: 0;
+      background: rgba(5,150,105,0.2);
+      border: 1px solid rgba(5,150,105,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+    }
+    .hsc-content {}
+    .hsc-val {
+      font-family: 'Outfit', sans-serif; font-weight: 900;
+      font-size: 2rem; color: #34d399; line-height: 1;
+    }
+    .hsc-title { font-size: 0.8rem; color: rgba(255,255,255,0.6); font-weight: 600; margin-top: 4px; }
+    .hsc-bar { margin-top: 12px; height: 6px; background: rgba(255,255,255,0.1); border-radius: 6px; overflow: hidden; }
+    .hsc-bar-fill { height: 100%; border-radius: 6px; background: linear-gradient(90deg, #059669, #34d399); width: 90%; animation: barGrow 2s 0.5s both ease-out; }
+    @keyframes barGrow { from { width: 0 } to { width: 90%; } }
+
+    /* Crop ticker */
+    .hero-crops-row {
+      display: flex; gap: 10px; flex-wrap: wrap;
+    }
+    .crop-chip {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 50px; padding: 8px 16px;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.75);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: all 0.3s;
+    }
+    .crop-chip:hover { background: rgba(197,160,89,0.15); border-color: rgba(197,160,89,0.4); color: var(--gold); }
+    .crop-chip span { font-size: 1.1rem; }
+
+    /* ── MOBILE ──────────────────────────── */
+    @media (max-width: 1100px) {
+      .h-card-1, .h-card-2, .h-card-3 { display: none; }
+      .h-coin-3, .h-coin-5 { display: none; }
+    }
+    @media (max-width: 900px) {
+      .hero-split { grid-template-columns: 1fr; }
+      .hero-right  { display: none; }
+      .hero-inner  { padding: 100px 0 60px; }
+      .hero-glass  { padding: 44px 32px; border-radius: 36px; }
+      .h-coin-1, .h-coin-2, .h-coin-4 { display: none; }
     }
 
     /* Marquee Band */
@@ -63,7 +381,7 @@
     }
     .portfolio-card:hover::after { transform: translateX(100%); }
 
-    /* Fancy Service Cards */
+    /* Service Cards */
     .service-card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -76,7 +394,7 @@
     .service-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0;
-      height: 6px;
+      height: 4px;
       background: linear-gradient(90deg, var(--primary), var(--gold));
       opacity: 0;
       transition: opacity 0.3s;
@@ -112,9 +430,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-16px); }
     }
-    .float-badge {
-      animation: float 6s ease-in-out infinite;
-    }
+    .float-badge { animation: float 6s ease-in-out infinite; }
 
     @keyframes slowRotate {
       from { transform: rotate(0deg); }
@@ -142,15 +458,13 @@
       position: absolute; top: -20%; left: -10%;
       width: 60%; height: 80%;
       background: radial-gradient(circle, rgba(5,150,105,0.15), transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
     .cta-glow-2 {
       position: absolute; bottom: -20%; right: -10%;
       width: 60%; height: 80%;
       background: radial-gradient(circle, rgba(197,160,89,0.1), transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
     /* Impact Stats Section */
@@ -166,18 +480,16 @@
       position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       opacity: 0.04;
-      pointer-events: none;
-      z-index: 1;
+      pointer-events: none; z-index: 1;
     }
     .stats-glow {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      position: absolute; inset: 0;
       background: radial-gradient(circle at 20% 50%, rgba(5,150,105,0.15) 0%, transparent 60%),
                   radial-gradient(circle at 80% 50%, rgba(197,160,89,0.1) 0%, transparent 60%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
 
-    /* Ecosystem Card Polish */
+    /* Journey Cards */
     .journey-card {
       background: var(--bg);
       border: 1px solid var(--border);
@@ -220,10 +532,7 @@
       z-index: 1;
     }
 
-    .cta-content {
-      position: relative;
-      z-index: 2;
-    }
+    .cta-content { position: relative; z-index: 2; }
 
     /* Premium Button Polish */
     .cta-section .btn-gold {
@@ -236,7 +545,6 @@
       background-position: right center;
       transform: translateY(-5px) scale(1.02);
     }
-
     .cta-section .btn-ghost {
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -258,12 +566,37 @@
       animation: slowRotateBadge 25s ease-in-out infinite !important;
     }
 
-    /* Impact stat bar */
+    /* Impact bar */
     .impact-bar {
       height: 5px; background: rgba(255,255,255,0.1);
       border-radius: var(--radius-full); overflow: hidden; margin-top: 20px;
     }
     .impact-bar-fill { height: 100%; border-radius: var(--radius-full); }
+
+    /* Testimonial cards */
+    .testimonial-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: 44px 40px;
+      position: relative;
+      transition: all 0.4s var(--ease-spring);
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute; top: 24px; left: 36px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--primary);
+      opacity: 0.15;
+      font-weight: 900;
+    }
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--gold);
+    }
 
     /* Mobile */
     @media (max-width: 900px) {
@@ -272,25 +605,31 @@
       .grid-portfolio { grid-template-columns: 1fr !important; }
       .grid-services  { grid-template-columns: 1fr !important; }
       .ecosystem-grid { grid-template-columns: 1fr !important; }
+      .stats-section { padding: 80px 0; }
+      .cta-section { padding: 80px 0; }
+      .service-card { padding: 36px 28px; }
     }
-
     @media (max-width: 640px) {
       .hero-btns { flex-direction: column; }
       .hero-btns .btn { justify-content: center; }
+    }
+    @media (max-width: 900px) {
+      .grid-2-col { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .desktop-only-line { display: none !important; }
     }
   </style>
 </head>
 <body>
 
-  <div class="scroll-progress"></div>
+  <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- ═══════════════ NAVBAR ═══════════════ -->
-  <nav class="navbar" id="main-nav">
+  <nav class="navbar" id="main-nav" aria-label="Main navigation">
     <div class="navbar-container">
-      <a href="index.html" class="logo-wrap">
+      <a href="index.html" class="logo-wrap" aria-label="IGO Loans — Home">
         <div class="logo-img-box">
-          <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo" loading="lazy">
+          <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo" width="46" height="46" loading="eager">
         </div>
         <div class="logo-text">
           <span class="brand">IGO LOANS</span>
@@ -298,7 +637,7 @@
         </div>
       </a>
 
-      <ul class="nav-links">
+      <ul class="nav-links" id="nav-links" role="list">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="agri-projects.html">Projects</a></li>
         <li><a href="procurement.html">Procurement</a></li>
@@ -309,12 +648,12 @@
       </ul>
 
       <div class="nav-cta-group">
-        <a href="farm-loan-form.html" class="nav-btn nav-btn-primary">Apply Now <i class="fas fa-arrow-right"></i></a>
+        <a href="farm-loan-form.html" class="nav-btn nav-btn-primary">Apply Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Toggle dark mode" tabindex="0">
-          <i class="fas fa-moon"></i>
+          <i class="fas fa-moon" aria-hidden="true"></i>
         </div>
-        <div class="mobile-toggle" id="menu-btn" aria-label="Toggle menu" role="button" tabindex="0">
-          <i class="fas fa-bars"></i>
+        <div class="mobile-toggle" id="menu-btn" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
+          <i class="fas fa-bars" aria-hidden="true"></i>
         </div>
       </div>
     </div>
@@ -322,56 +661,182 @@
 
   <main id="main-content">
 
-    <!-- ═══════════════ HERO ═══════════════ -->
-    <section class="hero" aria-label="Hero">
-      <div class="hero-overlay-right"></div>
-      <div class="hero-content">
-        <div class="container">
-          <div class="hero-glass reveal" style="max-width: 860px;">
-            <div class="hero-badge">
-              <span class="dot"></span>
-              THE NATIONAL STANDARD · EST. 2020
-            </div>
+    <!-- ═══════════════ HERO — PREMIUM REDESIGN ═══════════════ -->
+    <section class="hero" aria-label="Hero — The Sovereign Agri-Ecosystem">
 
-            <h1 class="section-title xxl" style="color:#fff; margin-bottom: 28px;">
-              The <span class="text-gradient-gold">Sovereign</span><br>Agri-Ecosystem
-            </h1>
+      <!-- ── Decorative layer: coins + emojis + floating cards ── -->
+      <div class="hero-deco" aria-hidden="true">
 
-            <p style="font-size:1.3rem; color:rgba(255,255,255,0.72); max-width:640px; line-height:1.65; margin-bottom:52px; font-weight:500;">
-              Building India's institutional-grade agricultural future through vertically integrated engineering, production, and global trade.
-            </p>
+        <!-- Gold 3D coins -->
+        <div class="h-coin h-coin-1"></div>
+        <div class="h-coin h-coin-2"></div>
+        <div class="h-coin h-coin-3"></div>
+        <div class="h-coin h-coin-4"></div>
+        <div class="h-coin h-coin-5"></div>
 
-            <div class="flex gap-6 hero-btns" style="flex-wrap:wrap;">
-              <a href="agri-projects.html" class="btn btn-primary btn-lg">
-                <i class="fas fa-rocket"></i> Launch a Project
-              </a>
-              <a href="portal.html" class="btn btn-ghost btn-lg">
-                Institutional Portal <i class="fas fa-shield-halved"></i>
-              </a>
-            </div>
+        <!-- Floating ₹ symbols -->
+        <div class="h-rupee h-rupee-1">₹</div>
+        <div class="h-rupee h-rupee-2">₹</div>
+        <div class="h-rupee h-rupee-3">₹</div>
+        <div class="h-rupee h-rupee-4">₹</div>
 
-            <!-- Mini Stats -->
-            <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:60px; padding-top:48px; border-top:1px solid rgba(255,255,255,0.1);">
-              <div>
-                <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold);">1M+</div>
-                <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.5); margin-top:4px;">Agripreneurs</div>
-              </div>
-              <div>
-                <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold);">₹5k Cr+</div>
-                <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.5); margin-top:4px;">Capital Flow</div>
-              </div>
-              <div>
-                <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold);">26</div>
-                <div style="font-size:0.72rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.5); margin-top:4px;">Verticals</div>
-              </div>
-            </div>
+        <!-- Agri crop emojis -->
+        <div class="h-emoji h-emoji-1">🌾</div>
+        <div class="h-emoji h-emoji-2">🌿</div>
+        <div class="h-emoji h-emoji-3">🌻</div>
+        <div class="h-emoji h-emoji-4">🍃</div>
+        <div class="h-emoji h-emoji-5">🌱</div>
+        <div class="h-emoji h-emoji-6">🌽</div>
+        <div class="h-emoji h-emoji-7">🥬</div>
+        <div class="h-emoji h-emoji-8">🍀</div>
+
+        <!-- Floating stat mini-cards (edge of screen) -->
+        <div class="h-stat-card h-card-1">
+          <div class="sc-icon" style="background:rgba(197,160,89,0.2); border:1px solid rgba(197,160,89,0.3);">✅</div>
+          <div>
+            <div class="sc-val">₹40L</div>
+            <div class="sc-lbl">Loan Approved</div>
+          </div>
+        </div>
+        <div class="h-stat-card h-card-2">
+          <div class="sc-icon" style="background:rgba(5,150,105,0.2); border:1px solid rgba(5,150,105,0.3);">⚡</div>
+          <div>
+            <div class="sc-val">72 hrs</div>
+            <div class="sc-lbl">Fast Disbursal</div>
+          </div>
+        </div>
+        <div class="h-stat-card h-card-3">
+          <div class="sc-icon" style="background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.3);">🏆</div>
+          <div>
+            <div class="sc-val">18+ Banks</div>
+            <div class="sc-lbl">Partner Network</div>
           </div>
         </div>
       </div>
+
+      <!-- ── Main hero content ── -->
+      <div class="hero-inner">
+        <div class="container">
+          <div class="hero-split">
+
+            <!-- LEFT: Glass content card -->
+            <div class="hero-left">
+              <div class="hero-glass reveal">
+
+                <div class="hero-badge">
+                  <span class="dot" aria-hidden="true"></span>
+                  THE NATIONAL STANDARD · EST. 2020
+                </div>
+
+                <h1 class="section-title xxl" style="color:#fff; margin-bottom:24px; line-height:1;">
+                  The <span class="text-gradient-gold">Sovereign</span><br>Agri-Ecosystem
+                </h1>
+
+                <p style="font-size:1.15rem; color:rgba(255,255,255,0.72); max-width:560px; line-height:1.7; margin-bottom:44px; font-weight:500;">
+                  Building India's institutional-grade agricultural future — vertically integrated engineering, production, loans &amp; global trade.
+                </p>
+
+                <div class="flex gap-6 hero-btns" style="flex-wrap:wrap; margin-bottom:52px;">
+                  <a href="agri-projects.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket" aria-hidden="true"></i> Launch a Project
+                  </a>
+                  <a href="farm-loan-form.html" class="btn btn-gold btn-lg">
+                    💰 Apply for Loan
+                  </a>
+                </div>
+
+                <!-- Mini Stats row -->
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-top:36px; border-top:1px solid rgba(255,255,255,0.10);">
+                  <div>
+                    <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">1M+</div>
+                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Agripreneurs</div>
+                  </div>
+                  <div>
+                    <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">₹5k Cr+</div>
+                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Capital Flow</div>
+                  </div>
+                  <div>
+                    <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">26</div>
+                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Verticals</div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- RIGHT: Info cards -->
+            <div class="hero-right reveal delay-2">
+
+              <!-- Loan showcase card -->
+              <div class="hero-loan-card">
+                <div class="hlc-title">🏦 Institutional Credit Line</div>
+                <div class="hlc-amount">₹50 Lakh</div>
+                <div class="hlc-sub">Max. Agriculture Loan Amount</div>
+                <div class="hlc-grid">
+                  <div class="hlc-pill">
+                    <span class="hlc-pill-emoji">📉</span>
+                    <div>
+                      <span class="hlc-pill-val">7.5%</span>
+                      <span class="hlc-pill-lbl">Fixed APR</span>
+                    </div>
+                  </div>
+                  <div class="hlc-pill">
+                    <span class="hlc-pill-emoji">⚡</span>
+                    <div>
+                      <span class="hlc-pill-val">72 hrs</span>
+                      <span class="hlc-pill-lbl">Approval</span>
+                    </div>
+                  </div>
+                  <div class="hlc-pill">
+                    <span class="hlc-pill-emoji">🏛️</span>
+                    <div>
+                      <span class="hlc-pill-val">18+</span>
+                      <span class="hlc-pill-lbl">Bank Partners</span>
+                    </div>
+                  </div>
+                  <div class="hlc-pill">
+                    <span class="hlc-pill-emoji">📋</span>
+                    <div>
+                      <span class="hlc-pill-val">KCC</span>
+                      <span class="hlc-pill-lbl">PMEGP · MSME</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Subsidy coverage card -->
+              <div class="hero-subsidy-card">
+                <div class="hsc-icon">🌿</div>
+                <div class="hsc-content" style="flex:1;">
+                  <div style="display:flex; align-items:center; justify-content:space-between;">
+                    <div class="hsc-val">90%</div>
+                    <span style="background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3); color:#34d399; font-size:0.65rem; font-weight:800; padding:4px 10px; border-radius:50px; text-transform:uppercase; letter-spacing:1px;">PM-KUSUM</span>
+                  </div>
+                  <div class="hsc-title">Subsidy Coverage Available</div>
+                  <div class="hsc-bar"><div class="hsc-bar-fill"></div></div>
+                </div>
+              </div>
+
+              <!-- Crop chips -->
+              <div class="hero-crops-row">
+                <div class="crop-chip"><span>🌾</span> Wheat &amp; Rice</div>
+                <div class="crop-chip"><span>🌿</span> Hydroponics</div>
+                <div class="crop-chip"><span>🌻</span> Horticulture</div>
+                <div class="crop-chip"><span>🐄</span> Livestock</div>
+                <div class="crop-chip"><span>🐟</span> Aquaculture</div>
+                <div class="crop-chip"><span>☀️</span> Solar Agri</div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ═══════════════ MARQUEE BAND ═══════════════ -->
-    <div class="marquee-band">
+    <div class="marquee-band" aria-hidden="true">
       <div class="marquee-track">
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-building-columns"></i> NABARD</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-tractor"></i> KISAN CREDIT CARD</div>
@@ -380,7 +845,6 @@
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-microchip"></i> AGRI-TECH 2026</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-shield-halved"></i> PMEGP SCHEME</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-seedling"></i> NHB HORTICULTURE</div>
-        <!-- Duplicates for seamless loop -->
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-building-columns"></i> NABARD</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-tractor"></i> KISAN CREDIT CARD</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-leaf"></i> PM-KUSUM SOLAR</div>
@@ -396,38 +860,33 @@
       <div class="container">
 
         <div class="section-header">
-          <div class="section-label"><i class="fas fa-circle-nodes"></i> The Sovereign Ecosystem</div>
+          <div class="section-label"><i class="fas fa-circle-nodes" aria-hidden="true"></i> The Sovereign Ecosystem</div>
           <h2 class="section-title lg reveal" style="max-width:800px;">Your 360° Agri-Business <span class="text-gradient-green">Journey</span></h2>
-          <p class="section-subtitle reveal delay-1" style="margin: 0 auto; text-align:center;">
+          <p class="section-subtitle reveal delay-1" style="margin:0 auto; text-align:center;">
             From the first plot of land to global market exports, IGO is your single-window partner for institutional agricultural success.
           </p>
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:32px; position:relative;">
 
-          <!-- Step connector line -->
-          <div class="step-connector desktop-only-line"></div>
+          <div class="step-connector desktop-only-line" aria-hidden="true"></div>
 
           <div class="journey-card reveal">
-            <div class="icon-box">
-              <i class="fas fa-map-location-dot"></i>
-            </div>
+            <div class="icon-box" aria-hidden="true"><i class="fas fa-map-location-dot"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 01</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Land</h4>
             <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Procurement & Legal via <strong>IGO Procurement</strong></p>
           </div>
 
           <div class="journey-card reveal delay-1">
-            <div class="icon-box">
-              <i class="fas fa-file-invoice"></i>
-            </div>
+            <div class="icon-box" aria-hidden="true"><i class="fas fa-file-invoice"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 02</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Planning</h4>
             <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Master DPR & Govt. Liasoning</p>
           </div>
 
-          <div class="journey-card reveal delay-2" style="border-color:var(--gold); background: var(--primary-dark); color: #fff;">
-            <div class="icon-box" style="background:rgba(197,160,89,0.15); color:var(--gold); border:1px solid rgba(197,160,89,0.3);">
+          <div class="journey-card reveal delay-2" style="border-color:var(--gold); background:var(--primary-dark); color:#fff;">
+            <div class="icon-box" style="background:rgba(197,160,89,0.15); color:var(--gold); border:1px solid rgba(197,160,89,0.3);" aria-hidden="true">
               <i class="fas fa-sack-dollar"></i>
             </div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:rgba(255,255,255,0.4); margin-bottom:14px;">Step 03 · YOU ARE HERE</div>
@@ -436,14 +895,10 @@
           </div>
 
           <div class="journey-card reveal delay-3">
-            <div class="icon-box">
-              <i class="fas fa-tractor"></i>
-            </div>
+            <div class="icon-box" aria-hidden="true"><i class="fas fa-tractor"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 04</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Operation</h4>
             <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Build & Manage via <strong>IGO Agri Projects</strong></p>
-          </div>
-            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6;">Build & Manage via <strong>IGO Agri Projects</strong></p>
           </div>
 
         </div>
@@ -451,41 +906,49 @@
     </section>
 
     <!-- ═══════════════ IMPACT STATS ═══════════════ -->
-    <section class="stats-section">
-      <div class="stats-glow"></div>
+    <section class="stats-section" aria-label="National Impact Statistics">
+      <div class="stats-glow" aria-hidden="true"></div>
       <div class="container" style="position:relative; z-index:2;">
 
         <div class="section-header" style="align-items:center;">
           <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25);">
-            <i class="fas fa-chart-line"></i> National Impact
+            <i class="fas fa-chart-line" aria-hidden="true"></i> National Impact
           </div>
           <h2 class="section-title lg reveal" style="color:#fff; text-align:center;">Scaling Excellence<br><span class="text-gradient-gold">Across 28 States</span></h2>
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:32px;">
 
-          <div class="card-stat reveal" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
+          <div class="card-stat reveal" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
             <div class="stat-value" data-count="1000000" data-suffix="+" data-prefix="">1M+</div>
             <div class="stat-label">Agripreneurs Targeted</div>
-            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:65%; background:var(--gold); box-shadow: 0 0 15px rgba(197,160,89,0.3);"></div></div>
+            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
+              <div class="impact-bar-fill" style="width:65%; background:var(--gold); box-shadow:0 0 15px rgba(197,160,89,0.3);"></div>
+            </div>
           </div>
 
-          <div class="card-stat reveal delay-1" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
+          <div class="card-stat reveal delay-1" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
             <div class="stat-value" style="font-size:3rem;">₹5,000 Cr+</div>
             <div class="stat-label">Capital Facilitation</div>
-            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:48%; background:var(--primary); box-shadow: 0 0 15px rgba(5,150,105,0.3);"></div></div>
+            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
+              <div class="impact-bar-fill" style="width:48%; background:var(--primary); box-shadow:0 0 15px rgba(5,150,105,0.3);"></div>
+            </div>
           </div>
 
-          <div class="card-stat reveal delay-2" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
+          <div class="card-stat reveal delay-2" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
             <div class="stat-value" data-count="26">26</div>
             <div class="stat-label">Vertical Brands</div>
-            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:100%; background:linear-gradient(90deg,var(--primary),var(--gold)); box-shadow: 0 0 15px rgba(197,160,89,0.3);"></div></div>
+            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
+              <div class="impact-bar-fill" style="width:100%; background:linear-gradient(90deg,var(--primary),var(--gold)); box-shadow:0 0 15px rgba(197,160,89,0.3);"></div>
+            </div>
           </div>
 
-          <div class="card-stat reveal delay-3" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
+          <div class="card-stat reveal delay-3" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
             <div class="stat-value" data-count="28">28</div>
             <div class="stat-label">States Operational</div>
-            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:85%; background:var(--gold); box-shadow: 0 0 15px rgba(197,160,89,0.3);"></div></div>
+            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
+              <div class="impact-bar-fill" style="width:85%; background:var(--gold); box-shadow:0 0 15px rgba(197,160,89,0.3);"></div>
+            </div>
           </div>
 
         </div>
@@ -498,7 +961,7 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;" class="grid-2-col">
 
           <div class="reveal-left">
-            <div class="section-label"><i class="fas fa-seedling"></i> National Credit Line</div>
+            <div class="section-label"><i class="fas fa-seedling" aria-hidden="true"></i> National Credit Line</div>
             <h2 class="section-title lg" style="margin-bottom:24px;">IGO <span class="text-gradient-green">Farm Loan</span> Mastery</h2>
             <p style="font-size:1.1rem; line-height:1.75; color:var(--text-muted); margin-bottom:40px;">
               We bridge the gap between rural ambition and institutional capital. Secure low-interest funding with our expert-led bank coordination and legal compliance suite.
@@ -506,44 +969,43 @@
 
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:40px;">
               <div class="card" style="padding:24px;">
-                <div style="font-size:1.5rem; color:var(--primary); margin-bottom:10px;"><i class="fas fa-percent"></i></div>
+                <div style="font-size:1.5rem; color:var(--primary); margin-bottom:10px;" aria-hidden="true"><i class="fas fa-percent"></i></div>
                 <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--primary);">7.5%</div>
                 <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Fixed APR</div>
               </div>
               <div class="card" style="padding:24px;">
-                <div style="font-size:1.5rem; color:var(--primary); margin-bottom:10px;"><i class="fas fa-clock"></i></div>
+                <div style="font-size:1.5rem; color:var(--primary); margin-bottom:10px;" aria-hidden="true"><i class="fas fa-clock"></i></div>
                 <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--primary);">72 hrs</div>
                 <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Approval Speed</div>
               </div>
               <div class="card" style="padding:24px;">
-                <div style="font-size:1.5rem; color:var(--gold); margin-bottom:10px;"><i class="fas fa-building-columns"></i></div>
+                <div style="font-size:1.5rem; color:var(--gold); margin-bottom:10px;" aria-hidden="true"><i class="fas fa-building-columns"></i></div>
                 <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--gold);">18+</div>
                 <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Bank Partners</div>
               </div>
               <div class="card" style="padding:24px;">
-                <div style="font-size:1.5rem; color:var(--gold); margin-bottom:10px;"><i class="fas fa-layer-group"></i></div>
+                <div style="font-size:1.5rem; color:var(--gold); margin-bottom:10px;" aria-hidden="true"><i class="fas fa-layer-group"></i></div>
                 <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.4rem; color:var(--gold);">₹50L+</div>
                 <div style="font-size:0.8rem; color:var(--text-muted); font-weight:600;">Max Subsidy</div>
               </div>
             </div>
 
             <div style="display:flex; gap:16px; flex-wrap:wrap;">
-              <a href="farm-loan-form.html" class="btn btn-primary">Apply for a Loan <i class="fas fa-arrow-right"></i></a>
+              <a href="farm-loan-form.html" class="btn btn-primary">Apply for a Loan <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
               <a href="subsidies.html" class="btn btn-outline">Browse Subsidies</a>
             </div>
           </div>
 
           <div class="reveal-right" style="position:relative;">
             <div style="background:linear-gradient(135deg, var(--primary-light), var(--gold-pale)); border-radius:var(--radius-xl); padding:60px; text-align:center;">
-              <div style="font-size:5rem; color:var(--primary); margin-bottom:24px;"><i class="fas fa-wheat-awn"></i></div>
+              <div style="font-size:5rem; color:var(--primary); margin-bottom:24px;" aria-hidden="true"><i class="fas fa-wheat-awn"></i></div>
               <div style="font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:900; color:var(--text); margin-bottom:16px;">KCC · PMEGP · MSME</div>
               <p style="color:var(--text-muted); margin-bottom:32px; font-size:0.95rem; line-height:1.7;">Comprehensive loan schemes covered by our expert consultants — from KCC to NABARD infrastructure grants.</p>
               <div style="display:flex; justify-content:center; gap:12px; flex-wrap:wrap;">
-                <span class="badge badge-green"><i class="fas fa-check-circle"></i> NABARD Certified</span>
-                <span class="badge badge-gold"><i class="fas fa-star"></i> Rated #1</span>
+                <span class="badge badge-green"><i class="fas fa-check-circle" aria-hidden="true"></i> NABARD Certified</span>
+                <span class="badge badge-gold"><i class="fas fa-star" aria-hidden="true"></i> Rated #1</span>
               </div>
             </div>
-
           </div>
 
         </div>
@@ -554,7 +1016,7 @@
     <section class="section" id="portfolios" style="background:var(--bg-alt);">
       <div class="container">
         <div class="section-header">
-          <div class="section-label"><i class="fas fa-layer-group"></i> Portfolio</div>
+          <div class="section-label"><i class="fas fa-layer-group" aria-hidden="true"></i> Portfolio</div>
           <h2 class="section-title lg reveal">Our Flagship <span class="text-gradient-green">Projects</span></h2>
           <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Precision agri-ventures built for scale, export, and institutional returns.</p>
         </div>
@@ -563,56 +1025,68 @@
 
           <div class="portfolio-card reveal">
             <div style="overflow:hidden; height:240px;">
-              <img src="agri_farming_projects_hero_1778132919368.png" alt="Exotic Farming" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+              <picture>
+                <source srcset="agri_farming_projects_hero_1778132919368.avif" type="image/avif">
+                <img src="agri_farming_projects_hero_1778132919368.png" alt="Exotic Agri Farming — high-value horticulture project" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
+              </picture>
             </div>
             <div style="padding:32px;">
-              <span class="badge badge-green" style="margin-bottom:14px;"><i class="fas fa-leaf"></i> Horticulture</span>
+              <span class="badge badge-green" style="margin-bottom:14px;"><i class="fas fa-leaf" aria-hidden="true"></i> Horticulture</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Exotic Agri Farming</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">High-value crops including saffron, vanilla, and speciality herbs — export-ready infrastructure.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right"></i></a>
+              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
           <div class="portfolio-card reveal delay-1">
             <div style="overflow:hidden; height:240px;">
-              <img src="aquaculture_projects_hero_1778132953152.png" alt="Aquaculture" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+              <picture>
+                <source srcset="aquaculture_projects_hero_1778132953152.avif" type="image/avif">
+                <img src="aquaculture_projects_hero_1778132953152.png" alt="Marine Aquaculture Hub — integrated fish and shrimp farms" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
+              </picture>
             </div>
             <div style="padding:32px;">
-              <span class="badge" style="background:rgba(99,102,241,0.1); color:#6366f1; border-color:rgba(99,102,241,0.2); margin-bottom:14px;"><i class="fas fa-fish"></i> Aquaculture</span>
+              <span class="badge" style="background:rgba(99,102,241,0.1); color:#6366f1; border-color:rgba(99,102,241,0.2); margin-bottom:14px;"><i class="fas fa-fish" aria-hidden="true"></i> Aquaculture</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Marine Aquaculture Hub</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">Integrated fish & shrimp farms with cold-chain logistics and export certification.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right"></i></a>
+              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
           <div class="portfolio-card reveal delay-2">
             <div style="overflow:hidden; height:240px;">
-              <img src="livestock_tech_projects_hero_1778132978858.png" alt="Livestock Tech" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+              <picture>
+                <source srcset="livestock_tech_projects_hero_1778132978858.avif" type="image/avif">
+                <img src="livestock_tech_projects_hero_1778132978858.png" alt="Smart Livestock Tech — IoT-powered livestock management" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
+              </picture>
             </div>
             <div style="padding:32px;">
-              <span class="badge badge-gold" style="margin-bottom:14px;"><i class="fas fa-cow"></i> Livestock</span>
+              <span class="badge badge-gold" style="margin-bottom:14px;"><i class="fas fa-cow" aria-hidden="true"></i> Livestock</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Smart Livestock Tech</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">IoT-powered livestock management with precision nutrition and real-time health monitoring.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right"></i></a>
+              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
           <div class="portfolio-card reveal delay-3">
             <div style="overflow:hidden; height:240px;">
-              <img src="agri_land_procurement_hero_1778132897958.png" alt="Franchise" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+              <picture>
+                <source srcset="agri_land_procurement_hero_1778132897958.avif" type="image/avif">
+                <img src="agri_land_procurement_hero_1778132897958.png" alt="IGO Franchise Network — India's fastest-growing agri-franchise" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
+              </picture>
             </div>
             <div style="padding:32px;">
-              <span class="badge" style="background:rgba(245,158,11,0.1); color:#d97706; border-color:rgba(245,158,11,0.2); margin-bottom:14px;"><i class="fas fa-handshake"></i> Franchise</span>
+              <span class="badge" style="background:rgba(245,158,11,0.1); color:#d97706; border-color:rgba(245,158,11,0.2); margin-bottom:14px;"><i class="fas fa-handshake" aria-hidden="true"></i> Franchise</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">IGO Franchise Network</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">Join India's fastest-growing agri-franchise chain with proven ROI and government backing.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right"></i></a>
+              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
         </div>
 
         <div style="text-align:center; margin-top:52px;">
-          <a href="agri-projects.html" class="btn btn-primary btn-lg">View All Projects <i class="fas fa-arrow-right"></i></a>
+          <a href="agri-projects.html" class="btn btn-primary btn-lg">View All Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </div>
       </div>
     </section>
@@ -621,7 +1095,7 @@
     <section class="section" id="services">
       <div class="container">
         <div class="section-header">
-          <div class="section-label"><i class="fas fa-briefcase"></i> Services</div>
+          <div class="section-label"><i class="fas fa-briefcase" aria-hidden="true"></i> Services</div>
           <h2 class="section-title lg reveal">What We Do <span class="text-gradient-gold">Best</span></h2>
           <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Every service precision-crafted for India's agricultural economy.</p>
         </div>
@@ -629,45 +1103,45 @@
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:28px;" class="grid-services">
 
           <div class="service-card reveal">
-            <i class="fas fa-sack-dollar icon"></i>
+            <i class="fas fa-sack-dollar icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">Farm Loan Facilitation</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">End-to-end support for KCC, PMEGP, AIF, and NABARD loans. We handle paperwork, bank coordination, and legal compliance.</p>
-            <a href="farm-loan-form.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Apply Now <i class="fas fa-arrow-right"></i></a>
+            <a href="farm-loan-form.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Apply Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-1">
-            <i class="fas fa-percent icon"></i>
+            <i class="fas fa-percent icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">Subsidy Maximization</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">Our AI-powered subsidy stacking engine identifies the optimal combination of Central and State schemes — up to 90% cost coverage.</p>
-            <a href="subsidy-calculator.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Calculate Now <i class="fas fa-arrow-right"></i></a>
+            <a href="subsidy-calculator.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Calculate Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-2">
-            <i class="fas fa-file-lines icon"></i>
+            <i class="fas fa-file-lines icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">DPR Preparation</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">Detailed Project Report preparation meeting NABARD and Ministry of Agriculture standards — from concept to bankable document.</p>
-            <a href="dpr-guide.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Learn More <i class="fas fa-arrow-right"></i></a>
+            <a href="dpr-guide.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Learn More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-3">
-            <i class="fas fa-tractor icon"></i>
+            <i class="fas fa-tractor icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">Agri Project Management</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">End-to-end project development — from site selection and design to construction supervision and first-harvest management.</p>
-            <a href="agri-projects.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Explore Projects <i class="fas fa-arrow-right"></i></a>
+            <a href="agri-projects.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Explore Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-4">
-            <i class="fas fa-solar-panel icon"></i>
+            <i class="fas fa-solar-panel icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">PM-KUSUM Solar</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">90% subsidized solar installations for farms. We handle site assessment, system design, government approval, and installation.</p>
-            <a href="subsidies.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Check Eligibility <i class="fas fa-arrow-right"></i></a>
+            <a href="subsidies.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Check Eligibility <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-5">
-            <i class="fas fa-handshake icon"></i>
+            <i class="fas fa-handshake icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">Franchise Partnership</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">Join the IGO ecosystem as a franchise partner — proven business model, government tie-ups, and full operational support.</p>
-            <a href="portal.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Apply for Franchise <i class="fas fa-arrow-right"></i></a>
+            <a href="portal.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Apply for Franchise <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
         </div>
@@ -680,23 +1154,92 @@
         <div style="display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;" class="grid-2-col">
 
           <div class="reveal-left">
-            <div class="section-label"><i class="fas fa-sitemap"></i> Our Verticals</div>
+            <div class="section-label"><i class="fas fa-sitemap" aria-hidden="true"></i> Our Verticals</div>
             <h2 class="section-title lg" style="margin-bottom:20px;">The IGO <span class="text-gradient-green">Ecosystem</span></h2>
             <p style="color:var(--text-muted); font-size:1.05rem; line-height:1.75; margin-bottom:48px;">
               26 integrated verticals spanning production, processing, technology, and trade — all working together for your agricultural success.
             </p>
-            <a href="agri-projects.html" class="btn btn-primary">Explore All Verticals <i class="fas fa-arrow-right"></i></a>
+            <a href="agri-projects.html" class="btn btn-primary">Explore All Verticals <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="ecosystem-grid reveal-right" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
-            <div class="brand-item"><i class="fas fa-leaf" style="color:var(--primary); font-size:1.2rem;"></i> Exotic Farming</div>
-            <div class="brand-item"><i class="fas fa-fish" style="color:#6366f1; font-size:1.2rem;"></i> Aquaculture</div>
-            <div class="brand-item"><i class="fas fa-cow" style="color:var(--gold); font-size:1.2rem;"></i> Livestock Tech</div>
-            <div class="brand-item"><i class="fas fa-solar-panel" style="color:#f59e0b; font-size:1.2rem;"></i> Solar Agri</div>
-            <div class="brand-item"><i class="fas fa-droplet" style="color:#3b82f6; font-size:1.2rem;"></i> Hydroponics</div>
-            <div class="brand-item"><i class="fas fa-seedling" style="color:var(--primary); font-size:1.2rem;"></i> Horticulture</div>
-            <div class="brand-item"><i class="fas fa-warehouse" style="color:var(--gold); font-size:1.2rem;"></i> Cold Storage</div>
-            <div class="brand-item"><i class="fas fa-globe" style="color:#10b981; font-size:1.2rem;"></i> Agri Exports</div>
+            <div class="brand-item"><i class="fas fa-leaf" style="color:var(--primary); font-size:1.2rem;" aria-hidden="true"></i> Exotic Farming</div>
+            <div class="brand-item"><i class="fas fa-fish" style="color:#6366f1; font-size:1.2rem;" aria-hidden="true"></i> Aquaculture</div>
+            <div class="brand-item"><i class="fas fa-cow" style="color:var(--gold); font-size:1.2rem;" aria-hidden="true"></i> Livestock Tech</div>
+            <div class="brand-item"><i class="fas fa-solar-panel" style="color:#f59e0b; font-size:1.2rem;" aria-hidden="true"></i> Solar Agri</div>
+            <div class="brand-item"><i class="fas fa-droplet" style="color:#3b82f6; font-size:1.2rem;" aria-hidden="true"></i> Hydroponics</div>
+            <div class="brand-item"><i class="fas fa-seedling" style="color:var(--primary); font-size:1.2rem;" aria-hidden="true"></i> Horticulture</div>
+            <div class="brand-item"><i class="fas fa-warehouse" style="color:var(--gold); font-size:1.2rem;" aria-hidden="true"></i> Cold Storage</div>
+            <div class="brand-item"><i class="fas fa-globe" style="color:#10b981; font-size:1.2rem;" aria-hidden="true"></i> Agri Exports</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-label"><i class="fas fa-star" aria-hidden="true"></i> Success Stories</div>
+          <h2 class="section-title lg reveal">Trusted by <span class="text-gradient-gold">Agripreneurs</span></h2>
+          <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Real results from farmers and entrepreneurs across India.</p>
+        </div>
+
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:28px;">
+
+          <div class="testimonial-card reveal">
+            <div style="display:flex; gap:4px; margin-bottom:20px; margin-top:8px;">
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75; margin-bottom:28px;">"IGO helped me secure a ₹40L KCC loan in just 4 days. Their team handled everything — paperwork, bank meetings, even the legal compliance. Truly world-class."</p>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,var(--primary),#34d399); display:flex; align-items:center; justify-content:center; font-family:'Outfit',sans-serif; font-weight:900; color:#fff; font-size:1.2rem;">R</div>
+              <div>
+                <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem;">Rajesh Kumar</div>
+                <div style="font-size:0.8rem; color:var(--text-muted);">Dairy Farmer, Punjab</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card reveal delay-1">
+            <div style="display:flex; gap:4px; margin-bottom:20px; margin-top:8px;">
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75; margin-bottom:28px;">"The subsidy calculator alone saved me weeks of research. IGO stacked PM-KUSUM + NHB grants and I ended up covering 85% of my project cost. Game-changer."</p>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,var(--gold),#e2d1a8); display:flex; align-items:center; justify-content:center; font-family:'Outfit',sans-serif; font-weight:900; color:#0f172a; font-size:1.2rem;">P</div>
+              <div>
+                <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem;">Priya Sharma</div>
+                <div style="font-size:0.8rem; color:var(--text-muted);">Horticulturist, Maharashtra</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card reveal delay-2">
+            <div style="display:flex; gap:4px; margin-bottom:20px; margin-top:8px;">
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+              <i class="fas fa-star" style="color:var(--gold); font-size:0.9rem;" aria-hidden="true"></i>
+            </div>
+            <p style="color:var(--text-muted); font-size:0.95rem; line-height:1.75; margin-bottom:28px;">"Opened an IGO franchise 8 months ago. The support has been incredible — from DPR to bank liaison to operations. Already profitable in month 6."</p>
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#6366f1,#818cf8); display:flex; align-items:center; justify-content:center; font-family:'Outfit',sans-serif; font-weight:900; color:#fff; font-size:1.2rem;">A</div>
+              <div>
+                <div style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem;">Arvind Mehta</div>
+                <div style="font-size:0.8rem; color:var(--text-muted);">Franchise Partner, Gujarat</div>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -704,22 +1247,25 @@
     </section>
 
     <!-- ═══════════════ CTA SECTION ═══════════════ -->
-    <section class="cta-section">
-      <div class="cta-glow-1"></div>
-      <div class="cta-glow-2"></div>
-      
+    <section class="cta-section" aria-label="Call to Action — Start Your Journey">
+      <div class="cta-glow-1" aria-hidden="true"></div>
+      <div class="cta-glow-2" aria-hidden="true"></div>
+
       <div class="container cta-content">
 
         <div style="position:absolute; top:-80px; right:40px; opacity:0.3; pointer-events:none;" class="float-badge" aria-hidden="true">
-          <img src="igo_national_excellence_badge_1778137168738.png" alt="" style="width:160px; animation:slowRotate 30s linear infinite;" loading="lazy">
+          <picture>
+            <source srcset="igo_national_excellence_badge_1778137168738.avif" type="image/avif">
+            <img src="igo_national_excellence_badge_1778137168738.png" alt="" width="160" height="160" style="width:160px; animation:slowRotate 30s linear infinite;" loading="lazy" decoding="async">
+          </picture>
         </div>
 
         <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25); margin:0 auto var(--space-8);">
-          <i class="fas fa-rocket"></i> Start Your Journey
+          <i class="fas fa-rocket" aria-hidden="true"></i> Start Your Journey
         </div>
 
-        <h2 class="section-title xl reveal" style="color:#fff; margin-bottom:32px; text-align:center; letter-spacing: -2px;">
-          Ready to Build Your<br><span class="text-gradient-gold" style="font-size: 1.1em; display: inline-block; margin-top: 10px;">Agri-Empire?</span>
+        <h2 class="section-title xl reveal" style="color:#fff; margin-bottom:32px; text-align:center; letter-spacing:-2px;">
+          Ready to Build Your<br><span class="text-gradient-gold" style="font-size:1.1em; display:inline-block; margin-top:10px;">Agri-Empire?</span>
         </h2>
 
         <p style="color:rgba(255,255,255,0.65); font-size:1.25rem; max-width:720px; margin:0 auto 56px; text-align:center; line-height:1.8; font-weight:500;">
@@ -727,37 +1273,37 @@
         </p>
 
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;" class="reveal">
-          <a href="farm-loan-form.html" class="btn btn-gold btn-xl" style="box-shadow: 0 20px 40px rgba(197,160,89,0.25);">
-            Apply for a Loan <i class="fas fa-arrow-right"></i>
+          <a href="farm-loan-form.html" class="btn btn-gold btn-xl" style="box-shadow:0 20px 40px rgba(197,160,89,0.25);">
+            Apply for a Loan <i class="fas fa-arrow-right" aria-hidden="true"></i>
           </a>
           <a href="subsidy-calculator.html" class="btn btn-ghost btn-xl">
-            Calculate Subsidies <i class="fas fa-calculator"></i>
+            Calculate Subsidies <i class="fas fa-calculator" aria-hidden="true"></i>
           </a>
         </div>
 
-        <!-- Premium Trust Badges -->
-        <div style="display:flex; justify-content:center; align-items: center; gap:60px; margin-top:100px; flex-wrap:wrap;" class="reveal delay-2">
-          
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height: 1;">NABARD</div>
-            <div style="height: 2px; width: 30px; background: var(--gold); border-radius: 2px; opacity: 0.5;"></div>
-            <div style="font-size:0.75rem; font-weight: 800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Approved Partner</div>
+        <!-- Trust Badges -->
+        <div style="display:flex; justify-content:center; align-items:center; gap:60px; margin-top:100px; flex-wrap:wrap;" class="reveal delay-2">
+
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height:1;">NABARD</div>
+            <div style="height:2px; width:30px; background:var(--gold); border-radius:2px; opacity:0.5;"></div>
+            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Approved Partner</div>
           </div>
 
-          <div style="width:1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);" class="desktop-only-line"></div>
+          <div style="width:1px; height:60px; background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);" class="desktop-only-line" aria-hidden="true"></div>
 
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height: 1;">ISO 9001</div>
-            <div style="height: 2px; width: 30px; background: var(--gold); border-radius: 2px; opacity: 0.5;"></div>
-            <div style="font-size:0.75rem; font-weight: 800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Certified Quality</div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height:1;">ISO 9001</div>
+            <div style="height:2px; width:30px; background:var(--gold); border-radius:2px; opacity:0.5;"></div>
+            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Certified Quality</div>
           </div>
 
-          <div style="width:1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);" class="desktop-only-line"></div>
+          <div style="width:1px; height:60px; background:linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);" class="desktop-only-line" aria-hidden="true"></div>
 
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
-            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height: 1;">18+ Banks</div>
-            <div style="height: 2px; width: 30px; background: var(--gold); border-radius: 2px; opacity: 0.5;"></div>
-            <div style="font-size:0.75rem; font-weight: 800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Banking Partners</div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height:1;">18+ Banks</div>
+            <div style="height:2px; width:30px; background:var(--gold); border-radius:2px; opacity:0.5;"></div>
+            <div style="font-size:0.75rem; font-weight:800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Banking Partners</div>
           </div>
 
         </div>
@@ -774,7 +1320,7 @@
 
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" class="footer-logo-img" loading="lazy">
+            <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" class="footer-logo-img" width="52" height="52" loading="lazy" decoding="async">
             <div class="footer-logo-text">
               <span class="brand">IGO LOANS</span>
               <span class="tagline">The Sovereign Ecosystem</span>
@@ -782,53 +1328,55 @@
           </div>
           <p>India's institutional-grade agri-fintech consultancy. Building the future of agricultural finance, one project at a time.</p>
           <div class="footer-socials">
-            <a href="#" class="social-btn" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-btn" aria-label="Twitter / X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
           </div>
         </div>
 
         <div>
           <div class="footer-heading">Services</div>
-          <div class="footer-links">
-            <a href="farm-loan-form.html"><i class="fas fa-chevron-right"></i> Farm Loan Application</a>
-            <a href="subsidies.html"><i class="fas fa-chevron-right"></i> Subsidy Hub</a>
-            <a href="subsidy-calculator.html"><i class="fas fa-chevron-right"></i> Subsidy Calculator</a>
-            <a href="dpr-guide.html"><i class="fas fa-chevron-right"></i> DPR Guide</a>
-            <a href="portal.html"><i class="fas fa-chevron-right"></i> Service Portal</a>
-          </div>
+          <nav class="footer-links" aria-label="Services links">
+            <a href="farm-loan-form.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Farm Loan Application</a>
+            <a href="subsidies.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Subsidy Hub</a>
+            <a href="subsidy-calculator.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Subsidy Calculator</a>
+            <a href="dpr-guide.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> DPR Guide</a>
+            <a href="portal.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Service Portal</a>
+          </nav>
         </div>
 
         <div>
           <div class="footer-heading">Projects</div>
-          <div class="footer-links">
-            <a href="agri-projects.html"><i class="fas fa-chevron-right"></i> Exotic Farming</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right"></i> Aquaculture</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right"></i> Livestock Tech</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right"></i> Solar Agri</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right"></i> Hydroponics</a>
-          </div>
+          <nav class="footer-links" aria-label="Projects links">
+            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Exotic Farming</a>
+            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Aquaculture</a>
+            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Livestock Tech</a>
+            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Solar Agri</a>
+            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Hydroponics</a>
+          </nav>
         </div>
 
         <div>
           <div class="footer-heading">Contact</div>
-          <div class="footer-contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            Plot #42, Agri-Fintech Hub,<br>Delhi NCR — 110001, India
-          </div>
-          <div class="footer-contact-item">
-            <i class="fas fa-phone"></i>
-            +91 98765 43210
-          </div>
-          <div class="footer-contact-item">
-            <i class="fas fa-envelope"></i>
-            info@igoloans.in
-          </div>
-          <div class="footer-contact-item">
-            <i class="fas fa-clock"></i>
-            Mon–Sat · 9 AM – 7 PM IST
-          </div>
+          <address style="font-style:normal;">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+              Plot #42, Agri-Fintech Hub,<br>Delhi NCR — 110001, India
+            </div>
+            <div class="footer-contact-item">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              <a href="tel:+919876543210" style="color:inherit;">+91 98765 43210</a>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:info@igoloans.in" style="color:inherit;">info@igoloans.in</a>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fas fa-clock" aria-hidden="true"></i>
+              Mon–Sat · 9 AM – 7 PM IST
+            </div>
+          </address>
         </div>
 
       </div>
@@ -843,14 +1391,7 @@
     </div>
   </footer>
 
-  <script src="assets/app.js"></script>
-
-  <style>
-    @media (max-width: 900px) {
-      .grid-2-col { grid-template-columns: 1fr !important; gap: 48px !important; }
-      .desktop-only-line { display: none !important; }
-    }
-  </style>
+  <script src="assets/app.js" defer></script>
 
 </body>
 </html>

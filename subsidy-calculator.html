@@ -7,7 +7,8 @@
   <link rel="icon" type="image/png" href="assets/logo.png">
   <title>Subsidy Maximizer Elite | IGO Loans</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/navbar.css">
 
@@ -161,7 +162,7 @@
 
       <!-- Header -->
       <div class="calc-header">
-        <img src="igo_national_excellence_badge_1778137168738.png" alt="Excellence Badge" class="badge-float" loading="lazy">
+        <picture><source srcset="igo_national_excellence_badge_1778137168738.avif" type="image/avif"><img src="igo_national_excellence_badge_1778137168738.png" alt="Excellence Badge" class="badge-float" loading="lazy"></picture>
         <div style="position:relative; z-index:1;">
           <div class="section-label" style="background:rgba(197,160,89,0.15); color:var(--gold); border-color:rgba(197,160,89,0.3); margin:0 auto 20px;">
             <i class="fas fa-bolt"></i> IGO National Subsidy Engine
@@ -405,7 +406,7 @@
     </div>
   </footer>
 
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js" defer></script>
   <script>
     let currentStep = 1;
     let selectedVertical = '';
