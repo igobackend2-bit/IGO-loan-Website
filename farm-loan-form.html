@@ -147,6 +147,7 @@
       <ul class="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="agri-projects.html">Projects</a></li>
+        <li><a href="procurement.html">Procurement</a></li>
         <li><a href="farm-loan-form.html" class="active">Farm Loans</a></li>
         <li><a href="subsidies.html">Subsidies</a></li>
         <li><a href="subsidy-calculator.html">Calculator</a></li>
@@ -192,8 +193,7 @@
       </div>
 
       <!-- FORM -->
-      <form name="farm-loan-applications" method="POST" data-netlify="true" id="loanForm">
-        <input type="hidden" name="form-name" value="farm-loan-applications">
+      <form id="loanForm">
 
         <!-- ── STEP 1: Personal Info ── -->
         <div class="step-panel active" id="step1">
@@ -202,7 +202,7 @@
           <div class="form-row" style="margin-bottom:0;">
             <div class="form-group">
               <label class="form-label">Full Name <span style="color:#ef4444;">*</span></label>
-              <input class="form-control form-control-lg" type="text" name="full_name" required placeholder="As per Aadhaar card">
+              <input class="form-control form-control-lg" type="text" name="fullName" required placeholder="As per Aadhaar card">
             </div>
             <div class="form-group">
               <label class="form-label">Mobile Number <span style="color:#ef4444;">*</span></label>
@@ -260,11 +260,11 @@
           <div class="form-row" style="margin-bottom:0;">
             <div class="form-group">
               <label class="form-label">Land Area (Acres) <span style="color:#ef4444;">*</span></label>
-              <input class="form-control form-control-lg" type="number" name="land_area" required placeholder="e.g. 5">
+              <input class="form-control form-control-lg" type="number" name="farmSize" required placeholder="e.g. 5">
             </div>
             <div class="form-group">
               <label class="form-label">Project Cost (₹ Lakhs) <span style="color:#ef4444;">*</span></label>
-              <input class="form-control form-control-lg" type="number" name="project_cost" required placeholder="e.g. 100">
+              <input class="form-control form-control-lg" type="number" name="projectCost" required placeholder="e.g. 100">
             </div>
           </div>
 
@@ -295,7 +295,7 @@
           <div class="form-row" style="margin-bottom:0;">
             <div class="form-group">
               <label class="form-label">Loan Amount (₹ Lakhs) <span style="color:#ef4444;">*</span></label>
-              <input class="form-control form-control-lg" type="number" name="loan_amount" required placeholder="e.g. 75">
+              <input class="form-control form-control-lg" type="number" name="loanAmount" required placeholder="e.g. 75">
             </div>
             <div class="form-group">
               <label class="form-label">Loan Tenure</label>
@@ -322,14 +322,14 @@
           <div class="form-group">
             <label class="form-label" style="margin-bottom:16px;">Interest in IGO Managed Farms (Passive Income)?</label>
             <label class="option-card" id="optYes">
-              <input type="radio" name="agritech_interest" value="yes">
+              <input type="radio" name="managedInterest" value="yes">
               <div>
                 <div style="font-weight:700; margin-bottom:4px;">Yes — professionally managed operation</div>
                 <div style="font-size:0.85rem; color:var(--text-muted);">IGO manages the farm; you earn passive returns</div>
               </div>
             </label>
             <label class="option-card selected" id="optNo">
-              <input type="radio" name="agritech_interest" value="no" checked>
+              <input type="radio" name="managedInterest" value="no" checked>
               <div>
                 <div style="font-weight:700; margin-bottom:4px;">No — I will manage it myself</div>
                 <div style="font-size:0.85rem; color:var(--text-muted);">You run operations with our consultancy support</div>
@@ -507,7 +507,7 @@
       });
     });
 
-    // Form submission
+    // Form submission - Hostinger API
     document.getElementById('loanForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
@@ -515,26 +515,51 @@
       btn.disabled = true;
 
       try {
-        const formData = new FormData(e.target);
-        const res = await fetch('/', {
+        const form = e.target;
+        const formData = {
+          fullName: form.fullName.value,
+          phone: form.phone.value,
+          email: form.email.value,
+          state: form.state.value,
+          district: form.district ? form.district.value : '',
+          farmSize: form.farmSize.value,
+          loanAmount: parseFloat(form.loanAmount.value) * 100000, // Convert lakhs to actual amount
+          loanType: form.project_category ? form.project_category.value : 'Agri Farming',
+          experience: form.experience ? form.experience.value : '0',
+          managedInterest: form.managedInterest ? form.managedInterest.value : 'no',
+          loanPurpose: form.loan_purpose ? form.loan_purpose.value : null,
+          investCapacity: form.projectCost ? (parseFloat(form.projectCost.value) > 10 ? '10l+' : parseFloat(form.projectCost.value) > 5 ? '5-10l' : '0-5l') : '0-5l'
+        };
+
+        const res = await fetch('/api/farm-loan-application', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: new URLSearchParams(formData).toString()
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
         });
 
-        if (res.ok) {
+        const data = await res.json();
+
+        if (res.ok && data.status === 'success') {
           e.target.style.display = 'none';
           document.querySelector('.step-dots').style.display = 'none';
           document.querySelector('[id="step-label"]').parentElement.style.display = 'none';
           document.querySelectorAll('h1, p').forEach((el, i) => { if (i < 2) el.style.display = 'none'; });
           document.getElementById('formSuccess').style.display = 'block';
+          // Show reference number in success message
+          const successMsg = document.querySelector('#formSuccess h3');
+          if (successMsg && data.referenceNumber) {
+            successMsg.innerHTML = `Application Submitted!<br><small style="font-size:0.6em; color:var(--text-muted);">Ref: ${data.referenceNumber}</small>`;
+          }
           // Mark all dots done
           for (let i = 1; i <= 4; i++) {
             document.getElementById('dot' + i).classList.add('done');
           }
-        } else throw new Error('Failed');
-      } catch {
-        alert('Submission failed. Please contact info@igoloans.in');
+        } else {
+          throw new Error(data.message || 'Failed');
+        }
+      } catch (err) {
+        console.error('Submission error:', err);
+        alert('Submission failed: ' + (err.message || 'Please contact info@igoloans.in'));
         btn.innerHTML = 'Submit Application <i class="fas fa-check-circle"></i>';
         btn.disabled = false;
       }

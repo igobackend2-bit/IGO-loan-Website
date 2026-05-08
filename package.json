@@ -8,7 +8,8 @@
     "dev": "nodemon server.js",
     "dv": "nodemon server.js",
     "serve": "npx serve .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo \"No build needed - static site\""
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.38.4",

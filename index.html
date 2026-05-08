@@ -124,26 +124,138 @@
     /* CTA Section */
     .cta-section {
       background: var(--primary-dark);
-      padding: 120px 0;
+      padding: 140px 0;
       text-align: center;
       position: relative;
       overflow: hidden;
+      border-top: 1px solid rgba(197, 160, 89, 0.1);
     }
     .cta-section::before {
       content: '';
-      position: absolute; top: -60%; left: -20%;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(5,150,105,0.2), transparent 65%);
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.04;
       pointer-events: none;
+      z-index: 1;
     }
-    .cta-section::after {
-      content: '';
-      position: absolute; bottom: -60%; right: -20%;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(197,160,89,0.12), transparent 65%);
+    .cta-glow-1 {
+      position: absolute; top: -20%; left: -10%;
+      width: 60%; height: 80%;
+      background: radial-gradient(circle, rgba(5,150,105,0.15), transparent 70%);
       pointer-events: none;
+      z-index: 0;
+    }
+    .cta-glow-2 {
+      position: absolute; bottom: -20%; right: -10%;
+      width: 60%; height: 80%;
+      background: radial-gradient(circle, rgba(197,160,89,0.1), transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Impact Stats Section */
+    .stats-section {
+      background: var(--primary-dark);
+      padding: 140px 0;
+      position: relative;
+      overflow: hidden;
+      border-top: 1px solid rgba(197, 160, 89, 0.05);
+    }
+    .stats-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .stats-glow {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(circle at 20% 50%, rgba(5,150,105,0.15) 0%, transparent 60%),
+                  radial-gradient(circle at 80% 50%, rgba(197,160,89,0.1) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ecosystem Card Polish */
+    .journey-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 52px 32px;
+      text-align: center;
+      transition: all 0.5s var(--ease-spring);
+      position: relative;
+      z-index: 2;
+    }
+    .journey-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+    .journey-card .icon-box {
+      width: 80px; height: 80px;
+      background: var(--primary-light);
+      border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      color: var(--primary);
+      margin: 0 auto 28px;
+      transition: all 0.4s var(--ease-spring);
+    }
+    .journey-card:hover .icon-box {
+      background: var(--primary);
+      color: #fff;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* Step Connector Glow */
+    .step-connector {
+      position: absolute; top: 60px; left: 10%; right: 10%;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--gold), transparent);
+      opacity: 0.2;
+      filter: blur(1px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Premium Button Polish */
+    .cta-section .btn-gold {
+      background: linear-gradient(135deg, #c5a059 0%, #e2d1a8 50%, #a38146 100%);
+      background-size: 200% auto;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.3);
+    }
+    .cta-section .btn-gold:hover {
+      background-position: right center;
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .cta-section .btn-ghost {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .cta-section .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--gold);
+    }
+
+    /* Badge Animation */
+    @keyframes slowRotateBadge {
+      from { transform: rotate(0deg) translateY(0); }
+      50% { transform: rotate(180deg) translateY(-20px); }
+      to { transform: rotate(360deg) translateY(0); }
+    }
+    .cta-section .float-badge img {
+      animation: slowRotateBadge 25s ease-in-out infinite !important;
     }
 
     /* Impact stat bar */
@@ -189,6 +301,7 @@
       <ul class="nav-links">
         <li><a href="index.html" class="active">Home</a></li>
         <li><a href="agri-projects.html">Projects</a></li>
+        <li><a href="procurement.html">Procurement</a></li>
         <li><a href="farm-loan-form.html">Farm Loans</a></li>
         <li><a href="subsidies.html">Subsidies</a></li>
         <li><a href="subsidy-calculator.html">Calculator</a></li>
@@ -290,44 +403,46 @@
           </p>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:28px; position:relative;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:32px; position:relative;">
 
-          <!-- Step connector line (desktop) -->
-          <div style="position:absolute; top:60px; left:16%; right:16%; height:2px; background:linear-gradient(90deg, var(--primary), var(--gold)); opacity:0.25; pointer-events:none;" class="desktop-only-line"></div>
+          <!-- Step connector line -->
+          <div class="step-connector desktop-only-line"></div>
 
-          <div class="card reveal" style="text-align:center; padding:48px 32px;">
-            <div style="width:80px; height:80px; background:var(--primary-light); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:2rem; color:var(--primary); margin:0 auto 24px;">
+          <div class="journey-card reveal">
+            <div class="icon-box">
               <i class="fas fa-map-location-dot"></i>
             </div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); margin-bottom:12px;">Step 01</div>
-            <h4 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:10px;">Land</h4>
-            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6;">Procurement & Legal via <strong>IGO Procurement</strong></p>
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 01</div>
+            <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Land</h4>
+            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Procurement & Legal via <strong>IGO Procurement</strong></p>
           </div>
 
-          <div class="card reveal delay-1" style="text-align:center; padding:48px 32px;">
-            <div style="width:80px; height:80px; background:var(--primary-light); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:2rem; color:var(--primary); margin:0 auto 24px;">
+          <div class="journey-card reveal delay-1">
+            <div class="icon-box">
               <i class="fas fa-file-invoice"></i>
             </div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); margin-bottom:12px;">Step 02</div>
-            <h4 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:10px;">Planning</h4>
-            <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6;">Master DPR & Govt. Liasoning</p>
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 02</div>
+            <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Planning</h4>
+            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Master DPR & Govt. Liasoning</p>
           </div>
 
-          <div class="card-dark reveal delay-2" style="text-align:center; padding:48px 32px; border-color:var(--gold);">
-            <div style="width:80px; height:80px; background:rgba(197,160,89,0.15); border-radius:var(--radius-md); border:1px solid rgba(197,160,89,0.3); display:flex; align-items:center; justify-content:center; font-size:2rem; color:var(--gold); margin:0 auto 24px;">
+          <div class="journey-card reveal delay-2" style="border-color:var(--gold); background: var(--primary-dark); color: #fff;">
+            <div class="icon-box" style="background:rgba(197,160,89,0.15); color:var(--gold); border:1px solid rgba(197,160,89,0.3);">
               <i class="fas fa-sack-dollar"></i>
             </div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.45); margin-bottom:12px;">Step 03 · YOU ARE HERE</div>
-            <h4 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:10px; color:var(--gold);">Funding</h4>
-            <p style="font-size:0.9rem; color:rgba(255,255,255,0.6); line-height:1.6;">Loans & Subsidies via <strong style="color:#fff;">IGO Loans</strong></p>
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:rgba(255,255,255,0.4); margin-bottom:14px;">Step 03 · YOU ARE HERE</div>
+            <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px; color:var(--gold);">Funding</h4>
+            <p style="font-size:0.95rem; color:rgba(255,255,255,0.6); line-height:1.7;">Loans & Subsidies via <strong style="color:#fff;">IGO Loans</strong></p>
           </div>
 
-          <div class="card reveal delay-3" style="text-align:center; padding:48px 32px;">
-            <div style="width:80px; height:80px; background:var(--primary-light); border-radius:var(--radius-md); display:flex; align-items:center; justify-content:center; font-size:2rem; color:var(--primary); margin:0 auto 24px;">
+          <div class="journey-card reveal delay-3">
+            <div class="icon-box">
               <i class="fas fa-tractor"></i>
             </div>
-            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); margin-bottom:12px;">Step 04</div>
-            <h4 style="font-family:'Outfit',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:10px;">Operation</h4>
+            <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 04</div>
+            <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Operation</h4>
+            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Build & Manage via <strong>IGO Agri Projects</strong></p>
+          </div>
             <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6;">Build & Manage via <strong>IGO Agri Projects</strong></p>
           </div>
 
@@ -336,9 +451,9 @@
     </section>
 
     <!-- ═══════════════ IMPACT STATS ═══════════════ -->
-    <section class="section" style="background:var(--primary-dark); overflow:hidden; position:relative;">
-      <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 30% 50%, rgba(5,150,105,0.15) 0%, transparent 60%); pointer-events:none;"></div>
-      <div class="container" style="position:relative; z-index:1;">
+    <section class="stats-section">
+      <div class="stats-glow"></div>
+      <div class="container" style="position:relative; z-index:2;">
 
         <div class="section-header" style="align-items:center;">
           <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25);">
@@ -347,30 +462,30 @@
           <h2 class="section-title lg reveal" style="color:#fff; text-align:center;">Scaling Excellence<br><span class="text-gradient-gold">Across 28 States</span></h2>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:28px;">
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:32px;">
 
-          <div class="card-stat reveal">
+          <div class="card-stat reveal" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
             <div class="stat-value" data-count="1000000" data-suffix="+" data-prefix="">1M+</div>
             <div class="stat-label">Agripreneurs Targeted</div>
-            <div class="impact-bar"><div class="impact-bar-fill" style="width:65%; background:var(--gold);"></div></div>
+            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:65%; background:var(--gold); box-shadow: 0 0 15px rgba(197,160,89,0.3);"></div></div>
           </div>
 
-          <div class="card-stat reveal delay-1">
+          <div class="card-stat reveal delay-1" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
             <div class="stat-value" style="font-size:3rem;">₹5,000 Cr+</div>
             <div class="stat-label">Capital Facilitation</div>
-            <div class="impact-bar"><div class="impact-bar-fill" style="width:48%; background:var(--primary);"></div></div>
+            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:48%; background:var(--primary); box-shadow: 0 0 15px rgba(5,150,105,0.3);"></div></div>
           </div>
 
-          <div class="card-stat reveal delay-2">
+          <div class="card-stat reveal delay-2" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
             <div class="stat-value" data-count="26">26</div>
             <div class="stat-label">Vertical Brands</div>
-            <div class="impact-bar"><div class="impact-bar-fill" style="width:100%; background:linear-gradient(90deg,var(--primary),var(--gold));"></div></div>
+            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:100%; background:linear-gradient(90deg,var(--primary),var(--gold)); box-shadow: 0 0 15px rgba(197,160,89,0.3);"></div></div>
           </div>
 
-          <div class="card-stat reveal delay-3">
+          <div class="card-stat reveal delay-3" style="background: rgba(255,255,255,0.03); border-color: rgba(197,160,89,0.15);">
             <div class="stat-value" data-count="28">28</div>
             <div class="stat-label">States Operational</div>
-            <div class="impact-bar"><div class="impact-bar-fill" style="width:85%; background:var(--gold);"></div></div>
+            <div class="impact-bar" style="background: rgba(255,255,255,0.05);"><div class="impact-bar-fill" style="width:85%; background:var(--gold); box-shadow: 0 0 15px rgba(197,160,89,0.3);"></div></div>
           </div>
 
         </div>
@@ -429,12 +544,6 @@
               </div>
             </div>
 
-            <!-- Floating Card -->
-            <div class="float-badge" style="position:absolute; bottom:-20px; left:-20px; background:var(--primary-dark); padding:24px 28px; border-radius:var(--radius-lg); border:1px solid rgba(197,160,89,0.25); box-shadow:var(--shadow-xl);">
-              <div style="font-size:1.6rem; color:var(--gold); margin-bottom:10px;"><i class="fas fa-landmark"></i></div>
-              <div style="color:#fff; font-weight:800; font-size:1.1rem;">Institutional Grade</div>
-              <div style="color:rgba(255,255,255,0.5); font-size:0.8rem;">Bank of Baroda · NABARD</div>
-            </div>
           </div>
 
         </div>
@@ -596,45 +705,61 @@
 
     <!-- ═══════════════ CTA SECTION ═══════════════ -->
     <section class="cta-section">
-      <div class="container" style="position:relative; z-index:1;">
+      <div class="cta-glow-1"></div>
+      <div class="cta-glow-2"></div>
+      
+      <div class="container cta-content">
 
-        <div style="position:absolute; top:-60px; right:40px; opacity:0.4;" class="float-badge" aria-hidden="true">
-          <img src="igo_national_excellence_badge_1778137168738.png" alt="" style="width:120px; animation:slowRotate 20s linear infinite;" loading="lazy">
+        <div style="position:absolute; top:-80px; right:40px; opacity:0.3; pointer-events:none;" class="float-badge" aria-hidden="true">
+          <img src="igo_national_excellence_badge_1778137168738.png" alt="" style="width:160px; animation:slowRotate 30s linear infinite;" loading="lazy">
         </div>
 
-        <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25); margin:0 auto var(--space-6);">
-          <i class="fas fa-rocket"></i> Start Today
+        <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25); margin:0 auto var(--space-8);">
+          <i class="fas fa-rocket"></i> Start Your Journey
         </div>
 
-        <h2 class="section-title xl reveal" style="color:#fff; margin-bottom:24px; text-align:center;">
-          Ready to Build Your<br><span class="text-gradient-gold">Agri-Empire?</span>
+        <h2 class="section-title xl reveal" style="color:#fff; margin-bottom:32px; text-align:center; letter-spacing: -2px;">
+          Ready to Build Your<br><span class="text-gradient-gold" style="font-size: 1.1em; display: inline-block; margin-top: 10px;">Agri-Empire?</span>
         </h2>
 
-        <p style="color:rgba(255,255,255,0.6); font-size:1.2rem; max-width:640px; margin:0 auto 52px; text-align:center; line-height:1.7; font-weight:500;">
+        <p style="color:rgba(255,255,255,0.65); font-size:1.25rem; max-width:720px; margin:0 auto 56px; text-align:center; line-height:1.8; font-weight:500;">
           Join thousands of agripreneurs who've secured funding, built projects, and created lasting legacies with IGO's sovereign ecosystem.
         </p>
 
-        <div style="display:flex; justify-content:center; gap:20px; flex-wrap:wrap;" class="reveal">
-          <a href="farm-loan-form.html" class="btn btn-gold btn-xl">Apply for a Loan <i class="fas fa-arrow-right"></i></a>
-          <a href="subsidy-calculator.html" class="btn btn-ghost btn-xl">Calculate Subsidies <i class="fas fa-calculator"></i></a>
+        <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;" class="reveal">
+          <a href="farm-loan-form.html" class="btn btn-gold btn-xl" style="box-shadow: 0 20px 40px rgba(197,160,89,0.25);">
+            Apply for a Loan <i class="fas fa-arrow-right"></i>
+          </a>
+          <a href="subsidy-calculator.html" class="btn btn-ghost btn-xl">
+            Calculate Subsidies <i class="fas fa-calculator"></i>
+          </a>
         </div>
 
-        <!-- Trust Badges -->
-        <div style="display:flex; justify-content:center; gap:40px; margin-top:72px; flex-wrap:wrap;" class="reveal delay-2">
-          <div style="text-align:center;">
-            <div style="font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:900; color:var(--gold);">NABARD</div>
-            <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.4); margin-top:4px;">Approved Partner</div>
+        <!-- Premium Trust Badges -->
+        <div style="display:flex; justify-content:center; align-items: center; gap:60px; margin-top:100px; flex-wrap:wrap;" class="reveal delay-2">
+          
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height: 1;">NABARD</div>
+            <div style="height: 2px; width: 30px; background: var(--gold); border-radius: 2px; opacity: 0.5;"></div>
+            <div style="font-size:0.75rem; font-weight: 800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Approved Partner</div>
           </div>
-          <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
-          <div style="text-align:center;">
-            <div style="font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:900; color:var(--gold);">ISO 9001</div>
-            <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.4); margin-top:4px;">Certified Quality</div>
+
+          <div style="width:1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);" class="desktop-only-line"></div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height: 1;">ISO 9001</div>
+            <div style="height: 2px; width: 30px; background: var(--gold); border-radius: 2px; opacity: 0.5;"></div>
+            <div style="font-size:0.75rem; font-weight: 800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Certified Quality</div>
           </div>
-          <div style="width:1px; background:rgba(255,255,255,0.1);"></div>
-          <div style="text-align:center;">
-            <div style="font-family:'Outfit',sans-serif; font-size:1.8rem; font-weight:900; color:var(--gold);">18+ Banks</div>
-            <div style="font-size:0.7rem; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.4); margin-top:4px;">Banking Partners</div>
+
+          <div style="width:1px; height: 60px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);" class="desktop-only-line"></div>
+
+          <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+            <div style="font-family:'Outfit',sans-serif; font-size:2rem; font-weight:900; color:var(--gold); line-height: 1;">18+ Banks</div>
+            <div style="height: 2px; width: 30px; background: var(--gold); border-radius: 2px; opacity: 0.5;"></div>
+            <div style="font-size:0.75rem; font-weight: 800; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.4);">Banking Partners</div>
           </div>
+
         </div>
 
       </div>
