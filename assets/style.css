@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
    IGO LOANS & SUBSIDY — MASTER DESIGN SYSTEM v2.0
-   Premium Fintech · Agri-Finance · India
+   Premium Fintech · Farming-Finance · India
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── 1. GOOGLE FONTS ─────────────────────────────────────────── */
@@ -999,6 +999,7 @@ textarea.form-control {
   transform: translateY(28px);
   transition: opacity var(--duration-slow) var(--ease-out),
               transform var(--duration-slow) var(--ease-out);
+  will-change: transform, opacity;
 }
 
 .reveal.visible {

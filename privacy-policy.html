@@ -3,125 +3,180 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Privacy Policy — IGO Loans & Subsidy. How we collect, use, and protect your personal data.">
+  <meta name="description" content="Privacy Policy for IGO Loans — Your trust and data security are our highest priority.">
   <link rel="icon" type="image/png" href="assets/logo.png">
-  <title>Privacy Policy | IGO Loans & Subsidy</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Privacy Policy | IGO Loans</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/navbar.css">
   <style>
-    .hero-solid { padding-top: calc(var(--nav-height) + 72px); padding-bottom: 72px; }
-    .legal-body { max-width: 840px; margin: 60px auto 100px; padding: 0 24px; }
-    .legal-section { margin-bottom: 48px; }
-    .legal-h2 { font-family: 'Outfit', sans-serif; font-size: 1.3rem; font-weight: 800; color: var(--primary); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-light); display: flex; align-items: center; gap: 10px; }
-    .legal-p { color: var(--text-muted); line-height: 1.85; font-size: 0.975rem; margin-bottom: 16px; }
-    .legal-ul { padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
-    .legal-ul li { display: flex; gap: 12px; align-items: flex-start; color: var(--text-muted); font-size: 0.95rem; line-height: 1.65; }
-    .legal-ul li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--primary); flex-shrink: 0; margin-top: 9px; }
+    body { padding-top: var(--nav-height); background: var(--bg-alt); }
+    .legal-wrap { max-width: 900px; margin: 60px auto 100px; padding: 0 24px; }
+    .legal-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 60px; box-shadow: var(--shadow-xl); }
+    .legal-header { margin-bottom: 48px; border-bottom: 2px solid var(--border); padding-bottom: 32px; }
+    h1 { font-family: 'Outfit', sans-serif; font-size: 3rem; font-weight: 900; color: var(--primary-dark); margin-bottom: 12px; }
+    .last-updated { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-light); }
+    .legal-content h2 { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 40px 0 20px; display: flex; align-items: center; gap: 12px; }
+    .legal-content p { margin-bottom: 20px; color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; }
+    .legal-content ul { margin: 0 0 24px 24px; list-style: disc; color: var(--text-muted); }
+    .legal-content li { margin-bottom: 12px; }
+    @media (max-width: 640px) { .legal-card { padding: 40px 24px; } h1 { font-size: 2.25rem; } }
   </style>
 </head>
 <body>
   <div class="scroll-progress"></div>
-  <nav class="navbar" id="main-nav">
+  <nav class="navbar" id="main-nav" aria-label="Main navigation">
     <div class="navbar-container">
-      <a href="index.html" class="logo-wrap">
-        <div class="logo-img-box"><img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" loading="lazy"></div>
-        <div class="logo-text"><span class="brand">IGO LOANS</span><span class="tagline">The Sovereign Ecosystem</span></div>
+      <a href="index.html" class="logo-wrap" aria-label="IGO Loans — Home">
+        <div class="logo-img-box">
+          <img src="assets/farm-loans-logo.jpg" alt="IGO Farm Loans Logo" width="46" height="46" loading="eager">
+        </div>
+        <div class="logo-text">
+          <span class="brand">IGO LOANS</span>
+          <span class="tagline">The Sovereign Ecosystem</span>
+        </div>
       </a>
-      <ul class="nav-links">
+
+      <ul class="nav-links" id="nav-links" role="list">
         <li><a href="index.html">Home</a></li>
+        <li><a href="farming-projects.html">Projects</a></li>
+        <li><a href="procurement.html">Procurement</a></li>
         <li><a href="farm-loan-form.html">Farm Loans</a></li>
         <li><a href="subsidies.html">Subsidies</a></li>
+        <li><a href="subsidy-calculator.html">Calculator</a></li>
         <li><a href="dpr-guide.html">DPR Guide</a></li>
-        <li><a href="portal.html">Portal</a></li>
       </ul>
+
       <div class="nav-cta-group">
-        <div id="theme-toggle" class="theme-toggle" role="button" tabindex="0"><i class="fas fa-moon"></i></div>
-        <div class="mobile-toggle" id="menu-btn" role="button"><i class="fas fa-bars"></i></div>
+        <a href="farm-loan-form.html" class="nav-btn nav-btn-primary">Apply Now <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+        <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Toggle dark mode" tabindex="0">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </div>
+        <div class="mobile-toggle" id="menu-btn" role="button" aria-label="Toggle menu">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </div>
       </div>
     </div>
   </nav>
-  <section class="hero-solid">
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(5,150,105,0.15),transparent 60%);pointer-events:none;z-index:1;"></div>
-    <div class="container" style="position:relative;z-index:2;text-align:center;">
-      <div class="section-label" style="background:rgba(197,160,89,0.12);color:var(--gold);border-color:rgba(197,160,89,0.25);margin:0 auto 20px;"><i class="fas fa-shield-halved"></i> Legal & Compliance</div>
-      <h1 class="section-title lg" style="color:#fff;margin-bottom:14px;">Privacy Policy</h1>
-      <p style="color:rgba(255,255,255,0.55);font-size:0.9rem;font-weight:600;">Last Updated: May 2026 · IGO Loans & Subsidy</p>
-    </div>
-  </section>
-  <main class="legal-body">
-    <div class="notice notice-green" style="margin-bottom:40px;"><i class="fas fa-info-circle"></i><span>At <strong>IGO Loans & Subsidy</strong>, we are committed to protecting your privacy and ensuring the highest level of security for your personal information.</span></div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-database"></i> 1. Information We Collect</h2>
-      <p class="legal-p">We collect personal information necessary to provide our consultancy services, including but not limited to:</p>
-      <ul class="legal-ul">
-        <li><strong>Identity Information:</strong> Full name, date of birth, gender, and photograph.</li>
-        <li><strong>Contact Information:</strong> Mobile number, email address, permanent and communication address.</li>
-        <li><strong>KYC Documents:</strong> Aadhaar Card, PAN Card, Voter ID, and other government-issued identification.</li>
-        <li><strong>Financial Information:</strong> Bank statements, income tax returns (ITR), land records, and project reports.</li>
-        <li><strong>Business Information:</strong> MSME/Udyam registration details, company incorporation documents, and GST details.</li>
-      </ul>
-    </div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-bullseye"></i> 2. Purpose of Collection</h2>
-      <ul class="legal-ul">
-        <li>Assessing eligibility for various government subsidies and bank loan schemes.</li>
-        <li>Preparing project reports and application dossiers for submission to financial institutions.</li>
-        <li>Facilitating communication between you and banks or government agencies (e.g., NABARD, MSME Ministry).</li>
-        <li>Compliance with anti-money laundering (AML) and KYC regulations.</li>
-      </ul>
-    </div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-share-nodes"></i> 3. Information Sharing</h2>
-      <p class="legal-p">We do not sell your personal data. We may share information with authorized banking partners, government departments, technical partners, and legal authorities as required by law.</p>
-    </div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-lock"></i> 4. Data Security</h2>
-      <p class="legal-p">We implement robust technical and organizational measures to safeguard your data against unauthorized access. Our systems use industry-standard encryption and follow the IT Act, 2000 and the DPDP Act, 2023 guidelines.</p>
-    </div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-clock"></i> 5. Data Retention</h2>
-      <p class="legal-p">We retain your personal information for as long as necessary to fulfill the purposes for which it was collected or as required by regulatory requirements. Post-fulfillment, data is securely archived or deleted.</p>
-    </div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-user-check"></i> 6. Your Rights</h2>
-      <ul class="legal-ul">
-        <li>Access and review the personal information we hold about you.</li>
-        <li>Request correction of any inaccurate or incomplete information.</li>
-        <li>Withdraw consent for data processing at any time (subject to contractual obligations).</li>
-        <li>Request deletion of your data once the service purpose is fulfilled.</li>
-      </ul>
-    </div>
-    <div class="legal-section">
-      <h2 class="legal-h2"><i class="fas fa-rotate"></i> 7. Changes to This Policy</h2>
-      <p class="legal-p">We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. We encourage periodic review.</p>
-    </div>
-    <div style="background:var(--primary-dark);border-radius:var(--radius-xl);padding:40px;margin-top:48px;">
-      <h3 style="font-family:'Outfit',sans-serif;font-size:1.2rem;font-weight:800;color:var(--gold);margin-bottom:16px;"><i class="fas fa-envelope"></i> 8. Contact Us</h3>
-      <p style="color:rgba(255,255,255,0.65);font-size:0.9rem;line-height:1.75;margin-bottom:20px;">For questions about this Privacy Policy, contact our Grievance Officer:</p>
-      <div style="color:rgba(255,255,255,0.7);font-size:0.9rem;display:flex;flex-direction:column;gap:10px;">
-        <div><i class="fas fa-envelope" style="color:var(--gold);margin-right:10px;"></i><a href="mailto:privacy@igoloans.in" style="color:var(--gold);">privacy@igoloans.in</a></div>
-        <div><i class="fas fa-map-marker-alt" style="color:var(--gold);margin-right:10px;"></i>Plot #42, Agri-Fintech Hub, Delhi NCR, India</div>
+
+  <main class="legal-wrap">
+    <div class="legal-card">
+      <header class="legal-header">
+        <div class="last-updated">Last Updated: May 2026</div>
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is foundational to our institutional commitment.</p>
+      </header>
+
+      <div class="legal-content">
+        <h2>1. Information Collection</h2>
+        <p>We collect information necessary to provide institutional-grade farming-fintech services, including:</p>
+        <ul>
+          <li>Contact details (Name, Email, Phone)</li>
+          <li>Farming project specifications and land details</li>
+          <li>Financial information for loan eligibility assessment</li>
+          <li>Technical data (IP address, browser type) for security and optimization</li>
+        </ul>
+
+        <h2>2. Data Usage</h2>
+        <p>Your data is processed exclusively for:</p>
+        <ul>
+          <li>Evaluating loan and subsidy eligibility</li>
+          <li>Providing customized DPR and project consultancy</li>
+          <li>Improving our platform's user experience</li>
+          <li>Ensuring legal and regulatory compliance</li>
+        </ul>
+
+        <h2>3. Data Protection</h2>
+        <p>We implement state-of-the-art encryption and security protocols to protect your sensitive information. Access is restricted to authorized personnel under strict non-disclosure agreements.</p>
+
+        <h2>4. Institutional Standards</h2>
+        <p>At IGO Loans, we adhere to global data protection standards. We do not sell or trade your personal information to third-party marketers.</p>
+
+        <h2>5. Contact Support</h2>
+        <p>For any privacy-related inquiries, please reach out to our dedicated compliance team at info@igoloans.in.</p>
       </div>
     </div>
   </main>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-grid">
+
         <div class="footer-brand">
           <div class="footer-logo">
-            <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" class="footer-logo-img" loading="lazy">
-            <div class="footer-logo-text"><span class="brand">IGO LOANS</span><span class="tagline">The Sovereign Ecosystem</span></div>
+            <img src="assets/farm-loans-logo.jpg" alt="IGO Loans Logo" class="footer-logo-img" width="52" height="52" loading="lazy" decoding="async">
+            <div class="footer-logo-text">
+              <span class="brand">IGO LOANS</span>
+              <span class="tagline">The Sovereign Ecosystem</span>
+            </div>
           </div>
-          <p>India's institutional-grade agri-fintech consultancy.</p>
+          <p>India's institutional-grade farming-fintech consultancy. Building the future of agricultural finance, one project at a time.</p>
+          <div class="footer-socials">
+            <a href="#" class="social-btn" aria-label="Twitter / X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+            <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="#" class="social-btn" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+            <a href="#" class="social-btn" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+          </div>
         </div>
-        <div><div class="footer-heading">Services</div><div class="footer-links"><a href="farm-loan-form.html"><i class="fas fa-chevron-right"></i> Farm Loans</a><a href="subsidies.html"><i class="fas fa-chevron-right"></i> Subsidies</a><a href="dpr-guide.html"><i class="fas fa-chevron-right"></i> DPR Guide</a></div></div>
-        <div><div class="footer-heading">Legal</div><div class="footer-links"><a href="privacy-policy.html"><i class="fas fa-chevron-right"></i> Privacy Policy</a><a href="terms-of-service.html"><i class="fas fa-chevron-right"></i> Terms of Service</a></div></div>
-        <div><div class="footer-heading">Contact</div><div class="footer-contact-item"><i class="fas fa-envelope"></i> privacy@igoloans.in</div></div>
+
+        <div>
+          <div class="footer-heading">Services</div>
+          <nav class="footer-links" aria-label="Services links">
+            <a href="farm-loan-form.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Farm Loan Application</a>
+            <a href="subsidies.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Subsidy Hub</a>
+            <a href="subsidy-calculator.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Subsidy Calculator</a>
+            <a href="dpr-guide.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> DPR Guide</a>
+            <a href="portal.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Service Portal</a>
+          </nav>
+        </div>
+
+        <div>
+          <div class="footer-heading">Projects</div>
+          <nav class="footer-links" aria-label="Projects links">
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Exotic Farming</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Aquaculture</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Livestock Tech</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Solar Farming</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Hydroponics</a>
+          </nav>
+        </div>
+
+        <div>
+          <div class="footer-heading">Contact</div>
+          <address style="font-style:normal;">
+            <div class="footer-contact-item">
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+              Plot #42, Farming-Fintech Hub,<br>Delhi NCR — 110001, India
+            </div>
+            <div class="footer-contact-item">
+              <i class="fas fa-phone" aria-hidden="true"></i>
+              <a href="tel:+919876543210" style="color:inherit;">+91 98765 43210</a>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
+              <a href="mailto:info@igoloans.in" style="color:inherit;">info@igoloans.in</a>
+            </div>
+            <div class="footer-contact-item">
+              <i class="fas fa-clock" aria-hidden="true"></i>
+              Mon–Sat · 9 AM – 7 PM IST
+            </div>
+          </address>
+        </div>
+
       </div>
-      <div class="footer-bottom"><p>&copy; 2026 IGO Loans & Subsidy. All rights reserved.</p><div class="footer-bottom-links"><a href="privacy-policy.html">Privacy</a><a href="terms-of-service.html">Terms</a></div></div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 IGO Loans & Subsidy. All rights reserved. A unit of IGO Group.</p>
+        <div class="footer-bottom-links">
+          <a href="privacy-policy.html">Privacy Policy</a>
+          <a href="terms-of-service.html">Terms of Service</a>
+        </div>
+      </div>
     </div>
   </footer>
-  <script src="assets/app.js"></script>
+
+  <script src="assets/app.js" defer></script>
 </body>
 </html>

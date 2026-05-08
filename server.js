@@ -541,13 +541,24 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.listen(PORT, () => {
-  console.log(`\n🚀 IGO Full-Stack Server Running`);
-  console.log(`🔗 Local: http://localhost:${PORT}`);
-  console.log(`📡 Database: Supabase Connected`);
-  console.log(`📝 Farm Loan API: POST /api/farm-loan-application`);
-  console.log(`📝 Subsidy API: POST /api/subsidy-eligibility-report`);
-  console.log(`📝 Lead Score API: GET /api/lead-score`);
-  console.log(`📝 Portal: http://localhost:${PORT}/portal`);
-  console.log(`📝 Procurement endpoints deployed as Netlify Functions`);
-});
+const startServer = (port) => {
+  const server = app.listen(port, () => {
+    console.log(`\n🚀 IGO Full-Stack Server Running`);
+    console.log(`🔗 Local: http://localhost:${port}`);
+    console.log(`📡 Database: Supabase Connected`);
+    console.log(`📝 Farm Loan API: POST /api/farm-loan-application`);
+    console.log(`📝 Subsidy API: POST /api/subsidy-eligibility-report`);
+    console.log(`📝 Lead Score API: GET /api/lead-score`);
+    console.log(`📝 Portal: http://localhost:${port}/portal`);
+    console.log(`📝 Procurement endpoints deployed as Netlify Functions`);
+  }).on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+      console.log(`⚠️ Port ${port} is busy, trying ${port + 1}...`);
+      startServer(port + 1);
+    } else {
+      console.error('Server error:', err);
+    }
+  });
+};
+
+startServer(PORT);

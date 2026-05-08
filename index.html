@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="IGO Loans & Subsidy — India's premium agri-fintech consultancy. Expert guidance for KCC, PMEGP, MSME loans, and government subsidies with national reach.">
-  <meta property="og:title" content="IGO Loans & Subsidy | Next-Gen Agri-Fintech India">
-  <meta property="og:description" content="Secure low-interest farm loans and maximize government subsidies with India's most trusted agri-consultancy.">
+  <meta name="description" content="IGO Loans & Subsidy — India's premium farming-fintech consultancy. Expert guidance for KCC, PMEGP, MSME loans, and government subsidies with national reach.">
+  <meta property="og:title" content="IGO Loans & Subsidy | Next-Gen Farming-Fintech India">
+  <meta property="og:description" content="Secure low-interest farm loans and maximize government subsidies with India's most trusted farming-consultancy.">
   <meta property="og:image" content="assets/logo.png">
   <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="assets/logo.png">
-  <title>IGO Loans & Subsidy | Next-Gen Agri-Fintech India</title>
+  <title>IGO Loans & Subsidy | Next-Gen Farming-Fintech India</title>
 
   <!-- Performance: preconnect to external origins -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -83,6 +83,7 @@
         inset 0 -3px 6px rgba(0,0,0,0.25);
       animation: coinFloat var(--dur, 7s) ease-in-out infinite;
       animation-delay: var(--delay, 0s);
+      will-change: transform;
     }
     .h-coin::after {
       content: '₹';
@@ -121,6 +122,7 @@
       filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
       animation: emojiFloat var(--dur, 9s) ease-in-out infinite;
       animation-delay: var(--delay, 0s);
+      will-change: transform;
     }
     .h-emoji-1  { --fs:2.6rem;  --dur:8s;  --delay:0s;   top:15%;  right:8%;  }
     .h-emoji-2  { --fs:2rem;    --dur:10s; --delay:1.5s; top:62%;  right:15%; }
@@ -134,16 +136,17 @@
     /* ── FLOATING STAT MINI-CARDS ────────── */
     .h-stat-card {
       position: absolute;
-      background: rgba(255,255,255,0.10);
-      backdrop-filter: blur(20px) saturate(1.8);
-      -webkit-backdrop-filter: blur(20px) saturate(1.8);
-      border: 1px solid rgba(255,255,255,0.20);
+      background: rgba(2, 44, 34, 0.85);
+      backdrop-filter: blur(12px) saturate(1.8);
+      -webkit-backdrop-filter: blur(12px) saturate(1.8);
+      border: 1px solid rgba(255,255,255,0.15);
       border-radius: 20px;
       padding: 16px 22px;
       display: flex; align-items: center; gap: 14px;
       box-shadow: 0 16px 40px rgba(0,0,0,0.30), inset 0 1px 0 rgba(255,255,255,0.15);
       animation: cardFloat var(--dur, 6s) ease-in-out infinite;
       animation-delay: var(--delay, 0s);
+      will-change: transform;
       z-index: 3;
       min-width: 180px;
     }
@@ -198,7 +201,6 @@
       gap: 48px;
       align-items: center;
     }
-    .hero-left {}
     .hero-right {
       display: flex;
       flex-direction: column;
@@ -304,7 +306,6 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 2rem;
     }
-    .hsc-content {}
     .hsc-val {
       font-family: 'Outfit', sans-serif; font-weight: 900;
       font-size: 2rem; color: #34d399; line-height: 1;
@@ -416,14 +417,21 @@
       font-size: 1rem;
       cursor: default;
       transition: all 0.35s var(--ease-spring);
+      position: relative;
+      overflow: hidden;
+    }
+    .brand-item i {
+      filter: drop-shadow(0 0 8px rgba(197,160,89,0.2));
+      transition: transform 0.3s;
     }
     .brand-item:hover {
       background: var(--bg);
       border-color: var(--gold);
       transform: translateX(12px) scale(1.03);
-      box-shadow: 0 12px 28px rgba(197,160,89,0.12);
+      box-shadow: 0 15px 35px rgba(197,160,89,0.15);
       color: var(--primary);
     }
+    .brand-item:hover i { transform: scale(1.2) rotate(10deg); }
 
     /* Floating Badge */
     @keyframes float {
@@ -514,11 +522,14 @@
       color: var(--primary);
       margin: 0 auto 28px;
       transition: all 0.4s var(--ease-spring);
+      box-shadow: 0 10px 20px rgba(5,150,105,0.1);
+      border: 1px solid rgba(5,150,105,0.1);
     }
     .journey-card:hover .icon-box {
       background: var(--primary);
       color: #fff;
       transform: scale(1.1) rotate(5deg);
+      box-shadow: 0 20px 40px rgba(5,150,105,0.3);
     }
 
     /* Step Connector Glow */
@@ -568,10 +579,14 @@
 
     /* Impact bar */
     .impact-bar {
-      height: 5px; background: rgba(255,255,255,0.1);
-      border-radius: var(--radius-full); overflow: hidden; margin-top: 20px;
+      height: 8px; background: rgba(255,255,255,0.05);
+      border-radius: var(--radius-full); overflow: hidden; margin-top: 24px;
+      border: 1px solid rgba(255,255,255,0.05);
     }
-    .impact-bar-fill { height: 100%; border-radius: var(--radius-full); }
+    .impact-bar-fill { 
+      height: 100%; border-radius: var(--radius-full); 
+      transition: width 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
 
     /* Testimonial cards */
     .testimonial-card {
@@ -638,8 +653,8 @@
       </a>
 
       <ul class="nav-links" id="nav-links" role="list">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="agri-projects.html">Projects</a></li>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="farming-projects.html">Projects</a></li>
         <li><a href="procurement.html">Procurement</a></li>
         <li><a href="farm-loan-form.html">Farm Loans</a></li>
         <li><a href="subsidies.html">Subsidies</a></li>
@@ -662,56 +677,11 @@
   <main id="main-content">
 
     <!-- ═══════════════ HERO — PREMIUM REDESIGN ═══════════════ -->
-    <section class="hero" aria-label="Hero — The Sovereign Agri-Ecosystem">
+    <section class="hero" aria-label="Hero — The Sovereign Farming-Ecosystem">
 
-      <!-- ── Decorative layer: coins + emojis + floating cards ── -->
-      <div class="hero-deco" aria-hidden="true">
-
-        <!-- Gold 3D coins -->
-        <div class="h-coin h-coin-1"></div>
-        <div class="h-coin h-coin-2"></div>
-        <div class="h-coin h-coin-3"></div>
-        <div class="h-coin h-coin-4"></div>
-        <div class="h-coin h-coin-5"></div>
-
-        <!-- Floating ₹ symbols -->
-        <div class="h-rupee h-rupee-1">₹</div>
-        <div class="h-rupee h-rupee-2">₹</div>
-        <div class="h-rupee h-rupee-3">₹</div>
-        <div class="h-rupee h-rupee-4">₹</div>
-
-        <!-- Agri crop emojis -->
-        <div class="h-emoji h-emoji-1">🌾</div>
-        <div class="h-emoji h-emoji-2">🌿</div>
-        <div class="h-emoji h-emoji-3">🌻</div>
-        <div class="h-emoji h-emoji-4">🍃</div>
-        <div class="h-emoji h-emoji-5">🌱</div>
-        <div class="h-emoji h-emoji-6">🌽</div>
-        <div class="h-emoji h-emoji-7">🥬</div>
-        <div class="h-emoji h-emoji-8">🍀</div>
-
-        <!-- Floating stat mini-cards (edge of screen) -->
-        <div class="h-stat-card h-card-1">
-          <div class="sc-icon" style="background:rgba(197,160,89,0.2); border:1px solid rgba(197,160,89,0.3);">✅</div>
-          <div>
-            <div class="sc-val">₹40L</div>
-            <div class="sc-lbl">Loan Approved</div>
-          </div>
-        </div>
-        <div class="h-stat-card h-card-2">
-          <div class="sc-icon" style="background:rgba(5,150,105,0.2); border:1px solid rgba(5,150,105,0.3);">⚡</div>
-          <div>
-            <div class="sc-val">72 hrs</div>
-            <div class="sc-lbl">Fast Disbursal</div>
-          </div>
-        </div>
-        <div class="h-stat-card h-card-3">
-          <div class="sc-icon" style="background:rgba(99,102,241,0.2); border:1px solid rgba(99,102,241,0.3);">🏆</div>
-          <div>
-            <div class="sc-val">18+ Banks</div>
-            <div class="sc-lbl">Partner Network</div>
-          </div>
-        </div>
+      <!-- ── Hero background overlay only ── -->
+      <div class="hero-deco" aria-hidden="true" style="opacity: 0.15;">
+        <!-- Clean background without floating clutter -->
       </div>
 
       <!-- ── Main hero content ── -->
@@ -729,19 +699,19 @@
                 </div>
 
                 <h1 class="section-title xxl" style="color:#fff; margin-bottom:24px; line-height:1;">
-                  The <span class="text-gradient-gold">Sovereign</span><br>Agri-Ecosystem
+                  The <span class="text-gradient-gold">Sovereign</span><br>Farming-Ecosystem
                 </h1>
 
                 <p style="font-size:1.15rem; color:rgba(255,255,255,0.72); max-width:560px; line-height:1.7; margin-bottom:44px; font-weight:500;">
-                  Building India's institutional-grade agricultural future — vertically integrated engineering, production, loans &amp; global trade.
+                  Building India's institutional-grade farming future — vertically integrated engineering, production, loans &amp; global trade.
                 </p>
 
                 <div class="flex gap-6 hero-btns" style="flex-wrap:wrap; margin-bottom:52px;">
-                  <a href="agri-projects.html" class="btn btn-primary btn-lg">
+                  <a href="farming-projects.html" class="btn btn-primary btn-lg">
                     <i class="fas fa-rocket" aria-hidden="true"></i> Launch a Project
                   </a>
                   <a href="farm-loan-form.html" class="btn btn-gold btn-lg">
-                    💰 Apply for Loan
+                    <i class="fas fa-sack-dollar" aria-hidden="true"></i> Apply for Loan
                   </a>
                 </div>
 
@@ -749,7 +719,7 @@
                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-top:36px; border-top:1px solid rgba(255,255,255,0.10);">
                   <div>
                     <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">1M+</div>
-                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Agripreneurs</div>
+                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Farming Entrepreneurs</div>
                   </div>
                   <div>
                     <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">₹5k Cr+</div>
@@ -765,66 +735,71 @@
             </div>
 
             <!-- RIGHT: Info cards -->
-            <div class="hero-right reveal delay-2">
+            <div class="hero-right reveal delay-2" style="display:flex; flex-direction:column; gap:20px;">
 
               <!-- Loan showcase card -->
-              <div class="hero-loan-card">
-                <div class="hlc-title">🏦 Institutional Credit Line</div>
-                <div class="hlc-amount">₹50 Lakh</div>
-                <div class="hlc-sub">Max. Agriculture Loan Amount</div>
-                <div class="hlc-grid">
-                  <div class="hlc-pill">
-                    <span class="hlc-pill-emoji">📉</span>
+              <div class="hero-loan-card" style="background:rgba(2, 44, 34, 0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:32px; box-shadow:0 30px 60px rgba(0,0,0,0.3); will-change:transform, opacity;">
+                <div class="hlc-title" style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1rem; color:var(--gold); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+                  <i class="fas fa-building-columns"></i> Institutional Credit Line
+                </div>
+                <div class="hlc-amount" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:2.8rem; color:#fff; line-height:1; margin-bottom:6px;">₹50 Lakh</div>
+                <div class="hlc-sub" style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.5); margin-bottom:28px;">Max. Farm Loan Amount</div>
+                
+                <div class="hlc-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                  <div class="hlc-pill" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:14px; border-radius:16px; display:flex; align-items:center; gap:12px;">
+                    <span class="hlc-pill-emoji" style="font-size:1.2rem; color:var(--gold);"><i class="fas fa-chart-line"></i></span>
                     <div>
-                      <span class="hlc-pill-val">7.5%</span>
-                      <span class="hlc-pill-lbl">Fixed APR</span>
+                      <span class="hlc-pill-val" style="display:block; font-family:'Outfit',sans-serif; font-weight:900; font-size:1.1rem; color:#fff;">7.5%</span>
+                      <span class="hlc-pill-lbl" style="display:block; font-size:0.6rem; font-weight:700; text-transform:uppercase; color:rgba(255,255,255,0.4);">Fixed APR</span>
                     </div>
                   </div>
-                  <div class="hlc-pill">
-                    <span class="hlc-pill-emoji">⚡</span>
+                  <div class="hlc-pill" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:14px; border-radius:16px; display:flex; align-items:center; gap:12px;">
+                    <span class="hlc-pill-emoji" style="font-size:1.2rem; color:#fbbf24;"><i class="fas fa-bolt-lightning"></i></span>
                     <div>
-                      <span class="hlc-pill-val">72 hrs</span>
-                      <span class="hlc-pill-lbl">Approval</span>
+                      <span class="hlc-pill-val" style="display:block; font-family:'Outfit',sans-serif; font-weight:900; font-size:1.1rem; color:#fff;">72 hrs</span>
+                      <span class="hlc-pill-lbl" style="display:block; font-size:0.6rem; font-weight:700; text-transform:uppercase; color:rgba(255,255,255,0.4);">Approval</span>
                     </div>
                   </div>
-                  <div class="hlc-pill">
-                    <span class="hlc-pill-emoji">🏛️</span>
+                  <div class="hlc-pill" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:14px; border-radius:16px; display:flex; align-items:center; gap:12px;">
+                    <span class="hlc-pill-emoji" style="font-size:1.2rem; color:#818cf8;"><i class="fas fa-landmark"></i></span>
                     <div>
-                      <span class="hlc-pill-val">18+</span>
-                      <span class="hlc-pill-lbl">Bank Partners</span>
+                      <span class="hlc-pill-val" style="display:block; font-family:'Outfit',sans-serif; font-weight:900; font-size:1.1rem; color:#fff;">18+</span>
+                      <span class="hlc-pill-lbl" style="display:block; font-size:0.6rem; font-weight:700; text-transform:uppercase; color:rgba(255,255,255,0.4);">Bank Partners</span>
                     </div>
                   </div>
-                  <div class="hlc-pill">
-                    <span class="hlc-pill-emoji">📋</span>
+                  <div class="hlc-pill" style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.05); padding:14px; border-radius:16px; display:flex; align-items:center; gap:12px;">
+                    <span class="hlc-pill-emoji" style="font-size:1.2rem; color:var(--primary);"><i class="fas fa-file-invoice-dollar"></i></span>
                     <div>
-                      <span class="hlc-pill-val">KCC</span>
-                      <span class="hlc-pill-lbl">PMEGP · MSME</span>
+                      <span class="hlc-pill-val" style="display:block; font-family:'Outfit',sans-serif; font-weight:900; font-size:1.1rem; color:#fff;">KCC</span>
+                      <span class="hlc-pill-lbl" style="display:block; font-size:0.6rem; font-weight:700; text-transform:uppercase; color:rgba(255,255,255,0.4);">PMEGP · MSME</span>
                     </div>
                   </div>
                 </div>
               </div>
 
               <!-- Subsidy coverage card -->
-              <div class="hero-subsidy-card">
-                <div class="hsc-icon">🌿</div>
+              <div class="hero-subsidy-card" style="background:rgba(2, 44, 34, 0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,0.1); border-radius:24px; padding:24px; display:flex; align-items:center; gap:20px; box-shadow:0 20px 40px rgba(0,0,0,0.2); will-change:transform, opacity;">
+                <div class="hsc-icon" style="width:52px; height:52px; background:rgba(197,160,89,0.15); color:var(--gold); display:flex; align-items:center; justify-content:center; border-radius:16px; border:1px solid rgba(197,160,89,0.2); font-size:1.4rem;"><i class="fas fa-coins"></i></div>
                 <div class="hsc-content" style="flex:1;">
-                  <div style="display:flex; align-items:center; justify-content:space-between;">
-                    <div class="hsc-val">90%</div>
-                    <span style="background:rgba(52,211,153,0.15); border:1px solid rgba(52,211,153,0.3); color:#34d399; font-size:0.65rem; font-weight:800; padding:4px 10px; border-radius:50px; text-transform:uppercase; letter-spacing:1px;">PM-KUSUM</span>
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px;">
+                    <div class="hsc-val" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:1.8rem; color:#fff;">90%</div>
+                    <span style="background:rgba(52,211,153,0.12); border:1px solid rgba(52,211,153,0.2); color:#34d399; font-size:0.6rem; font-weight:800; padding:4px 12px; border-radius:50px; text-transform:uppercase; letter-spacing:1px;">PM-KUSUM</span>
                   </div>
-                  <div class="hsc-title">Subsidy Coverage Available</div>
-                  <div class="hsc-bar"><div class="hsc-bar-fill"></div></div>
+                  <div class="hsc-title" style="font-size:0.75rem; font-weight:700; color:rgba(255,255,255,0.5); margin-bottom:12px;">Subsidy Coverage Available</div>
+                  <div class="hsc-bar" style="height:6px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;">
+                    <div class="hsc-bar-fill" style="width:90%; height:100%; background:linear-gradient(90deg, var(--primary), #34d399); box-shadow:0 0 15px rgba(52,211,153,0.4);"></div>
+                  </div>
                 </div>
               </div>
 
               <!-- Crop chips -->
               <div class="hero-crops-row">
-                <div class="crop-chip"><span>🌾</span> Wheat &amp; Rice</div>
-                <div class="crop-chip"><span>🌿</span> Hydroponics</div>
-                <div class="crop-chip"><span>🌻</span> Horticulture</div>
-                <div class="crop-chip"><span>🐄</span> Livestock</div>
-                <div class="crop-chip"><span>🐟</span> Aquaculture</div>
-                <div class="crop-chip"><span>☀️</span> Solar Agri</div>
+                <div class="crop-chip"><i class="fas fa-sack-dollar" style="color:var(--gold); margin-right:8px;"></i> Cash Crops</div>
+                <div class="crop-chip"><i class="fas fa-leaf" style="color:#10b981; margin-right:8px;"></i> Hydroponics</div>
+                <div class="crop-chip"><i class="fas fa-seedling" style="color:#f59e0b; margin-right:8px;"></i> Horticulture</div>
+                <div class="crop-chip"><i class="fas fa-cow" style="color:var(--text-muted); margin-right:8px;"></i> Livestock</div>
+                <div class="crop-chip"><i class="fas fa-fish" style="color:#3b82f6; margin-right:8px;"></i> Aquaculture</div>
+                <div class="crop-chip"><i class="fas fa-sun" style="color:#eab308; margin-right:8px;"></i> Solar Farming</div>
               </div>
 
             </div>
@@ -842,14 +817,14 @@
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-tractor"></i> KISAN CREDIT CARD</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-leaf"></i> PM-KUSUM SOLAR</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-landmark"></i> GOVT OF INDIA</div>
-        <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-microchip"></i> AGRI-TECH 2026</div>
+        <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-microchip"></i> FARMING-TECH 2026</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-shield-halved"></i> PMEGP SCHEME</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-seedling"></i> NHB HORTICULTURE</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-building-columns"></i> NABARD</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-tractor"></i> KISAN CREDIT CARD</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-leaf"></i> PM-KUSUM SOLAR</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-landmark"></i> GOVT OF INDIA</div>
-        <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-microchip"></i> AGRI-TECH 2026</div>
+        <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-microchip"></i> FARMING-TECH 2026</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-shield-halved"></i> PMEGP SCHEME</div>
         <div class="marquee-item" style="color:var(--gold-light);"><i class="fas fa-seedling"></i> NHB HORTICULTURE</div>
       </div>
@@ -861,9 +836,9 @@
 
         <div class="section-header">
           <div class="section-label"><i class="fas fa-circle-nodes" aria-hidden="true"></i> The Sovereign Ecosystem</div>
-          <h2 class="section-title lg reveal" style="max-width:800px;">Your 360° Agri-Business <span class="text-gradient-green">Journey</span></h2>
+          <h2 class="section-title lg reveal" style="max-width:800px;">Your 360° Farming-Business <span class="text-gradient-green">Journey</span></h2>
           <p class="section-subtitle reveal delay-1" style="margin:0 auto; text-align:center;">
-            From the first plot of land to global market exports, IGO is your single-window partner for institutional agricultural success.
+            From the first plot of land to global market exports, IGO is your single-window partner for institutional farming success.
           </p>
         </div>
 
@@ -872,22 +847,22 @@
           <div class="step-connector desktop-only-line" aria-hidden="true"></div>
 
           <div class="journey-card reveal">
-            <div class="icon-box" aria-hidden="true"><i class="fas fa-map-location-dot"></i></div>
+            <div class="icon-box" aria-hidden="true" style="background:var(--primary-light); color:var(--primary);"><i class="fas fa-map-location-dot"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 01</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Land</h4>
             <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Procurement & Legal via <strong>IGO Procurement</strong></p>
           </div>
 
           <div class="journey-card reveal delay-1">
-            <div class="icon-box" aria-hidden="true"><i class="fas fa-file-invoice"></i></div>
+            <div class="icon-box" aria-hidden="true" style="background:var(--primary-light); color:var(--primary);"><i class="fas fa-file-invoice"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 02</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Planning</h4>
             <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Master DPR & Govt. Liasoning</p>
           </div>
 
-          <div class="journey-card reveal delay-2" style="border-color:var(--gold); background:var(--primary-dark); color:#fff;">
-            <div class="icon-box" style="background:rgba(197,160,89,0.15); color:var(--gold); border:1px solid rgba(197,160,89,0.3);" aria-hidden="true">
-              <i class="fas fa-sack-dollar"></i>
+          <div class="journey-card reveal delay-2" style="border-color:var(--gold); background:var(--primary-dark); color:#fff; box-shadow:0 30px 60px rgba(197,160,89,0.25);">
+            <div class="icon-box" style="background:rgba(197,160,89,0.15); color:var(--gold); border:1px solid rgba(197,160,89,0.3); box-shadow:0 0 20px rgba(197,160,89,0.2);" aria-hidden="true">
+              <i class="fas fa-money-bill-trend-up"></i>
             </div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:rgba(255,255,255,0.4); margin-bottom:14px;">Step 03 · YOU ARE HERE</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px; color:var(--gold);">Funding</h4>
@@ -895,10 +870,10 @@
           </div>
 
           <div class="journey-card reveal delay-3">
-            <div class="icon-box" aria-hidden="true"><i class="fas fa-tractor"></i></div>
+            <div class="icon-box" aria-hidden="true" style="background:var(--primary-light); color:var(--primary);"><i class="fas fa-tractor"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 04</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Operation</h4>
-            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Build & Manage via <strong>IGO Agri Projects</strong></p>
+            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Build & Manage via <strong>IGO Farming Projects</strong></p>
           </div>
 
         </div>
@@ -917,37 +892,41 @@
           <h2 class="section-title lg reveal" style="color:#fff; text-align:center;">Scaling Excellence<br><span class="text-gradient-gold">Across 28 States</span></h2>
         </div>
 
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px,1fr)); gap:32px;">
+        <div class="impact-grid reveal" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); gap:24px; margin-top:60px;">
 
-          <div class="card-stat reveal" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
-            <div class="stat-value" data-count="1000000" data-suffix="+" data-prefix="">1M+</div>
-            <div class="stat-label">Agripreneurs Targeted</div>
-            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
-              <div class="impact-bar-fill" style="width:65%; background:var(--gold); box-shadow:0 0 15px rgba(197,160,89,0.3);"></div>
+          <div class="card-stat" style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,160,89,0.15); border-radius:24px; padding:40px 32px; text-align:center; transition:all 0.4s var(--ease-spring); position:relative; overflow:hidden;">
+            <div style="font-size:1.8rem; color:var(--gold); margin-bottom:20px; filter:drop-shadow(0 0 10px rgba(197,160,89,0.3));"><i class="fas fa-users-viewfinder"></i></div>
+            <div class="stat-value" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:3.2rem; color:#fff; line-height:1; margin-bottom:10px;">1M+</div>
+            <div class="stat-label" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Farming Entrepreneurs Targeted</div>
+            <div class="impact-bar" style="height:6px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;">
+              <div class="impact-bar-fill" style="width:65%; height:100%; background:var(--gold); box-shadow:0 0 20px rgba(197,160,89,0.4);"></div>
             </div>
           </div>
 
-          <div class="card-stat reveal delay-1" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
-            <div class="stat-value" style="font-size:3rem;">₹5,000 Cr+</div>
-            <div class="stat-label">Capital Facilitation</div>
-            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
-              <div class="impact-bar-fill" style="width:48%; background:var(--primary); box-shadow:0 0 15px rgba(5,150,105,0.3);"></div>
+          <div class="card-stat" style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,160,89,0.15); border-radius:24px; padding:40px 32px; text-align:center; transition:all 0.4s var(--ease-spring); position:relative; overflow:hidden;">
+            <div style="font-size:1.8rem; color:var(--primary); margin-bottom:20px; filter:drop-shadow(0 0 10px rgba(5,150,105,0.3));"><i class="fas fa-money-bill-transfer"></i></div>
+            <div class="stat-value" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:3.2rem; color:#fff; line-height:1; margin-bottom:10px;">₹5k Cr+</div>
+            <div class="stat-label" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Capital Facilitation</div>
+            <div class="impact-bar" style="height:6px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;">
+              <div class="impact-bar-fill" style="width:48%; height:100%; background:var(--primary); box-shadow:0 0 20px rgba(5,150,105,0.4);"></div>
             </div>
           </div>
 
-          <div class="card-stat reveal delay-2" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
-            <div class="stat-value" data-count="26">26</div>
-            <div class="stat-label">Vertical Brands</div>
-            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
-              <div class="impact-bar-fill" style="width:100%; background:linear-gradient(90deg,var(--primary),var(--gold)); box-shadow:0 0 15px rgba(197,160,89,0.3);"></div>
+          <div class="card-stat" style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,160,89,0.15); border-radius:24px; padding:40px 32px; text-align:center; transition:all 0.4s var(--ease-spring); position:relative; overflow:hidden;">
+            <div style="font-size:1.8rem; color:var(--gold); margin-bottom:20px; filter:drop-shadow(0 0 10px rgba(197,160,89,0.3));"><i class="fas fa-shield-halved"></i></div>
+            <div class="stat-value" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:3.2rem; color:#fff; line-height:1; margin-bottom:10px;">26</div>
+            <div class="stat-label" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Vertical Brands</div>
+            <div class="impact-bar" style="height:6px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;">
+              <div class="impact-bar-fill" style="width:100%; height:100%; background:linear-gradient(90deg,var(--primary),var(--gold)); box-shadow:0 0 20px rgba(197,160,89,0.4);"></div>
             </div>
           </div>
 
-          <div class="card-stat reveal delay-3" style="background:rgba(255,255,255,0.03); border-color:rgba(197,160,89,0.15);">
-            <div class="stat-value" data-count="28">28</div>
-            <div class="stat-label">States Operational</div>
-            <div class="impact-bar" style="background:rgba(255,255,255,0.05);">
-              <div class="impact-bar-fill" style="width:85%; background:var(--gold); box-shadow:0 0 15px rgba(197,160,89,0.3);"></div>
+          <div class="card-stat" style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,160,89,0.15); border-radius:24px; padding:40px 32px; text-align:center; transition:all 0.4s var(--ease-spring); position:relative; overflow:hidden;">
+            <div style="font-size:1.8rem; color:var(--gold); margin-bottom:20px; filter:drop-shadow(0 0 10px rgba(197,160,89,0.3));"><i class="fas fa-map-location-dot"></i></div>
+            <div class="stat-value" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:3.2rem; color:#fff; line-height:1; margin-bottom:10px;">28</div>
+            <div class="stat-label" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.5); margin-bottom:24px;">States Operational</div>
+            <div class="impact-bar" style="height:6px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;">
+              <div class="impact-bar-fill" style="width:85%; height:100%; background:var(--gold); box-shadow:0 0 20px rgba(197,160,89,0.4);"></div>
             </div>
           </div>
 
@@ -1018,7 +997,7 @@
         <div class="section-header">
           <div class="section-label"><i class="fas fa-layer-group" aria-hidden="true"></i> Portfolio</div>
           <h2 class="section-title lg reveal">Our Flagship <span class="text-gradient-green">Projects</span></h2>
-          <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Precision agri-ventures built for scale, export, and institutional returns.</p>
+          <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Precision farming-ventures built for scale, export, and institutional returns.</p>
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:28px;" class="grid-portfolio">
@@ -1027,14 +1006,14 @@
             <div style="overflow:hidden; height:240px;">
               <picture>
                 <source srcset="agri_farming_projects_hero_1778132919368.avif" type="image/avif">
-                <img src="agri_farming_projects_hero_1778132919368.png" alt="Exotic Agri Farming — high-value horticulture project" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
+                <img src="agri_farming_projects_hero_1778132919368.png" alt="Exotic Farming — high-value horticulture project" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
               </picture>
             </div>
             <div style="padding:32px;">
               <span class="badge badge-green" style="margin-bottom:14px;"><i class="fas fa-leaf" aria-hidden="true"></i> Horticulture</span>
-              <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Exotic Agri Farming</h4>
+              <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Exotic Farming</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">High-value crops including saffron, vanilla, and speciality herbs — export-ready infrastructure.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="farming-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
@@ -1049,7 +1028,7 @@
               <span class="badge" style="background:rgba(99,102,241,0.1); color:#6366f1; border-color:rgba(99,102,241,0.2); margin-bottom:14px;"><i class="fas fa-fish" aria-hidden="true"></i> Aquaculture</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Marine Aquaculture Hub</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">Integrated fish & shrimp farms with cold-chain logistics and export certification.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="farming-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
@@ -1064,7 +1043,7 @@
               <span class="badge badge-gold" style="margin-bottom:14px;"><i class="fas fa-cow" aria-hidden="true"></i> Livestock</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">Smart Livestock Tech</h4>
               <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">IoT-powered livestock management with precision nutrition and real-time health monitoring.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="farming-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
@@ -1072,21 +1051,21 @@
             <div style="overflow:hidden; height:240px;">
               <picture>
                 <source srcset="agri_land_procurement_hero_1778132897958.avif" type="image/avif">
-                <img src="agri_land_procurement_hero_1778132897958.png" alt="IGO Franchise Network — India's fastest-growing agri-franchise" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
+                <img src="agri_land_procurement_hero_1778132897958.png" alt="IGO Franchise Network — India's fastest-growing farming-franchise" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
               </picture>
             </div>
             <div style="padding:32px;">
               <span class="badge" style="background:rgba(245,158,11,0.1); color:#d97706; border-color:rgba(245,158,11,0.2); margin-bottom:14px;"><i class="fas fa-handshake" aria-hidden="true"></i> Franchise</span>
               <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:10px;">IGO Franchise Network</h4>
-              <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">Join India's fastest-growing agri-franchise chain with proven ROI and government backing.</p>
-              <a href="agri-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <p style="color:var(--text-muted); font-size:0.9rem; line-height:1.65; margin-bottom:20px;">Join India's fastest-growing farming-franchise chain with proven ROI and government backing.</p>
+              <a href="farming-projects.html" class="btn btn-sm btn-outline">View Project <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
           </div>
 
         </div>
 
         <div style="text-align:center; margin-top:52px;">
-          <a href="agri-projects.html" class="btn btn-primary btn-lg">View All Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+          <a href="farming-projects.html" class="btn btn-primary btn-lg">View All Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
         </div>
       </div>
     </section>
@@ -1097,7 +1076,7 @@
         <div class="section-header">
           <div class="section-label"><i class="fas fa-briefcase" aria-hidden="true"></i> Services</div>
           <h2 class="section-title lg reveal">What We Do <span class="text-gradient-gold">Best</span></h2>
-          <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Every service precision-crafted for India's agricultural economy.</p>
+          <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Every service precision-crafted for India's farming economy.</p>
         </div>
 
         <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:28px;" class="grid-services">
@@ -1119,15 +1098,15 @@
           <div class="service-card reveal delay-2">
             <i class="fas fa-file-lines icon" aria-hidden="true"></i>
             <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">DPR Preparation</h4>
-            <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">Detailed Project Report preparation meeting NABARD and Ministry of Agriculture standards — from concept to bankable document.</p>
+            <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">Detailed Project Report preparation meeting NABARD and Ministry of Farming standards — from concept to bankable document.</p>
             <a href="dpr-guide.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Learn More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-3">
             <i class="fas fa-tractor icon" aria-hidden="true"></i>
-            <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">Agri Project Management</h4>
+            <h4 style="font-family:'Outfit',sans-serif; font-weight:800; font-size:1.3rem; margin-bottom:14px;">Farming Project Management</h4>
             <p style="color:var(--text-muted); line-height:1.7; margin-bottom:24px; font-size:0.95rem;">End-to-end project development — from site selection and design to construction supervision and first-harvest management.</p>
-            <a href="agri-projects.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Explore Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="farming-projects.html" style="color:var(--primary); font-weight:800; font-size:0.9rem; display:flex; align-items:center; gap:8px;">Explore Projects <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="service-card reveal delay-4">
@@ -1157,20 +1136,20 @@
             <div class="section-label"><i class="fas fa-sitemap" aria-hidden="true"></i> Our Verticals</div>
             <h2 class="section-title lg" style="margin-bottom:20px;">The IGO <span class="text-gradient-green">Ecosystem</span></h2>
             <p style="color:var(--text-muted); font-size:1.05rem; line-height:1.75; margin-bottom:48px;">
-              26 integrated verticals spanning production, processing, technology, and trade — all working together for your agricultural success.
+              26 integrated verticals spanning production, processing, technology, and trade — all working together for your farming success.
             </p>
-            <a href="agri-projects.html" class="btn btn-primary">Explore All Verticals <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            <a href="farming-projects.html" class="btn btn-primary">Explore All Verticals <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
           </div>
 
           <div class="ecosystem-grid reveal-right" style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
             <div class="brand-item"><i class="fas fa-leaf" style="color:var(--primary); font-size:1.2rem;" aria-hidden="true"></i> Exotic Farming</div>
             <div class="brand-item"><i class="fas fa-fish" style="color:#6366f1; font-size:1.2rem;" aria-hidden="true"></i> Aquaculture</div>
             <div class="brand-item"><i class="fas fa-cow" style="color:var(--gold); font-size:1.2rem;" aria-hidden="true"></i> Livestock Tech</div>
-            <div class="brand-item"><i class="fas fa-solar-panel" style="color:#f59e0b; font-size:1.2rem;" aria-hidden="true"></i> Solar Agri</div>
+            <div class="brand-item"><i class="fas fa-solar-panel" style="color:#f59e0b; font-size:1.2rem;" aria-hidden="true"></i> Solar Farming</div>
             <div class="brand-item"><i class="fas fa-droplet" style="color:#3b82f6; font-size:1.2rem;" aria-hidden="true"></i> Hydroponics</div>
             <div class="brand-item"><i class="fas fa-seedling" style="color:var(--primary); font-size:1.2rem;" aria-hidden="true"></i> Horticulture</div>
             <div class="brand-item"><i class="fas fa-warehouse" style="color:var(--gold); font-size:1.2rem;" aria-hidden="true"></i> Cold Storage</div>
-            <div class="brand-item"><i class="fas fa-globe" style="color:#10b981; font-size:1.2rem;" aria-hidden="true"></i> Agri Exports</div>
+            <div class="brand-item"><i class="fas fa-globe" style="color:#10b981; font-size:1.2rem;" aria-hidden="true"></i> Farming Exports</div>
           </div>
 
         </div>
@@ -1182,7 +1161,7 @@
       <div class="container">
         <div class="section-header">
           <div class="section-label"><i class="fas fa-star" aria-hidden="true"></i> Success Stories</div>
-          <h2 class="section-title lg reveal">Trusted by <span class="text-gradient-gold">Agripreneurs</span></h2>
+          <h2 class="section-title lg reveal">Trusted by <span class="text-gradient-gold">Farming Entrepreneurs</span></h2>
           <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Real results from farmers and entrepreneurs across India.</p>
         </div>
 
@@ -1265,11 +1244,11 @@
         </div>
 
         <h2 class="section-title xl reveal" style="color:#fff; margin-bottom:32px; text-align:center; letter-spacing:-2px;">
-          Ready to Build Your<br><span class="text-gradient-gold" style="font-size:1.1em; display:inline-block; margin-top:10px;">Agri-Empire?</span>
+          Ready to Build Your<br><span class="text-gradient-gold" style="font-size:1.1em; display:inline-block; margin-top:10px;">Farming-Empire?</span>
         </h2>
 
         <p style="color:rgba(255,255,255,0.65); font-size:1.25rem; max-width:720px; margin:0 auto 56px; text-align:center; line-height:1.8; font-weight:500;">
-          Join thousands of agripreneurs who've secured funding, built projects, and created lasting legacies with IGO's sovereign ecosystem.
+          Join thousands of farming entrepreneurs who've secured funding, built projects, and created lasting legacies with IGO's sovereign ecosystem.
         </p>
 
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;" class="reveal">
@@ -1326,7 +1305,7 @@
               <span class="tagline">The Sovereign Ecosystem</span>
             </div>
           </div>
-          <p>India's institutional-grade agri-fintech consultancy. Building the future of agricultural finance, one project at a time.</p>
+          <p>India's institutional-grade farming-fintech consultancy. Building the future of farming finance, one project at a time.</p>
           <div class="footer-socials">
             <a href="#" class="social-btn" aria-label="Twitter / X"><i class="fab fa-twitter" aria-hidden="true"></i></a>
             <a href="#" class="social-btn" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
@@ -1349,11 +1328,11 @@
         <div>
           <div class="footer-heading">Projects</div>
           <nav class="footer-links" aria-label="Projects links">
-            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Exotic Farming</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Aquaculture</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Livestock Tech</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Solar Agri</a>
-            <a href="agri-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Hydroponics</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Exotic Farming</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Aquaculture</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Livestock Tech</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Solar Farming</a>
+            <a href="farming-projects.html"><i class="fas fa-chevron-right" aria-hidden="true"></i> Hydroponics</a>
           </nav>
         </div>
 
@@ -1362,7 +1341,7 @@
           <address style="font-style:normal;">
             <div class="footer-contact-item">
               <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-              Plot #42, Agri-Fintech Hub,<br>Delhi NCR — 110001, India
+              Plot #42, Farming-Fintech Hub,<br>Delhi NCR — 110001, India
             </div>
             <div class="footer-contact-item">
               <i class="fas fa-phone" aria-hidden="true"></i>
