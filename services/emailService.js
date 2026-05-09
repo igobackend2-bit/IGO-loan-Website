@@ -40,4 +40,55 @@ const sendFormLinkEmail = async (email, name, refNum) => {
   }
 };
 
-module.exports = { sendFormLinkEmail };
+const sendAdminNotification = async (type, data) => {
+  try {
+    const isMock = !process.env.SMTP_USER || process.env.SMTP_USER.includes('your-email');
+    
+    if (isMock) {
+      console.log('--- MOCK ADMIN EMAIL ---');
+      console.log('To: admin@igofarmloans.com');
+      console.log('Subject:', `NEW ENQUIRY: ${type.toUpperCase()}`);
+      console.log('Data:', data);
+      console.log('------------------------');
+      return { success: true, mock: true };
+    }
+
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      secure: false,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+
+    const mailOptions = {
+      from: `"IGO System Alert" <${process.env.SMTP_USER}>`,
+      to: 'admin@igofarmloans.com',
+      subject: `🚨 NEW ENQUIRY: ${type.toUpperCase()} - ${data.fullName || 'New Lead'}`,
+      html: `
+        <div style="font-family: sans-serif; padding: 20px; border: 1px solid #eee; border-radius: 10px;">
+          <h2 style="color: #059669;">New Lead Captured</h2>
+          <p><strong>Source:</strong> ${type}</p>
+          <hr>
+          <p><strong>Name:</strong> ${data.fullName || data.name}</p>
+          <p><strong>Phone:</strong> ${data.phone || data.mobile}</p>
+          <p><strong>Email:</strong> ${data.email || 'Not provided'}</p>
+          <p><strong>Location:</strong> ${data.district || 'N/A'}, ${data.state || 'N/A'}</p>
+          ${data.loanAmount ? `<p><strong>Loan Amount:</strong> ₹${data.loanAmount}</p>` : ''}
+          <hr>
+          <p style="font-size: 12px; color: #666;">This is an automated alert from IGO Groups Command Center.</p>
+        </div>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    return { success: true };
+  } catch (error) {
+    console.error('Admin Email Alert Error:', error);
+    return { success: false, error: error.message };
+  }
+};
+
+module.exports = { sendFormLinkEmail, sendAdminNotification };

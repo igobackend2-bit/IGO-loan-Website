@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="assets/navbar.css">
   <style>
-    body { padding-top: var(--nav-height); background: var(--bg-alt); }
+    body { padding-top: 0; background: var(--bg-alt); }
     .legal-wrap { max-width: 900px; margin: 60px auto 100px; padding: 0 24px; }
     .legal-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 60px; box-shadow: var(--shadow-xl); }
     .legal-header { margin-bottom: 48px; border-bottom: 2px solid var(--border); padding-bottom: 32px; }
@@ -53,19 +53,26 @@
         <div id="theme-toggle" class="theme-toggle" role="button" aria-label="Toggle dark mode" tabindex="0">
           <i class="fas fa-moon" aria-hidden="true"></i>
         </div>
-        <div class="mobile-toggle" id="menu-btn" role="button" aria-label="Toggle menu">
+        <div class="mobile-toggle" id="menu-btn" aria-label="Toggle menu" aria-expanded="false" role="button" tabindex="0">
           <i class="fas fa-bars" aria-hidden="true"></i>
         </div>
       </div>
     </div>
   </nav>
+  
+  <!-- HERO -->
+  <section class="hero-solid" style="padding: calc(var(--nav-height) + 40px) 0 40px;">
+    <div style="position:absolute; inset:0; background:radial-gradient(ellipse at 50% 0%, rgba(5,150,105,0.1), transparent 60%); pointer-events:none; z-index:1;"></div>
+    <div class="container" style="position:relative; z-index:2; text-align:center;">
+      <h1 style="font-family:'Outfit',sans-serif; font-size:2.8rem; font-weight:900; color:#fff; letter-spacing:-1px; margin-bottom:10px;">Privacy <span class="text-gradient-gold">Policy</span></h1>
+      <p style="color:rgba(255,255,255,0.6); font-size:1rem; font-weight:500;">Your trust and data security are our highest priority.</p>
+    </div>
+  </section>
 
   <main class="legal-wrap">
     <div class="legal-card">
-      <header class="legal-header">
+      <header class="legal-header" style="border:none; margin:0;">
         <div class="last-updated">Last Updated: May 2026</div>
-        <h1>Privacy Policy</h1>
-        <p>Your privacy is foundational to our institutional commitment.</p>
       </header>
 
       <div class="legal-content">

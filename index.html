@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
   <!-- Preload critical hero image (LCP) -->
-  <link rel="preload" as="image" href="igo_home_hero_bg_wide_1778136091121.avif" type="image/avif">
+  <link rel="preload" as="image" href="assets/igo_home_hero_bg_wide_new_v2_1778309727586.png" type="image/png">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap">
@@ -32,10 +32,7 @@
        ══════════════════════════════════════════ */
     .hero {
       background-image:
-        image-set(
-          url('igo_home_hero_bg_wide_1778136091121.avif') type('image/avif'),
-          url('igo_home_hero_bg_wide_1778136091121.png') type('image/png')
-        );
+        url('assets/igo_home_hero_bg_wide_new_v2_1778309727586.png');
       background-repeat: no-repeat;
       background-position: center center;
       background-size: cover;
@@ -47,7 +44,7 @@
       overflow: hidden;
     }
     @supports not (background-image: image-set(url('x') type('image/avif'))) {
-      .hero { background-image: url('igo_home_hero_bg_wide_1778136091121.png'); }
+      .hero { background-image: url('assets/igo_home_hero_bg_wide_new_v2_1778309727586.png'); }
     }
 
     /* Dark layered overlay — left heavy, fades right */
@@ -637,6 +634,7 @@
 <body>
 
   <div class="scroll-progress" role="progressbar" aria-label="Page scroll progress"></div>
+  <canvas id="coinCanvas" style="position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:1;"></canvas>
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <!-- ═══════════════ NAVBAR ═══════════════ -->
@@ -655,7 +653,7 @@
       <ul class="nav-links" id="nav-links" role="list">
         <li><a href="index.html">Home</a></li>
         <li><a href="farming-projects.html">Projects</a></li>
-        <li><a href="procurement.html">Procurement</a></li>
+        <li><a href="procurement.html">Agri Estate</a></li>
         <li><a href="farm-loan-form.html">Farm Loans</a></li>
         <li><a href="subsidies.html">Subsidies</a></li>
         <li><a href="subsidy-calculator.html">Calculator</a></li>
@@ -719,7 +717,7 @@
                 <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; padding-top:36px; border-top:1px solid rgba(255,255,255,0.10);">
                   <div>
                     <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">1M+</div>
-                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Farming Entrepreneurs</div>
+                    <div style="font-size:0.68rem; font-weight:700; text-transform:uppercase; letter-spacing:1.5px; color:rgba(255,255,255,0.45); margin-top:5px;">Agripreneurs</div>
                   </div>
                   <div>
                     <div style="font-family:'Outfit',sans-serif; font-size:1.9rem; font-weight:900; color:var(--gold); line-height:1;">₹5k Cr+</div>
@@ -850,7 +848,7 @@
             <div class="icon-box" aria-hidden="true" style="background:var(--primary-light); color:var(--primary);"><i class="fas fa-map-location-dot"></i></div>
             <div style="font-family:'Space Grotesk',sans-serif; font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:2.5px; color:var(--text-light); margin-bottom:14px;">Step 01</div>
             <h4 style="font-family:'Outfit',sans-serif; font-size:1.5rem; font-weight:800; margin-bottom:12px;">Land</h4>
-            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Procurement & Legal via <strong>IGO Procurement</strong></p>
+            <p style="font-size:0.95rem; color:var(--text-muted); line-height:1.7;">Agri Estate & Legal via <strong>IGO Agri Estate</strong></p>
           </div>
 
           <div class="journey-card reveal delay-1">
@@ -897,7 +895,7 @@
           <div class="card-stat" style="background:rgba(255,255,255,0.03); border:1px solid rgba(197,160,89,0.15); border-radius:24px; padding:40px 32px; text-align:center; transition:all 0.4s var(--ease-spring); position:relative; overflow:hidden;">
             <div style="font-size:1.8rem; color:var(--gold); margin-bottom:20px; filter:drop-shadow(0 0 10px rgba(197,160,89,0.3));"><i class="fas fa-users-viewfinder"></i></div>
             <div class="stat-value" style="font-family:'Outfit',sans-serif; font-weight:900; font-size:3.2rem; color:#fff; line-height:1; margin-bottom:10px;">1M+</div>
-            <div class="stat-label" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Farming Entrepreneurs Targeted</div>
+            <div class="stat-label" style="font-family:'Plus Jakarta Sans',sans-serif; font-weight:700; font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:rgba(255,255,255,0.5); margin-bottom:24px;">Agripreneurs Targeted</div>
             <div class="impact-bar" style="height:6px; background:rgba(255,255,255,0.05); border-radius:10px; overflow:hidden;">
               <div class="impact-bar-fill" style="width:65%; height:100%; background:var(--gold); box-shadow:0 0 20px rgba(197,160,89,0.4);"></div>
             </div>
@@ -1004,10 +1002,7 @@
 
           <div class="portfolio-card reveal">
             <div style="overflow:hidden; height:240px;">
-              <picture>
-                <source srcset="agri_farming_projects_hero_1778132919368.avif" type="image/avif">
-                <img src="agri_farming_projects_hero_1778132919368.png" alt="Exotic Farming — high-value horticulture project" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
-              </picture>
+              <img src="assets/agri_projects_hero.png" alt="Exotic Farming — high-value horticulture project" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
             </div>
             <div style="padding:32px;">
               <span class="badge badge-green" style="margin-bottom:14px;"><i class="fas fa-leaf" aria-hidden="true"></i> Horticulture</span>
@@ -1019,10 +1014,7 @@
 
           <div class="portfolio-card reveal delay-1">
             <div style="overflow:hidden; height:240px;">
-              <picture>
-                <source srcset="aquaculture_projects_hero_1778132953152.avif" type="image/avif">
-                <img src="aquaculture_projects_hero_1778132953152.png" alt="Marine Aquaculture Hub — integrated fish and shrimp farms" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
-              </picture>
+              <img src="assets/agriculture_portfolio.png" alt="Marine Aquaculture Hub — integrated fish and shrimp farms" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
             </div>
             <div style="padding:32px;">
               <span class="badge" style="background:rgba(99,102,241,0.1); color:#6366f1; border-color:rgba(99,102,241,0.2); margin-bottom:14px;"><i class="fas fa-fish" aria-hidden="true"></i> Aquaculture</span>
@@ -1034,10 +1026,7 @@
 
           <div class="portfolio-card reveal delay-2">
             <div style="overflow:hidden; height:240px;">
-              <picture>
-                <source srcset="livestock_tech_projects_hero_1778132978858.avif" type="image/avif">
-                <img src="livestock_tech_projects_hero_1778132978858.png" alt="Smart Livestock Tech — IoT-powered livestock management" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
-              </picture>
+              <img src="assets/livestock_portfolio.png" alt="Smart Livestock Tech — IoT-powered livestock management" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
             </div>
             <div style="padding:32px;">
               <span class="badge badge-gold" style="margin-bottom:14px;"><i class="fas fa-cow" aria-hidden="true"></i> Livestock</span>
@@ -1049,10 +1038,7 @@
 
           <div class="portfolio-card reveal delay-3">
             <div style="overflow:hidden; height:240px;">
-              <picture>
-                <source srcset="agri_land_procurement_hero_1778132897958.avif" type="image/avif">
-                <img src="agri_land_procurement_hero_1778132897958.png" alt="IGO Franchise Network — India's fastest-growing farming-franchise" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
-              </picture>
+              <img src="assets/agri_estate_hero.png" alt="IGO Franchise Network — India's fastest-growing farming-franchise" width="600" height="240" style="width:100%; height:100%; object-fit:cover;" loading="lazy" decoding="async">
             </div>
             <div style="padding:32px;">
               <span class="badge" style="background:rgba(245,158,11,0.1); color:#d97706; border-color:rgba(245,158,11,0.2); margin-bottom:14px;"><i class="fas fa-handshake" aria-hidden="true"></i> Franchise</span>
@@ -1161,7 +1147,7 @@
       <div class="container">
         <div class="section-header">
           <div class="section-label"><i class="fas fa-star" aria-hidden="true"></i> Success Stories</div>
-          <h2 class="section-title lg reveal">Trusted by <span class="text-gradient-gold">Farming Entrepreneurs</span></h2>
+          <h2 class="section-title lg reveal">Trusted by <span class="text-gradient-gold">Agripreneurs</span></h2>
           <p class="section-subtitle reveal delay-1" style="text-align:center; margin:0 auto;">Real results from farmers and entrepreneurs across India.</p>
         </div>
 
@@ -1233,10 +1219,7 @@
       <div class="container cta-content">
 
         <div style="position:absolute; top:-80px; right:40px; opacity:0.3; pointer-events:none;" class="float-badge" aria-hidden="true">
-          <picture>
-            <source srcset="igo_national_excellence_badge_1778137168738.avif" type="image/avif">
-            <img src="igo_national_excellence_badge_1778137168738.png" alt="" width="160" height="160" style="width:160px; animation:slowRotate 30s linear infinite;" loading="lazy" decoding="async">
-          </picture>
+          <img src="assets/national_agri_fintech_award_badge_2026_transparent_1778305209899.png" alt="National Agri-Fintech Award 2026" width="160" height="160" style="width:160px; animation:slowRotate 30s linear infinite; clip-path: circle(50% at 50% 50%); object-fit: cover;" loading="lazy" decoding="async">
         </div>
 
         <div class="section-label" style="background:rgba(197,160,89,0.12); color:var(--gold); border-color:rgba(197,160,89,0.25); margin:0 auto var(--space-8);">
@@ -1248,7 +1231,7 @@
         </h2>
 
         <p style="color:rgba(255,255,255,0.65); font-size:1.25rem; max-width:720px; margin:0 auto 56px; text-align:center; line-height:1.8; font-weight:500;">
-          Join thousands of farming entrepreneurs who've secured funding, built projects, and created lasting legacies with IGO's sovereign ecosystem.
+          Join thousands of Agripreneurs who've secured funding, built projects, and created lasting legacies with IGO's sovereign ecosystem.
         </p>
 
         <div style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;" class="reveal">
@@ -1372,5 +1355,6 @@
 
   <script src="assets/app.js" defer></script>
 
+  <script src="assets/coins.js"></script>
 </body>
 </html>
